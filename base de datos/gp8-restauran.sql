@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2024 a las 21:36:58
+-- Tiempo de generación: 14-10-2024 a las 22:11:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,6 +33,7 @@ CREATE TABLE `detalle_pedido` (
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio_unitario` decimal(10,2) NOT NULL,
+  `mesero` varchar(100) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -76,7 +77,8 @@ CREATE TABLE `productos` (
   `nombre` varchar(100) NOT NULL,
   `categoria` varchar(50) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
