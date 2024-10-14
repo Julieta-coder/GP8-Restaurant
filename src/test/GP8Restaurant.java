@@ -1,5 +1,5 @@
 
-package gp8.restaurant;
+package test;
 
 
 public class GP8Restaurant {
