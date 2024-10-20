@@ -4,27 +4,25 @@
  */
 package Entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-/**
- *
- * @author Adriana
- */
 public class Meseros {
     private int id_mesero;
     private String nombre;
     private String apellido;
     private String dni;
-    private Date fecha_registro;
+    private LocalDate fecha_registro;  // Usamos LocalDate en lugar de Date
 
-    public Meseros(int id_mesero, String nombre, String apellido, String dni, Date fecha_registro) {
+    // Constructor con todos los parámetros
+    public Meseros(int id_mesero, String nombre, String apellido, String dni, LocalDate fecha_registro) {
         this.id_mesero = id_mesero;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.fecha_registro = fecha_registro;
+        this.fecha_registro = fecha_registro;  // Asignamos LocalDate
     }
 
+    // Getters y setters
     public int getId_mesero() { return id_mesero; }
     public void setId_mesero(int id_mesero) { this.id_mesero = id_mesero; }
 
@@ -37,6 +35,11 @@ public class Meseros {
     public String getDni() { return dni; }
     public void setDni(String dni) { this.dni = dni; }
 
-    public Date getFecha_registro() { return fecha_registro; }
-    public void setFecha_registro(Date fecha_registro) { this.fecha_registro = fecha_registro; }
+    public LocalDate getFecha_registro() { return fecha_registro; }
+    public void setFecha_registro(LocalDate fecha_registro) { this.fecha_registro = fecha_registro; }
+
+    // Método para obtener la fecha de registro
+    public LocalDate getFechaRegistro() {
+        return fecha_registro;
+    }
 }

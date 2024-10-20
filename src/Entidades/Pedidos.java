@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -28,6 +29,10 @@ public class Pedidos {
         this.hora_pedido = hora_pedido;
         this.estado = estado;
         this.monto_total = monto_total;
+    }
+
+    public Pedidos(int i, int id_mesa, int id_mesero, LocalDateTime fechaReserva, boolean b, double d) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     public int getId_pedido() { return id_pedido; }
