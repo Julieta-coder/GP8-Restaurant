@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -15,11 +16,11 @@ public class Pedidos {
     private int id_mesa;
     private int id_mesero;
     private Date fecha_pedido;
-    private Time hora_pedido;
+    private LocalTime hora_pedido;  
     private boolean estado;
     private double monto_total;
 
-    public Pedidos(int id_pedido, int id_mesa, int id_mesero, Date fecha_pedido, Time hora_pedido, boolean estado, double monto_total) {
+   public Pedidos(int id_pedido, int id_mesa, int id_mesero, Date fecha_pedido, LocalTime hora_pedido, boolean estado, double monto_total) {
         this.id_pedido = id_pedido;
         this.id_mesa = id_mesa;
         this.id_mesero = id_mesero;
@@ -41,18 +42,12 @@ public class Pedidos {
     public Date getFecha_pedido() { return fecha_pedido; }
     public void setFecha_pedido(Date fecha_pedido) { this.fecha_pedido = fecha_pedido; }
 
-    public Time getHora_pedido() { return hora_pedido; }
-    public void setHora_pedido(Time hora_pedido) { this.hora_pedido = hora_pedido; }
+    public LocalTime getHora_pedido() { return hora_pedido; }  // LocalTime para manejar la hora
+    public void setHora_pedido(LocalTime hora_pedido) { this.hora_pedido = hora_pedido; }
 
     public boolean isEstado() { return estado; }
     public void setEstado(boolean estado) { this.estado = estado; }
 
     public double getMonto_total() { return monto_total; }
     public void setMonto_total(double monto_total) { this.monto_total = monto_total; }
-
-    private static class Time {
-
-        public Time() {
-        }
-    }
 }

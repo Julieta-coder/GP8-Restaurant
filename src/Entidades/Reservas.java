@@ -4,21 +4,24 @@
  */
 package Entidades;
 
-import java.security.Timestamp;
 
 /**
  *
  * @author Adriana
  */
+
+import java.time.LocalDateTime;
+
 public class Reservas {
     private int id_reserva;
     private int id_mesa;
     private String nombre_cliente;
     private String dni_cliente;
-    private Timestamp fecha_reserva;
+    private LocalDateTime fecha_reserva;  // Cambiar a LocalDateTime
     private boolean estado;
 
-    public Reservas(int id_reserva, int id_mesa, String nombre_cliente, String dni_cliente, Timestamp fecha_reserva, boolean estado) {
+    // Constructor
+    public Reservas(int id_reserva, int id_mesa, String nombre_cliente, String dni_cliente, LocalDateTime fecha_reserva, boolean estado) {
         this.id_reserva = id_reserva;
         this.id_mesa = id_mesa;
         this.nombre_cliente = nombre_cliente;
@@ -27,6 +30,7 @@ public class Reservas {
         this.estado = estado;
     }
 
+    // Getters y Setters
     public int getId_reserva() { return id_reserva; }
     public void setId_reserva(int id_reserva) { this.id_reserva = id_reserva; }
 
@@ -39,8 +43,8 @@ public class Reservas {
     public String getDni_cliente() { return dni_cliente; }
     public void setDni_cliente(String dni_cliente) { this.dni_cliente = dni_cliente; }
 
-    public Timestamp getFecha_reserva() { return fecha_reserva; }
-    public void setFecha_reserva(Timestamp fecha_reserva) { this.fecha_reserva = fecha_reserva; }
+    public LocalDateTime getFecha_reserva() { return fecha_reserva; }
+    public void setFecha_reserva(LocalDateTime fecha_reserva) { this.fecha_reserva = fecha_reserva; }
 
     public boolean isEstado() { return estado; }
     public void setEstado(boolean estado) { this.estado = estado; }

@@ -8,6 +8,104 @@ package persistencia;
  *
  * @author Adriana
  */
-public class Reservasdata {
-    
+
+import Entidades.Reservas;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ReservasData {
+    private Connection connection;
+
+    public ReservasData() {
+        this.connection = Conexion.getConnection();
+    }
+
+    public void agregarReserva(Reservas reserva) {
+        String sql = "INSERT INTO reservas (id_mesa, nombre_cliente, dni_cliente, fecha_reserva, estado) VALUES (?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, reserva.getId_mesa());
+            ps.setString(2, reserva.getNombre_cliente());
+            ps.setString(3, reserva.getDni_cliente());
+            ps.setTimestamp(4, Timestamp.valueOf(reserva.getFecha_reserva()));
+            ps.setBoolean(5, reserva.isEstado());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error al agregar reserva: " + e.getMessage());
+        }
+    }
+
+    public List<Reservas> listarReservas() {
+        List<Reservas> reservas = new ArrayList<>();
+        String sql = "SELECT * FROM reservas";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Reservas reserva = new Reservas(
+                    rs.getInt("id_reserva"),
+                    rs.getInt("id_mesa"),
+                    rs.getString("nombre_cliente"),
+                    rs.getString("dni_cliente"),
+                    rs.getTimestamp("fecha_reserva").toLocalDateTime(),
+                    rs.getBoolean("estado")
+                );
+                reservas.add(reserva);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar reservas: " + e.getMessage());
+        }
+        return reservas;
+    }
+
+    public void actualizarReserva(Reservas reserva) {
+        String sql = "UPDATE reservas SET id_mesa = ?, nombre_cliente = ?, dni_cliente = ?, fecha_reserva = ?, estado = ? WHERE id_reserva = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, reserva.getId_mesa());
+            ps.setString(2, reserva.getNombre_cliente());
+            ps.setString(3, reserva.getDni_cliente());
+            ps.setTimestamp(4, Timestamp.valueOf(reserva.getFecha_reserva()));
+            ps.setBoolean(5, reserva.isEstado());
+            ps.setInt(6, reserva.getId_reserva());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar reserva: " + e.getMessage());
+        }
+    }
+
+    public void eliminarReserva(int id_reserva) {
+        String sql = "DELETE FROM reservas WHERE id_reserva = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id_reserva);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar reserva: " + e.getMessage());
+        }
+    }
+
+    public Reservas buscarReservaPorId(int id_reserva) {
+        Reservas reserva = null;
+        String sql = "SELECT * FROM reservas WHERE id_reserva = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id_reserva);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                reserva = new Reservas(
+                    rs.getInt("id_reserva"),
+                    rs.getInt("id_mesa"),
+                    rs.getString("nombre_cliente"),
+                    rs.getString("dni_cliente"),
+                    rs.getTimestamp("fecha_reserva").toLocalDateTime(),
+                    rs.getBoolean("estado")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar reserva: " + e.getMessage());
+        }
+        return reserva;
+    }
 }
