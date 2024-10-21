@@ -2,11 +2,11 @@
 
 <ClassDiagram name="Entidades">
   <ClassDiagramComponents>
-    <Class name="DetallePedido" package="Entidades" visibility="public" xPosition="786.0" yPosition="29.0">
+    <Class name="DetallePedido" package="Entidades" visibility="public" xPosition="20.0" yPosition="20.0">
       <Fields>
         <Field name="id_detalle" type="int" visibility="private"/>
-        <Field name="pedido" type="Pedidos" visibility="private"/>
-        <Field name="producto" type="Productos" visibility="private"/>
+        <Field name="id_pedido" type="int" visibility="private"/>
+        <Field name="id_producto" type="int" visibility="private"/>
         <Field name="cantidad" type="int" visibility="private"/>
         <Field name="precio_unitario" type="double" visibility="private"/>
         <Field name="sub_total" type="double" visibility="private"/>
@@ -14,8 +14,8 @@
       <Constructors>
         <Constructor visibility="public">
           <Argument type="int" name="id_detalle"/>
-          <Argument type="Pedidos" name="pedido"/>
-          <Argument type="Productos" name="producto"/>
+          <Argument type="int" name="id_pedido"/>
+          <Argument type="int" name="id_producto"/>
           <Argument type="int" name="cantidad"/>
           <Argument type="double" name="precio_unitario"/>
           <Argument type="double" name="sub_total"/>
@@ -26,13 +26,13 @@
         <Method name="setId_detalle" returnType="void" visibility="public">
           <Argument type="int" name="id_detalle"/>
         </Method>
-        <Method name="getPedido" returnType="Pedidos" visibility="public"/>
-        <Method name="setPedido" returnType="void" visibility="public">
-          <Argument type="Pedidos" name="pedido"/>
+        <Method name="getId_pedido" returnType="int" visibility="public"/>
+        <Method name="setId_pedido" returnType="void" visibility="public">
+          <Argument type="int" name="id_pedido"/>
         </Method>
-        <Method name="getProducto" returnType="Productos" visibility="public"/>
-        <Method name="setProducto" returnType="void" visibility="public">
-          <Argument type="Productos" name="producto"/>
+        <Method name="getId_producto" returnType="int" visibility="public"/>
+        <Method name="setId_producto" returnType="void" visibility="public">
+          <Argument type="int" name="id_producto"/>
         </Method>
         <Method name="getCantidad" returnType="int" visibility="public"/>
         <Method name="setCantidad" returnType="void" visibility="public">
@@ -48,13 +48,12 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Mesas" package="Entidades" visibility="public" xPosition="948.0" yPosition="612.0">
+    <Class name="Mesas" package="Entidades" visibility="public" xPosition="1408.0" yPosition="77.0">
       <Fields>
         <Field name="id_mesa" type="int" visibility="private"/>
         <Field name="numero" type="int" visibility="private"/>
         <Field name="capacidad" type="int" visibility="private"/>
         <Field name="estado" type="String" visibility="private"/>
-        <Field name="reservas" type="List&lt;Reservas&gt;" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public">
@@ -83,14 +82,13 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Meseros" package="Entidades" visibility="public" xPosition="1799.0" yPosition="746.0">
+    <Class name="Meseros" package="Entidades" visibility="public" xPosition="1276.0" yPosition="573.0">
       <Fields>
         <Field name="id_mesero" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
         <Field name="apellido" type="String" visibility="private"/>
         <Field name="dni" type="String" visibility="private"/>
-        <Field name="fecha_registro" type="LocalDate" visibility="private"/>
-        <Field name="pedidos" type="List&lt;Pedidos&gt;" visibility="private"/>
+        <Field name="fecha_registro" type="Date" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public">
@@ -98,7 +96,7 @@
           <Argument type="String" name="nombre"/>
           <Argument type="String" name="apellido"/>
           <Argument type="String" name="dni"/>
-          <Argument type="LocalDate" name="fecha_registro"/>
+          <Argument type="Date" name="fecha_registro"/>
         </Constructor>
       </Constructors>
       <Methods>
@@ -118,31 +116,29 @@
         <Method name="setDni" returnType="void" visibility="public">
           <Argument type="String" name="dni"/>
         </Method>
-        <Method name="getFechaRegistro" returnType="LocalDate" visibility="public"/>
-        <Method name="setFechaRegistro" returnType="void" visibility="public">
-          <Argument type="LocalDate" name="fecha_registro"/>
+        <Method name="getFecha_registro" returnType="Date" visibility="public"/>
+        <Method name="setFecha_registro" returnType="void" visibility="public">
+          <Argument type="Date" name="fecha_registro"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Pedidos" package="Entidades" visibility="public" xPosition="1670.0" yPosition="29.0">
+    <Class name="Pedidos" package="Entidades" visibility="public" xPosition="681.0" yPosition="20.0">
       <Fields>
         <Field name="id_pedido" type="int" visibility="private"/>
-        <Field name="mesa" type="Mesas" visibility="private"/>
-        <Field name="mesero" type="Meseros" visibility="private"/>
-        <Field name="fecha_pedido" type="LocalDate" visibility="private"/>
-        <Field name="hora_pedido" type="LocalTime" visibility="private"/>
-        <Field name="estado" type="boolean" visibility="private"/>
-        <Field name="monto_total" type="double" visibility="private"/>
         <Field name="id_mesa" type="int" visibility="private"/>
         <Field name="id_mesero" type="int" visibility="private"/>
+        <Field name="fecha_pedido" type="Date" visibility="private"/>
+        <Field name="hora_pedido" type="Time" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+        <Field name="monto_total" type="double" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public">
           <Argument type="int" name="id_pedido"/>
-          <Argument type="Mesas" name="mesa"/>
-          <Argument type="Meseros" name="mesero"/>
-          <Argument type="LocalDate" name="fecha_pedido"/>
-          <Argument type="LocalTime" name="hora_pedido"/>
+          <Argument type="int" name="id_mesa"/>
+          <Argument type="int" name="id_mesero"/>
+          <Argument type="Date" name="fecha_pedido"/>
+          <Argument type="Time" name="hora_pedido"/>
           <Argument type="boolean" name="estado"/>
           <Argument type="double" name="monto_total"/>
         </Constructor>
@@ -160,13 +156,13 @@
         <Method name="setId_mesero" returnType="void" visibility="public">
           <Argument type="int" name="id_mesero"/>
         </Method>
-        <Method name="getFecha_pedido" returnType="LocalDate" visibility="public"/>
+        <Method name="getFecha_pedido" returnType="Date" visibility="public"/>
         <Method name="setFecha_pedido" returnType="void" visibility="public">
-          <Argument type="LocalDate" name="fecha_pedido"/>
+          <Argument type="Date" name="fecha_pedido"/>
         </Method>
-        <Method name="getHora_pedido" returnType="LocalTime" visibility="public"/>
+        <Method name="getHora_pedido" returnType="Time" visibility="public"/>
         <Method name="setHora_pedido" returnType="void" visibility="public">
-          <Argument type="LocalTime" name="hora_pedido"/>
+          <Argument type="Time" name="hora_pedido"/>
         </Method>
         <Method name="isEstado" returnType="boolean" visibility="public"/>
         <Method name="setEstado" returnType="void" visibility="public">
@@ -176,10 +172,9 @@
         <Method name="setMonto_total" returnType="void" visibility="public">
           <Argument type="double" name="monto_total"/>
         </Method>
-        <Method name="getMesa" returnType="Object" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Productos" package="Entidades" visibility="public" xPosition="18.0" yPosition="29.0">
+    <Class name="Productos" package="Entidades" visibility="public" xPosition="710.0" yPosition="560.0">
       <Fields>
         <Field name="id_producto" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -187,7 +182,6 @@
         <Field name="precio" type="double" visibility="private"/>
         <Field name="stock" type="int" visibility="private"/>
         <Field name="estado" type="boolean" visibility="private"/>
-        <Field name="detallesPedido" type="List&lt;DetallePedido&gt;" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public">
@@ -226,14 +220,13 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Reservas" package="Entidades" visibility="public" xPosition="31.0" yPosition="549.0">
+    <Class name="Reservas" package="Entidades" visibility="public" xPosition="20.0" yPosition="544.0">
       <Fields>
         <Field name="id_reserva" type="int" visibility="private"/>
         <Field name="id_mesa" type="int" visibility="private"/>
-        <Field name="mesa" type="Mesas" visibility="private"/>
         <Field name="nombre_cliente" type="String" visibility="private"/>
         <Field name="dni_cliente" type="String" visibility="private"/>
-        <Field name="fecha_reserva" type="LocalDateTime" visibility="private"/>
+        <Field name="fecha_reserva" type="Timestamp" visibility="private"/>
         <Field name="estado" type="boolean" visibility="private"/>
       </Fields>
       <Constructors>
@@ -242,7 +235,7 @@
           <Argument type="int" name="id_mesa"/>
           <Argument type="String" name="nombre_cliente"/>
           <Argument type="String" name="dni_cliente"/>
-          <Argument type="LocalDateTime" name="fecha_reserva"/>
+          <Argument type="Timestamp" name="fecha_reserva"/>
           <Argument type="boolean" name="estado"/>
         </Constructor>
       </Constructors>
@@ -263,30 +256,16 @@
         <Method name="setDni_cliente" returnType="void" visibility="public">
           <Argument type="String" name="dni_cliente"/>
         </Method>
-        <Method name="getFecha_reserva" returnType="LocalDateTime" visibility="public"/>
+        <Method name="getFecha_reserva" returnType="Timestamp" visibility="public"/>
         <Method name="setFecha_reserva" returnType="void" visibility="public">
-          <Argument type="LocalDateTime" name="fecha_reserva"/>
+          <Argument type="Timestamp" name="fecha_reserva"/>
         </Method>
         <Method name="isEstado" returnType="boolean" visibility="public"/>
         <Method name="setEstado" returnType="void" visibility="public">
           <Argument type="boolean" name="estado"/>
         </Method>
-        <Method name="toString" returnType="String" visibility="public"/>
-        <Method name="equals" returnType="boolean" visibility="public">
-          <Argument type="Object" name="o"/>
-        </Method>
-        <Method name="hashCode" returnType="int" visibility="public"/>
       </Methods>
     </Class>
   </ClassDiagramComponents>
-  <ClassDiagramRelations>
-    <HasRelation name="mesero" source="Entidades.Pedidos" target="Entidades.Meseros" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="detallesPedido" source="Entidades.Productos" target="Entidades.DetallePedido" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;DetallePedido&gt;"/>
-    <HasRelation name="reservas" source="Entidades.Mesas" target="Entidades.Reservas" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Reservas&gt;"/>
-    <HasRelation name="pedidos" source="Entidades.Meseros" target="Entidades.Pedidos" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Pedidos&gt;"/>
-    <HasRelation name="mesa" source="Entidades.Reservas" target="Entidades.Mesas" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="producto" source="Entidades.DetallePedido" target="Entidades.Productos" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="pedido" source="Entidades.DetallePedido" target="Entidades.Pedidos" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="mesa" source="Entidades.Pedidos" target="Entidades.Mesas" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-  </ClassDiagramRelations>
+  <ClassDiagramRelations/>
 </ClassDiagram>
