@@ -174,7 +174,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Productos" package="Entidades" visibility="public" xPosition="710.0" yPosition="544.0">
+    <Class name="Productos" package="Entidades" visibility="public" xPosition="710.0" yPosition="560.0">
       <Fields>
         <Field name="id_producto" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>

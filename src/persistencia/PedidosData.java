@@ -77,7 +77,7 @@ public class PedidosData {
         }
     }
 
-    public void eliminarPedido(int id_pedido) {
+    public void eliminarPedido(int id_pedido) { //Hacer baja logica tambien
         String sql = "DELETE FROM pedidos WHERE id_pedido = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class PedidosData {
 
     public Pedidos buscarPedidoPorId(int id_pedido) {
         Pedidos pedido = null;
-        String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";
+        String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";//Ver si hay que aclarar el estado del pedido
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id_pedido);
