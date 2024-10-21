@@ -8,7 +8,7 @@ package persistencia;
  *
  * @author Adriana
  */
-import Entidades.Mesas;
+import Entidades.Mesa;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class MesasData {
         this.connection = Conexion.getConnection();
     }
 
-    public void agregarMesa(Mesas mesa) {
+    public void agregarMesa(Mesa mesa) {
         String sql = "INSERT INTO mesas (numero, capacidad, estado) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -33,14 +33,14 @@ public class MesasData {
         }
     }
 
-    public List<Mesas> listarMesas() {
-        List<Mesas> mesas = new ArrayList<>();
-        String sql = "SELECT * FROM mesas";
+    public List<Mesa> listarMesas() {
+        List<Mesa> mesas = new ArrayList<>();
+        String sql = "SELECT * FROM mesas WHERE estado = 1 "; //Añadir estado 
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                Mesas mesa = new Mesas(
+                Mesa mesa = new Mesa(
                     rs.getInt("id_mesa"),
                     rs.getInt("numero"),
                     rs.getInt("capacidad"),
@@ -54,7 +54,7 @@ public class MesasData {
         return mesas;
     }
 
-   public void actualizarMesa(Mesas mesa) {
+   public void actualizarMesa(Mesa mesa) {
         String sql = "UPDATE mesas SET numero = ?, capacidad = ?, estado = ? WHERE id_mesa = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

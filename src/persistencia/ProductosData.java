@@ -8,7 +8,7 @@ package persistencia;
  *
  * @author Adriana
  */
-import Entidades.Productos;
+import Entidades.Producto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ProductosData {
         this.connection = Conexion.getConnection();
     }
 
-    public void agregarProducto(Productos producto) {
+    public void agregarProducto(Producto producto) {
         String sql = "INSERT INTO productos (nombre, categoria, precio, stock, estado) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -35,14 +35,14 @@ public class ProductosData {
         }
     }
 
-    public List<Productos> listarProductos() {
-        List<Productos> productos = new ArrayList<>();
+    public List<Producto> listarProductos() {
+        List<Producto> productos = new ArrayList<>();
         String sql = "SELECT * FROM productos";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                Productos producto = new Productos(
+                Producto producto = new Producto(
                     rs.getInt("id_producto"),
                     rs.getString("nombre"),
                     rs.getString("categoria"),
@@ -58,7 +58,7 @@ public class ProductosData {
         return productos;
     }
 
-    public void actualizarProducto(Productos producto) {
+    public void actualizarProducto(Producto producto) {
         String sql = "UPDATE productos SET nombre = ?, categoria = ?, precio = ?, stock = ?, estado = ? WHERE id_producto = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -85,15 +85,15 @@ public class ProductosData {
         }
     }
 
-    public Productos buscarProductoPorId(int id_producto) {
-        Productos producto = null;
+    public Producto buscarProductoPorId(int id_producto) {
+        Producto producto = null;
         String sql = "SELECT * FROM productos WHERE id_producto = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id_producto);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                producto = new Productos(
+                producto = new Producto(
                     rs.getInt("id_producto"),
                     rs.getString("nombre"),
                     rs.getString("categoria"),

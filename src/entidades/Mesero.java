@@ -8,27 +8,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Meseros {
+public class Mesero {
     private int id_mesero;
     private String nombre;
     private String apellido;
     private String dni;
     private LocalDate fecha_registro;
 
-    private List<Pedidos> pedidos;
-    
-    public Meseros(int id_mesero, String nombre, String apellido, String dni, LocalDate fecha_registro) {
+    public Mesero() {
+    }
+
+    public Mesero(String nombre, String apellido, String dni, LocalDate fecha_registro) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.fecha_registro = fecha_registro;
+    }
+
+    public Mesero(int id_mesero, String nombre, String apellido, String dni, LocalDate fecha_registro) {
         this.id_mesero = id_mesero;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fecha_registro = fecha_registro;
-        this.pedidos = new ArrayList<>();
     }
-
-    public Meseros(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     public int getId_mesero() { return id_mesero; }
     public void setId_mesero(int id_mesero) { this.id_mesero = id_mesero; }
@@ -49,4 +53,10 @@ public class Meseros {
     public void setFechaRegistro(LocalDate fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
+
+    @Override
+    public String toString() {
+        return "Mesero{" + "id_mesero=" + id_mesero + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", fecha_registro=" + fecha_registro + '}';
+    }
+    
 }

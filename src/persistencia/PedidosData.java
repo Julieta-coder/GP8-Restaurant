@@ -8,7 +8,7 @@ package persistencia;
  *
  * @author Adriana
  */
-import Entidades.Pedidos;
+import Entidades.Pedido;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class PedidosData {
         this.connection = Conexion.getConnection();
     }
 
-    public void agregarPedido(Pedidos pedido) {
+    public void agregarPedido(Pedido pedido) {
         String sql = "INSERT INTO pedidos (id_mesa, id_mesero, fecha_pedido, hora_pedido, estado, monto_total) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -36,22 +36,16 @@ public class PedidosData {
         }
     }
 
-    public List<Pedidos> listarPedidos() {
-        List<Pedidos> pedidos = new ArrayList<>();
+    public List<Pedido> listarPedidos() {
+        List<Pedido> pedidos = new ArrayList<>();
         String sql = "SELECT * FROM pedidos";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                Pedidos pedido = new Pedidos(
-                    rs.getInt("id_pedido"),
-                    rs.getInt("id_mesa"),
-                    rs.getInt("id_mesero"),
-                    rs.getDate("fecha_pedido"),
-                    rs.getTime("hora_pedido").toLocalTime(),
-                    rs.getBoolean("estado"),
-                    rs.getDouble("monto_total")
-                );
+                Pedido pedido = new Pedido ();
+                    pedido.setId_pedido( rs.getInt("id_pedido"));
+                    pedido.setId_mesa(rs.getInt("id_mesa"));
                 pedidos.add(pedido);
             }
         } catch (SQLException e) {
@@ -60,7 +54,7 @@ public class PedidosData {
         return pedidos;
     }
 
-    public void actualizarPedido(Pedidos pedido) {
+    public void actualizarPedido(Pedido pedido) {
         String sql = "UPDATE pedidos SET id_mesa = ?, id_mesero = ?, fecha_pedido = ?, hora_pedido = ?, estado = ?, monto_total = ? WHERE id_pedido = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -88,15 +82,15 @@ public class PedidosData {
         }
     }
 
-    public Pedidos buscarPedidoPorId(int id_pedido) {
-        Pedidos pedido = null;
+    public Pedido buscarPedidoPorId(int id_pedido) {
+        Pedido pedido = null;
         String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";//Ver si hay que aclarar el estado del pedido
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id_pedido);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                pedido = new Pedidos(
+                pedido = new Pedido(
                     rs.getInt("id_pedido"),
                     rs.getInt("id_mesa"),
                     rs.getInt("id_mesero"),

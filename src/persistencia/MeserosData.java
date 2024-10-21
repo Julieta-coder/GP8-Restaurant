@@ -4,7 +4,7 @@
  */
 package persistencia;
 
-import Entidades.Meseros;
+import Entidades.Mesero;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class MeserosData {
     }
 
    
-    public void agregarMesero(Meseros mesero) {
+    public void agregarMesero(Mesero mesero) {
         String sql = "INSERT INTO meseros (nombre, apellido, dni, fecha_registro) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -35,14 +35,14 @@ public class MeserosData {
     }
 
     
-    public List<Meseros> listarMeseros() {
-        List<Meseros> meseros = new ArrayList<>();
+    public List<Mesero> listarMeseros() {
+        List<Mesero> meseros = new ArrayList<>();
         String sql = "SELECT * FROM meseros";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                Meseros mesero = new Meseros(
+                Mesero mesero = new Mesero(
                     rs.getInt("id_mesero"),
                     rs.getString("nombre"),
                     rs.getString("apellido"),

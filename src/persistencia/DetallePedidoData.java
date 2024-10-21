@@ -5,10 +5,10 @@
 package persistencia;
 
 import Entidades.DetallePedido;
-import Entidades.Mesas;
-import Entidades.Meseros;
-import Entidades.Pedidos;
-import Entidades.Productos;
+import Entidades.Mesa;
+import Entidades.Mesero;
+import Entidades.Pedido;
+import Entidades.Producto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +45,8 @@ public class DetallePedidoData {
             ps.setInt(1, id_pedido);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Pedidos pedido = buscarPedidoPorId(rs.getInt("id_pedido"));
-                Productos producto = buscarProductoPorId(rs.getInt("id_producto"));
+                Pedido pedido = buscarPedidoPorId(rs.getInt("id_pedido"));
+                Producto producto = buscarProductoPorId(rs.getInt("id_producto"));
                 DetallePedido detallePedido = new DetallePedido(
                     rs.getInt("id_detalle"),
                     pedido,
@@ -90,8 +90,8 @@ public class DetallePedidoData {
         }
     }
 
-    public Pedidos buscarPedidoPorId(int id_pedido) {
-    Pedidos pedido = null;
+    public Pedido buscarPedidoPorId(int id_pedido) {
+    Pedido pedido = null;
     String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";
     try {
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -99,11 +99,11 @@ public class DetallePedidoData {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             // Crear una instancia de Mesas utilizando el id_mesa
-            Mesas mesa = new Mesas(rs.getInt("id_mesa"));  // Esto crea un objeto Mesas con el id_mesa
-            Meseros mesero = new Meseros(rs.getInt("id_mesero"));  // Similar con mesero si es necesario
+            Mesa mesa = new Mesa(rs.getInt("id_mesa"));  // Esto crea un objeto Mesas con el id_mesa
+            Mesero mesero = new Mesero(rs.getInt("id_mesero"));  // Similar con mesero si es necesario
 
             // Ahora puedes usar el objeto mesa en tu pedido
-            pedido = new Pedidos(
+            pedido = new Pedido(
                 rs.getInt("id_pedido"),
                 mesa,  // Pasas el objeto Mesas en lugar del int id_mesa
                 mesero,  // Pasas el objeto Mesero en lugar del int id_mesero
@@ -120,15 +120,15 @@ public class DetallePedidoData {
     }
 
 
-    private Productos buscarProductoPorId(int id_producto) {
-        Productos producto = null;
+    private Producto buscarProductoPorId(int id_producto) {
+        Producto producto = null;
         String sql = "SELECT * FROM productos WHERE id_producto = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id_producto);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                producto = new Productos(
+                producto = new Producto(
                     rs.getInt("id_producto"),
                     rs.getString("nombre"),
                     rs.getString("categoria"),

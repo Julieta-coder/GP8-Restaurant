@@ -6,17 +6,17 @@ package Entidades;
 
 import java.time.LocalDateTime;
 
-public class Reservas {
+public class Reserva {
     private int id_reserva;
     private int id_mesa;
-    private Mesas mesa;
+    private Mesa mesa;
     private String nombre_cliente;
     private String dni_cliente;
     private LocalDateTime fecha_reserva;
     private boolean estado;
 
     
-    public Reservas(int id_reserva, int id_mesa, String nombre_cliente, String dni_cliente, LocalDateTime fecha_reserva, boolean estado) {
+    public Reserva(int id_reserva, int id_mesa, String nombre_cliente, String dni_cliente, LocalDateTime fecha_reserva, boolean estado) {
         this.id_reserva = id_reserva;
         this.id_mesa = id_mesa;
         this.mesa = mesa; 
@@ -64,7 +64,7 @@ public class Reservas {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Reservas reservas = (Reservas) o;
+        Reserva reservas = (Reserva) o;
 
         if (id_reserva != reservas.id_reserva) return false;
         if (id_mesa != reservas.id_mesa) return false;
