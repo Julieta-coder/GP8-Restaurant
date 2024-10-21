@@ -8,23 +8,23 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
     
-    // Parámetros de conexión
+   
     private static final String URL = "jdbc:mariadb://localhost/";
     private static final String DB = "gp8-restauran";
     private static final String USUARIO = "root";
     private static final String PASSWORD = "";
     private static Connection connection;
 
-    // Constructor vacío
+   
     public Conexion() {}
 
-    // Método para obtener la conexión
+   
     public static Connection getConnection() {
         if (connection == null) {
             try {
-                // Cargar el driver de MariaDB
+                
                 Class.forName("org.mariadb.jdbc.Driver");
-                // Establecer la conexión
+               
                 connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);
                 JOptionPane.showMessageDialog(null, "Conexión establecida correctamente.");
             } catch (ClassNotFoundException ex) {

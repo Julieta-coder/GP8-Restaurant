@@ -4,21 +4,31 @@
  */
 package Entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Adriana
  */
-public class Mesas {
+    public class Mesas {
     private int id_mesa;
     private int numero;
     private int capacidad;
     private String estado;
+
+    public Mesas(int id_mesa) {
+        this.id_mesa = id_mesa;
+    }
+    
+    private List<Reservas> reservas; 
 
     public Mesas(int id_mesa, int numero, int capacidad, String estado) {
         this.id_mesa = id_mesa;
         this.numero = numero;
         this.capacidad = capacidad;
         this.estado = estado;
+        this.reservas = new ArrayList<>();
     }
 
     public int getId_mesa() { return id_mesa; }

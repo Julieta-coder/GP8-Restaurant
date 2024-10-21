@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import java.util.List;
+
 /**
  *
  * @author Adriana
@@ -16,6 +18,8 @@ public class Productos {
     private int stock;
     private boolean estado;
 
+    private List<DetallePedido> detallesPedido;
+    
     public Productos(int id_producto, String nombre, String categoria, double precio, int stock, boolean estado) {
         this.id_producto = id_producto;
         this.nombre = nombre;

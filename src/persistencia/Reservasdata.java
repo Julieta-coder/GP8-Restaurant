@@ -4,11 +4,6 @@
  */
 package persistencia;
 
-/**
- *
- * @author Adriana
- */
-
 import Entidades.Reservas;
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,16 +14,25 @@ public class ReservasData {
 
     public ReservasData() {
         this.connection = Conexion.getConnection();
+        if (this.connection == null) {
+            System.out.println("Error: No se pudo establecer la conexión con la base de datos.");
+        }
     }
 
     public void agregarReserva(Reservas reserva) {
         String sql = "INSERT INTO reservas (id_mesa, nombre_cliente, dni_cliente, fecha_reserva, estado) VALUES (?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, reserva.getId_mesa());
             ps.setString(2, reserva.getNombre_cliente());
             ps.setString(3, reserva.getDni_cliente());
-            ps.setTimestamp(4, Timestamp.valueOf(reserva.getFecha_reserva()));
+
+            
+            if (reserva.getFecha_reserva() != null) {
+                ps.setTimestamp(4, Timestamp.valueOf(reserva.getFecha_reserva()));
+            } else {
+                ps.setNull(4, Types.TIMESTAMP); 
+            }
+
             ps.setBoolean(5, reserva.isEstado());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -36,12 +40,13 @@ public class ReservasData {
         }
     }
 
+    
     public List<Reservas> listarReservas() {
         List<Reservas> reservas = new ArrayList<>();
         String sql = "SELECT * FROM reservas";
-        try {
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+        try (Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
             while (rs.next()) {
                 Reservas reserva = new Reservas(
                     rs.getInt("id_reserva"),
@@ -59,10 +64,10 @@ public class ReservasData {
         return reservas;
     }
 
+    
     public void actualizarReserva(Reservas reserva) {
         String sql = "UPDATE reservas SET id_mesa = ?, nombre_cliente = ?, dni_cliente = ?, fecha_reserva = ?, estado = ? WHERE id_reserva = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, reserva.getId_mesa());
             ps.setString(2, reserva.getNombre_cliente());
             ps.setString(3, reserva.getDni_cliente());
@@ -75,10 +80,10 @@ public class ReservasData {
         }
     }
 
+    
     public void eliminarReserva(int id_reserva) {
         String sql = "DELETE FROM reservas WHERE id_reserva = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id_reserva);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -86,11 +91,11 @@ public class ReservasData {
         }
     }
 
+    
     public Reservas buscarReservaPorId(int id_reserva) {
         Reservas reserva = null;
         String sql = "SELECT * FROM reservas WHERE id_reserva = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id_reserva);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
