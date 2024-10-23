@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Entidades">
   <ClassDiagramComponents>
-    <Class name="DetallePedido" package="Entidades" visibility="public" xPosition="383.0" yPosition="57.0">
+    <Class name="DetallePedido" package="Entidades" visibility="public" xPosition="390.0" yPosition="57.0">
       <Fields>
         <Field name="id_detalle" type="int" visibility="private"/>
         <Field name="pedido" type="Pedidos" visibility="private"/>
@@ -48,7 +48,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Mesas" package="Entidades" visibility="public" xPosition="1129.0" yPosition="35.0">
+    <Class name="Mesas" package="Entidades" visibility="public" xPosition="1183.0" yPosition="57.0">
       <Fields>
         <Field name="id_mesa" type="int" visibility="private"/>
         <Field name="numero" type="int" visibility="private"/>
@@ -87,7 +87,7 @@
         <Method name="untitledMethod" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Meseros" package="Entidades" visibility="public" xPosition="1129.0" yPosition="264.0">
+    <Class name="Meseros" package="Entidades" visibility="public" xPosition="840.0" yPosition="443.0">
       <Fields>
         <Field name="id_mesero" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -131,7 +131,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Pedidos" package="Entidades" visibility="public" xPosition="788.0" yPosition="54.0">
+    <Class name="Pedidos" package="Entidades" visibility="public" xPosition="286.0" yPosition="-168.0">
       <Fields>
         <Field name="id_pedido" type="int" visibility="private"/>
         <Field name="mesa" type="Mesas" visibility="private"/>
@@ -187,7 +187,7 @@
         <Method name="getMesero" returnType="Object" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Productos" package="Entidades" visibility="public" xPosition="29.0" yPosition="54.0">
+    <Class name="Productos" package="Entidades" visibility="public" xPosition="15.0" yPosition="57.0">
       <Fields>
         <Field name="id_producto" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -234,7 +234,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Reservas" package="Entidades" visibility="public" xPosition="1365.0" yPosition="35.0">
+    <Class name="Reservas" package="Entidades" visibility="public" xPosition="1183.0" yPosition="361.0">
       <Fields>
         <Field name="id_reserva" type="int" visibility="private"/>
         <Field name="id_mesa" type="int" visibility="private"/>
@@ -288,9 +288,9 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="Atiende" source="Entidades.Pedidos" target="Entidades.Meseros" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="Tiene" source="Entidades.DetallePedido" target="Entidades.Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="Tiene" source="Entidades.Pedidos" target="Entidades.Mesas" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="Tiene" source="Entidades.DetallePedido" target="Entidades.Productos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Tiene" source="Entidades.Pedidos" target="Entidades.Mesas" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Tiene" source="Entidades.DetallePedido" target="Entidades.Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Atiende" source="Entidades.Pedidos" target="Entidades.Meseros" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>

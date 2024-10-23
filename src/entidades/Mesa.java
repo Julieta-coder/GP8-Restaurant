@@ -71,7 +71,17 @@ import java.util.List;
     
     public void setEstado(boolean estado) { 
         this.estado = estado; 
+        
     }
+
+    public String getDisposicion() {
+        return disposicion;
+    }
+
+    public void setDisposicion(String disposicion) {
+        this.disposicion = disposicion;
+    }
+    
 
     @Override
     public String toString() {

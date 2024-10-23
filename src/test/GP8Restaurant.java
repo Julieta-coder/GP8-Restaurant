@@ -15,7 +15,30 @@ public class GP8Restaurant {
             return;
         }
 
-//        MesasData mesasData = new MesasData();
+        
+        /*TEST NUEVO*/
+       MesaData mesaData = new MesaData();
+       Mesa mesa = new Mesa(8, 10, "ocupada",true);
+       mesaData.agregarMesa(mesa);
+        for (Mesa m : mesaData.listarMesas()) {
+            System.out.println(m);
+        }
+       mesa.setDisposicion("libre");
+       mesa.setId_mesa(27);
+       mesaData.actualizarDisposicionMesa(mesa);
+         mesaData.eliminarMesa(27);
+         mesa.setEstado(true);
+         mesaData.bajaLogica(29);
+         mesaData.altaLogica(29);
+         
+         mesaData.obtenerMesaActivaPorId(5);
+       
+      
+       
+       
+       //TEST ANTIGUO
+       
+       
 //        MeserosData meserosData = new MeserosData();
 //        ProductosData productosData = new ProductosData();
 //        ReservasData reservasData = new ReservasData();
@@ -90,7 +113,7 @@ public class GP8Restaurant {
 //
 //        System.out.println("Pruebas finalizadas.");
 
-
+        
 
       }
 }

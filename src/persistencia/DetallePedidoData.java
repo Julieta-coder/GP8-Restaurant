@@ -37,31 +37,31 @@ public class DetallePedidoData {
     }
 
     
-    public List<DetallePedido> listarDetallesPorPedido(int id_pedido) {
-        List<DetallePedido> detalles = new ArrayList<>();
-        String sql = "SELECT * FROM detalle_pedido WHERE id_pedido = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id_pedido);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Pedido pedido = buscarPedidoPorId(rs.getInt("id_pedido"));
-                Producto producto = buscarProductoPorId(rs.getInt("id_producto"));
-                DetallePedido detallePedido = new DetallePedido(
-                    rs.getInt("id_detalle"),
-                    pedido,
-                    producto,
-                    rs.getInt("cantidad"),
-                    rs.getDouble("precio_unitario"),
-                    rs.getDouble("sub_total")
-                );
-                detalles.add(detallePedido);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al listar detalles de pedido: " + e.getMessage());
-        }
-        return detalles;
-    }
+//    public List<DetallePedido> listarDetallesPorPedido(int id_pedido) {
+//        List<DetallePedido> detalles = new ArrayList<>();
+//        String sql = "SELECT * FROM detalle_pedido WHERE id_pedido = ?";
+//        try {
+//            PreparedStatement ps = connection.prepareStatement(sql);
+//            ps.setInt(1, id_pedido);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Pedido pedido = buscarPedidoPorId(rs.getInt("id_pedido"));
+//                Producto producto = buscarProductoPorId(rs.getInt("id_producto"));
+//                DetallePedido detallePedido = new DetallePedido(
+//                    rs.getInt("id_detalle"),
+//                    pedido,
+//                    producto,
+//                    rs.getInt("cantidad"),
+//                    rs.getDouble("precio_unitario"),
+//                    rs.getDouble("sub_total")
+//                );
+//                detalles.add(detallePedido);
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error al listar detalles de pedido: " + e.getMessage());
+//        }
+//        return detalles;
+//    }
 
     
     public void actualizarDetallePedido(DetallePedido detallePedido) {
@@ -90,34 +90,34 @@ public class DetallePedidoData {
         }
     }
 
-    public Pedido buscarPedidoPorId(int id_pedido) {
-    Pedido pedido = null;
-    String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";
-    try {
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, id_pedido);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            // Crear una instancia de Mesas utilizando el id_mesa
-            Mesa mesa = new Mesa(rs.getInt("id_mesa"));  // Esto crea un objeto Mesas con el id_mesa
-            Mesero mesero = new Mesero(rs.getInt("id_mesero"));  // Similar con mesero si es necesario
-
-            // Ahora puedes usar el objeto mesa en tu pedido
-            pedido = new Pedido(
-                rs.getInt("id_pedido"),
-                mesa,  // Pasas el objeto Mesas en lugar del int id_mesa
-                mesero,  // Pasas el objeto Mesero en lugar del int id_mesero
-                rs.getDate("fecha_pedido").toLocalDate(),
-                rs.getTime("hora_pedido").toLocalTime(),
-                rs.getBoolean("estado"),
-                rs.getDouble("monto_total")
-            );
-        }
-    } catch (SQLException e) {
-        System.out.println("Error al buscar pedido: " + e.getMessage());
-    }
-    return pedido;
-    }
+//    public Pedido buscarPedidoPorId(int id_pedido) {
+//    Pedido pedido = null;
+//    String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";
+//    try {
+//        PreparedStatement ps = connection.prepareStatement(sql);
+//        ps.setInt(1, id_pedido);
+//        ResultSet rs = ps.executeQuery();
+//        if (rs.next()) {
+//            // Crear una instancia de Mesas utilizando el id_mesa
+//            Mesa mesa = new Mesa(rs.getInt("id_mesa"));  // Esto crea un objeto Mesas con el id_mesa
+//            Mesero mesero = new Mesero(rs.getInt("id_mesero"));  // Similar con mesero si es necesario
+//
+//            // Ahora puedes usar el objeto mesa en tu pedido
+//            pedido = new Pedido(
+//                rs.getInt("id_pedido"),
+//                mesa,  // Pasas el objeto Mesas en lugar del int id_mesa
+//                mesero,  // Pasas el objeto Mesero en lugar del int id_mesero
+//                rs.getDate("fecha_pedido").toLocalDate(),
+//                rs.getTime("hora_pedido").toLocalTime(),
+//                rs.getBoolean("estado"),
+//                rs.getDouble("monto_total")
+//            );
+//        }
+//    } catch (SQLException e) {
+//        System.out.println("Error al buscar pedido: " + e.getMessage());
+//    }
+//    return pedido;
+//    }
 
 
     private Producto buscarProductoPorId(int id_producto) {
