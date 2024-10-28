@@ -41,7 +41,7 @@ public class MesaData {
         String sql = "SELECT * FROM mesas WHERE estado = 1 "; //Añadir estado 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Mesa mesa = new Mesa();
                 mesa.setCapacidad(rs.getInt("capacidad"));
