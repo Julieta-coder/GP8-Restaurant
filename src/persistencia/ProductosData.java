@@ -1,17 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package persistencia;
 
-/**
- *
- * @author Adriana
- */
+
 import Entidades.Producto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ProductosData {
     private Connection connection;
@@ -23,7 +20,7 @@ public class ProductosData {
     public void agregarProducto(Producto producto) {
         String sql = "INSERT INTO productos (nombre, categoria, precio, stock, estado) VALUES (?, ?, ?, ?, ?)";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, producto.getNombre());
             ps.setString(2, producto.getCategoria());
             ps.setDouble(3, producto.getPrecio());
@@ -107,4 +104,27 @@ public class ProductosData {
         }
         return producto;
     }
+    
+    //eliminado logico
+    
+    public void cambiarEstado(int id){
+    String sql = "UPDATE productos SET estado = 0 WHERE id_producto = ?";
+    
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            int agregado = ps.executeUpdate();
+            if(agregado ==1){
+                
+                JOptionPane.showMessageDialog(null, "Producto dado de baja");           
+            }         
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "No se encontro la tabla");
+        }
+     
+        
+    }
+    
 }

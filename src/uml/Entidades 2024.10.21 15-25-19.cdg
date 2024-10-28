@@ -187,7 +187,7 @@
         <Method name="getMesero" returnType="Object" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Productos" package="Entidades" visibility="public" xPosition="15.0" yPosition="57.0">
+    <Class name="Productos" package="Entidades" visibility="public" xPosition="69.0" yPosition="57.0">
       <Fields>
         <Field name="id_producto" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -288,9 +288,9 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="Tiene" source="Entidades.DetallePedido" target="Entidades.Productos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="Tiene" source="Entidades.Pedidos" target="Entidades.Mesas" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="Tiene" source="Entidades.DetallePedido" target="Entidades.Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="Atiende" source="Entidades.Pedidos" target="Entidades.Meseros" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Tiene" source="Entidades.DetallePedido" target="Entidades.Productos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Tiene" source="Entidades.DetallePedido" target="Entidades.Pedidos" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="Tiene" source="Entidades.Pedidos" target="Entidades.Mesas" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
