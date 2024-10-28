@@ -15,6 +15,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
      */
     public ViewMenuPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -38,11 +39,11 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jdPrincipal.setLayout(jdPrincipalLayout);
         jdPrincipalLayout.setHorizontalGroup(
             jdPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 717, Short.MAX_VALUE)
         );
         jdPrincipalLayout.setVerticalGroup(
             jdPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 507, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Mesas");
