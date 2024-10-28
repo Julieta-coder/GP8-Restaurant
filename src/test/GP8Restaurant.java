@@ -26,12 +26,12 @@ public class GP8Restaurant {
        mesa.setDisposicion("libre");
        mesa.setId_mesa(27);
        mesaData.actualizarDisposicionMesa(mesa);
-         mesaData.eliminarMesa(27);
-         mesa.setEstado(true);
-         mesaData.bajaLogica(29);
-         mesaData.altaLogica(29);
+       mesaData.eliminarMesa(27);
+       mesa.setEstado(true);
+       mesaData.bajaLogica(29);
+       mesaData.altaLogica(29);
          
-         mesaData.obtenerMesaActivaPorId(5);
+       mesaData.obtenerMesaActivaPorId(5);
        
       
        
