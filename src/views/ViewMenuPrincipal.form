@@ -14,6 +14,14 @@
             <Property name="text" type="java.lang.String" value="Meseros"/>
           </Properties>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jmProductos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Productos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmProductosMouseClicked"/>
+          </Events>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Detelle Pedido"/>

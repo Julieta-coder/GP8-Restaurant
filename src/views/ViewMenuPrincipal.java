@@ -31,6 +31,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jmProductos = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +52,14 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Meseros");
         jMenuBar1.add(jMenu2);
+
+        jmProductos.setText("Productos");
+        jmProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmProductosMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jmProductos);
 
         jMenu3.setText("Detelle Pedido");
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -85,6 +94,15 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
        jdPrincipal.add(internoDP);
        jdPrincipal.moveToFront(internoDP);
     }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jmProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmProductosMouseClicked
+         jdPrincipal.removeAll();
+        jdPrincipal.repaint();
+        ViewProducto interProd = new ViewProducto();
+        interProd.setVisible(true);
+        jdPrincipal.add(interProd);
+        jdPrincipal.moveToFront(interProd);
+    }//GEN-LAST:event_jmProductosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -127,5 +145,6 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JDesktopPane jdPrincipal;
+    private javax.swing.JMenu jmProductos;
     // End of variables declaration//GEN-END:variables
 }
