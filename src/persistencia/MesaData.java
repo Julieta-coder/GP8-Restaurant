@@ -34,8 +34,7 @@ public class MesaData {
         }
     }
     
-    
-
+   
     public List<Mesa> listarMesas(){
         
         List<Mesa> mesas = new ArrayList<>();
@@ -148,24 +147,22 @@ public class MesaData {
         Mesa mesa = null;
         
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id_mesa);
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                mesa = new Mesa();
-                mesa.setId_mesa(rs.getInt("id_mesa"));
-                mesa.setNumero(rs.getInt("numero"));
-                mesa.setCapacidad(rs.getInt("capacidad"));
-                mesa.setDisposicion(rs.getString("disposicion"));
-                mesa.setEstado(rs.getBoolean("estado"));
-            }else{
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id_mesa);
+                ResultSet rs = ps.executeQuery();
                 
-                System.out.println("La mesa está en el deposito.");/*EL METODO SERA NULO CUANDO EL ESTADO ES CERO*/
+                if (rs.next()) {
+                    mesa = new Mesa();
+                    mesa.setId_mesa(rs.getInt("id_mesa"));
+                    mesa.setNumero(rs.getInt("numero"));
+                    mesa.setCapacidad(rs.getInt("capacidad"));
+                    mesa.setDisposicion(rs.getString("disposicion"));
+                    mesa.setEstado(rs.getBoolean("estado"));
+                }else{
+                    
+                    System.out.println("La mesa está en el deposito.");/*EL METODO SERA NULO CUANDO EL ESTADO ES CERO*/
+                }
             }
-            
-            
-            ps.close();
             
         } catch (SQLException ex) {
             
@@ -179,24 +176,22 @@ public class MesaData {
         Mesa mesa = null;
         
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id_mesa);
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                mesa = new Mesa();
-                mesa.setId_mesa(rs.getInt("id_mesa"));
-                mesa.setNumero(rs.getInt("numero"));
-                mesa.setCapacidad(rs.getInt("capacidad"));
-                mesa.setDisposicion(rs.getString("disposicion"));
-                mesa.setEstado(rs.getBoolean("estado"));
-            }else{
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id_mesa);
+                ResultSet rs = ps.executeQuery();
                 
-                System.out.println("La mesa que busca esta activa"); /*EL METODO SERA NULO CUANDO EL ESTADO ES UNO*/
+                if (rs.next()) {
+                    mesa = new Mesa();
+                    mesa.setId_mesa(rs.getInt("id_mesa"));
+                    mesa.setNumero(rs.getInt("numero"));
+                    mesa.setCapacidad(rs.getInt("capacidad"));
+                    mesa.setDisposicion(rs.getString("disposicion"));
+                    mesa.setEstado(rs.getBoolean("estado"));
+                }else{
+                    
+                    System.out.println("La mesa que busca esta activa"); /*EL METODO SERA NULO CUANDO EL ESTADO ES UNO*/
+                }
             }
-            
-            
-            ps.close();
             
         } catch (SQLException ex) {
             

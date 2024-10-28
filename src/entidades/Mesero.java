@@ -5,8 +5,6 @@
 package Entidades;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Mesero {
     private int id_mesero;

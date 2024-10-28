@@ -16,6 +16,7 @@ public class Reserva {
     private boolean estado;
 
     
+      
     public Reserva(int id_reserva, int id_mesa, String nombre_cliente, String dni_cliente, LocalDateTime fecha_reserva, boolean estado) {
         this.id_reserva = id_reserva;
         this.id_mesa = id_mesa;
@@ -51,6 +52,7 @@ public class Reserva {
         return "Reservas{" +
                 "id_reserva=" + id_reserva +
                 ", id_mesa=" + id_mesa +
+                ", mesa=" + mesa +
                 ", nombre_cliente='" + nombre_cliente + '\'' +
                 ", dni_cliente='" + dni_cliente + '\'' +
                 ", fecha_reserva=" + fecha_reserva +
@@ -83,5 +85,9 @@ public class Reserva {
         result = 31 * result + fecha_reserva.hashCode();
         result = 31 * result + (estado ? 1 : 0);
         return result;
+    }
+
+    public void setMesa(Mesa mesa) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

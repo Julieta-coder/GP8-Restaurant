@@ -1,4 +1,4 @@
-package test;
+package Vista;
 
 import Entidades.*;
 import persistencia.*;
