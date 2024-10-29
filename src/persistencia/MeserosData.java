@@ -58,4 +58,32 @@ public class MeserosData {
         }
         return meseros;
     }
+    
+    //Maty se mando un metodo que le hacia falta
+    public Mesero buscarMozoPorId(int id_mesero) {
+        Mesero mesero = null;
+        String sql = "SELECT * FROM meseros WHERE id_mesero = ?"; 
+        try {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, id_mesero);
+                ResultSet resultSet = statement.executeQuery();
+                
+                if (resultSet.next()) {
+                    mesero = new Mesero();
+                    mesero.setId_mesero(resultSet.getInt("id_mesero"));
+                    mesero.setNombre(resultSet.getString("nombre"));
+                    mesero.setApellido(resultSet.getString("apellido"));
+                    mesero.setDni(resultSet.getString("dni"));
+                    mesero.setFechaRegistro(resultSet.getDate("fechaNacimiento").toLocalDate());
+                } else {
+                    System.out.println("No se encontró  Moz@ con ese ID.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar Moz@ : " + e.getMessage());
+        }
+
+        return mesero;
+    }
+    
 }

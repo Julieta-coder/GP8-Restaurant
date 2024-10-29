@@ -4,13 +4,16 @@
  */
 package Entidades;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Pedido {
     private int id_pedido;
     private Mesa mesa;  // Relación con Mesas
     private Mesero mesero;  // Relación con Meseros
+   // private List <DetallePedido> detallePedido; //Relacion con detalle pedidos
     private LocalDate fecha_pedido;
     private LocalTime hora_pedido;
     private boolean estado;
@@ -20,25 +23,53 @@ public class Pedido {
         
     }
 
-    public Pedido(Mesa mesa, Mesero mesero, LocalDate fecha_pedido, LocalTime hora_pedido, boolean estado, double monto_total) {
+    public Pedido(Mesa mesa, Mesero mesero, LocalDate fecha_pedido, LocalTime hora_pedido, boolean estado, double monto_total ) {
         this.mesa = mesa;
         this.mesero = mesero;
         this.fecha_pedido = fecha_pedido;
         this.hora_pedido = hora_pedido;
         this.estado = estado;
         this.monto_total = monto_total;
+        
     }
-    public Pedido(int id_mesa, int id_mesero, LocalDate fecha_pedido, LocalTime hora_pedido, boolean estado, double monto_total) {
+    public Pedido(int id_mesa, int id_mesero, LocalDate fecha_pedido, LocalTime hora_pedido, boolean estado, double monto_total ) {
         this.mesa = new Mesa();
         this.mesa.setId_mesa(id_mesa);
         this.mesero = new Mesero();
         this.mesero.setId_mesero(id_mesero);
         
         
+        
         this.fecha_pedido = fecha_pedido;
         this.hora_pedido = hora_pedido;
         this.estado = estado;
         this.monto_total = monto_total;
+    }
+
+    public Pedido(int id_pedido, int id_mesa, int id_mesero, Date fecha_pedido, LocalTime hora_pedido, boolean estado, double montoTotal) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        Mesa mesa;
+//        Mesero mesero;
+//        
+//        this.id_pedido=id_pedido;
+//        this.mesa=mesa
+
+        
+    }
+    
+    public int getId_mesa(){
+        
+         return getMesa().getId_mesa();
+        
+    }
+    
+    public void setId_mesa(int id_mesa){
+        this.mesa.setId_mesa(id_mesa);
+    }
+    
+    public int getId_mesero(){
+        
+        return getMesero().getId_mesero();
     }
 
     public int getId_pedido() {
@@ -96,6 +127,15 @@ public class Pedido {
     public void setMonto_total(double monto_total) {
         this.monto_total = monto_total;
     }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "id_pedido=" + id_pedido + ", mesa=" + mesa.getId_mesa() + ", mesero=" + mesero.getId_mesero() + ", fecha_pedido=" + fecha_pedido + ", hora_pedido=" + hora_pedido + ", estado=" + estado + ", monto_total=" + monto_total + '}';
+    }
+    
+    
+    
+    
     
     
 }
