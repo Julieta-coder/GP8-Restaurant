@@ -3,12 +3,12 @@ package views;
 
 import Entidades.Producto;
 import javax.swing.JOptionPane;
-import persistencia.ProductosData;
+import persistencia.ProductoData;
 
 
 public class ViewProducto extends javax.swing.JInternalFrame {
     
-    private ProductosData pd = new ProductosData();
+    private ProductoData pd = new ProductoData();
     private Producto productoNuevo = null;
 
     

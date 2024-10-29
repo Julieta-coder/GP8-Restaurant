@@ -50,4 +50,10 @@ public class Producto {
 
     public boolean isEstado() { return estado; }
     public void setEstado(boolean estado) { this.estado = estado; }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "id_producto=" + id_producto + ", nombre=" + nombre + ", categoria=" + categoria + ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + '}';
+    }
+    
 }

@@ -16,24 +16,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PedidosData {
+public class PedidoData {
     private final Connection connection;
     
    private MesaData mesaData= new MesaData();
-    private MeserosData meseroData=new MeserosData();
+    private MeseroData meseroData=new MeseroData();
     
     
 
-    public PedidosData() {
+    public PedidoData() {
         this.connection = Conexion.getConnection();
     }
     
-    public PedidosData(Conexion conexion) {
+    public PedidoData(Conexion conexion) {
                 this.connection = Conexion.getConnection();
 
     }
     
-    public PedidosData(Conexion conexion, MesaData mesaData ,MeserosData meseroData) {
+    public PedidoData(Conexion conexion, MesaData mesaData ,MeseroData meseroData) {
                 this.connection = Conexion.getConnection();
                 this.mesaData=mesaData;
                 this.meseroData=meseroData;
@@ -48,8 +48,8 @@ public class PedidosData {
             try (
                  PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                // statement.setInt(1, insc.getAlumno().getIdAlumno());
-                statement.setInt(1, pedido.getId_mesa());
-                statement.setInt(2, pedido.getId_mesero());
+                statement.setInt(1, pedido.getMesa().getId_mesa());
+                statement.setInt(2, pedido.getMesero().getId_mesero());
                 statement.setDate(3,  java.sql.Date.valueOf(pedido.getFecha_pedido()));      
                 statement.setTime(4, java.sql.Time.valueOf(pedido.getHora_pedido()));
                 statement.setBoolean(5, pedido.isEstado());
@@ -352,30 +352,28 @@ public class PedidosData {
 //        }
 //    }
 
-//    public Pedido buscarPedidoPorId(int id_pedido) {
-//        Pedido pedido = null;
-//        String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";//Ver si hay que aclarar el estado del pedido
-//        try {
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ps.setInt(1, id_pedido);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                pedido = new Pedido(
-//                        
-//                    rs.getInt("id_pedido"),
-//                    rs.getInt("id_mesa"),
-//                    rs.getInt("id_mesero"),
-//                    rs.getDate("fecha_pedido"),
-//                    rs.getTime("hora_pedido").toLocalTime(),
-//                    rs.getBoolean("estado"),
-//                    rs.getDouble("monto_total")
-//                );
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Error al buscar pedido: " + e.getMessage());
-//        }
-//        return pedido;
-//    }
+    public Pedido buscarPedidoPorId(int id_pedido) {
+        Pedido pedido = null;
+        String sql = "SELECT * FROM pedidos WHERE id_pedido = ?";//Ver si hay que aclarar el estado del pedido
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id_pedido);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                pedido = new Pedido();
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedido.setFecha_pedido(rs.getDate("fecha_pedido").toLocalDate());
+                pedido.setHora_pedido(rs.getTime("hora_pedido").toLocalTime());
+                pedido.setId_pedido(rs.getInt("id_pedido"));
+                pedido.setMesa(mesaData.obtenerMesaActivaPorId(rs.getInt("id_mesa")));
+                pedido.setMesero(meseroData.buscarMozoPorId(rs.getInt("id_mesero")));
+                pedido.setMonto_total(rs.getInt("monto_total"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar pedido: " + e.getMessage());
+        }
+        return pedido;
+    }
     
       // Método para buscar un pedido por ID Maty
 //    public Pedido buscarPedido(int id_pedido) {

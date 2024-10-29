@@ -10,10 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class ProductosData {
+public class ProductoData {
     private Connection connection;
 
-    public ProductosData() {
+    public ProductoData() {
         this.connection = Conexion.getConnection();
     }
 
@@ -90,14 +90,14 @@ public class ProductosData {
             ps.setInt(1, id_producto);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                producto = new Producto(
-                    rs.getInt("id_producto"),
-                    rs.getString("nombre"),
-                    rs.getString("categoria"),
-                    rs.getDouble("precio"),
-                    rs.getInt("stock"),
-                    rs.getBoolean("estado")
-                );
+                producto = new Producto();
+                producto.setId_producto(rs.getInt("id_producto"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setCategoria(rs.getString("categoria"));
+                producto.setEstado(rs.getBoolean("estado"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecio(rs.getDouble("precio"));
+              
             }
         } catch (SQLException e) {
             System.out.println("Error al buscar producto: " + e.getMessage());

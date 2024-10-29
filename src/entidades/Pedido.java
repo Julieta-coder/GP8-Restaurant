@@ -46,31 +46,18 @@ public class Pedido {
         this.monto_total = monto_total;
     }
 
-    public Pedido(int id_pedido, int id_mesa, int id_mesero, Date fecha_pedido, LocalTime hora_pedido, boolean estado, double montoTotal) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        Mesa mesa;
-//        Mesero mesero;
-//        
-//        this.id_pedido=id_pedido;
-//        this.mesa=mesa
+    public Pedido(int id_pedido, Mesa mesa, Mesero mesero, LocalDate fecha_pedido, LocalTime hora_pedido, boolean estado, double monto_total) {
+        this.id_pedido = id_pedido;
+        this.mesa = mesa;
+        this.mesero = mesero;
+        this.fecha_pedido = fecha_pedido;
+        this.hora_pedido = hora_pedido;
+        this.estado = estado;
+        this.monto_total = monto_total;
+    }
 
-        
-    }
-    
-    public int getId_mesa(){
-        
-         return getMesa().getId_mesa();
-        
-    }
-    
-    public void setId_mesa(int id_mesa){
-        this.mesa.setId_mesa(id_mesa);
-    }
-    
-    public int getId_mesero(){
-        
-        return getMesero().getId_mesero();
-    }
+
+
 
     public int getId_pedido() {
         return id_pedido;
@@ -130,7 +117,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "id_pedido=" + id_pedido + ", mesa=" + mesa.getId_mesa() + ", mesero=" + mesero.getId_mesero() + ", fecha_pedido=" + fecha_pedido + ", hora_pedido=" + hora_pedido + ", estado=" + estado + ", monto_total=" + monto_total + '}';
+        return "Pedido{" + "id_pedido=" + id_pedido + ", mesa=" + mesa + ", mesero=" + mesero + ", fecha_pedido=" + fecha_pedido + ", hora_pedido=" + hora_pedido + ", estado=" + estado + ", monto_total=" + monto_total + '}';
     }
     
     

@@ -51,4 +51,11 @@ public class DetallePedido {
 
     public double getSub_total() { return sub_total; }
     public void setSub_total(double sub_total) { this.sub_total = sub_total; }
+
+    @Override
+    public String toString() {
+        return "DetallePedido{" + "id_detalle=" + id_detalle + ", pedido=" + pedido + ", producto=" + producto + ", cantidad=" + cantidad + ", precio_unitario=" + precio_unitario + ", sub_total=" + sub_total + '}';
+    }
+    
+    
 }
