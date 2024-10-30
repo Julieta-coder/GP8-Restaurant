@@ -27,6 +27,9 @@ public class ProductoData {
             ps.setInt(4, producto.getStock());
             ps.setBoolean(5, producto.isEstado());
             ps.executeUpdate();
+            
+            
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Error al agregar producto: " + e.getMessage());
         }
