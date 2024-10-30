@@ -18,7 +18,7 @@ public class MeseroData {
 
    
     public void agregarMesero(Mesero mesero) {
-        String sql = "INSERT INTO meseros (nombre, apellido, dni, fecha_registro) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO meseros (nombre, apellido, dni, fecha_registro, contraseña, estado) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, mesero.getNombre());
@@ -26,7 +26,9 @@ public class MeseroData {
             ps.setInt(3, mesero.getDni());
 
             
-            ps.setDate(4, java.sql.Date.valueOf(mesero.getFechaRegistro()));
+            ps.setDate(4, java.sql.Date.valueOf(mesero.getFecha_registro()));
+            ps.setString(5, mesero.getContraseña());
+            ps.setBoolean(6, mesero.isEstado());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -66,7 +68,9 @@ public class MeseroData {
                     mesero.setNombre(resultSet.getString("nombre"));
                     mesero.setApellido(resultSet.getString("apellido"));
                     mesero.setDni(resultSet.getInt("dni"));
-                    mesero.setFechaRegistro(resultSet.getDate("fecha_registro").toLocalDate());
+                    mesero.setFecha_registro(resultSet.getDate("fecha_registro").toLocalDate());
+                    mesero.setContraseña(resultSet.getString("contraseña"));
+                    mesero.setEstado(resultSet.getBoolean("estado"));
                 } else {
                     System.out.println("No se encontró  Moz@ con ese ID.");
                 }

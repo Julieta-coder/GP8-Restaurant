@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author nelso
  */
-public class ViewMesero extends javax.swing.JInternalFrame {
+public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     private List <Mesero> meseros = new ArrayList<>();
     
     
@@ -24,7 +24,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
     /**
      * Creates new form ViewMesero
      */
-    public ViewMesero() {
+    public ViewMeseroAdmin() {
         initComponents();
         modelo = (DefaultTableModel) jtMeseros.getModel();
         armarCabeceraTabla();
@@ -58,13 +58,25 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         jtID = new javax.swing.JTextField();
         jbActualizar = new javax.swing.JButton();
 
+        jlNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlNombre.setText("Nombre:");
 
+        jlApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlApellido.setText("Apellido:");
 
+        jlDni.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlDni.setText("DNI;");
 
+        jlContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlContraseña.setText("Contraseña:");
+
+        jtNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jtApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jtDNI.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jpContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jtMeseros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,6 +91,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtMeseros);
 
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +99,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
             }
         });
 
+        jbBuscar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +107,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
             }
         });
 
+        jbAgregar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbAgregar.setText("Agregar");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,8 +115,12 @@ public class ViewMesero extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("ID:");
 
+        jtID.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jbActualizar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbActualizar.setText("Actualizar");
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,8 +138,12 @@ public class ViewMesero extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(62, 62, 62)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jbAgregar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+                                    .addComponent(jbEliminar))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jlApellido)
                                         .addComponent(jlNombre)
@@ -128,30 +151,26 @@ public class ViewMesero extends javax.swing.JInternalFrame {
                                         .addComponent(jlContraseña))
                                     .addGap(33, 33, 33)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                                         .addComponent(jtApellido)
                                         .addComponent(jtDNI)
+                                        .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                                         .addComponent(jpContraseña)))
-                                .addGroup(layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(75, 75, 75)
                                     .addComponent(jLabel1)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
                                     .addComponent(jbBuscar))))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(72, 72, 72)
-                            .addComponent(jbAgregar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jbEliminar))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(31, 31, 31)
+                            .addGap(18, 18, 18)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,16 +190,16 @@ public class ViewMesero extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbEliminar)
                     .addComponent(jbAgregar))
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jbActualizar)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -198,7 +217,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         limpiarTabla();
         
         for (Mesero mesero:meseros) {
-              modelo.addRow(new Object [] {mesero.getId_mesero(), mesero.getNombre(), mesero.getApellido(),mesero.getDni(), mesero.getFechaRegistro() } );
+              modelo.addRow(new Object [] {mesero.getId_mesero(), mesero.getNombre(), mesero.getApellido(),mesero.getDni(), mesero.getFecha_registro()} );
               
         }
     }
@@ -209,20 +228,20 @@ public class ViewMesero extends javax.swing.JInternalFrame {
             int id = meseros.size() + 1;
             String nombre = jtNombre.getText();
             String apellido = jtApellido.getText();
-            String dni = jtDNI.getText();
+            int dni = Integer.parseInt(jtDNI.getText());
             String contraseña = jpContraseña.getText();
         
-            if(nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || contraseña.isEmpty()) {
+            if(nombre.isEmpty() || apellido.isEmpty() || dni == 0 || contraseña.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Completar todos los campos.");
                 return;
             }
-            Mesero nuevoMesero = new Mesero(id, nombre, apellido, id, LocalDate.MIN);
+            Mesero nuevoMesero = new Mesero();//RECORDAR AÑADIR CONTRASEÑA Y ESTADO 
             meseros.add(nuevoMesero);
             cargarDatosEnTabla();
             JOptionPane.showMessageDialog(this, "Mesero agregado exitosamente.");
             
         }    catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Error al agregar el mesero.");
+            JOptionPane.showMessageDialog(this, "DNI debe ser numerico.");
         }
     }//GEN-LAST:event_jbAgregarActionPerformed
 

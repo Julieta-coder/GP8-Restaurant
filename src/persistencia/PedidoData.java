@@ -307,7 +307,7 @@ public class PedidoData {
     }
     
     public void actualizarMontoTotal(int id_mesa, int id_mesero, Double monto_total) {
-        String sql = "UPDATE inscripcion SET monto_total = ? WHERE id_mesa = ? AND id_mesero = ?";
+        String sql = "UPDATE inscripcion SET monto_total = ? WHERE id_mesa = ? AND id_mesero = ?"; 
         try {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setDouble(1, monto_total);

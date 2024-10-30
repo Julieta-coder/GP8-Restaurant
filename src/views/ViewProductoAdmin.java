@@ -1,23 +1,19 @@
-
 package views;
 
 import Entidades.Producto;
 import javax.swing.JOptionPane;
 import persistencia.ProductoData;
 
+public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
-public class ViewProducto extends javax.swing.JInternalFrame {
-    
     private ProductoData pd = new ProductoData();
     private Producto productoNuevo = null;
 
-    
-    public ViewProducto() {
+    public ViewProductoAdmin() {
         initComponents();
         comboCategorias();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -190,112 +186,110 @@ public class ViewProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        
-        
+
         //falta agregar la excepcion si en nombre se ponen numeros
         //ver porque solo me deja agregar 1 vez despues ya no, tengoq eu cerrar y abrir el programa
-        try{
-            
-        String nombre = jtNombre.getText();
-        String categoria = (String)jComboCategoria.getSelectedItem();
-        
-        if(nombre.isEmpty() || categoria.isEmpty()){
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
-            return;
-        }
-        
-        Double precio = Double.parseDouble(jtPrecio.getText());
-        int stock = Integer.parseInt(jtStock.getText());
-       
-        Boolean estado = jrbEstado.isSelected();
-        
-        if(productoNuevo == null){
-            productoNuevo = new Producto(nombre,categoria,precio,stock,estado);
-            pd.agregarProducto(productoNuevo);
-            limpiarCampos();
-            
-        
-        }else{
-            productoNuevo.setNombre(nombre);
-            productoNuevo.setCategoria(categoria);
-            productoNuevo.setPrecio(precio);
-            productoNuevo.setStock(stock);
-            pd.actualizarProducto(productoNuevo);
-            limpiarCampos();
-     
-        }
-        
-        
-        }catch(NumberFormatException ex){
+        try {
+
+            String nombre = jtNombre.getText();
+            if (nombre.matches("^[a-zA-Z]+$")) {
+                String categoria = (String) jComboCategoria.getSelectedItem();
+
+                if (nombre.isEmpty() || categoria.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+                    return;
+                }
+
+                Double precio = Double.parseDouble(jtPrecio.getText());
+                int stock = Integer.parseInt(jtStock.getText());
+
+                Boolean estado = jrbEstado.isSelected();
+
+                if (productoNuevo == null) {
+                    productoNuevo = new Producto(nombre, categoria, precio, stock, estado);
+                    pd.agregarProducto(productoNuevo);
+                    limpiarCampos();
+                    JOptionPane.showMessageDialog(this, "¡Producto agregado!");
+
+                } else {
+                    productoNuevo.setNombre(nombre);
+                    productoNuevo.setCategoria(categoria);
+                    productoNuevo.setPrecio(precio);
+                    productoNuevo.setStock(stock);
+                    pd.actualizarProducto(productoNuevo);
+                    limpiarCampos();
+                    JOptionPane.showMessageDialog(this, "¡Producto modificado!");
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Nombre debe contener solo letras");
+            }
+
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un dato valido");
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-             
-        if(productoNuevo!=null){
+
+        if (productoNuevo != null) {
             pd.cambiarEstado(productoNuevo.getId_producto());
             productoNuevo = null;
             limpiarCampos();
-        
-        }else {
-        
+
+        } else {
+
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
-        
-        
-            
+
+
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
-         
+
         Integer codigo = Integer.parseInt(jtCodigo.getText());
-        
-        productoNuevo=pd.buscarProductoPorId(codigo);
-        
-        if(productoNuevo!= null){
-        
+
+        productoNuevo = pd.buscarProductoPorId(codigo);
+
+        if (productoNuevo != null) {
+
             jtNombre.setText(productoNuevo.getNombre());
             jComboCategoria.setSelectedItem(productoNuevo.getCategoria());
             jtPrecio.setText(String.valueOf(productoNuevo.getPrecio()));
             jtStock.setText(String.valueOf(productoNuevo.getStock()));
             jrbEstado.setSelected(productoNuevo.isEstado());
-            
-            
+
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jtCodigoActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         limpiarCampos();
-        productoNuevo=null;
-        
+        productoNuevo = null;
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
-  private void comboCategorias(){
-        
-    jComboCategoria.addItem("Entrada");
-    jComboCategoria.addItem("Plato principal");
-    jComboCategoria.addItem("Bebida con alcohol");
-    jComboCategoria.addItem("Bebida sin alcohol");
-    jComboCategoria.addItem("Postre");
-    
-    }
-  
-  private void limpiarCampos(){
-      jtNombre.setText("");
-      jtPrecio.setText("");
-      jtStock.setText("");
-      jrbEstado.setSelected(true);
+    private void comboCategorias() {
 
-}
-    
-    
-    
-    
-    
+        jComboCategoria.addItem("Entrada");
+        jComboCategoria.addItem("Plato principal");
+        jComboCategoria.addItem("Bebida con alcohol");
+        jComboCategoria.addItem("Bebida sin alcohol");
+        jComboCategoria.addItem("Postre");
+
+    }
+
+    private void limpiarCampos() {
+        jtNombre.setText("");
+        jtPrecio.setText("");
+        jtStock.setText("");
+        jrbEstado.setSelected(true);
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboCategoria;

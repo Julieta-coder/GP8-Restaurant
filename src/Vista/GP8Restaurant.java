@@ -42,7 +42,7 @@ public class GP8Restaurant {
        Mesa mesa1 = new Mesa(1,2, 4, "libre",true);
        LocalDate fecha = LocalDate.of(1990, 10, 16);
        LocalTime hora = LocalTime.of(7, 30);
-       Mesero mesero = new Mesero(1,"Luca","Salonia",40722588,fecha);
+       Mesero mesero = new Mesero(1,"Luca","Salonia",40722588,fecha,"dwdad",true);
 //       Pedido pedido = new Pedido(mesa1,mesero,fecha,hora,true,5000);/*2 EL MONTO TOTAL SE DEBERA OBTENER ATRAVES DE ALGUNA OPERACION REALIZADA CON IFOTMACION OBTENIDA EN DATA*/
        /*6 CITAMOS ESTE PEDIDO PARA PODER UTILIZARLO ABAJO EN DETALLE PEDIDO ESPECIFICANDO EL ID QUE TIENE EN LA BASE DE DATOS*/
       

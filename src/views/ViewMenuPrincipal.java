@@ -29,10 +29,16 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
         jdPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jmProductos = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jmMesa = new javax.swing.JMenu();
+        jmMesero = new javax.swing.JMenu();
+        jmPedido = new javax.swing.JMenu();
+        jmReserva = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jmiMesero = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jmiProducto = new javax.swing.JMenuItem();
+        jmiContable = new javax.swing.JMenuItem();
+        jmiStock = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,34 +46,68 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jdPrincipal.setLayout(jdPrincipalLayout);
         jdPrincipalLayout.setHorizontalGroup(
             jdPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 717, Short.MAX_VALUE)
+            .addGap(0, 1009, Short.MAX_VALUE)
         );
         jdPrincipalLayout.setVerticalGroup(
             jdPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 752, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Mesas");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Meseros");
-        jMenuBar1.add(jMenu2);
-
-        jmProductos.setText("Productos");
-        jmProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jmMesa.setText("Mesas");
+        jmMesa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmProductosMouseClicked(evt);
+                jmMesaMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jmProductos);
+        jMenuBar1.add(jmMesa);
 
-        jMenu3.setText("Detelle Pedido");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jmMesero.setText("Meseros");
+        jMenuBar1.add(jmMesero);
+
+        jmPedido.setText("Pedidos");
+        jmPedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
+                jmPedidoMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jmPedido);
+
+        jmReserva.setText("Reserva");
+        jMenuBar1.add(jmReserva);
+
+        jMenu6.setText("Administracion");
+
+        jmiMesero.setText("Contratar mesero");
+        jmiMesero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiMeseroActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmiMesero);
+
+        jMenuItem2.setText("Añadir mesa");
+        jMenu6.add(jMenuItem2);
+
+        jmiProducto.setText("Cargar producto");
+        jmiProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiProductoActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmiProducto);
+
+        jmiContable.setText("Contable");
+        jmiContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiContableActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmiContable);
+
+        jmiStock.setText("Stock");
+        jMenu6.add(jmiStock);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -75,7 +115,9 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdPrincipal)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jdPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,24 +127,55 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+    private void jmMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMesaMouseClicked
         // TODO add your handling code here:
         jdPrincipal.removeAll();
         jdPrincipal.repaint();
-       ViewDetallePedido internoDP = new ViewDetallePedido();
-       internoDP.setVisible(true);
-       jdPrincipal.add(internoDP);
-       jdPrincipal.moveToFront(internoDP);
-    }//GEN-LAST:event_jMenu3MouseClicked
+        ViewSalonMesa interMesa = new ViewSalonMesa();
+        interMesa.setVisible(true);
+        jdPrincipal.add(interMesa);
+        jdPrincipal.moveToFront(interMesa);
+    }//GEN-LAST:event_jmMesaMouseClicked
 
-    private void jmProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmProductosMouseClicked
-         jdPrincipal.removeAll();
+    private void jmiMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMeseroActionPerformed
+        // TODO add your handling code here:
+        jdPrincipal.removeAll();
         jdPrincipal.repaint();
-        ViewProducto interProd = new ViewProducto();
-        interProd.setVisible(true);
-        jdPrincipal.add(interProd);
-        jdPrincipal.moveToFront(interProd);
-    }//GEN-LAST:event_jmProductosMouseClicked
+        ViewMeseroAdmin interMeseroAdmin = new ViewMeseroAdmin();
+        interMeseroAdmin.setVisible(true);
+        jdPrincipal.add(interMeseroAdmin);
+        jdPrincipal.moveToFront(interMeseroAdmin);
+    }//GEN-LAST:event_jmiMeseroActionPerformed
+
+    private void jmiProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProductoActionPerformed
+        // TODO add your handling code here:
+        jdPrincipal.removeAll();
+        jdPrincipal.repaint();
+        ViewProductoAdmin interProductoAdmin = new ViewProductoAdmin();
+        interProductoAdmin.setVisible(true);
+        jdPrincipal.add(interProductoAdmin);
+        jdPrincipal.moveToFront(interProductoAdmin);
+    }//GEN-LAST:event_jmiProductoActionPerformed
+
+    private void jmPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmPedidoMouseClicked
+        // TODO add your handling code here:
+        jdPrincipal.removeAll();
+        jdPrincipal.repaint();
+        ViewPedido interPedido = new ViewPedido();
+        interPedido.setVisible(true);
+        jdPrincipal.add(interPedido);
+        jdPrincipal.moveToFront(interPedido);
+    }//GEN-LAST:event_jmPedidoMouseClicked
+
+    private void jmiContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiContableActionPerformed
+        // TODO add your handling code here:
+          jdPrincipal.removeAll();
+        jdPrincipal.repaint();
+        ViewPedidoAdmin interPedidoAdmin = new ViewPedidoAdmin();
+        interPedidoAdmin.setVisible(true);
+        jdPrincipal.add(interPedidoAdmin);
+        jdPrincipal.moveToFront(interPedidoAdmin);
+    }//GEN-LAST:event_jmiContableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,11 +213,17 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JDesktopPane jdPrincipal;
-    private javax.swing.JMenu jmProductos;
+    private javax.swing.JMenu jmMesa;
+    private javax.swing.JMenu jmMesero;
+    private javax.swing.JMenu jmPedido;
+    private javax.swing.JMenu jmReserva;
+    private javax.swing.JMenuItem jmiContable;
+    private javax.swing.JMenuItem jmiMesero;
+    private javax.swing.JMenuItem jmiProducto;
+    private javax.swing.JMenuItem jmiStock;
     // End of variables declaration//GEN-END:variables
 }
