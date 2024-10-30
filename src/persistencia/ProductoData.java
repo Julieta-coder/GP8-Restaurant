@@ -1,35 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package persistencia;
 
-/**
- *
- * @author Adriana
- */
+
 import Entidades.Producto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-public class ProductosData {
+public class ProductoData {
     private Connection connection;
 
-    public ProductosData() {
+    public ProductoData() {
         this.connection = Conexion.getConnection();
     }
 
     public void agregarProducto(Producto producto) {
         String sql = "INSERT INTO productos (nombre, categoria, precio, stock, estado) VALUES (?, ?, ?, ?, ?)";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, producto.getNombre());
             ps.setString(2, producto.getCategoria());
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getStock());
             ps.setBoolean(5, producto.isEstado());
             ps.executeUpdate();
+            
+            
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Error al agregar producto: " + e.getMessage());
         }
@@ -93,18 +93,41 @@ public class ProductosData {
             ps.setInt(1, id_producto);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                producto = new Producto(
-                    rs.getInt("id_producto"),
-                    rs.getString("nombre"),
-                    rs.getString("categoria"),
-                    rs.getDouble("precio"),
-                    rs.getInt("stock"),
-                    rs.getBoolean("estado")
-                );
+                producto = new Producto();
+                producto.setId_producto(rs.getInt("id_producto"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setCategoria(rs.getString("categoria"));
+                producto.setEstado(rs.getBoolean("estado"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecio(rs.getDouble("precio"));
+              
             }
         } catch (SQLException e) {
             System.out.println("Error al buscar producto: " + e.getMessage());
         }
         return producto;
     }
+    
+    //eliminado logico
+    
+    public void cambiarEstado(int id){
+    String sql = "UPDATE productos SET estado = 0 WHERE id_producto = ?";
+    
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            int agregado = ps.executeUpdate();
+            if(agregado ==1){
+                
+                JOptionPane.showMessageDialog(null, "Producto dado de baja");           
+            }         
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "No se encontro la tabla");
+        }
+     
+        
+    }
+    
 }

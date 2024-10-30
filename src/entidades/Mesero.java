@@ -10,20 +10,20 @@ public class Mesero {
     private int id_mesero;
     private String nombre;
     private String apellido;
-    private String dni;
+    private int dni;
     private LocalDate fecha_registro;
 
     public Mesero() {
     }
 
-    public Mesero(String nombre, String apellido, String dni, LocalDate fecha_registro) {
+    public Mesero(String nombre, String apellido, int dni, LocalDate fecha_registro) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fecha_registro = fecha_registro;
     }
 
-    public Mesero(int id_mesero, String nombre, String apellido, String dni, LocalDate fecha_registro) {
+    public Mesero(int id_mesero, String nombre, String apellido, int dni, LocalDate fecha_registro) {
         this.id_mesero = id_mesero;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -41,8 +41,8 @@ public class Mesero {
     public String getApellido() { return apellido; }
     public void setApellido(String apellido) { this.apellido = apellido; }
 
-    public String getDni() { return dni; }
-    public void setDni(String dni) { this.dni = dni; }
+    public int getDni() { return dni; }
+    public void setDni(int dni) { this.dni = dni; }
 
     public LocalDate getFechaRegistro() {  
         return fecha_registro;

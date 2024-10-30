@@ -9,10 +9,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeserosData {
+public class MeseroData {
     private Connection connection;
 
-    public MeserosData() {
+    public MeseroData() {
         this.connection = Conexion.getConnection();
     }
 
@@ -23,7 +23,7 @@ public class MeserosData {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, mesero.getNombre());
             ps.setString(2, mesero.getApellido());
-            ps.setString(3, mesero.getDni());
+            ps.setInt(3, mesero.getDni());
 
             
             ps.setDate(4, java.sql.Date.valueOf(mesero.getFechaRegistro()));
@@ -42,15 +42,7 @@ public class MeserosData {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                Mesero mesero = new Mesero(
-                    rs.getInt("id_mesero"),
-                    rs.getString("nombre"),
-                    rs.getString("apellido"),
-                    rs.getString("dni"),
-
-                    // Convertir java.sql.Date a LocalDate
-                    rs.getDate("fecha_registro").toLocalDate()
-                );
+                Mesero mesero = new Mesero();//Construir
                 meseros.add(mesero);
             }
         } catch (SQLException e) {
@@ -58,4 +50,32 @@ public class MeserosData {
         }
         return meseros;
     }
+    
+    //Maty se mando un metodo que le hacia falta
+    public Mesero buscarMozoPorId(int id_mesero) {
+        Mesero mesero = null;
+        String sql = "SELECT * FROM meseros WHERE id_mesero = ?"; 
+        try {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, id_mesero);
+                ResultSet resultSet = statement.executeQuery();
+                
+                if (resultSet.next()) {
+                    mesero = new Mesero();
+                    mesero.setId_mesero(resultSet.getInt("id_mesero"));
+                    mesero.setNombre(resultSet.getString("nombre"));
+                    mesero.setApellido(resultSet.getString("apellido"));
+                    mesero.setDni(resultSet.getInt("dni"));
+                    mesero.setFechaRegistro(resultSet.getDate("fecha_registro").toLocalDate());
+                } else {
+                    System.out.println("No se encontró  Moz@ con ese ID.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar Moz@ : " + e.getMessage());
+        }
+
+        return mesero;
+    }
+    
 }
