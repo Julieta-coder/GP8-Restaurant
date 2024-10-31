@@ -257,7 +257,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Completar todos los campos.");
                 return;
             }
-            Mesero mesero = new Mesero (nombre, apellido, dni, LocalDate.MIN, contraseña, isIcon);
+            Mesero mesero = new Mesero (nombre, apellido, dni, LocalDate.now(), contraseña, true);
             
             meseroData.agregarMesero(mesero);
                     jtNombre.setText("");
