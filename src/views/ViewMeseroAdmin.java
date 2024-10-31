@@ -5,13 +5,12 @@
 package views;
 
 import Entidades.Mesero;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import persistencia.MeseroData;
 
 /**
  *
@@ -19,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     private List <Mesero> meseros = new ArrayList<>();
-    private meseroData meseData = new meseroData();
+    private MeseroData meseroData = new MeseroData();
     
     
     
@@ -258,7 +257,9 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Completar todos los campos.");
                 return;
             }
-            meseros.agregarMesero(mesero);
+            Mesero mesero = new Mesero (nombre, apellido, dni, LocalDate.MIN, contraseña, isIcon);
+            
+            meseroData.agregarMesero(mesero);
                     jtNombre.setText("");
                     jtApellido.setText("");
                     jtDNI.setText("");
