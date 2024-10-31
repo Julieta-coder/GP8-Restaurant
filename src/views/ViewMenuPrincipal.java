@@ -104,7 +104,12 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu6.add(jmiContable);
 
-        jmiStock.setText("Stock");
+        jmiStock.setText("Stock productos");
+        jmiStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiStockActionPerformed(evt);
+            }
+        });
         jMenu6.add(jmiStock);
 
         jMenuBar1.add(jMenu6);
@@ -176,6 +181,17 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jdPrincipal.add(interPedidoAdmin);
         jdPrincipal.moveToFront(interPedidoAdmin);
     }//GEN-LAST:event_jmiContableActionPerformed
+
+    private void jmiStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiStockActionPerformed
+        
+        jdPrincipal.removeAll();
+        jdPrincipal.repaint();
+        ViewStockProductos interStock = new ViewStockProductos();
+        interStock.setVisible(true);
+        jdPrincipal.add(interStock);
+        jdPrincipal.moveToFront(interStock);
+        
+    }//GEN-LAST:event_jmiStockActionPerformed
 
     /**
      * @param args the command line arguments
