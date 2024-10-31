@@ -5,6 +5,8 @@
 package views;
 
 import Entidades.Mesero;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     private List <Mesero> meseros = new ArrayList<>();
+    private meseroData meseData = new meseroData();
     
     
     
@@ -71,12 +74,32 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         jlContraseña.setText("Contraseña:");
 
         jtNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
+        });
 
         jtApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtApellidoKeyTyped(evt);
+            }
+        });
 
         jtDNI.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtDNIKeyTyped(evt);
+            }
+        });
 
         jpContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jpContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jpContraseñaKeyTyped(evt);
+            }
+        });
 
         jtMeseros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -235,6 +258,11 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Completar todos los campos.");
                 return;
             }
+            meseros.agregarMesero(mesero);
+                    jtNombre.setText("");
+                    jtApellido.setText("");
+                    jtDNI.setText("");
+                    
             Mesero nuevoMesero = new Mesero();//RECORDAR AÑADIR CONTRASEÑA Y ESTADO 
             meseros.add(nuevoMesero);
             cargarDatosEnTabla();
@@ -243,6 +271,9 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         }    catch (Exception e){
             JOptionPane.showMessageDialog(this, "DNI debe ser numerico.");
         }
+        
+        
+   
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
@@ -290,6 +321,37 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "El ID debe ser un número.");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jpContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpContraseñaKeyTyped
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jpContraseñaKeyTyped
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+        
+         if ((c>'z' || c<'a')&&(c>'Z' || c<'A')) evt.consume();
+    }//GEN-LAST:event_jtNombreKeyTyped
+
+    private void jtDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDNIKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+        
+        if( jtDNI.getText().length() >= 8 ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtDNIKeyTyped
+
+    private void jtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+        
+         if ((c>'z' || c<'a')&&(c>'Z' || c<'A')) evt.consume();
+    }//GEN-LAST:event_jtApellidoKeyTyped
 
     private DefaultTableModel modelo;
     
