@@ -215,11 +215,11 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiStockActionPerformed
 
-<<<<<<< Updated upstream
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-=======
+
     private void jmMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMesaActionPerformed
         // TODO add your handling code here:
         
@@ -235,7 +235,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jdPrincipal.moveToFront(interMesaAdmin);
         
     }//GEN-LAST:event_jAMesaActionPerformed
->>>>>>> Stashed changes
+
 
     /**
      * @param args the command line arguments

@@ -286,6 +286,8 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
                // TODO add your handling code here:
     
+    // Corrección en el método jBuscarActionPerformed
+                               
     try {
         int id = Integer.parseInt(jIdMesa.getText()); // Campo de texto para ingresar el ID de la mesa
 
@@ -294,8 +296,8 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
         if (mesa != null) {
             // Rellenar los campos con los datos de la mesa encontrada
-            jNumeroMesa.setText(String.valueOf(mesa.getNumero()));
-            jCapacidad.setText(String.valueOf(mesa.getCapacidad()));
+            jNumeroMesa.setValue(mesa.getNumero()); // Corrección: se usa setValue en lugar de setText
+            jCapacidad.setValue(mesa.getCapacidad()); // Corrección: se usa setValue en lugar de setText
             jDisposicion.setSelectedItem(mesa.getDisposicion());
             jEstado.setSelectedItem(mesa.getEstado() ? "Activa" : "Inactiva"); // Asigna "Activa" o "Inactiva" según el estado booleano
         } else {
@@ -307,16 +309,20 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "La mesa no existe o está inactiva.");
     }
 
+
   
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
         // TODO add your handling code here:
                                      
+    // Corrección en el método jAgregarActionPerformed
+                                   
+
     try {
         // Obtener los valores de los campos de entrada
-        int numeroMesa = Integer.parseInt(jNumeroMesa.getText());
-        int capacidad = Integer.parseInt(jCapacidad.getText());
+        int numeroMesa = (Integer) jNumeroMesa.getValue(); // Corrección: se usa getValue en lugar de getText
+        int capacidad = (Integer) jCapacidad.getValue(); // Corrección: se usa getValue en lugar de getText
         String disposicion = jDisposicion.getSelectedItem().toString();
         boolean estado = jEstado.getSelectedItem().equals("Activa");
 
@@ -331,8 +337,8 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         mesaData.agregarMesa(mesa);  // Asegúrate de que mesaData esté correctamente inicializado
 
         // Limpiar los campos de entrada
-        jNumeroMesa.setText("");
-        jCapacidad.setText("");
+        jNumeroMesa.setValue(0); // Corrección: se usa setValue en lugar de setText
+        jCapacidad.setValue(0); // Corrección: se usa setValue en lugar de setText
         jDisposicion.setSelectedIndex(0);
         jEstado.setSelectedIndex(0);
 
@@ -346,10 +352,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al agregar la mesa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-
-
-       
-        
+    
     }//GEN-LAST:event_jAgregarActionPerformed
 
     private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
