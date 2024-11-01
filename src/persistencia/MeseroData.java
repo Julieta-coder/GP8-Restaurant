@@ -81,5 +81,44 @@ public class MeseroData {
 
         return mesero;
     }
+//    
+//    public void eliminarMesero(int idMesero) {
+//    String sql = "DELETE FROM meseros WHERE id_mesero = ?";
+//    try {
+//        PreparedStatement ps = connection.prepareStatement(sql);
+//        ps.setInt(1, idMesero); // Establece el ID del mesero a eliminar
+//        int filasAfectadas = ps.executeUpdate();
+//        
+//        if (filasAfectadas > 0) {
+//            System.out.println("Mesero eliminado exitosamente.");
+//        } else {
+//            System.out.println("No se encontró un mesero con el ID especificado.");
+//        }
+//    } catch (SQLException e) {
+//        System.out.println("Error al eliminar mesero: " + e.getMessage());
+//    }
+//}
+    
+    public boolean eliminarMesero(int idMesero) {
+    String sql = "DELETE FROM meseros WHERE id_mesero = ?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, idMesero); // Establece el ID del mesero a eliminar
+        int filasAfectadas = ps.executeUpdate();
+        
+        if (filasAfectadas > 0) {
+            System.out.println("Mesero eliminado exitosamente.");
+            return true; // Retorna true si se eliminó exitosamente
+        } else {
+            System.out.println("No se encontró un mesero con el ID especificado.");
+            return false; // Retorna false si no se encontró el mesero
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al eliminar mesero: " + e.getMessage());
+        return false; // Retorna false en caso de error
+    }
+}
+
+
     
 }

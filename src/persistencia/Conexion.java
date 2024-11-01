@@ -10,7 +10,7 @@ public class Conexion {
     
    
     private static final String URL = "jdbc:mariadb://localhost/";
-    private static final String DB = "gp8_restaurant";
+    private static final String DB = "gp8-restaurant";
     private static final String USUARIO = "root";
     private static final String PASSWORD = "";
     private static Connection connection;

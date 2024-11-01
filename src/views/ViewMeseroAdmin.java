@@ -284,6 +284,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                     jtNombre.setText("");
                     jtApellido.setText("");
                     jtDNI.setText("");
+                    jpContraseña.setText("");
                     
             Mesero nuevoMesero = new Mesero();//RECORDAR AÑADIR CONTRASEÑA Y ESTADO 
             meseros.add(nuevoMesero);
@@ -317,38 +318,103 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int selectedRow = jtMeseros.getSelectedRow();
         
-        if (selectedRow >= 0){
-            meseros.remove(selectedRow);
-            limpiarTabla();
-            cargarDatosEnTabla();
-            JOptionPane.showMessageDialog(this, "Mesero eliminado exitosamente. ");
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un mesero para eliminar. ");
-        }
+//        if (selectedRow >= 0){
+//            meseros.remove(selectedRow);
+//            limpiarTabla();
+//            cargarDatosEnTabla();
+//            JOptionPane.showMessageDialog(this, "Mesero eliminado exitosamente. ");
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Seleccione un mesero para eliminar. ");
+//        }
+//                try{
+//            try{
+//                int id = Integer.parseInt(jtID.getText());
+//                int respuesta= JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres eliminar el mesero "+meseroData.buscarMozoPorId(id).getNombre()+" de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+//                if (respuesta == JOptionPane.YES_OPTION) {
+//                    meseroData.eliminarMesero(id);//Eliminacion fisica 
+//                    JOptionPane.showMessageDialog(this, "Materia eliminada "); 
+//                }
+//            }catch(NullPointerException e){
+//                 JOptionPane.showMessageDialog(this, "No se encontro este id ","Error",JOptionPane.ERROR_MESSAGE); 
+//            }
+//        }catch(NumberFormatException e){
+//            JOptionPane.showMessageDialog(this, "Debe ingresar algun Id ","Error",JOptionPane.ERROR_MESSAGE); 
+//        }
+
+                                             
+    String idText = jtID.getText();
+    
+    if (idText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID para eliminar.");
+        return;
+    }
+
+    try {
+        int id = Integer.parseInt(idText);
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres eliminar el mesero con ID " + id + " de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
         
+        if (respuesta == JOptionPane.YES_OPTION) {
+            // Llamar al método de eliminación en meseroData
+            if (meseroData.eliminarMesero(id)) { // Ahora funciona correctamente
+                JOptionPane.showMessageDialog(this, "Mesero eliminado exitosamente.");
+                cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró mesero con ID " + id);
+            }
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+    }
+
+
+    
+       
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        String id = jtID.getText();
+//        String id = jtID.getText();
+//        
+//     if (id.isEmpty()) {
+//         JOptionPane.showMessageDialog(this, "Ingresa un ID para buscar.");
+//            return;
+//     }  
+//     
+//     try {
+//         int idCompare = Integer.parseInt(id);
+//         
+//         for (Mesero mesero:meseros){
+//             if (mesero.getId_mesero() == idCompare) {
+//                 JOptionPane.showMessageDialog(this, "Mesero encontrado: " + mesero.getNombre()+" "+mesero.getApellido());
+//                 return;
+//                }
+//            }JOptionPane.showMessageDialog(this, "No se ha encontrado mesero con ese id");
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(this, "El ID debe ser un número.");
+//        }
+
+try {
+        // Obtener el ID del JTextField jtID
+        int idCompare = Integer.parseInt(jtID.getText());
+        // Buscar el mesero utilizando meseroData
+        Mesero mesero = meseroData.buscarMozoPorId(idCompare);
         
-     if (id.isEmpty()) {
-         JOptionPane.showMessageDialog(this, "Ingresa un ID para buscar.");
-            return;
-     }  
-     
-     try {
-         int idCompare = Integer.parseInt(id);
-         
-         for (Mesero mesero:meseros){
-             if (mesero.getId_mesero() == idCompare) {
-                 JOptionPane.showMessageDialog(this, "Mesero encontrado: " + mesero.getNombre()+" "+mesero.getApellido());
-                 return;
-                }
-            }JOptionPane.showMessageDialog(this, "No se ha encontrado mesero con ese id");
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID debe ser un número.");
+        if (mesero != null) {
+            // Si se encuentra el mesero, llenar los campos con sus datos
+            jtNombre.setText(mesero.getNombre());
+            jtApellido.setText(mesero.getApellido());
+            jtDNI.setText(String.valueOf(mesero.getDni()));
+            jpContraseña.setText(mesero.getContraseña());
+            // Aquí podrías agregar más campos si es necesario
+        } else {
+            // Si no se encuentra el mesero, mostrar un mensaje
+            JOptionPane.showMessageDialog(this, "No se encontró mesero con el ID " + idCompare);
         }
+
+    } catch (NumberFormatException e) {
+        // Si ocurre un error de formato, mostrar un mensaje
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+    }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jpContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpContraseñaKeyTyped
