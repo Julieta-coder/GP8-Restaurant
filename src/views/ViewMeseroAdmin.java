@@ -5,6 +5,8 @@
 package views;
 
 import Entidades.Mesero;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,13 +104,16 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
 
         jtMeseros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "Nombre", "Apellido", "DNI", "fecha_registro", "estado"
             }
         ));
         jScrollPane1.setViewportView(jtMeseros);
@@ -235,15 +240,31 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cargarDatosEnTabla(){
-        limpiarTabla();
-        
-        for (Mesero mesero:meseros) {
-              modelo.addRow(new Object [] {mesero.getId_mesero(), mesero.getNombre(), mesero.getApellido(),mesero.getDni(), mesero.getFecha_registro()} );
-              
-        }
-    }
+//    private void cargarDatosEnTabla(){
+//        limpiarTabla();
+//        
+//        for (Mesero mesero:meseros) {
+//              modelo.addRow(new Object [] {mesero.getId_mesero(), mesero.getNombre(), mesero.getApellido(),mesero.getDni(), mesero.getFecha_registro()} );
+//              
+//        }
+//    }
     
+    
+    private void cargarDatosEnTabla() {
+    List<Mesero> meseros = meseroData.listarMeseros(); // Obtén los datos
+    limpiarTabla(); // Limpia antes de agregar nuevos datos
+    
+    for (Mesero mesero : meseros) {
+        modelo.addRow(new Object[] {
+            mesero.getId_mesero(),
+            mesero.getNombre(),
+            mesero.getApellido(),
+            mesero.getDni(),
+            mesero.getContraseña()
+        });
+    }
+}
+
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // TODO add your handling code here:
         try {
@@ -277,12 +298,19 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
    
     }//GEN-LAST:event_jbAgregarActionPerformed
 
+    
+    
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
-        limpiarTabla();
-        cargarDatosEnTabla();
+//        limpiarTabla();
+//        cargarDatosEnTabla();
        
-        
+        jbActualizar.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        cargarDatosEnTabla(); // Actualiza los datos manualmente
+    }
+});
+
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
