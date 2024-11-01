@@ -284,16 +284,16 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
         if (mesa != null) {
             // Rellenar los campos con los datos de la mesa encontrada
-<<<<<<< Updated upstream
+
             jNumeroMesa.setValue(mesa.getNumero()); // Corrección: se usa setValue en lugar de setText
             jCapacidad.setValue(mesa.getCapacidad()); // Corrección: se usa setValue en lugar de setText
-=======
+
            
           
              jNumeroMesa.setValue(mesa.getNumero()); // Corrección: se usa setValue en lugar de setText
              jCapacidad.setValue(mesa.getCapacidad()); // Corrección: se usa setValue en lugar de setText
             
->>>>>>> Stashed changes
+
             jDisposicion.setSelectedItem(mesa.getDisposicion());
             jEstado.setSelectedItem(mesa.getEstado() ? "Activa" : "Inactiva"); // Asigna "Activa" o "Inactiva" según el estado booleano
         } else {
@@ -317,10 +317,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     try {
         // Obtener los valores de los campos de entrada
-<<<<<<< Updated upstream
-=======
-       
->>>>>>> Stashed changes
+
         int numeroMesa = (Integer) jNumeroMesa.getValue(); // Corrección: se usa getValue en lugar de getText
         int capacidad = (Integer) jCapacidad.getValue(); // Corrección: se usa getValue en lugar de getText
         String disposicion = jDisposicion.getSelectedItem().toString();
@@ -337,13 +334,13 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         mesaData.agregarMesa(mesa);  // Asegúrate de que mesaData esté correctamente inicializado
 
         // Limpiar los campos de entrada
-<<<<<<< Updated upstream
+
         jNumeroMesa.setValue(0); // Corrección: se usa setValue en lugar de setText
         jCapacidad.setValue(0); // Corrección: se usa setValue en lugar de setText
-=======
+
         jNumeroMesa.setValue(0);
         jCapacidad.setValue(0);
->>>>>>> Stashed changes
+
         jDisposicion.setSelectedIndex(0);
         jEstado.setSelectedIndex(0);
 
