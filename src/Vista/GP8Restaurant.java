@@ -15,6 +15,10 @@ public class GP8Restaurant {
             System.out.println("Error al establecer la conexión con la base de datos.");
             return;
         }
+        
+        ProductoData pd = new ProductoData();
+       pd.listarProductos();
+        
 
         
         /*TEST MESA*/

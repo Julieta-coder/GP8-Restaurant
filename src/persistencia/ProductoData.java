@@ -34,22 +34,26 @@ public class ProductoData {
     }
 
     public List<Producto> listarProductos() {
+        
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT * FROM productos";
         try {
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
             while (rs.next()) {
-                Producto producto = new Producto(
-                    rs.getInt("id_producto"),
-                    rs.getString("nombre"),
-                    rs.getString("categoria"),
-                    rs.getDouble("precio"),
-                    rs.getInt("stock"),
-                    rs.getBoolean("estado")
-                );
-                productos.add(producto);
+                Producto p = new Producto();
+
+                    p.setId_producto(rs.getInt("id_producto"));
+                    p.setNombre(rs.getString("nombre"));
+                    p.setCategoria(rs.getString("categoria"));
+                    p.setPrecio(rs.getDouble("precio"));
+                    p.setStock(rs.getInt("stock"));
+                    productos.add(p);
+                    
             }
+            ps.close();
+            
         } catch (SQLException e) {
             System.out.println("Error al listar productos: " + e.getMessage());
         }

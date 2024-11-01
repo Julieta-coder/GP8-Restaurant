@@ -1,12 +1,17 @@
 
 package views;
 
+
+import Entidades.Producto;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
 public class ViewStockProductos extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
+    private List<Producto> listaP;
+  
    
     public ViewStockProductos() {
         initComponents();
@@ -38,9 +43,9 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("Buscar por nombre:");
 
-        jLabel2.setText("Categoria:");
+        jLabel2.setText("Buscar por caegoria:");
 
         jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -56,7 +61,7 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -109,7 +114,12 @@ private void cabeceraTabla(){
 }
 
 private void cargarDatos(){
-
+    
+    for (Producto p : listaP){
+        
+        modelo.addRow(new Object[] {p.getId_producto(),p.getNombre(),p.getCategoria(),p.getPrecio(),p.getStock()});
+    
+    }
 
 }
 
