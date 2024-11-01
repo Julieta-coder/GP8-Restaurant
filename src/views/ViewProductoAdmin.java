@@ -57,6 +57,12 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Carga de productos");
 
+        jComboCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboCategoriaActionPerformed(evt);
+            }
+        });
+
         jbGuardar.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -248,6 +254,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
 
+        //ESTE ERA ELIMINADO LOGICO POR EL BOTON ELIMINAR
 //        if (productoNuevo != null) {
 //            pd.cambiarEstado(productoNuevo.getId_producto());
 //            productoNuevo = null;
@@ -322,6 +329,10 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         jtCodigo.requestFocus();
         
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jComboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboCategoriaActionPerformed
 
     private void comboCategorias() {
 

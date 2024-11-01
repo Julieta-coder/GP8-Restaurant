@@ -99,6 +99,7 @@ public class ProductoData {
     }
 
     public Producto buscarProductoPorId(int id_producto) {
+        
         Producto producto = null;
         String sql = "SELECT * FROM productos WHERE id_producto = ?";
         try {
@@ -108,13 +109,16 @@ public class ProductoData {
             if (rs.next()) {
                 producto = new Producto();
                 producto.setId_producto(rs.getInt("id_producto"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setCategoria(rs.getString("categoria"));
-                producto.setEstado(rs.getBoolean("estado"));
                 producto.setNombre(rs.getString("nombre"));
-                producto.setPrecio(rs.getDouble("precio"));
+                producto.setCategoria(rs.getString("categoria"));
+                 producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));               
+                producto.setEstado(rs.getBoolean("estado"));
+                
+               
               
             }
+            
         } catch (SQLException e) {
             System.out.println("Error al buscar producto: " + e.getMessage());
         }
