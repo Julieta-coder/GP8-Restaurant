@@ -86,6 +86,11 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenu6.add(jmiMesero);
 
         jMenuItem2.setText("Añadir mesa");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem2);
 
         jmiProducto.setText("Cargar producto");
@@ -192,6 +197,10 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jdPrincipal.moveToFront(interStock);
         
     }//GEN-LAST:event_jmiStockActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
