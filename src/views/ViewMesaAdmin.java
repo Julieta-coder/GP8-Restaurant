@@ -15,7 +15,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     private List <Mesa> mesas = new ArrayList<>();
     private MesaData mesaData = new MesaData();
-
+    DefaultTableModel modelo = new DefaultTableModel();
     
     public ViewMesaAdmin() {
         initComponents();
@@ -408,7 +408,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jListaEstadoActionPerformed
 
     
-    private DefaultTableModel modelo;
+//    private DefaultTableModel modelo;
 
 private void armarCabeceraTabla() {
     if (modelo == null) {
