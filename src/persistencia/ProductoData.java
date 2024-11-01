@@ -35,8 +35,11 @@ public class ProductoData {
 
     public List<Producto> listarProductos() {
         
-        List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT * FROM productos";
+        ArrayList<Producto> productos = new ArrayList<>();
+        
+        String sql = "SELECT id_producto,nombre,categoria,precio, stock FROM productos WHERE estado = 1";
+        
+        
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -49,6 +52,7 @@ public class ProductoData {
                     p.setCategoria(rs.getString("categoria"));
                     p.setPrecio(rs.getDouble("precio"));
                     p.setStock(rs.getInt("stock"));
+                    p.setEstado(true);
                     productos.add(p);
                     
             }
@@ -81,7 +85,14 @@ public class ProductoData {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id_producto);
-            ps.executeUpdate();
+            int fila = ps.executeUpdate();
+            
+            if(fila>0){
+            
+                JOptionPane.showMessageDialog(null, "Producto eliminado con exito");
+            }
+            ps.close();
+            
         } catch (SQLException e) {
             System.out.println("Error al eliminar producto: " + e.getMessage());
         }

@@ -15,9 +15,11 @@ public class GP8Restaurant {
             System.out.println("Error al establecer la conexión con la base de datos.");
             return;
         }
-        
-        ProductoData pd = new ProductoData();
-       pd.listarProductos();
+//        PRUEBA PARA LISTAR PRRODUCTO
+//            ProductoData p = new ProductoData();
+//        for(Producto produc: p.listarProductos() ){
+//            System.out.println(produc);
+//        }
         
 
         
@@ -43,18 +45,18 @@ public class GP8Restaurant {
        /*TEST DETALLE PEDIDO*/
        /*1 PARA MESA Y MESERO HAY QUE USAR EL CONTRUCTOR CON ID PARA QUE PEDIDO LO RECUPERE*/
 //       Producto producto = new Producto("Coca","Bebida",50,10,true); 8 LO MISMO HACEMOS CON PRODUCTO
-       Mesa mesa1 = new Mesa(1,2, 4, "libre",true);
-       LocalDate fecha = LocalDate.of(1990, 10, 16);
-       LocalTime hora = LocalTime.of(7, 30);
-       Mesero mesero = new Mesero(1,"Luca","Salonia",40722588,fecha,"dwdad",true);
+   //    Mesa mesa1 = new Mesa(1,2, 4, "libre",true);
+   //    LocalDate fecha = LocalDate.of(1990, 10, 16);
+   //    LocalTime hora = LocalTime.of(7, 30);
+    //   Mesero mesero = new Mesero(1,"Luca","Salonia",40722588,fecha,"dwdad",true);
 //       Pedido pedido = new Pedido(mesa1,mesero,fecha,hora,true,5000);/*2 EL MONTO TOTAL SE DEBERA OBTENER ATRAVES DE ALGUNA OPERACION REALIZADA CON IFOTMACION OBTENIDA EN DATA*/
        /*6 CITAMOS ESTE PEDIDO PARA PODER UTILIZARLO ABAJO EN DETALLE PEDIDO ESPECIFICANDO EL ID QUE TIENE EN LA BASE DE DATOS*/
       
        
-       ProductoData productoData = new ProductoData();
-       PedidoData pedidoData = new PedidoData();
-       MesaData mesaData1 = new MesaData();
-       MeseroData meseroData = new MeseroData();
+      // ProductoData productoData = new ProductoData();
+     //  PedidoData pedidoData = new PedidoData();
+     //  MesaData mesaData1 = new MesaData();
+     //  MeseroData meseroData = new MeseroData();
        
        
 //       productoData.agregarProducto(producto);
@@ -65,11 +67,11 @@ public class GP8Restaurant {
        //7 CITAMOS EL METODO DE CARGA PEDIDO PARA EVITAR CONFLICTOS
        
        
-       Pedido pedido = new Pedido(7,mesa1,mesero,fecha,hora,true,5000);
-       Producto producto = new Producto(5,"Coca","Bebida",50,10,true);
+      // Pedido pedido = new Pedido(7,mesa1,mesero,fecha,hora,true,5000);
+      // Producto producto = new Producto(5,"Coca","Bebida",50,10,true);
        
-       DetallePedido dp = new DetallePedido(pedido,producto,22,250,1000);
-       DetallePedidoData dpD = new DetallePedidoData();
+      // DetallePedido dp = new DetallePedido(pedido,producto,22,250,1000);
+      // DetallePedidoData dpD = new DetallePedidoData();
 //       dpD.agregarDetallePedido(dp);
        /*9 EL DETALLE SE CARGO CON EXISTO*/
        
@@ -78,7 +80,7 @@ public class GP8Restaurant {
 //        System.out.println(pedidoData.buscarPedidoPorId(7));
 //        System.out.println(dpD.listarDetallesPorPedido(8));
 //        System.out.println(dpD.listarDetallesPorProducto(5));
-        dpD.eliminarDetallePedido(10);
+       // dpD.eliminarDetallePedido(10);
        
        
        
