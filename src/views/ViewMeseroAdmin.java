@@ -30,8 +30,8 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
      */
     public ViewMeseroAdmin() {
         initComponents();
-        modelo = (DefaultTableModel) jtMeseros.getModel();
-        armarCabeceraTabla();
+        
+//        armarCabeceraTabla();
     }
     
     
@@ -53,8 +53,6 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         jtApellido = new javax.swing.JTextField();
         jtDNI = new javax.swing.JTextField();
         jpContraseña = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtMeseros = new javax.swing.JTable();
         jbEliminar = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
         jbAgregar = new javax.swing.JButton();
@@ -102,22 +100,6 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
             }
         });
 
-        jtMeseros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "id", "Nombre", "Apellido", "DNI", "fecha_registro", "estado"
-            }
-        ));
-        jScrollPane1.setViewportView(jtMeseros);
-
         jbEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -160,38 +142,34 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbActualizar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(62, 62, 62)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jbAgregar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                                    .addComponent(jbEliminar))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlApellido)
-                                        .addComponent(jlNombre)
-                                        .addComponent(jlDni)
-                                        .addComponent(jlContraseña))
-                                    .addGap(33, 33, 33)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtApellido)
-                                        .addComponent(jtDNI)
-                                        .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                        .addComponent(jpContraseña)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(75, 75, 75)
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbBuscar))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jbAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+                        .addComponent(jbEliminar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlApellido)
+                            .addComponent(jlNombre)
+                            .addComponent(jlDni)
+                            .addComponent(jlContraseña))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtApellido)
+                            .addComponent(jtDNI)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jpContraseña)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbActualizar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbBuscar)))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,22 +201,20 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                     .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jbActualizar)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limpiarTabla(){
-        int rowCount = modelo.getRowCount();
-        
-        for (int i = rowCount - 1 ; i >= 0; i --){
-            modelo.removeRow(i);
-        }
-    }
+//    private void limpiarTabla(){
+//        int rowCount = modelo.getRowCount();
+//        
+//        for (int i = rowCount - 1 ; i >= 0; i --){
+//            modelo.removeRow(i);
+//        }
+//    }
     
 //    private void cargarDatosEnTabla(){
 //        limpiarTabla();
@@ -250,21 +226,21 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
 //    }
     
     
-    private void cargarDatosEnTabla() {
-    List<Mesero> meseros = meseroData.listarMeseros(); // Obtén los datos
-    limpiarTabla(); // Limpia antes de agregar nuevos datos
-    
-    for (Mesero mesero : meseros) {
-        modelo.addRow(new Object[] {
-            mesero.getId_mesero(),
-            mesero.getNombre(),
-            mesero.getApellido(),
-            mesero.getDni(),
-            mesero.getContraseña()
-        });
-    }
-}
-
+//    private void cargarDatosEnTabla() {
+//    List<Mesero> meseros = meseroData.listarMeseros(); // Obtén los datos
+//    limpiarTabla(); // Limpia antes de agregar nuevos datos
+//    
+//    for (Mesero mesero : meseros) {
+//        modelo.addRow(new Object[] {
+//            mesero.getId_mesero(),
+//            mesero.getNombre(),
+//            mesero.getApellido(),
+//            mesero.getDni(),
+//            mesero.getContraseña()
+//        });
+//    }
+//}
+//
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // TODO add your handling code here:
         try {
@@ -288,7 +264,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                     
             Mesero nuevoMesero = new Mesero();//RECORDAR AÑADIR CONTRASEÑA Y ESTADO 
             meseros.add(nuevoMesero);
-            cargarDatosEnTabla();
+//            cargarDatosEnTabla();
             JOptionPane.showMessageDialog(this, "Mesero agregado exitosamente.");
             
         }    catch (Exception e){
@@ -302,21 +278,17 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     
     
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        // TODO add your handling code here:
-//        limpiarTabla();
-//        cargarDatosEnTabla();
-       
-        jbActualizar.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-        cargarDatosEnTabla(); // Actualiza los datos manualmente
-    }
-});
+        
+                    jtNombre.setText("");
+                    jtApellido.setText("");
+                    jtDNI.setText("");
+                    jpContraseña.setText("");
 
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jtMeseros.getSelectedRow();
+//        int selectedRow = jtMeseros.getSelectedRow();
         
 //        if (selectedRow >= 0){
 //            meseros.remove(selectedRow);
@@ -357,7 +329,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
             // Llamar al método de eliminación en meseroData
             if (meseroData.eliminarMesero(id)) { // Ahora funciona correctamente
                 JOptionPane.showMessageDialog(this, "Mesero eliminado exitosamente.");
-                cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
+//                cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
             } else {
                 JOptionPane.showMessageDialog(this, "No se encontró mesero con ID " + id);
             }
@@ -448,18 +420,18 @@ try {
          if ((c>'z' || c<'a')&&(c>'Z' || c<'A')) evt.consume();
     }//GEN-LAST:event_jtApellidoKeyTyped
 
-    private DefaultTableModel modelo;
-    
-    private void armarCabeceraTabla() {
-        if (modelo.getColumnCount() == 0){
-            modelo.addColumn("ID");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellido");
-            modelo.addColumn("DNI");
-            modelo.addColumn("Fecha_de_ingreso");
-        }
-        jtMeseros.setModel(modelo);
-    }
+//    private DefaultTableModel modelo;
+//    
+//    private void armarCabeceraTabla() {
+//        if (modelo.getColumnCount() == 0){
+//            modelo.addColumn("ID");
+//            modelo.addColumn("Nombre");
+//            modelo.addColumn("Apellido");
+//            modelo.addColumn("DNI");
+//            modelo.addColumn("Fecha_de_ingreso");
+//        }
+//        jtMeseros.setModel(modelo);
+//    }
     
 //    private void armarCabeceraTabla() {
 //        modelo.setColumnIdentifiers(new String[]{"ID", "Nombre", "Apellido", "DNI", "Fecha de Ingreso"});
@@ -467,7 +439,6 @@ try {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;
@@ -480,7 +451,6 @@ try {
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDNI;
     private javax.swing.JTextField jtID;
-    private javax.swing.JTable jtMeseros;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 }
