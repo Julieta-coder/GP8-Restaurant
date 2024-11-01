@@ -49,11 +49,11 @@
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir mesa"/>
               </Properties>
               <Events>
-<<<<<<< Updated upstream
+
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
-=======
+
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAMesaActionPerformed"/>
->>>>>>> Stashed changes
+
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiProducto">
