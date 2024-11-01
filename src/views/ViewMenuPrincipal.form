@@ -10,6 +10,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmMesaMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmMesaActionPerformed"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmMesero">
@@ -43,12 +44,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiMeseroActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="jAMesa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir mesa"/>
               </Properties>
               <Events>
+<<<<<<< Updated upstream
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+=======
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAMesaActionPerformed"/>
+>>>>>>> Stashed changes
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiProducto">

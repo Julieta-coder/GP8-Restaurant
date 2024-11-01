@@ -4,6 +4,8 @@
  */
 package views;
 
+import java.awt.Color;
+
 /**
  *
  * @author salon
@@ -35,7 +37,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jmReserva = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jmiMesero = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jAMesa = new javax.swing.JMenuItem();
         jmiProducto = new javax.swing.JMenuItem();
         jmiContable = new javax.swing.JMenuItem();
         jmiStock = new javax.swing.JMenuItem();
@@ -57,6 +59,11 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jmMesa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jmMesaMouseClicked(evt);
+            }
+        });
+        jmMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmMesaActionPerformed(evt);
             }
         });
         jMenuBar1.add(jmMesa);
@@ -85,6 +92,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu6.add(jmiMesero);
 
+<<<<<<< Updated upstream
         jMenuItem2.setText("Añadir mesa");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +100,15 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem2);
+=======
+        jAMesa.setText("Añadir mesa");
+        jAMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAMesaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jAMesa);
+>>>>>>> Stashed changes
 
         jmiProducto.setText("Cargar producto");
         jmiProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -198,9 +215,27 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiStockActionPerformed
 
+<<<<<<< Updated upstream
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+=======
+    private void jmMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMesaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jmMesaActionPerformed
+
+    private void jAMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAMesaActionPerformed
+    
+     jdPrincipal.removeAll();
+        jdPrincipal.repaint();
+        ViewMesaAdmin interMesaAdmin = new ViewMesaAdmin();
+        interMesaAdmin.setVisible(true);
+        jdPrincipal.add(interMesaAdmin);
+        jdPrincipal.moveToFront(interMesaAdmin);
+        
+    }//GEN-LAST:event_jAMesaActionPerformed
+>>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments
@@ -238,9 +273,9 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jAMesa;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JDesktopPane jdPrincipal;
     private javax.swing.JMenu jmMesa;
     private javax.swing.JMenu jmMesero;

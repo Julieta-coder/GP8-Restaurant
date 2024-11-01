@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MesaData {
+
+    public static Mesa buscarMesa(Integer codigo) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
     private Connection connection;
 
     public MesaData() {
@@ -200,6 +204,59 @@ public class MesaData {
         
         return mesa;
     }
+  public Mesa buscarMesaPorId(int id_mesa) {
+        String sql = "SELECT * FROM mesas WHERE id_mesa = ?";
+        Mesa mesa = null;
+
+        try {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id_mesa);
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    int numero = rs.getInt("numero");
+                    int capacidad = rs.getInt("capacidad");
+                    String disposicion = rs.getString("disposicion");
+                    boolean estado = rs.getBoolean("estado");
+                    
+                    mesa = new Mesa(id_mesa, numero, capacidad, disposicion, estado);
+                } else {
+                    System.out.println("No se encontró una mesa con ID: " + id_mesa);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar mesa por ID: " + e.getMessage());
+        }
+
+        return mesa;
+    }
+
+  
+  public List<Mesa> listarMesasPorEstado(boolean estado) {
+    List<Mesa> mesas = new ArrayList<>();
+    String sql = "SELECT * FROM mesas WHERE estado = ?";
+
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setBoolean(1, estado);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Mesa mesa = new Mesa();
+            mesa.setId_mesa(rs.getInt("id_mesa"));
+            mesa.setNumero(rs.getInt("numero"));
+            mesa.setCapacidad(rs.getInt("capacidad"));
+            mesa.setDisposicion(rs.getString("disposicion"));
+            mesa.setEstado(rs.getBoolean("estado"));
+            mesas.add(mesa);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al listar mesas por estado: " + e.getMessage());
+    }
+
+    return mesas;
+}
 
 }
 
