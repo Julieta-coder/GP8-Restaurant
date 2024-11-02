@@ -41,7 +41,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jDisposicion = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jEstado = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jIdMesa = new javax.swing.JTextField();
         jBuscar = new javax.swing.JButton();
@@ -93,13 +92,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jDisposicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libre", "Ocupada", "Atendida" }));
 
         jLabel4.setText("Estado");
-
-        jEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1" }));
-        jEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEstadoActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("ID");
 
@@ -166,11 +158,11 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
+                                .addGap(118, 118, 118)
                                 .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Actualizar)
-                                .addGap(148, 148, 148)
+                                .addGap(125, 125, 125)
                                 .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 20, Short.MAX_VALUE))
@@ -199,17 +191,11 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jrbEstadoLogico)
                                 .addGap(0, 0, Short.MAX_VALUE))))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jNumeroMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -279,42 +265,53 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                // TODO add your handling code here:
                                          
     try {
-        int id = Integer.parseInt(jIdMesa.getText().trim()); // Campo de texto para ingresar el ID de la mesa
-
-        // Llama al método buscarMesaPorId
-        Mesa mesa = mesaData.buscarMesaPorId(id);
-
-        if (mesa != null) {
-            // Rellenar los campos con los datos de la mesa encontrada
-            jNumeroMesa.setValue(mesa.getNumero()); // Usa setValue en el JSpinner
-            jCapacidad.setValue(mesa.getCapacidad()); // Usa setValue en el JSpinner
-            
-            jDisposicion.setSelectedItem(mesa.getDisposicion()); // Selecciona la disposición correspondiente
-            jEstado.setSelectedItem(mesa.getEstado() ? "Activa" : "Inactiva"); // Ajusta el estado según el valor booleano de 'estado'
-
-            // Limpia la tabla antes de cargar los datos
-            DefaultTableModel model = (DefaultTableModel) jDetalleMesa.getModel();
-            model.setRowCount(0); // Limpia las filas existentes
-
-            // Agrega los datos de la mesa encontrada a la tabla
-            model.addRow(new Object[]{
-                mesa.getId_mesa(),
-                mesa.getNumero(),
-                mesa.getCapacidad(),
-                mesa.getDisposicion(),
-                mesa.getEstado() ? "Activa" : "Inactiva"
-            });
-
-        } else {
-            JOptionPane.showMessageDialog(this, "La mesa no existe o está inactiva.");
-        }
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Debe ingresar un valor numérico en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (NullPointerException e) {
-        JOptionPane.showMessageDialog(this, "La mesa no existe o está inactiva.");
-    } catch (HeadlessException e) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error al buscar la mesa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    if (jIdMesa.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
     }
+    
+    int id = Integer.parseInt(jIdMesa.getText().trim());
+
+    // Llama al método buscarMesaPorId
+    Mesa mesa = mesaData.buscarMesaPorId(id);
+
+    if (mesa != null) {
+        // Rellenar los campos con los datos de la mesa encontrada
+        jNumeroMesa.setValue(mesa.getNumero());
+        jCapacidad.setValue(mesa.getCapacidad());
+        jDisposicion.setSelectedItem(mesa.getDisposicion());
+
+        // Establece el estado en el combo box según el valor booleano
+        if (mesa.getEstado()) {
+            jrbEstadoLogico.isSelected();
+        } else {
+            jrbEstadoLogico.isSelected();
+        }
+
+        // Limpia la tabla antes de cargar los datos
+        DefaultTableModel model = (DefaultTableModel) jDetalleMesa.getModel();
+        model.setRowCount(0);
+
+        // Agrega los datos de la mesa encontrada a la tabla
+        model.addRow(new Object[]{
+            mesa.getId_mesa(),
+            mesa.getNumero(),
+            mesa.getCapacidad(),
+            mesa.getDisposicion(),
+            mesa.getEstado() ? "Activa" : "Inactiva"
+        });
+
+    } else {
+        JOptionPane.showMessageDialog(this, "La mesa no existe o está inactiva.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+    } catch (NumberFormatException ex) {
+    JOptionPane.showMessageDialog(this, "Debe ingresar un valor numérico en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (NullPointerException e) {
+    JOptionPane.showMessageDialog(this, "Error al intentar buscar la mesa. La mesa no existe o está inactiva.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+    JOptionPane.showMessageDialog(this, "Ocurrió un error al buscar la mesa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
+
 
  
     }//GEN-LAST:event_jBuscarActionPerformed
@@ -331,8 +328,8 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         int numeroMesa = (Integer) jNumeroMesa.getValue(); // Corrección: se usa getValue en lugar de getText
         int capacidad = (Integer) jCapacidad.getValue(); // Corrección: se usa getValue en lugar de getText
         String disposicion = jDisposicion.getSelectedItem().toString();
-      //  boolean estado = jEstado.getSelectedItem());
-         boolean estado = jrbEstadoLogico.isSelected();
+        //boolean estado = (boolean) jEstado.getSelectedItem().);
+        boolean estado = jrbEstadoLogico.isSelected();
 
         // Validar que todos los campos estén llenos
         if (numeroMesa == 0 || capacidad == 0 || disposicion.isEmpty()) {
@@ -353,7 +350,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jCapacidad.setValue(0);
 
         jDisposicion.setSelectedIndex(0);
-        jEstado.setSelectedIndex(0);
+        jrbEstadoLogico.isSelected();
 
         // Recargar la tabla para mostrar la nueva mesa
         cargarDatosEnTabla();
@@ -375,31 +372,49 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
         
-        limpiarTabla();
-        cargarDatosEnTabla();
-              
-        int selectedRow = jDetalleMesa.getSelectedRow();
-        
-        int idMesa = (Integer) modelo.getValueAt(selectedRow, 0);
-        int numeroMesa = (Integer) modelo.getValueAt(selectedRow, 1);
-        int capacidad = (Integer) modelo.getValueAt(selectedRow, 2);
-        String disposicion = (String)modelo.getValueAt(selectedRow, 3);
-        boolean estado = (Boolean) modelo.getValueAt(selectedRow, 4);
           
-        Mesa me = new Mesa(idMesa, numeroMesa, capacidad, disposicion, estado);
-        
-        if (selectedRow >= 0){
-            
+              
+    // Asegúrate de que se haya seleccionado una fila en la tabla
+    int selectedRow = jDetalleMesa.getSelectedRow();
+    
+    if (selectedRow >= 0) {
+        try {
+            // Asegúrate de que la edición de la celda actual se detenga para capturar el valor editado
+            if (jDetalleMesa.isEditing()) {
+                jDetalleMesa.getCellEditor().stopCellEditing();
+            }
+
+            // Convertir cada valor de la tabla con verificación de tipos
+            int idMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
+            int numeroMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 1).toString());
+            int capacidad = Integer.parseInt(modelo.getValueAt(selectedRow, 2).toString());
+            String disposicion = modelo.getValueAt(selectedRow, 3).toString();
+            boolean estado = modelo.getValueAt(selectedRow, 4).toString().equals("Activa");
+
+            // Crear una instancia de Mesa con los datos modificados
+            Mesa me = new Mesa(idMesa, numeroMesa, capacidad, disposicion, estado);
+
+            // Llamar al método para actualizar la mesa en la base de datos
             mesaData.actualizarMesa(me);
-            
-          //  jNumeroMesa.remove(selectedRow);
-//            limpiarTabla();
-//            cargarDatosEnTabla();
-//            
-            JOptionPane.showMessageDialog(this, "Mesa actualizada exitosamente. ");
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una mesa para actualizar. ");
+
+            // Mensaje de éxito
+            JOptionPane.showMessageDialog(this, "Mesa actualizada exitosamente.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer los datos numéricos de la tabla. Verifica los tipos de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassCastException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer los datos de la tabla. Verifica los tipos de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar la mesa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una mesa para actualizar.");
+    }
+
+
+
+
+
+
         
         
     }//GEN-LAST:event_ActualizarActionPerformed
@@ -431,7 +446,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiarTabla(); // Limpia la tabla antes de cargar los nuevos datos
 
-       boolean estado = jEstado.getSelectedItem().equals("Activa");
+       boolean estado = jrbEstadoLogico.isSelected();
 
     // Obtener la lista de mesas por el estado seleccionado
     List<Mesa> mesas = mesaData.listarMesasPorEstado(estado);
@@ -447,10 +462,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         }
             
     }//GEN-LAST:event_jListaEstadoActionPerformed
-
-    private void jEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jEstadoActionPerformed
 
     
 //    private DefaultTableModel modelo;
@@ -479,7 +490,6 @@ private void armarCabeceraTabla() {
     private javax.swing.JTable jDetalleMesa;
     private javax.swing.JComboBox<String> jDisposicion;
     private javax.swing.JButton jEliminar;
-    private javax.swing.JComboBox<String> jEstado;
     private javax.swing.JTextField jIdMesa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
