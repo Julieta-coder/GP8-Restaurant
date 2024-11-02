@@ -371,9 +371,8 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jSalirActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
-        
-          
-              
+      
+             
     // Asegúrate de que se haya seleccionado una fila en la tabla
     int selectedRow = jDetalleMesa.getSelectedRow();
     
@@ -410,12 +409,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Seleccione una mesa para actualizar.");
     }
 
-
-
-
-
-
-        
+  
         
     }//GEN-LAST:event_ActualizarActionPerformed
 
