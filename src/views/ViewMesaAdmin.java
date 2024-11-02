@@ -2,6 +2,7 @@
 package views;
 
 import Entidades.Mesa;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -276,31 +277,34 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
                // TODO add your handling code here:
-    
-    // Corrección en el método jBuscarActionPerformed
-                               
+                                         
     try {
-        int id = Integer.parseInt(jIdMesa.getText()); // Campo de texto para ingresar el ID de la mesa
+        int id = Integer.parseInt(jIdMesa.getText().trim()); // Campo de texto para ingresar el ID de la mesa
 
         // Llama al método buscarMesaPorId
         Mesa mesa = mesaData.buscarMesaPorId(id);
 
         if (mesa != null) {
             // Rellenar los campos con los datos de la mesa encontrada
-
-            jNumeroMesa.setValue(mesa.getNumero()); // Corrección: se usa setValue en lugar de setText
-            jCapacidad.setValue(mesa.getCapacidad()); // Corrección: se usa setValue en lugar de setText
-
-           
-          
-             //jNumeroMesa.setValue(mesa.getNumero()); // Corrección: se usa setValue en lugar de setText
-            // jCapacidad.setValue(mesa.getCapacidad()); // Corrección: se usa setValue en lugar de setText
+            jNumeroMesa.setValue(mesa.getNumero()); // Usa setValue en el JSpinner
+            jCapacidad.setValue(mesa.getCapacidad()); // Usa setValue en el JSpinner
             
+            jDisposicion.setSelectedItem(mesa.getDisposicion()); // Selecciona la disposición correspondiente
+            jEstado.setSelectedItem(mesa.getEstado() ? "Activa" : "Inactiva"); // Ajusta el estado según el valor booleano de 'estado'
 
-            jDisposicion.setSelectedItem(mesa.getDisposicion());
-            //jEstado.setSelectedItem(mesa.getEstado() ? "Activa" : "Inactiva"); // Asigna "Activa" o "Inactiva" según el estado booleano
-            jrbEstadoLogico.isSelected();
-            
+            // Limpia la tabla antes de cargar los datos
+            DefaultTableModel model = (DefaultTableModel) jDetalleMesa.getModel();
+            model.setRowCount(0); // Limpia las filas existentes
+
+            // Agrega los datos de la mesa encontrada a la tabla
+            model.addRow(new Object[]{
+                mesa.getId_mesa(),
+                mesa.getNumero(),
+                mesa.getCapacidad(),
+                mesa.getDisposicion(),
+                mesa.getEstado() ? "Activa" : "Inactiva"
+            });
+
         } else {
             JOptionPane.showMessageDialog(this, "La mesa no existe o está inactiva.");
         }
@@ -308,10 +312,11 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Debe ingresar un valor numérico en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (NullPointerException e) {
         JOptionPane.showMessageDialog(this, "La mesa no existe o está inactiva.");
+    } catch (HeadlessException e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error al buscar la mesa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-
-  
+ 
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
@@ -426,23 +431,21 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiarTabla(); // Limpia la tabla antes de cargar los nuevos datos
 
-    // Determinar el estado seleccionado en el combo box
-    boolean estado = jEstado.getSelectedItem().equals("Activa");
+       boolean estado = jEstado.getSelectedItem().equals("Activa");
 
     // Obtener la lista de mesas por el estado seleccionado
     List<Mesa> mesas = mesaData.listarMesasPorEstado(estado);
 
     for (Mesa mesa : mesas) {
-        modelo.addRow(new Object[]{
-            mesa.getId_mesa(),
-            mesa.getNumero(),
-            mesa.getCapacidad(),
-            mesa.getDisposicion(),
-            mesa.getEstado() ? "Activa" : "Inactiva"
-        });
-    }
-        
-        
+            modelo.addRow(new Object[]{
+                mesa.getId_mesa(),
+                mesa.getNumero(),
+                mesa.getCapacidad(),
+                mesa.getDisposicion(),
+                mesa.getEstado() ? "Activa" : "Inactiva"
+            });
+        }
+            
     }//GEN-LAST:event_jListaEstadoActionPerformed
 
     private void jEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoActionPerformed
