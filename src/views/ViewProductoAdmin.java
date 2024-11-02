@@ -281,6 +281,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         
             pd.eliminarProducto(id);
             limpiarCampos();
+            jtCodigo.setEditable(false);
        
             }
         
