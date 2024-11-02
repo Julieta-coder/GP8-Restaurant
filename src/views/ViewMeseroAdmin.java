@@ -279,10 +279,51 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         
-                    jtNombre.setText("");
-                    jtApellido.setText("");
-                    jtDNI.setText("");
-                    jpContraseña.setText("");
+                                                    
+    // Asegurarse de que el campo ID no esté vacío
+    String idText = jtID.getText();
+    if (idText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID para actualizar.");
+        return;
+    }
+
+    try {
+        // Obtener el ID y los nuevos valores de los campos
+        int id = Integer.parseInt(idText);
+        String nombre = jtNombre.getText().trim();
+        String apellido = jtApellido.getText().trim();
+        int dni = Integer.parseInt(jtDNI.getText().trim());
+        String contraseña = jpContraseña.getText().trim();
+
+        // Verificar que todos los campos estén llenos
+        if (nombre.isEmpty() || apellido.isEmpty() || jtDNI.getText().isEmpty() || contraseña.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos antes de actualizar.");
+            return;
+        }
+
+        // Crear una instancia de Mesero con los nuevos datos
+        Mesero mesero = new Mesero(id, nombre, apellido, dni, LocalDate.now(), contraseña, true);
+
+        // Llamar al método de actualización en meseroData
+        boolean actualizado = meseroData.actualizarMesero(mesero);
+
+        if (actualizado) {
+            JOptionPane.showMessageDialog(this, "Mesero actualizado exitosamente.");
+            // Limpiar los campos después de actualizar
+            jtNombre.setText("");
+            jtApellido.setText("");
+            jtDNI.setText("");
+            jpContraseña.setText("");
+            jtID.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró un mesero con el ID especificado.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "DNI e ID deben ser valores numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar el mesero: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
 
     }//GEN-LAST:event_jbActualizarActionPerformed
 

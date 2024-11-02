@@ -118,6 +118,32 @@ public class MeseroData {
         return false; // Retorna false en caso de error
     }
 }
+    public boolean actualizarMesero(Mesero mesero) {
+    String sql = "UPDATE meseros SET nombre = ?, apellido = ?, dni = ?, fecha_registro = ?, contraseña = ?, estado = ? WHERE id_mesero = ?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, mesero.getNombre());
+        ps.setString(2, mesero.getApellido());
+        ps.setInt(3, mesero.getDni());
+        ps.setDate(4, java.sql.Date.valueOf(mesero.getFecha_registro()));
+        ps.setString(5, mesero.getContraseña());
+        ps.setBoolean(6, mesero.isEstado());
+        ps.setInt(7, mesero.getId_mesero()); // Usamos el ID del mesero para identificar el registro a actualizar
+
+        int filasAfectadas = ps.executeUpdate();
+        
+        if (filasAfectadas > 0) {
+            System.out.println("Mesero actualizado exitosamente.");
+            return true; // Retorna true si se actualizó exitosamente
+        } else {
+            System.out.println("No se encontró un mesero con el ID especificado.");
+            return false; // Retorna false si no se encontró el mesero
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al actualizar mesero: " + e.getMessage());
+        return false; // Retorna false en caso de error
+    }
+}
 
 
     
