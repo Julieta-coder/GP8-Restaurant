@@ -19,6 +19,9 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     
     public ViewMesaAdmin() {
         initComponents();
+        armarCabeceraTabla();
+        limpiarTabla();
+        cargarDatosEnTabla();
     }
 
     
@@ -47,7 +50,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jListaEstado = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jSalir = new javax.swing.JButton();
-        jNuevo = new javax.swing.JButton();
+        jrbEstadoLogico = new javax.swing.JRadioButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,9 +154,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
             }
         });
 
-        jNuevo.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jNuevo.setText("Nuevo");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,48 +163,56 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Actualizar)
+                                .addGap(148, 148, 148)
+                                .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jCapacidad, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jNumeroMesa, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDisposicion, 0, 1, Short.MAX_VALUE)
-                            .addComponent(jEstado, 0, 78, Short.MAX_VALUE)
-                            .addComponent(jIdMesa))
-                        .addGap(63, 63, 63)
-                        .addComponent(jBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jListaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
-                                .addComponent(jNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(71, 71, 71)
-                                .addComponent(Actualizar)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jCapacidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                                    .addComponent(jNumeroMesa, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDisposicion, 0, 1, Short.MAX_VALUE)
+                                    .addComponent(jIdMesa))
+                                .addGap(63, 63, 63)
+                                .addComponent(jBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 20, Short.MAX_VALUE))))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jListaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jrbEstadoLogico)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
+                .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jNumeroMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,7 +223,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jrbEstadoLogico))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -230,9 +238,8 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                     .addComponent(jEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
@@ -263,10 +270,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 }
    
     
-    private void jEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jEstadoActionPerformed
-
     private void jIdMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIdMesaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jIdMesaActionPerformed
@@ -290,12 +293,14 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
            
           
-             jNumeroMesa.setValue(mesa.getNumero()); // Corrección: se usa setValue en lugar de setText
-             jCapacidad.setValue(mesa.getCapacidad()); // Corrección: se usa setValue en lugar de setText
+             //jNumeroMesa.setValue(mesa.getNumero()); // Corrección: se usa setValue en lugar de setText
+            // jCapacidad.setValue(mesa.getCapacidad()); // Corrección: se usa setValue en lugar de setText
             
 
             jDisposicion.setSelectedItem(mesa.getDisposicion());
-            jEstado.setSelectedItem(mesa.getEstado() ? "Activa" : "Inactiva"); // Asigna "Activa" o "Inactiva" según el estado booleano
+            //jEstado.setSelectedItem(mesa.getEstado() ? "Activa" : "Inactiva"); // Asigna "Activa" o "Inactiva" según el estado booleano
+            jrbEstadoLogico.isSelected();
+            
         } else {
             JOptionPane.showMessageDialog(this, "La mesa no existe o está inactiva.");
         }
@@ -310,7 +315,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
-        // TODO add your handling code here:
+      
                                      
     // Corrección en el método jAgregarActionPerformed
                                    
@@ -321,7 +326,8 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         int numeroMesa = (Integer) jNumeroMesa.getValue(); // Corrección: se usa getValue en lugar de getText
         int capacidad = (Integer) jCapacidad.getValue(); // Corrección: se usa getValue en lugar de getText
         String disposicion = jDisposicion.getSelectedItem().toString();
-        boolean estado = jEstado.getSelectedItem().equals("Activa");
+      //  boolean estado = jEstado.getSelectedItem());
+         boolean estado = jrbEstadoLogico.isSelected();
 
         // Validar que todos los campos estén llenos
         if (numeroMesa == 0 || capacidad == 0 || disposicion.isEmpty()) {
@@ -363,19 +369,51 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jSalirActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
-        // TODO add your handling code here:
+        
         limpiarTabla();
         cargarDatosEnTabla();
+              
+        int selectedRow = jDetalleMesa.getSelectedRow();
+        
+        int idMesa = (Integer) modelo.getValueAt(selectedRow, 0);
+        int numeroMesa = (Integer) modelo.getValueAt(selectedRow, 1);
+        int capacidad = (Integer) modelo.getValueAt(selectedRow, 2);
+        String disposicion = (String)modelo.getValueAt(selectedRow, 3);
+        boolean estado = (Boolean) modelo.getValueAt(selectedRow, 4);
+          
+        Mesa me = new Mesa(idMesa, numeroMesa, capacidad, disposicion, estado);
+        
+        if (selectedRow >= 0){
+            
+            mesaData.actualizarMesa(me);
+            
+          //  jNumeroMesa.remove(selectedRow);
+//            limpiarTabla();
+//            cargarDatosEnTabla();
+//            
+            JOptionPane.showMessageDialog(this, "Mesa actualizada exitosamente. ");
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una mesa para actualizar. ");
+        }
+        
+        
     }//GEN-LAST:event_ActualizarActionPerformed
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
-        // TODO add your handling code here:
+       
+        //FALTA AGREGAR VALIDADCION, CARTEL DE CONFIRMACION....
         int selectedRow = jDetalleMesa.getSelectedRow();
         
+        int filaMesa = (Integer) modelo.getValueAt(selectedRow, 0);
+        
         if (selectedRow >= 0){
-            jNumeroMesa.remove(selectedRow);
+            
+            mesaData.eliminarMesa(filaMesa);
+            
+          //  jNumeroMesa.remove(selectedRow);
             limpiarTabla();
             cargarDatosEnTabla();
+            
             JOptionPane.showMessageDialog(this, "Mesa eliminada exitosamente. ");
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione una mesa para eliminar. ");
@@ -406,6 +444,10 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jListaEstadoActionPerformed
+
+    private void jEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jEstadoActionPerformed
 
     
 //    private DefaultTableModel modelo;
@@ -443,11 +485,11 @@ private void armarCabeceraTabla() {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox<String> jListaEstado;
-    private javax.swing.JButton jNuevo;
     private javax.swing.JSpinner jNumeroMesa;
     private javax.swing.JButton jSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton jrbEstadoLogico;
     // End of variables declaration//GEN-END:variables
 }

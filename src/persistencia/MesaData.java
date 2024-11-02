@@ -12,6 +12,7 @@ import Entidades.Mesa;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class MesaData {
 
@@ -104,6 +105,7 @@ public class MesaData {
             System.out.println("Error al eliminar mesa: " + e.getMessage());
         }
     }
+    
     public void bajaLogica(int id_mesa) {
         String sql = "UPDATE mesas SET estado = 0 WHERE id_mesa = ?";
         
@@ -258,5 +260,31 @@ public class MesaData {
     return mesas;
 }
 
+  
+  
+  
+   public void actualizarMesa(Mesa mesa) {
+        String sql = "UPDATE mesas SET numero = ?, capacidad = ?, disposicion = ?, estado = ? WHERE id_mesa = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, mesa.getNumero());
+            ps.setInt(2, mesa.getCapacidad());
+            ps.setString(3, mesa.getDisposicion());
+            ps.setBoolean(4, mesa.getEstado());
+            ps.setInt(5, mesa.getId_mesa());   
+            
+            int exito = ps.executeUpdate(); 
+            
+            if(exito ==1){
+            
+                JOptionPane.showMessageDialog(null, "Mesa modificado");
+            }         
+            
+        } catch (SQLException e) {
+            
+            System.out.println("Error al actualizar mesa: " + e.getMessage());
+        }
+    }
+  
 }
 

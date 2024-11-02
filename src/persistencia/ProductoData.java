@@ -75,6 +75,7 @@ public class ProductoData {
             ps.setBoolean(5, producto.isEstado());
             ps.setInt(6, producto.getId_producto());
             ps.executeUpdate();
+            
         } catch (SQLException e) {
             System.out.println("Error al actualizar producto: " + e.getMessage());
         }
