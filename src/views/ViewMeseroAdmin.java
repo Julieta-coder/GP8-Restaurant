@@ -244,10 +244,14 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // TODO add your handling code here:
         try {
-            int id = meseros.size() + 1;
+            
             String nombre = jtNombre.getText();
             String apellido = jtApellido.getText();
             int dni = Integer.parseInt(jtDNI.getText());
+            if(dni<999999){
+                JOptionPane.showMessageDialog(this, "DNI invalido.");
+                return;
+            }
             String contraseña = jpContraseña.getText();
         
             if(nombre.isEmpty() || apellido.isEmpty() || dni == 0 || contraseña.isEmpty()) {
@@ -364,7 +368,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
 
     try {
         int id = Integer.parseInt(idText);
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres eliminar el mesero con ID " + id + " de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres eliminar el mesero " + "'"+meseroData.buscarMozoPorId(id).getApellido()+"'"+ " de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
         
         if (respuesta == JOptionPane.YES_OPTION) {
             // Llamar al método de eliminación en meseroData

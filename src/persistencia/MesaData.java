@@ -286,6 +286,27 @@ public class MesaData {
             System.out.println("Error al actualizar mesa: " + e.getMessage());
         }
     }
+   
+    public boolean numeroExiste(int numero){
+        boolean existencia=true;
+        
+        String sql ="SELECT numero FROM mesas;";
+        try{
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    
+                    if(rs.getInt("numero")==(numero)){
+                        existencia=false;
+                    }
+                }
+            }
+        
+        }catch (SQLException ex) {
+            System.out.println(" Error al acceder a la tabla Mesas " + ex.getMessage());
+        }
+        return existencia;
+    }
   
 }
 

@@ -339,7 +339,16 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
         // Crear una nueva mesa y agregarla a la base de datos
         Mesa mesa = new Mesa(numeroMesa, capacidad, disposicion, estado);
-        mesaData.agregarMesa(mesa);  // Asegúrate de que mesaData esté correctamente inicializado
+        boolean existe = mesaData.numeroExiste(numeroMesa);
+        
+        /*Comprobamos si el numero de mesa ya existe*/
+        if(existe!=false){
+             JOptionPane.showMessageDialog(this, "Mesa agregada exitosamente.");
+             mesaData.agregarMesa(mesa);
+        }else{
+            JOptionPane.showMessageDialog(this,  "La mesa con el numero "+mesaData.buscarMesaPorId(numeroMesa).getNumero()+ " ya existe","Advertencia", JOptionPane.ERROR_MESSAGE);
+        } 
+        // Asegúrate de que mesaData esté correctamente inicializado
 
         // Limpiar los campos de entrada
 
@@ -356,7 +365,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         cargarDatosEnTabla();
 
         // Mensaje de confirmación
-        JOptionPane.showMessageDialog(this, "Mesa agregada exitosamente.");
+       
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Capacidad y Número de Mesa deben ser valores numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception e) {

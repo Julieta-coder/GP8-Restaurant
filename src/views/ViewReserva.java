@@ -80,6 +80,11 @@ public class ViewReserva extends javax.swing.JInternalFrame {
         });
 
         jtfDni.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfDniKeyTyped(evt);
+            }
+        });
 
         jtfIdMesa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -248,6 +253,17 @@ public class ViewReserva extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
          jbGuardarReserva.setEnabled(true);
     }//GEN-LAST:event_jbNuevaReservaActionPerformed
+
+    private void jtfDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDniKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(c>'9'|| c<'0'){
+            evt.consume();
+        }
+        if( jtfDni.getText().length() >= 8 ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfDniKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
