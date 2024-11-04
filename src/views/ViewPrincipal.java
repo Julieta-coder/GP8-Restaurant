@@ -1,6 +1,8 @@
 
 package views;
 
+import javax.swing.JOptionPane;
+
 
 public class ViewPrincipal extends javax.swing.JFrame {
 
@@ -8,6 +10,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
     public ViewPrincipal() {
         initComponents();
         setLocationRelativeTo(null); 
+        /*ACTIVAR VISIBILIDAD Y EDICION de jpLogIn DESPUES*/
+        jpLogIn.setEnabled(false);
+        jpLogIn.setVisible(false);
+//        jmAdministracion.setEnabled(false); va junto con el botono de log in
     }
 
     
@@ -16,6 +22,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         escritorio = new javax.swing.JDesktopPane();
+        jpLogIn = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jtfUsuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtfConstraseña = new javax.swing.JTextField();
+        jbLogIn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmMesa = new javax.swing.JMenu();
         jmMesero = new javax.swing.JMenu();
@@ -32,26 +44,80 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("Usuario:");
+
+        jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Constraseña:");
+
+        jtfConstraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jbLogIn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jbLogIn.setText("Log in");
+        jbLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLogInActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpLogInLayout = new javax.swing.GroupLayout(jpLogIn);
+        jpLogIn.setLayout(jpLogInLayout);
+        jpLogInLayout.setHorizontalGroup(
+            jpLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpLogInLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(jpLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jtfUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                    .addComponent(jtfConstraseña))
+                .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLogInLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbLogIn)
+                .addGap(34, 34, 34))
+        );
+        jpLogInLayout.setVerticalGroup(
+            jpLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpLogInLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jtfConstraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbLogIn)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        escritorio.setLayer(jpLogIn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1384, Short.MAX_VALUE)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(458, 458, 458)
+                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(540, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jmMesa.setText("Mesas");
         jmMesa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jmMesaMouseClicked(evt);
-            }
-        });
-        jmMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmMesaActionPerformed(evt);
             }
         });
         jMenuBar1.add(jmMesa);
@@ -142,11 +208,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMesaActionPerformed
-
-        
-    }//GEN-LAST:event_jmMesaActionPerformed
-
     private void jmiContratarMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiContratarMeseroActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
@@ -235,6 +296,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(interReservaList);
     }//GEN-LAST:event_jmiListarReservasActionPerformed
 
+    private void jbLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogInActionPerformed
+        // TODO add your handling code here:
+        /*PARA DESPUES PROXIMAMENTE*/
+        
+//        if(jtfConstraseña.getText().equalsIgnoreCase("hola")){
+//            jmAdministracion.setEnabled(true);
+//            jpLogIn.setEnabled(false);
+//            jpLogIn.setVisible(false);
+//        }else{
+//            JOptionPane.showMessageDialog(this, "Contraseña invalida");
+//        }
+        
+    }//GEN-LAST:event_jbLogInActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -270,7 +345,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton jbLogIn;
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmMesa;
     private javax.swing.JMenu jmMesero;
@@ -283,5 +361,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiGuardarReserva;
     private javax.swing.JMenuItem jmiListarReservas;
     private javax.swing.JMenuItem jmiStock;
+    private javax.swing.JPanel jpLogIn;
+    private javax.swing.JTextField jtfConstraseña;
+    private javax.swing.JTextField jtfUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
      */
     public ViewSalonMesa() {
         initComponents();
+        jpAbrirMesa.setEnabled(false);
+        jpAbrirMesa.setVisible(false);
     }
 
     /**
@@ -32,79 +34,261 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jFrame2 = new javax.swing.JFrame();
-        jFrame3 = new javax.swing.JFrame();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jdpSalon = new javax.swing.JDesktopPane();
+        jpAbrirMesa = new javax.swing.JPanel();
+        jbAtras = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner2 = new javax.swing.JSpinner();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jSpinner3 = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jSpinner4 = new javax.swing.JSpinner();
+        jButton6 = new javax.swing.JButton();
+        jpSalon = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtMesasActivas = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jcbMeseros = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jsCantidadPersonas = new javax.swing.JSpinner();
+        jbAbrirMesa = new javax.swing.JButton();
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setTitle("Salon");
 
-        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
-        jFrame2.getContentPane().setLayout(jFrame2Layout);
-        jFrame2Layout.setHorizontalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame2Layout.setVerticalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jdpSalon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jFrame3Layout = new javax.swing.GroupLayout(jFrame3.getContentPane());
-        jFrame3.getContentPane().setLayout(jFrame3Layout);
-        jFrame3Layout.setHorizontalGroup(
-            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame3Layout.setVerticalGroup(
-            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jpAbrirMesa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        setTitle("Agregar Nueva Mesa");
+        jbAtras.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/back-button.png"))); // NOI18N
+        jbAtras.setText("Atras");
+        jbAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtrasActionPerformed(evt);
+            }
+        });
+        jpAbrirMesa.add(jbAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, 40));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 408, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
-        );
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setText("Atender");
+        jpAbrirMesa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Bebidas:");
+        jpAbrirMesa.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Entrada:");
+        jpAbrirMesa.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Plato Principal:");
+        jpAbrirMesa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jpAbrirMesa.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 180, -1));
+
+        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jpAbrirMesa.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 180, -1));
+
+        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 80, -1));
+
+        jSpinner2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 80, -1));
+
+        jComboBox3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jpAbrirMesa.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 180, -1));
+
+        jSpinner3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 80, -1));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("Agregar producto");
+        jpAbrirMesa.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
+
+        jScrollPane2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jpAbrirMesa.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, 190));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton2.setText("Tomar pedido");
+        jpAbrirMesa.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setText("Actualizar pedido");
+        jpAbrirMesa.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, -1));
+
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton4.setText("Cobrar");
+        jpAbrirMesa.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Postre:");
+        jpAbrirMesa.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 262, -1, -1));
+
+        jComboBox4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jpAbrirMesa.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 180, -1));
+
+        jSpinner4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 80, -1));
+
+        jButton6.setBackground(new java.awt.Color(51, 51, 51));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cross-32.png"))); // NOI18N
+        jButton6.setText("Salir");
+        jpAbrirMesa.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
+
+        jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 910, 380));
+
+        jpSalon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtMesasActivas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtMesasActivas);
+
+        jpSalon.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 226));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Mozo: ");
+        jpSalon.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
+
+        jcbMeseros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbMeseros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbMeserosActionPerformed(evt);
+            }
+        });
+        jpSalon.add(jcbMeseros, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 130, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Personas:");
+        jpSalon.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
+
+        jsCantidadPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpSalon.add(jsCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 130, -1));
+
+        jbAbrirMesa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbAbrirMesa.setText("Abrir mesa");
+        jbAbrirMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAbrirMesaActionPerformed(evt);
+            }
+        });
+        jpSalon.add(jbAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 150, -1));
+
+        jdpSalon.add(jpSalon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 35, 738, 299));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jdpSalon, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jdpSalon)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbMeserosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMeserosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbMeserosActionPerformed
+
+    private void jbAbrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirMesaActionPerformed
+        // TODO add your handling code here:
+        jpSalon.setEnabled(false);
+        jpSalon.setVisible(false);
+        jpAbrirMesa.setEnabled(true);
+        jpAbrirMesa.setVisible(true);
+    }//GEN-LAST:event_jbAbrirMesaActionPerformed
+
+    private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
+        // TODO add your handling code here:
+        jpSalon.setEnabled(true);
+        jpSalon.setVisible(true);
+        jpAbrirMesa.setEnabled(false);
+        jpAbrirMesa.setVisible(false);
+    }//GEN-LAST:event_jbAtrasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JFrame jFrame2;
-    private javax.swing.JFrame jFrame3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JSpinner jSpinner4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbAbrirMesa;
+    private javax.swing.JButton jbAtras;
+    private javax.swing.JComboBox<String> jcbMeseros;
+    private javax.swing.JDesktopPane jdpSalon;
+    private javax.swing.JPanel jpAbrirMesa;
+    private javax.swing.JPanel jpSalon;
+    private javax.swing.JSpinner jsCantidadPersonas;
+    private javax.swing.JTable jtMesasActivas;
     // End of variables declaration//GEN-END:variables
     
     
