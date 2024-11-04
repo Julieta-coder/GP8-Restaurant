@@ -4,14 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/views/ViewReserva.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/Vista/GP8Restaurant.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/persistencia/DetallePedidoData.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/persistencia/MesaData.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/persistencia/PedidoData.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/persistencia/ReservaData.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/persistencia/Conexion.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/entidades/Mesa.java</file>
-            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/entidades/Reserva.java</file>
+            <file>file:/C:/Users/salon/OneDrive/Documentos/NetBeansProjects/GP8-Restaurant/src/views/ViewPrincipal.java</file>
         </group>
     </open-files>
 </project-private>

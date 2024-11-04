@@ -21,6 +21,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jmMesero = new javax.swing.JMenu();
         jmPedido = new javax.swing.JMenu();
         jmReserva = new javax.swing.JMenu();
+        jmiGuardarReserva = new javax.swing.JMenuItem();
+        jmiListarReservas = new javax.swing.JMenuItem();
         jmAdministracion = new javax.swing.JMenu();
         jmiContratarMesero = new javax.swing.JMenuItem();
         jmiAñadirMesa = new javax.swing.JMenuItem();
@@ -34,11 +36,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGap(0, 1488, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 660, Short.MAX_VALUE)
         );
 
         jmMesa.setText("Mesas");
@@ -61,6 +63,23 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jmPedido);
 
         jmReserva.setText("Reserva");
+
+        jmiGuardarReserva.setText("Guardar reserva");
+        jmiGuardarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiGuardarReservaActionPerformed(evt);
+            }
+        });
+        jmReserva.add(jmiGuardarReserva);
+
+        jmiListarReservas.setText("Listar reservas");
+        jmiListarReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarReservasActionPerformed(evt);
+            }
+        });
+        jmReserva.add(jmiListarReservas);
+
         jMenuBar1.add(jmReserva);
 
         jmAdministracion.setText("Administracion");
@@ -196,6 +215,26 @@ public class ViewPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiStockActionPerformed
 
+    private void jmiGuardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGuardarReservaActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        ViewReserva interReserva = new ViewReserva();
+        interReserva.setVisible(true);
+        escritorio.add(interReserva);
+        escritorio.moveToFront(interReserva);
+    }//GEN-LAST:event_jmiGuardarReservaActionPerformed
+
+    private void jmiListarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarReservasActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        ViewListarReservas interReservaList = new ViewListarReservas();
+        interReservaList.setVisible(true);
+        escritorio.add(interReservaList);
+        escritorio.moveToFront(interReservaList);
+    }//GEN-LAST:event_jmiListarReservasActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -241,6 +280,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiCargarProducto;
     private javax.swing.JMenuItem jmiContable;
     private javax.swing.JMenuItem jmiContratarMesero;
+    private javax.swing.JMenuItem jmiGuardarReserva;
+    private javax.swing.JMenuItem jmiListarReservas;
     private javax.swing.JMenuItem jmiStock;
     // End of variables declaration//GEN-END:variables
 }

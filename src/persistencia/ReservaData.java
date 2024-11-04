@@ -95,6 +95,59 @@ public class ReservaData {
         
         return reservas;
     }
+    public List<Reserva> obtenerReservasOrden() {
+        List<Reserva> reservas = new ArrayList<>();
+        String sql = "SELECT * FROM reservas WHERE 1 ORDER BY fecha_reserva ASC;";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int id_reserva = rs.getInt("id_reserva");
+                Mesa mesa = mesaData.obtenerMesaActivaPorId(rs.getInt("id_mesa"));
+                String nombre_cliente = rs.getString("nombre_cliente");
+                int dni_cliente = rs.getInt("dni_cliente");
+                 LocalDate fecha_reserva = rs.getDate("fecha_reserva").toLocalDate();
+                boolean estado = rs.getBoolean("estado");
+                
+                Reserva reserva = new Reserva(id_reserva, mesa, nombre_cliente, dni_cliente, fecha_reserva, estado);
+                reserva.setMesa(mesa);
+                reservas.add(reserva);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return reservas;
+    }
+    
+    public List<Reserva> obtenerReservasPorId(int id_reserva) {
+        List<Reserva> reservas = new ArrayList<>();
+        String sql = "SELECT * FROM reservas WHERE id_reserva = ?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id_reserva);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Mesa mesa = mesaData.obtenerMesaActivaPorId(rs.getInt("id_mesa"));
+                String nombre_cliente = rs.getString("nombre_cliente");
+                int dni_cliente = rs.getInt("dni_cliente");
+                 LocalDate fecha_reserva = rs.getDate("fecha_reserva").toLocalDate();
+                boolean estado = rs.getBoolean("estado");
+                
+                Reserva reserva = new Reserva(id_reserva, mesa, nombre_cliente, dni_cliente, fecha_reserva, estado);
+                reserva.setMesa(mesa);
+                reservas.add(reserva);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return reservas;
+    }
 
     public void actualizarReserva(String nombre ,int dni,LocalDate fecha, int id_reserva) {
         String sql = "UPDATE reservas SET nombre_cliente = ?, dni_cliente = ?, fecha_reserva = ? WHERE id_reserva = ?";

@@ -4,17 +4,35 @@
  */
 package views;
 
+import Entidades.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import persistencia.*;
+
 /**
  *
  * @author salon
  */
 public class ViewReserva extends javax.swing.JInternalFrame {
 
+    private Mesa mesa;
+    private Reserva reserva;
+    private MesaData mesaData;
+    private ReservaData reservaData;
+
     /**
      * Creates new form ViewReserva
      */
     public ViewReserva() {
         initComponents();
+        JTextField dateTextField = (JTextField) jdcFecha.getDateEditor().getUiComponent();
+        dateTextField.setEditable(false); // Deshabilitar la edición manual
+        mesa = new Mesa();
+        mesaData = new MesaData();
+        reserva = new Reserva();
+        reservaData = new ReservaData();
     }
 
     /**
@@ -30,13 +48,14 @@ public class ViewReserva extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jdcFechaReserva = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         jtfNombreCliente = new javax.swing.JTextField();
         jtfDni = new javax.swing.JTextField();
         jtfIdMesa = new javax.swing.JTextField();
         jbNuevaReserva = new javax.swing.JButton();
         jbGuardarReserva = new javax.swing.JButton();
+        jdcFecha = new com.toedter.calendar.JDateChooser();
+        jbSalir = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Guardar una Reserva");
@@ -49,8 +68,6 @@ public class ViewReserva extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Fecha:");
-
-        jdcFechaReserva.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("id de la mesa:");
@@ -68,38 +85,60 @@ public class ViewReserva extends javax.swing.JInternalFrame {
 
         jbNuevaReserva.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbNuevaReserva.setText("Nueva");
+        jbNuevaReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevaReservaActionPerformed(evt);
+            }
+        });
 
         jbGuardarReserva.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbGuardarReserva.setText("Guardar");
+        jbGuardarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarReservaActionPerformed(evt);
+            }
+        });
+
+        jdcFecha.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jbSalir.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jbNuevaReserva)
-                        .addGap(121, 121, 121)
-                        .addComponent(jbGuardarReserva))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfNombreCliente)
-                            .addComponent(jtfDni)
-                            .addComponent(jdcFechaReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jtfIdMesa)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(jLabel1)))
-                .addGap(34, 34, 34))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jtfNombreCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfDni, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jdcFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                    .addComponent(jtfIdMesa))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(jLabel1)
+                .addGap(34, 253, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jbNuevaReserva)
+                .addGap(121, 121, 121)
+                .addComponent(jbGuardarReserva)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSalir)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,15 +156,16 @@ public class ViewReserva extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jdcFechaReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 21, Short.MAX_VALUE)
+                    .addComponent(jdcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jtfIdMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbNuevaReserva)
-                            .addComponent(jbGuardarReserva)))
+                            .addComponent(jbGuardarReserva)
+                            .addComponent(jbSalir)))
                     .addComponent(jLabel5))
                 .addGap(32, 32, 32))
         );
@@ -137,6 +177,78 @@ public class ViewReserva extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNombreClienteActionPerformed
 
+    private void jbGuardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarReservaActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        /*El primer try previene el ingreso de caracteres no numericos en campos de texto dni e id*/
+        try {
+            int dni = Integer.parseInt(jtfDni.getText());
+            
+            /*Este if controla el limite numerico permitido para dni (Limitado en la base de datos a 8 caracteres)*/
+            if (dni > 999999 && dni < 99999999) {
+                int idMesa = Integer.parseInt(jtfIdMesa.getText());
+
+                String nombre = jtfNombreCliente.getText();
+                
+                /*El siguiente if controla que campo de texto nombre NO quede vacio*/
+                if (!nombre.isEmpty()) {
+                    
+                    /*El try controla que LocalDate no sea nula*/
+                    try {
+                      
+                        LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+                        mesa = mesaData.obtenerMesaActivaPorId(idMesa);
+                        
+                        /*El if controla que mesa no sea nula*/
+                        if (mesa != null) {
+                            reserva = new Reserva(mesa, nombre, dni, fecha, true);
+
+                            int confirm = JOptionPane.showConfirmDialog(this, "¿Realizar reserva en la mesa " + mesa.getNumero() + "?", "Confirmar reserva", JOptionPane.YES_NO_OPTION);
+                               
+                            /*Confirmacion de reserva*/
+                            if (confirm == JOptionPane.YES_OPTION) {
+                                 /*CREACION DE RESERVA*/
+                                 reservaData.guardarReserva(reserva);
+                                JOptionPane.showMessageDialog(this, "¡Reserva creada!");
+                                jbGuardarReserva.setEnabled(false);
+                                jtfNombreCliente.setText("");
+                                jtfDni.setText("");
+                                jtfIdMesa.setText("");
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(this, "El id de la mesa no existe", "Error", JOptionPane.ERROR_MESSAGE);
+                            
+                        } 
+                        
+                    } catch (NullPointerException e) {
+                        JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "DNI invalido. ", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "DNI e ID solo reciben valores numericos", "", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jbGuardarReservaActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaReservaActionPerformed
+        // TODO add your handling code here:
+         jbGuardarReserva.setEnabled(true);
+    }//GEN-LAST:event_jbNuevaReservaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -146,7 +258,8 @@ public class ViewReserva extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbGuardarReserva;
     private javax.swing.JButton jbNuevaReserva;
-    private com.toedter.calendar.JDateChooser jdcFechaReserva;
+    private javax.swing.JButton jbSalir;
+    private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JTextField jtfDni;
     private javax.swing.JTextField jtfIdMesa;
     private javax.swing.JTextField jtfNombreCliente;

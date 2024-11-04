@@ -87,13 +87,7 @@ import java.util.List;
         return "Mesa{" + "id_mesa=" + id_mesa + ", numero=" + numero + ", capacidad=" + capacidad + ", disposicion=" + disposicion + ", estado=" + estado + ", reservas=" + reservas + '}';
     }
 
-    public String getnumeroMesa() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String getdisposicion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  
     
     
 }

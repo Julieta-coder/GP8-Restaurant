@@ -164,6 +164,7 @@ public class MesaData {
                     mesa.setCapacidad(rs.getInt("capacidad"));
                     mesa.setDisposicion(rs.getString("disposicion"));
                     mesa.setEstado(rs.getBoolean("estado"));
+                    
                 }else{
                     
                     System.out.println("La mesa está en el deposito.");/*EL METODO SERA NULO CUANDO EL ESTADO ES CERO*/
