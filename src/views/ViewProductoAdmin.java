@@ -19,6 +19,13 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
     public ViewProductoAdmin() {
         initComponents();
+        
+        
+     //  modelo = new DefaultTableModel();
+
+        
+        
+        
         comboCategorias();
     }
 
