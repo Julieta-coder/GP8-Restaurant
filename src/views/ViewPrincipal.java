@@ -44,15 +44,21 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jpLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Usuario:");
+        jpLogIn.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 60, -1, -1));
 
         jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jpLogIn.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 104, 277, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Constraseña:");
+        jpLogIn.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 160, -1, -1));
 
         jtfConstraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jpLogIn.add(jtfConstraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 204, 277, -1));
 
         jbLogIn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbLogIn.setText("Log in");
@@ -61,39 +67,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jbLogInActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jpLogInLayout = new javax.swing.GroupLayout(jpLogIn);
-        jpLogIn.setLayout(jpLogInLayout);
-        jpLogInLayout.setHorizontalGroup(
-            jpLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpLogInLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(jpLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jtfUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                    .addComponent(jtfConstraseña))
-                .addContainerGap(42, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLogInLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbLogIn)
-                .addGap(34, 34, 34))
-        );
-        jpLogInLayout.setVerticalGroup(
-            jpLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpLogInLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtfConstraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbLogIn)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        jpLogIn.add(jbLogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 260, -1, -1));
 
         escritorio.setLayer(jpLogIn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -102,16 +76,16 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(458, 458, 458)
-                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addGap(322, 322, 322)
+                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap(74, Short.MAX_VALUE)
+                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
         );
 
         jmMesa.setText("Mesas");
