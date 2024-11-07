@@ -30,7 +30,8 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
      */
     public ViewMeseroAdmin() {
         initComponents();
-        
+        jbEliminar.setEnabled(false);
+        jbActualizar.setEnabled(false);
 //        armarCabeceraTabla();
     }
     
@@ -59,6 +60,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jtID = new javax.swing.JTextField();
         jbActualizar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
 
         jlNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlNombre.setText("Nombre:");
@@ -137,6 +139,13 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
             }
         });
 
+        jbSalir.setText("X");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,7 +155,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jbAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                         .addComponent(jbEliminar))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +180,17 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jbBuscar)))))
                 .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addContainerGap()
+                .addComponent(jbSalir)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -415,7 +430,8 @@ try {
         int idCompare = Integer.parseInt(jtID.getText());
         // Buscar el mesero utilizando meseroData
         Mesero mesero = meseroData.buscarMozoPorId(idCompare);
-        
+          jbEliminar.setEnabled(true);
+        jbActualizar.setEnabled(true);
         if (mesero != null) {
             // Si se encuentra el mesero, llenar los campos con sus datos
             jtNombre.setText(mesero.getNombre());
@@ -465,6 +481,11 @@ try {
          if ((c>'z' || c<'a')&&(c>'Z' || c<'A')) evt.consume();
     }//GEN-LAST:event_jtApellidoKeyTyped
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 //    private DefaultTableModel modelo;
 //    
 //    private void armarCabeceraTabla() {
@@ -488,6 +509,7 @@ try {
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlApellido;
     private javax.swing.JLabel jlContraseña;
     private javax.swing.JLabel jlDni;
