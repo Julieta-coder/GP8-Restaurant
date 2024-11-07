@@ -8,6 +8,7 @@ import Entidades.Mesero;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class MeseroData {
     private Connection connection;
@@ -143,6 +144,23 @@ public class MeseroData {
         System.out.println("Error al actualizar mesero: " + e.getMessage());
         return false; // Retorna false en caso de error
     }
+}
+    
+    public boolean dniExiste(int dni) {
+    boolean existencia = false; // Cambiar a false para indicar que el DNI no existe inicialmente
+    String sql = "SELECT dni FROM meseros WHERE dni = ?"; // Buscar solo el DNI específico
+
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        ps.setInt(1, dni);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            existencia = true; // Si encuentra el DNI, cambia existencia a true
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesero: " + ex.getMessage());
+    }
+    return existencia;
 }
 
 
