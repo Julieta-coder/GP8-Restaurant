@@ -2,6 +2,9 @@
 package views;
 
 import Entidades.Mesero;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import persistencia.MeseroData;
 
@@ -31,13 +34,22 @@ public class ViewPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/fondoresto.png"));
+        Image image = icon.getImage();
+        escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+
+        };
         jpLogIn = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtfUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtfContraseña = new javax.swing.JTextField();
         jbLogIn = new javax.swing.JButton();
+        jlFondoLogin = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmMesa = new javax.swing.JMenu();
         jmMesero = new javax.swing.JMenu();
@@ -84,6 +96,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jpLogIn.add(jbLogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 260, -1, -1));
 
+        jlFondoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
+        jpLogIn.add(jlFondoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 340));
+
         escritorio.setLayer(jpLogIn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -92,8 +107,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(322, 322, 322)
-                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,28 +313,30 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiListarReservasActionPerformed
 
     private void jbLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogInActionPerformed
-        
+       
         //verifico que los campos no esten vacios
         //con el trim elimino si el usuario puso espacios al principio o al final 
        if(jtfUsuario.getText().trim().isEmpty() || jtfContraseña.getText().trim().isEmpty()){
            
            JOptionPane.showMessageDialog(this, "Debe ingresar usuario y contraseña");
-           return;
-       
+           return;   
        } 
         
-       try{
+      try{
         MeseroData md = new MeseroData();
         Integer usuario = Integer.parseInt(jtfUsuario.getText());
         String contra = jtfContraseña.getText();
 
         Mesero mesero = md.buscarMozoPorDni(usuario);
-       
 
          if(mesero !=null && usuario.equals(mesero.getDni()) && (contra.equals(mesero.getContraseña()))){
                 JOptionPane.showMessageDialog(this, "Ingreso correctamente!!");
                 jpLogIn.setVisible(false);
                 jmMesa.setEnabled(true);
+                jmMesero.setEnabled(true);
+                 jmPedido.setEnabled(true);
+                jmReserva.setEnabled(true);
+                jmAdministracion.setEnabled(true);
                 inicioSesion = true;
                 
         }else {
@@ -337,19 +354,22 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     private void jmMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMeseroMouseClicked
         
-        escritorio.removeAll();
-        escritorio.repaint();
-        ViewMesero interMesero = new ViewMesero();
-        interMesero.setVisible(true);
-        escritorio.add(interMesero);
-        escritorio.moveToFront(interMesero);
         
+     if(inicioSesion){    
+         escritorio.removeAll();
+         escritorio.repaint();
+         ViewMesero interMesero = new ViewMesero();
+         interMesero.setVisible(true);
+         escritorio.add(interMesero);
+         escritorio.moveToFront(interMesero);
+        
+        }else{
+        JOptionPane.showMessageDialog(this, "Debe iniciar sesion para acceder");
+     }
     }//GEN-LAST:event_jmMeseroMouseClicked
 
     private void jtfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsuarioActionPerformed
-       
 
-        
     }//GEN-LAST:event_jtfUsuarioActionPerformed
 
   
@@ -391,6 +411,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jbLogIn;
+    private javax.swing.JLabel jlFondoLogin;
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmMesa;
     private javax.swing.JMenu jmMesero;
