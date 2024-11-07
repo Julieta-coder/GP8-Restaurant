@@ -347,6 +347,10 @@ public class MesaData {
         }
         return existencia;
     }
+
+    public void actualizarMesa(int idMesa, Mesa me) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
   
 }
 

@@ -254,6 +254,15 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
             mesa.getEstado() ? "Activa" : "Inactiva"
         });
     }
+    
+    DefaultTableModel modelo = new DefaultTableModel() {
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        // Bloquear la edición de la columna ID (columna 0)
+        return column != 0;
+    }
+};
+
 }
    
     
@@ -382,7 +391,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
       
              
-    // Asegúrate de que se haya seleccionado una fila en la tabla
+   // Asegúrate de que se haya seleccionado una fila en la tabla
     int selectedRow = jDetalleMesa.getSelectedRow();
     
     if (selectedRow >= 0) {
@@ -392,14 +401,16 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jDetalleMesa.getCellEditor().stopCellEditing();
             }
 
-            // Convertir cada valor de la tabla con verificación de tipos
+            // Leer el ID de la mesa, pero sin permitir que se modifique
             int idMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
+            
+            // Leer y convertir los valores editables de la tabla
             int numeroMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 1).toString());
             int capacidad = Integer.parseInt(modelo.getValueAt(selectedRow, 2).toString());
             String disposicion = modelo.getValueAt(selectedRow, 3).toString();
             boolean estado = modelo.getValueAt(selectedRow, 4).toString().equals("Activa");
 
-            // Crear una instancia de Mesa con los datos modificados
+            // Crear una instancia de Mesa sin modificar el ID
             Mesa me = new Mesa(idMesa, numeroMesa, capacidad, disposicion, estado);
 
             // Llamar al método para actualizar la mesa en la base de datos
@@ -417,7 +428,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     } else {
         JOptionPane.showMessageDialog(this, "Seleccione una mesa para actualizar.");
     }
-
   
         
     }//GEN-LAST:event_ActualizarActionPerformed
