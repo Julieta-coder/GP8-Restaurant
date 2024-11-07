@@ -163,6 +163,30 @@ public class MeseroData {
     return existencia;
 }
 
+    
+     public Mesero buscarMozoPorDni(int dni) {
+        Mesero mesero = null;
+        String sql = "SELECT dni,contraseña FROM meseros WHERE dni = ?"; 
+        try {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, dni);
+                ResultSet resultSet = statement.executeQuery();
+                
+                if (resultSet.next()) {
+                    mesero = new Mesero();
+                    mesero.setDni(resultSet.getInt("dni"));
+                    mesero.setContraseña(resultSet.getString("contraseña"));
+
+                } else {
+                    System.out.println("No se encontró  Moz@ con ese usuario.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar Moz@ : " + e.getMessage());
+        }
+
+        return mesero;
+    }
 
     
 }

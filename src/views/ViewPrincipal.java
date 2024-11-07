@@ -1,18 +1,28 @@
 
 package views;
 
+import Entidades.Mesero;
 import javax.swing.JOptionPane;
+import persistencia.MeseroData;
 
 
 public class ViewPrincipal extends javax.swing.JFrame {
 
+    private boolean inicioSesion = false;
     
     public ViewPrincipal() {
         initComponents();
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
+        jmMesa.setEnabled(false);
+        jmMesero.setEnabled(false);
+        jmPedido.setEnabled(false);
+        jmReserva.setEnabled(false);
+        jmAdministracion.setEnabled(false);
+        
+        
         /*ACTIVAR VISIBILIDAD Y EDICION de jpLogIn DESPUES*/
-        jpLogIn.setEnabled(false);
-        jpLogIn.setVisible(false);
+      //  jpLogIn.setEnabled(false);
+       // jpLogIn.setVisible(false);
 //        jmAdministracion.setEnabled(false); va junto con el botono de log in
     }
 
@@ -26,7 +36,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jtfUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jtfConstraseña = new javax.swing.JTextField();
+        jtfContraseña = new javax.swing.JTextField();
         jbLogIn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmMesa = new javax.swing.JMenu();
@@ -51,14 +61,19 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jpLogIn.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 60, -1, -1));
 
         jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfUsuarioActionPerformed(evt);
+            }
+        });
         jpLogIn.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 104, 277, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Constraseña:");
         jpLogIn.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 160, -1, -1));
 
-        jtfConstraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jpLogIn.add(jtfConstraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 204, 277, -1));
+        jtfContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jpLogIn.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 204, 277, -1));
 
         jbLogIn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jbLogIn.setText("Log in");
@@ -83,7 +98,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
@@ -97,6 +112,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jmMesa);
 
         jmMesero.setText("Meseros");
+        jmMesero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMeseroMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jmMesero);
 
         jmPedido.setText("Pedidos");
@@ -194,12 +214,19 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     private void jmMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMesaMouseClicked
         
+        
+    if(inicioSesion){
+        
         escritorio.removeAll();
         escritorio.repaint();
         ViewSalonMesa interMesa = new ViewSalonMesa();
         interMesa.setVisible(true);
         escritorio.add(interMesa);
         escritorio.moveToFront(interMesa);
+        
+        }else{
+        JOptionPane.showMessageDialog(this, "Debe iniciar sesion para acceder");
+    }
         
     }//GEN-LAST:event_jmMesaMouseClicked
 
@@ -271,18 +298,59 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiListarReservasActionPerformed
 
     private void jbLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogInActionPerformed
-        // TODO add your handling code here:
-        /*PARA DESPUES PROXIMAMENTE*/
         
-//        if(jtfConstraseña.getText().equalsIgnoreCase("hola")){
-//            jmAdministracion.setEnabled(true);
-//            jpLogIn.setEnabled(false);
-//            jpLogIn.setVisible(false);
-//        }else{
-//            JOptionPane.showMessageDialog(this, "Contraseña invalida");
-//        }
+        //verifico que los campos no esten vacios
+        //con el trim elimino si el usuario puso espacios al principio o al final 
+       if(jtfUsuario.getText().trim().isEmpty() || jtfContraseña.getText().trim().isEmpty()){
+           
+           JOptionPane.showMessageDialog(this, "Debe ingresar usuario y contraseña");
+           return;
+       
+       } 
         
+       try{
+        MeseroData md = new MeseroData();
+        Integer usuario = Integer.parseInt(jtfUsuario.getText());
+        String contra = jtfContraseña.getText();
+
+        Mesero mesero = md.buscarMozoPorDni(usuario);
+       
+
+         if(mesero !=null && usuario.equals(mesero.getDni()) && (contra.equals(mesero.getContraseña()))){
+                JOptionPane.showMessageDialog(this, "Ingreso correctamente!!");
+                jpLogIn.setVisible(false);
+                jmMesa.setEnabled(true);
+                inicioSesion = true;
+                
+        }else {
+            JOptionPane.showMessageDialog(this, "Los datos ingresados son incorrectos");
+            jtfUsuario.setText("");
+            jtfContraseña.setText("");
+        }    
+       }catch(NumberFormatException ex){
+       
+           JOptionPane.showMessageDialog(this, "El usuario debe ser un dni numerico");
+           jtfUsuario.setText("");
+           jtfContraseña.setText("");
+       }
     }//GEN-LAST:event_jbLogInActionPerformed
+
+    private void jmMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMeseroMouseClicked
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        ViewMesero interMesero = new ViewMesero();
+        interMesero.setVisible(true);
+        escritorio.add(interMesero);
+        escritorio.moveToFront(interMesero);
+        
+    }//GEN-LAST:event_jmMeseroMouseClicked
+
+    private void jtfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsuarioActionPerformed
+       
+
+        
+    }//GEN-LAST:event_jtfUsuarioActionPerformed
 
   
     public static void main(String args[]) {
@@ -336,7 +404,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiListarReservas;
     private javax.swing.JMenuItem jmiStock;
     private javax.swing.JPanel jpLogIn;
-    private javax.swing.JTextField jtfConstraseña;
+    private javax.swing.JTextField jtfContraseña;
     private javax.swing.JTextField jtfUsuario;
     // End of variables declaration//GEN-END:variables
 }
