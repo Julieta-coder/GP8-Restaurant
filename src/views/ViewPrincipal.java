@@ -330,7 +330,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         Mesero mesero = md.buscarMozoPorDni(usuario);
 
          if(mesero !=null && usuario.equals(mesero.getDni()) && (contra.equals(mesero.getContraseña()))){
-                JOptionPane.showMessageDialog(this, "Ingreso correctamente!!");
+               // JOptionPane.showMessageDialog(this, "Ingreso correctamente!!");
                 jpLogIn.setVisible(false);
                 jmMesa.setEnabled(true);
                 jmMesero.setEnabled(true);
