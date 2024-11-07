@@ -29,11 +29,17 @@ public class MesaData {
         String sql = "INSERT INTO mesas (numero, capacidad, disposicion, estado) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, mesa.getNumero());
-            ps.setInt(2, mesa.getCapacidad());
-            ps.setString(3, mesa.getDisposicion());
-            ps.setBoolean(4, mesa.getEstado());
-            ps.executeUpdate();
+            /*ESTE METODO VERIFICA LA EXISTENCIA DE UNA MESA CON EL MISMO NUMERO. LO HICIMOS PARA NO UTILIZAR CLAVE PRIMARIA EN 'NUMERO'*/
+            if(numeroExiste(mesa.getNumero()) == true){
+                 ps.setInt(1, mesa.getNumero());
+                 ps.setInt(2, mesa.getCapacidad());
+                 ps.setString(3, mesa.getDisposicion());
+                 ps.setBoolean(4, mesa.getEstado());
+                 ps.executeUpdate();
+            }else{
+                System.out.println("Numero mesa ya existe");
+                
+            }
         } catch (SQLException e) {
             System.out.println("Error al agregar mesa: " + e.getMessage());
         }
@@ -178,6 +184,40 @@ public class MesaData {
         
         return mesa;
     }
+  
+   public Mesa obtenerMesaActivaPorNumero(int numero) {
+        String sql = "SELECT * FROM mesas WHERE numero = ? AND estado = 1";
+        Mesa mesa = null;
+        
+        try {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, numero);
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    mesa = new Mesa();
+                    mesa.setId_mesa(rs.getInt("id_mesa"));
+                    mesa.setNumero(rs.getInt("numero"));
+                    mesa.setCapacidad(rs.getInt("capacidad"));
+                    mesa.setDisposicion(rs.getString("disposicion"));
+                    mesa.setEstado(rs.getBoolean("estado"));
+                    
+                }else{
+                    
+                    System.out.println("La mesa está en el deposito.");/*EL METODO SERA NULO CUANDO EL ESTADO ES CERO*/
+                }
+            }
+            
+        } catch (SQLException ex) {
+            
+            System.out.println("Error al obtener la mesa: " + ex.getMessage());
+        }
+        
+        return mesa;
+    }
+  
+  
+  
   public Mesa obtenerMesaInactivaPorId(int id_mesa) {
         String sql = "SELECT * FROM mesas WHERE id_mesa = ? AND estado = 0";
         Mesa mesa = null;

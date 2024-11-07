@@ -5,8 +5,11 @@
 package views;
 
 import Entidades.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persistencia.*;
 
@@ -15,27 +18,37 @@ import persistencia.*;
  * @author salon
  */
 public class ViewListarReservas extends javax.swing.JInternalFrame {
-            private ReservaData reservaData;
-            private Reserva reserva;
-    
-         private DefaultTableModel modeloTabla = new DefaultTableModel(){
-         
-          @Override
-          public boolean isCellEditable(int fila, int columna) {
-              
-              return false;
-          }
-     };
+
+    private ReservaData reservaData;
+    private Reserva reserva;
+    private MesaData mesaData;
+    private Mesa mesa;
+
+    private DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            if (columna == 2 || columna == 3 || columna == 4 || columna == 5) {
+
+                return true;
+            }
+            return false;
+        }
+    };
+
     /**
      * Creates new form ViewListarReservas
      */
     public ViewListarReservas() {
         reservaData = new ReservaData();
         reserva = new Reserva();
+        mesaData = new MesaData();
+        mesa = new Mesa();
         initComponents();
         armarCabecera();
-        cargarCombo();
-        
+        cargarComboIdReserva();
+        cargarComboNumero();
+
     }
 
     /**
@@ -52,7 +65,6 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         jtReservas = new javax.swing.JTable();
         jcbReservaId = new javax.swing.JComboBox<>();
         jcbMesaId = new javax.swing.JComboBox<>();
-        jrbOrdenar = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,6 +72,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jbTodas = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
+        jbOrdenar = new javax.swing.JButton();
 
         jtReservas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jtReservas.setModel(new javax.swing.table.DefaultTableModel(
@@ -73,6 +86,11 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtReservasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtReservas);
 
         jcbReservaId.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -83,12 +101,9 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         });
 
         jcbMesaId.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jrbOrdenar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jrbOrdenar.setText("Ordenar fecha");
-        jrbOrdenar.addActionListener(new java.awt.event.ActionListener() {
+        jcbMesaId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbOrdenarActionPerformed(evt);
+                jcbMesaIdActionPerformed(evt);
             }
         });
 
@@ -99,12 +114,20 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         jLabel2.setText("Id reserva:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Id mesa:");
+        jLabel3.setText("Numero mesa:");
 
         jbEliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
+        jbSalir.setBackground(new java.awt.Color(51, 51, 51));
         jbSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cross-32.png"))); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +145,19 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
 
         jbModificar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
+
+        jbOrdenar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbOrdenar.setText("Ordenar por fecha");
+        jbOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbOrdenarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,79 +165,71 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(286, 286, 286))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jbModificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbEliminar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbSalir))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jcbMesaId, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jcbReservaId, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 20, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jbTodas)
-                                            .addComponent(jrbOrdenar))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(33, 33, 33))))
+                        .addGap(257, 257, 257)
+                        .addComponent(jbSalir))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jcbMesaId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbReservaId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jbOrdenar)
+                            .addComponent(jbTodas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbModificar)
+                            .addComponent(jbEliminar))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jbSalir))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbReservaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(26, 26, 26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbMesaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(28, 28, 28)
-                        .addComponent(jrbOrdenar)
-                        .addGap(18, 18, 18)
+                        .addGap(17, 17, 17)
+                        .addComponent(jbOrdenar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbTodas)
-                        .addGap(31, 31, 31))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbEliminar)
-                    .addComponent(jbSalir)
-                    .addComponent(jbModificar))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbEliminar)
+                        .addGap(39, 39, 39))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -214,20 +242,175 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
 
     private void jcbReservaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbReservaIdActionPerformed
         // TODO add your handling code here:
-         borrarFilaTabla();
-         cargarDatos();
+        cargarDatos();
     }//GEN-LAST:event_jcbReservaIdActionPerformed
 
     private void jbTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTodasActionPerformed
         // TODO add your handling code here:
-         tablaCompleta();
+        tablaCompleta();
     }//GEN-LAST:event_jbTodasActionPerformed
 
-    private void jrbOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbOrdenarActionPerformed
+    private void jcbMesaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMesaIdActionPerformed
         // TODO add your handling code here:
-        tablaCompletaOrdenada();
+        cargarDatosIdMesa();
+    }//GEN-LAST:event_jcbMesaIdActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        int filaSelect = jtReservas.getSelectedRow();
+        if (filaSelect != -1) {
+            int id_reserva = (Integer) jtReservas.getValueAt(filaSelect, 0);
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar la reserva con id " + reservaData.buscarReserva(id_reserva) + "?", "Eliminar reserva", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                reservaData.eliminarReserva(id_reserva);
+                modeloTabla.removeRow(filaSelect);
+                JOptionPane.showMessageDialog(this, "¡Reserva eliminada!");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fila", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jtReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtReservasMouseClicked
+        // TODO add your handling code here: 
+//        int filaSelected = jtReservas.getSelectedRow();
+//        if (filaSelected != -1) {
+//
+//        }
+
+
+    }//GEN-LAST:event_jtReservasMouseClicked
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+
         
-    }//GEN-LAST:event_jrbOrdenarActionPerformed
+        int filaSelect = jtReservas.getSelectedRow();
+
+        if (filaSelect != -1) {
+            
+            Object idReservaObj = jtReservas.getValueAt(filaSelect, 0);
+            int id_reserva = 0;
+            
+            if (idReservaObj instanceof String) {
+                
+                try {
+                    
+                    id_reserva = Integer.parseInt((String) idReservaObj);
+                    
+                } catch (NumberFormatException e) {
+                    
+                    JOptionPane.showMessageDialog(this, "El ID de la reserva no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    return;
+                }
+            } else if (idReservaObj instanceof Integer) {
+                id_reserva = (Integer) idReservaObj;
+            }
+
+   
+            Object dniObj = jtReservas.getValueAt(filaSelect, 2);
+            int din = 0;
+            if (dniObj instanceof String) {
+                
+                try {
+                    
+                    String dniStr = (String) dniObj;
+                    
+                    if (dniStr.length() == 8 && dniStr.matches("\\d+")) { // Verificar que tenga 8 dígitos y sea numérico
+                        
+                        din = Integer.parseInt(dniStr);
+                        
+                    } else if (dniStr.length() != 8) {
+                        JOptionPane.showMessageDialog(this, "El DNI debe tener exactamente 8 caracteres", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    } else {
+                        
+                        JOptionPane.showMessageDialog(this, "El DNI debe contener solo números", "Error", JOptionPane.ERROR_MESSAGE);
+                        
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    
+                    JOptionPane.showMessageDialog(this, "El valor de DNI no es válido. Debe ser numérico", "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    return;
+                }
+            } else if (dniObj instanceof Integer) {
+                din = (Integer) dniObj;
+            }
+
+           
+            String nombre = (String) jtReservas.getValueAt(filaSelect, 3);
+
+           
+            Object fechaObj = jtReservas.getValueAt(filaSelect, 4);
+            
+            LocalDate fecha = null;
+            if (fechaObj instanceof String) {
+                
+                try {
+                    
+                    fecha = LocalDate.parse((String) fechaObj); 
+                    
+                } catch (DateTimeParseException e) {
+                    
+                    JOptionPane.showMessageDialog(this, "La fecha no es válida. Debe cumplir el siguiente formato: yyyy-mm-dd", "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    return;
+                }
+            } else if (fechaObj instanceof LocalDate) {
+                
+                fecha = (LocalDate) fechaObj;
+                
+            }
+            
+            
+           Object numeroObj = jtReservas.getValueAt(filaSelect, 5);
+            int numero = 0;
+            Mesa mesa= new Mesa();
+            
+            if (numeroObj instanceof String) {
+                
+                try {
+                    
+                    numero = Integer.parseInt((String) numeroObj);
+                    mesa = mesaData.obtenerMesaActivaPorNumero(numero);
+                    
+                } catch (NumberFormatException e) {
+                    
+                    JOptionPane.showMessageDialog(this, "El numero de la mesa no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    return;
+                }
+                
+            } else if (numeroObj instanceof Integer) {
+                
+                numero = (Integer) idReservaObj;
+                
+            }
+         
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Modificar reserva?", "Modificar reserva", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+               
+                reservaData.actualizarReserva(mesa,nombre, din, fecha, id_reserva);
+                
+                modeloTabla.removeRow(filaSelect);
+                JOptionPane.showMessageDialog(this, "¡Reserva modificada!");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fila", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOrdenarActionPerformed
+        // TODO add your handling code here:
+          tablaCompletaOrdenada();
+    }//GEN-LAST:event_jbOrdenarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,62 +421,91 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbModificar;
+    private javax.swing.JButton jbOrdenar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JButton jbTodas;
-    private javax.swing.JComboBox<String> jcbMesaId;
+    private javax.swing.JComboBox<Integer> jcbMesaId;
     private javax.swing.JComboBox<Reserva> jcbReservaId;
-    private javax.swing.JRadioButton jrbOrdenar;
     private javax.swing.JTable jtReservas;
     // End of variables declaration//GEN-END:variables
-       private void armarCabecera(){ 
+       private void armarCabecera() {
         this.modeloTabla.addColumn("ID");
+        this.modeloTabla.addColumn("ID_MESA");
         this.modeloTabla.addColumn("DNI");
         this.modeloTabla.addColumn("Nombre");
         this.modeloTabla.addColumn("Fecha");
         this.modeloTabla.addColumn("Numero de mesa");
         jtReservas.setModel(modeloTabla);
-    } 
-    
-  public void cargarCombo() {
-    ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservas();
-    jcbReservaId.removeAllItems();
-    for (Reserva r : reservas) {
-        jcbReservaId.addItem(r);
     }
-}  
-       
-    public void tablaCompleta(){
+
+    public void cargarComboIdReserva() {
+        ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservas();
+        jcbReservaId.removeAllItems();
+        for (Reserva r : reservas) {
+            jcbReservaId.addItem(r);
+        }
+    }
+
+    public void cargarComboNumero() {
+        ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservas();
+        jcbMesaId.removeAllItems();
+        for (Reserva r : reservas) {
+            jcbMesaId.addItem(r.getMesa().getNumero());
+        }
+    }
+
+    public void tablaCompleta() {
         borrarFilaTabla();
-         ArrayList<Reserva> reservas= (ArrayList<Reserva>) reservaData.obtenerReservas();
-        for(Reserva r:reservas){
-            modeloTabla.addRow(new Object[]{r.getId_reserva(),r.getDni_cliente(), r.getNombre_cliente(), r.getFecha_reserva(), r.getMesa().getNumero()});
+        ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservas();
+        for (Reserva r : reservas) {
+            modeloTabla.addRow(new Object[]{r.getId_reserva(), r.getMesa().getId_mesa(), r.getDni_cliente(), r.getNombre_cliente(), r.getFecha_reserva(), r.getMesa().getNumero()});
         }
-        
-    } 
-    public void tablaCompletaOrdenada(){
+
+    }
+
+    public void tablaCompletaOrdenada() {
         borrarFilaTabla();
-         ArrayList<Reserva> reservas= (ArrayList<Reserva>) reservaData.obtenerReservasOrden();
-        for(Reserva r:reservas){
-            modeloTabla.addRow(new Object[]{r.getId_reserva(),r.getDni_cliente(), r.getNombre_cliente(), r.getFecha_reserva(), r.getMesa().getNumero()});
+        ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservasOrden();
+        for (Reserva r : reservas) {
+            modeloTabla.addRow(new Object[]{r.getId_reserva(), r.getMesa().getId_mesa(), r.getDni_cliente(), r.getNombre_cliente(), r.getFecha_reserva(), r.getMesa().getNumero()});
         }
     }
-       
-   public void cargarDatos(){
-    borrarFilaTabla(); 
-    Reserva reservaSelec = (Reserva) jcbReservaId.getSelectedItem();
-    if (reservaSelec != null) {
-        int id = reservaSelec.getId_reserva();
-        ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservasPorId(id);
-        for(Reserva r:reservas){
-           modeloTabla.addRow(new Object[]{r.getId_reserva(),r.getDni_cliente(), r.getNombre_cliente(), r.getFecha_reserva(), r.getMesa().getNumero()});
+
+    public void cargarDatos() {
+        borrarFilaTabla();
+        Reserva reservaSelec = (Reserva) jcbReservaId.getSelectedItem();
+        if (reservaSelec != null) {
+            int id = reservaSelec.getId_reserva();
+            ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservasPorId(id);
+            for (Reserva r : reservas) {
+                modeloTabla.addRow(new Object[]{r.getId_reserva(), r.getMesa().getId_mesa(), r.getDni_cliente(), r.getNombre_cliente(), r.getFecha_reserva(), r.getMesa().getNumero()});
+            }
         }
     }
-}
-     private void borrarFilaTabla(){
-        int indice=modeloTabla.getRowCount()-1;
-        for(int i=indice;i>=0;i--){
+
+    private void borrarFilaTabla() {
+        int indice = modeloTabla.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
             modeloTabla.removeRow(i);
         }
-        
+
     }
+
+    public void cargarDatosIdMesa() {
+        borrarFilaTabla();
+        int numero = (int) jcbMesaId.getSelectedItem();
+        Mesa mesa = new Mesa();
+        mesa = mesaData.obtenerMesaActivaPorNumero(numero);
+      
+        Reserva reservaSelec = reservaData.buscarReservaIdMesa(mesa.getId_mesa());
+       
+        if (reservaSelec != null) {
+            ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservasPorId(reservaSelec.getId_reserva());
+            for (Reserva r : reservas) {
+               
+                modeloTabla.addRow(new Object[]{r.getId_reserva(), r.getMesa().getId_mesa(), r.getDni_cliente(), r.getNombre_cliente(), r.getFecha_reserva(), r.getMesa().getNumero()});
+            }
+        }
+    }
+
 }
