@@ -7,6 +7,7 @@ package views;
 import Entidades.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import persistencia.*;
@@ -185,50 +186,62 @@ public class ViewReserva extends javax.swing.JInternalFrame {
 
     private void jbGuardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarReservaActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+
         /*El primer try previene el ingreso de caracteres no numericos en campos de texto dni e id*/
         try {
             int dni = Integer.parseInt(jtfDni.getText());
-            
+
             /*Este if controla el limite numerico permitido para dni (Limitado en la base de datos a 8 caracteres)*/
             if (dni > 999999 && dni < 99999999) {
                 int numeroMesa = Integer.parseInt(jtfIdMesa.getText());
 
                 String nombre = jtfNombreCliente.getText();
-                
+                if (!nombre.matches("[a-zA-Z]+")) {
+                    
+                   JOptionPane.showMessageDialog(this, "El nombre no puede contener numeros");
+                   
+                   return;
+                }
                 /*El siguiente if controla que campo de texto nombre NO quede vacio*/
                 if (!nombre.isEmpty()) {
-                    
+
                     /*El try controla que LocalDate no sea nula*/
                     try {
-                      
-                        LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
+                        LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        ArrayList<Reserva> reservasFecha = (ArrayList<Reserva>) reservaData.obtenerReservas();
+                        for (Reserva r : reservasFecha) {
+                            LocalDate fechaValid = r.getFecha_reserva();
+                            System.out.println(fechaValid);
+                            if (fechaValid.equals(fecha)) {
+                                JOptionPane.showMessageDialog(this, "La mesa ya esta reservada en la fecha " + fecha);
+                                return;
+                            }
+                        }
                         mesa = mesaData.obtenerMesaActivaPorNumero(numeroMesa);
-                        
+
                         /*El if controla que mesa no sea nula*/
                         if (mesa != null) {
                             reserva = new Reserva(mesa, nombre, dni, fecha, true);
 
                             int confirm = JOptionPane.showConfirmDialog(this, "¿Realizar reserva en la mesa " + mesa.getNumero() + "?", "Confirmar reserva", JOptionPane.YES_NO_OPTION);
-                               
+
                             /*Confirmacion de reserva*/
                             if (confirm == JOptionPane.YES_OPTION) {
-                                 /*CREACION DE RESERVA*/
-                                 reservaData.guardarReserva(reserva);
+                                /*CREACION DE RESERVA*/
+
+                                reservaData.guardarReserva(reserva);
                                 JOptionPane.showMessageDialog(this, "¡Reserva creada!");
                                 jbGuardarReserva.setEnabled(false);
                                 jtfNombreCliente.setText("");
                                 jtfDni.setText("");
                                 jtfIdMesa.setText("");
                             }
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(this, "El numero de mesa no existe", "Error", JOptionPane.ERROR_MESSAGE);
-                            
-                        } 
-                        
+
+                        }
+
                     } catch (NullPointerException e) {
                         JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha");
                     }
@@ -252,16 +265,16 @@ public class ViewReserva extends javax.swing.JInternalFrame {
 
     private void jbNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaReservaActionPerformed
         // TODO add your handling code here:
-         jbGuardarReserva.setEnabled(true);
+        jbGuardarReserva.setEnabled(true);
     }//GEN-LAST:event_jbNuevaReservaActionPerformed
 
     private void jtfDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDniKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(c>'9'|| c<'0'){
+        if (c > '9' || c < '0') {
             evt.consume();
         }
-        if( jtfDni.getText().length() >= 8 ){
+        if (jtfDni.getText().length() >= 8) {
             evt.consume();
         }
     }//GEN-LAST:event_jtfDniKeyTyped

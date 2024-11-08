@@ -311,34 +311,38 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         if (filaSelect != -1) {
             int personas = (int) jsCantidadPersonas.getValue();
             int capacidad = (int) jtMesasActivas.getValueAt(filaSelect, 2);
+            if (personas > 0) {
+                if (personas <= capacidad) {
+                    int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+                    int numero = (int) jtMesasActivas.getValueAt(filaSelect, 1);
+                    String disposicion = (String) jtMesasActivas.getValueAt(filaSelect, 3);
+                    mesa.setId_mesa(id_mesa);
+                    mesa.setNumero(numero);
+                    mesa.setCapacidad(capacidad);
+                    mesa.setDisposicion(disposicion);
 
-            if (personas <= capacidad) {
-                int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
-                int numero = (int) jtMesasActivas.getValueAt(filaSelect, 1);
-                String disposicion = (String) jtMesasActivas.getValueAt(filaSelect, 3);
-                mesa.setId_mesa(id_mesa);
-                mesa.setNumero(numero);
-                mesa.setCapacidad(capacidad);
-                mesa.setDisposicion(disposicion);
+                    mesero = (Mesero) jcbMeseros.getSelectedItem();
 
-                mesero = (Mesero) jcbMeseros.getSelectedItem();
+                    pedido.setMesa(mesa);
+                    pedido.setMesero(mesero);
+                    pedido.setFecha_pedido(LocalDate.now());
+                    pedido.setHora_pedido(LocalTime.now());
+                    pedido.setEstado(true);
 
-                pedido.setMesa(mesa);
-                pedido.setMesero(mesero);
-                pedido.setFecha_pedido(LocalDate.now());
-                pedido.setHora_pedido(LocalTime.now());
-                pedido.setEstado(true);
+                    pedidoData.cargarPedido(pedido);
 
-                pedidoData.cargarPedido(pedido);
+                    jpSalon.setEnabled(false);
+                    jpSalon.setVisible(false);
+                    jpAbrirMesa.setEnabled(true);
+                    jpAbrirMesa.setVisible(true);
 
-                jpSalon.setEnabled(false);
-                jpSalon.setVisible(false);
-                jpAbrirMesa.setEnabled(true);
-                jpAbrirMesa.setVisible(true);
-
-            } else {
-                JOptionPane.showMessageDialog(this, "La cantidad de personas supera a la capcidad de la mesa.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cantidad de personas supera a la capcidad de la mesa.");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Seleccione la cantidad de personas.");
             }
+
         }
 
 
@@ -364,11 +368,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         boolean flag = false;
         /*Comprobamos que existan filas*/
         if (totalFilas > 0) {
-            
+
             int confirm = JOptionPane.showConfirmDialog(this, "¿Confirma el pedido?", "Confirmacion", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                
-                flag =true;
+
+                flag = true;
                 // Seleccionar todas las filas usando setRowSelectionInterval
                 jtProductos.setRowSelectionInterval(0, totalFilas - 1); // Selecciona desde la primera hasta la última fila
                 // Creamos un arreglo para obtener las filas seleccionadas
@@ -398,16 +402,16 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
                     detallePedido.setPedido(pedido);
                     detallePedidoData.agregarDetallePedido(detallePedido);
-                     
+
                 }
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "No hay productos seleccionados.");
         }
-        if(flag){
+        if (flag) {
             borrarFilaTabla();
         }
-       
+
 
     }//GEN-LAST:event_jbTomarPedidoActionPerformed
 
