@@ -252,19 +252,14 @@ public class PedidoData {
                     pedido.setEstado(resultSet.getBoolean("estado"));
                     pedido.setMonto_total(resultSet.getDouble("monto_total"));
 
-
                    pedidos.add(pedido);
-                }
-                
-                
-            
-                
+                }                
                 
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener pedidos: " + e.getMessage());
         }
-        return pedidos;
+            return pedidos;
     }
     
     

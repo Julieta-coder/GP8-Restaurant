@@ -1,12 +1,32 @@
 
 package views;
 
+import Entidades.Mesero;
+import Entidades.Pedido;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import persistencia.MeseroData;
+import persistencia.PedidoData;
+
 
 public class ViewMesero extends javax.swing.JInternalFrame {
 
     
+     private DefaultTableModel modelo = new DefaultTableModel();
+     PedidoData pd = new PedidoData();
+     private List <Mesero> listaM = new ArrayList();   
+     private List <Pedido> listaP = new ArrayList();   
+     private MeseroData md = new MeseroData();
+     
+     
     public ViewMesero() {
         initComponents();
+        
+        listaM = md.listarMeseros(); 
+        cargarMesero();
+        cabeceraTabla();
+        cargarDatos();
     }
 
    
@@ -31,7 +51,6 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         jLabel1.setText("Mozo:");
         PanelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jcbMeseros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         PanelFondo.add(jcbMeseros, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 150, 30));
 
         jTablaMeseroPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -47,7 +66,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTablaMeseroPedidos);
 
-        PanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, 170));
+        PanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 520, 170));
 
         jrbPendientes.setText("Pedidos pendientes");
         PanelFondo.add(jrbPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
@@ -93,9 +112,55 @@ public class ViewMesero extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaMeseroPedidos;
-    private javax.swing.JComboBox<String> jcbMeseros;
+    private javax.swing.JComboBox<Mesero> jcbMeseros;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JRadioButton jrbCobrados;
     private javax.swing.JRadioButton jrbPendientes;
     // End of variables declaration//GEN-END:variables
+
+
+private void cabeceraTabla(){
+         
+    this.modelo.addColumn("ID_PEDIDO");
+    this.modelo.addColumn("NRO_MESA");
+    this.modelo.addColumn("FECHA");
+    this.modelo.addColumn("HORA");
+    //this.modelo.addColumn("ESTADO");
+    this.modelo.addColumn("TOTAL");
+    
+    jTablaMeseroPedidos.setModel(modelo);
+    
+
+}
+
+private void cargarMesero(){
+        
+    for (Mesero mese : listaM){
+        jcbMeseros.addItem(mese); //esto lleva al toStrign porque muestro un objeto de tipo mesero
+    }
+
+
+}
+
+    private void cargarDatos(){
+        
+         modelo.setRowCount(0);
+         
+         Mesero selec =(Mesero)jcbMeseros.getSelectedItem();//tomo del combo box el mesero seleccionado
+       //como el getselected nos devuelve un object lo casteo a Mesero
+       
+      // listaM = inscData.materiasNoCursadas(selec.getIdAlumno()); // esto nso devuelve la lista con todas las materias que no esta inscripto
+       //ahora las gregamos a la tabla
+       
+      listaP = pd.listarPedidosDelMozo(selec.getId_mesero());
+       
+       for (Pedido p : listaP){
+           modelo.addRow(new Object[]{p.getId_pedido(), p.getMesa(), p.getFecha_pedido(),p.getHora_pedido(),p.getMonto_total()});
+       
+       }
+        
+
+    }
+
+
 }

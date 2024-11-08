@@ -11,23 +11,25 @@ import persistencia.MeseroData;
 
 public class ViewPrincipal extends javax.swing.JFrame {
 
-    private boolean inicioSesion = true;
+    private boolean inicioSesion = false;
+    
     
     public ViewPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-        jmMesa.setEnabled(true);
+        configurarEscritorio(); //llamo el metodo que cree para centrar el panel del login
+    
+        jmMesa.setEnabled(false);
         jmMesero.setEnabled(false);
         jmPedido.setEnabled(false);
         jmReserva.setEnabled(false);
         jmAdministracion.setEnabled(false);
-        
-        
-        /*ACTIVAR VISIBILIDAD Y EDICION de jpLogIn DESPUES*/
-      //  jpLogIn.setEnabled(false);
-       // jpLogIn.setVisible(false);
-//        jmAdministracion.setEnabled(false); va junto con el botono de log in
+      
+      
     }
+    
+   
+    
 
     
     @SuppressWarnings("unchecked")
@@ -428,4 +430,23 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jtfContraseña;
     private javax.swing.JTextField jtfUsuario;
     // End of variables declaration//GEN-END:variables
+
+    //METODOS PARA CENTRAR EL PANEL DEL LOGIN CUANDO SE AGRANDA LA PNATALLA
+private void centrarPanelLogin(){
+    int x = (escritorio.getWidth()- jpLogIn.getWidth())/2;
+    int y=(escritorio.getHeight()-jpLogIn.getHeight())/2;
+    jpLogIn.setLocation(x, y);   
+    
+}
+
+ private void configurarEscritorio() {
+        escritorio.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                centrarPanelLogin();
+            }
+        });
+    }
+
+
 }

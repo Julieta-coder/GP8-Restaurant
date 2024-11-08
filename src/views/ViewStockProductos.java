@@ -71,15 +71,7 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 390, 80, 33));
 
-        jtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtNombreActionPerformed(evt);
-            }
-        });
         jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtNombreKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtNombreKeyReleased(evt);
             }
@@ -108,26 +100,11 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtNombreActionPerformed
-
-    private void jtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyPressed
-        
-       // cargarDatos();
-        
-        
-    }//GEN-LAST:event_jtNombreKeyPressed
-
     private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
         
         String nom = jtNombre.getText().toLowerCase();
-        
-        //modelo.getDataVector().removeAllElements(); //elimino elementos de la tabla
-        //modelo.fireTableDataChanged();
         cargarDatos(nom);
-        
-        
+    
     }//GEN-LAST:event_jtNombreKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -157,13 +134,13 @@ private void cabeceraTabla(){
     
 
 }
+
     private void cargarDatos(String nom){
       
       modelo.setRowCount(0); // limpio la tabla
       List <Producto> listaP = pd.listarProductos();
-   
-    
-    for (Producto p : listaP){
+     
+     for (Producto p : listaP){
         
         //uso el tolowercase para que no discrimine minusculas y mayusculas 
         //uso el contains para que me busque coincidencias indistintamente de donde se encuentra la palabra ingresada o parte de la palabra
@@ -174,9 +151,7 @@ private void cabeceraTabla(){
                      }
              }
               modelo.fireTableDataChanged(); //notifico los cambios al modelo de la tabla
-
-        
-    }
+        }
     
     
 //     private void comboCategorias() {
