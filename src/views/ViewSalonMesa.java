@@ -361,39 +361,53 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         /*Obtenemos el total de las filas*/
         int totalFilas = jtProductos.getRowCount();
+        boolean flag = false;
         /*Comprobamos que existan filas*/
         if (totalFilas > 0) {
-            // Seleccionar todas las filas usando setRowSelectionInterval
-            jtProductos.setRowSelectionInterval(0, totalFilas - 1); // Selecciona desde la primera hasta la última fila
-            // Creamos un arreglo para obtener las filas seleccionadas
-            int[] filasRecorrido = jtProductos.getSelectedRows();
-
-            // Recorrer cada fila seleccionada
-            double total = 0;
-            for (int fila : filasRecorrido) {
-                // Extraer los valores de cada columna en la fila seleccionada
-                int id_producto = (int) jtProductos.getValueAt(fila, 0);
-                String nombre = (String) jtProductos.getValueAt(fila, 1);
-                String categoria = (String) jtProductos.getValueAt(fila, 2);
-                double precio = (double) jtProductos.getValueAt(fila, 3);
-                int cantidad = (int) jtProductos.getValueAt(fila, 4);
-
-                detallePedido.setCantidad(cantidad);
-
-                detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
-
-                detallePedido.setPrecio_unitario(precio);
-
-                detallePedido.setSub_total(precio * cantidad);
-
-                total = precio * cantidad + total;
-
-                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+            
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Confirma el pedido?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
                 
-                detallePedido.setPedido(pedido);
-                detallePedidoData.agregarDetallePedido(detallePedido);
+                flag =true;
+                // Seleccionar todas las filas usando setRowSelectionInterval
+                jtProductos.setRowSelectionInterval(0, totalFilas - 1); // Selecciona desde la primera hasta la última fila
+                // Creamos un arreglo para obtener las filas seleccionadas
+                int[] filasRecorrido = jtProductos.getSelectedRows();
+
+                // Recorrer cada fila seleccionada
+                double total = 0;
+                for (int fila : filasRecorrido) {
+                    // Extraer los valores de cada columna en la fila seleccionada
+                    int id_producto = (int) jtProductos.getValueAt(fila, 0);
+                    String nombre = (String) jtProductos.getValueAt(fila, 1);
+                    String categoria = (String) jtProductos.getValueAt(fila, 2);
+                    double precio = (double) jtProductos.getValueAt(fila, 3);
+                    int cantidad = (int) jtProductos.getValueAt(fila, 4);
+
+                    detallePedido.setCantidad(cantidad);
+
+                    detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
+
+                    detallePedido.setPrecio_unitario(precio);
+
+                    detallePedido.setSub_total(precio * cantidad);
+
+                    total = precio * cantidad + total;
+
+                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+
+                    detallePedido.setPedido(pedido);
+                    detallePedidoData.agregarDetallePedido(detallePedido);
+                     
+                }
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay productos seleccionados.");
         }
+        if(flag){
+            borrarFilaTabla();
+        }
+       
 
     }//GEN-LAST:event_jbTomarPedidoActionPerformed
 
@@ -477,9 +491,9 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtProductos;
     // End of variables declaration//GEN-END:variables
     private void borrarFilaTabla() {
-        int indice = modeloTabla.getRowCount() - 1;
+        int indice = modeloTablaProducto.getRowCount() - 1;
         for (int i = indice; i >= 0; i--) {
-            modeloTabla.removeRow(i);
+            modeloTablaProducto.removeRow(i);
         }
     }
 
