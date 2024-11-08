@@ -23,10 +23,9 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         armarCabeceraTabla();
         limpiarTabla();
         cargarDatosEnTabla();
-        
-        // Configura jNumeroMesa y jCapacidad para que no permitan números negativos
-jNumeroMesa.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
-jCapacidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+                
+        jNumeroMesa.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+        jCapacidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
 
     }
 
