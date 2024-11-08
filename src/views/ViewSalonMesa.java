@@ -3,24 +3,76 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package views;
+
 import Entidades.*;
 import persistencia.*;
 
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Adriana
  */
 public class ViewSalonMesa extends javax.swing.JInternalFrame {
-        private MesaData mesaSalon = new MesaData();
-    /**
-     * Creates new form ViewMesa
-     */
+
+    private MesaData mesaData;
+    private MeseroData meseroData;
+    private PedidoData pedidoData;
+    private DetallePedidoData detallePedidoData;
+    private ProductoData productoData;
+    private Mesa mesa;
+    private Mesero mesero;
+    private Pedido pedido;
+    private Producto producto;
+    private DetallePedido detallePedido;
+
+    private DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+    private DefaultTableModel modeloTablaProducto = new DefaultTableModel() {
+
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+
     public ViewSalonMesa() {
+
+        mesaData = new MesaData();;
+        meseroData = new MeseroData();
+        pedidoData = new PedidoData();
+        detallePedidoData = new DetallePedidoData();
+        mesa = new Mesa();
+        mesero = new Mesero();
+        pedido = new Pedido();
+        detallePedido = new DetallePedido();
+        producto = new Producto();
+        productoData = new ProductoData();
+
         initComponents();
+        cargarComboMozo();
+        armarCabeceraMesas();
+        tablaCompleta();
+
+        /*Ventana emergente*/
+        armarCabeceraProductos();
+        cargarComboBebidas();
+        cargarComboEntrada();
+        cargarComboPlatoPrincipal();
+        cargarComboPostre();
+
         jpAbrirMesa.setEnabled(false);
         jpAbrirMesa.setVisible(false);
     }
@@ -41,22 +93,22 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jSpinner3 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        jcBebidas = new javax.swing.JComboBox<>();
+        jcEntrada = new javax.swing.JComboBox<>();
+        jsCantidaPP = new javax.swing.JSpinner();
+        jsCantidadEntrada = new javax.swing.JSpinner();
+        jcPlatoPrincipal = new javax.swing.JComboBox<>();
+        jsCantidadBebidas = new javax.swing.JSpinner();
+        jbAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jtProductos = new javax.swing.JTable();
+        jbTomarPedido = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jSpinner4 = new javax.swing.JSpinner();
-        jButton6 = new javax.swing.JButton();
+        jcPostre = new javax.swing.JComboBox<>();
+        jsCantidadPostre = new javax.swing.JSpinner();
+        jbSalir = new javax.swing.JButton();
         jpSalon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMesasActivas = new javax.swing.JTable();
@@ -98,34 +150,36 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jLabel6.setText("Plato Principal:");
         jpAbrirMesa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpAbrirMesa.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 180, -1));
+        jcBebidas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jcBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 180, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpAbrirMesa.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 180, -1));
+        jcEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jcEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 180, -1));
 
-        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 80, -1));
+        jsCantidaPP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jsCantidaPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 80, -1));
 
-        jSpinner2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 80, -1));
+        jsCantidadEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jsCantidadEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 80, -1));
 
-        jComboBox3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpAbrirMesa.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 180, -1));
+        jcPlatoPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jcPlatoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 180, -1));
 
-        jSpinner3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 80, -1));
+        jsCantidadBebidas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jsCantidadBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 80, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Agregar producto");
-        jpAbrirMesa.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
+        jbAgregar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbAgregar.setText("Agregar producto");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
+        jpAbrirMesa.add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
 
         jScrollPane2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -136,13 +190,18 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jtProductos);
 
         jpAbrirMesa.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, 190));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Tomar pedido");
-        jpAbrirMesa.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+        jbTomarPedido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbTomarPedido.setText("Tomar pedido");
+        jbTomarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbTomarPedidoActionPerformed(evt);
+            }
+        });
+        jpAbrirMesa.add(jbTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton3.setText("Actualizar pedido");
@@ -156,19 +215,23 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jLabel7.setText("Postre:");
         jpAbrirMesa.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 262, -1, -1));
 
-        jComboBox4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpAbrirMesa.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 180, -1));
+        jcPostre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jcPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 180, -1));
 
-        jSpinner4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 80, -1));
+        jsCantidadPostre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpAbrirMesa.add(jsCantidadPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 80, -1));
 
-        jButton6.setBackground(new java.awt.Color(51, 51, 51));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cross-32.png"))); // NOI18N
-        jButton6.setText("Salir");
-        jpAbrirMesa.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
+        jbSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jbSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cross-32.png"))); // NOI18N
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+        jpAbrirMesa.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
 
         jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 910, 380));
 
@@ -191,7 +254,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Mozo: ");
-        jpSalon.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
+        jpSalon.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, -1));
 
         jcbMeseros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jcbMeseros.addActionListener(new java.awt.event.ActionListener() {
@@ -199,14 +262,14 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jcbMeserosActionPerformed(evt);
             }
         });
-        jpSalon.add(jcbMeseros, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 130, -1));
+        jpSalon.add(jcbMeseros, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Personas:");
-        jpSalon.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
+        jpSalon.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
 
         jsCantidadPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpSalon.add(jsCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 130, -1));
+        jpSalon.add(jsCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 150, -1));
 
         jbAbrirMesa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jbAbrirMesa.setText("Abrir mesa");
@@ -242,10 +305,43 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
     private void jbAbrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirMesaActionPerformed
         // TODO add your handling code here:
-        jpSalon.setEnabled(false);
-        jpSalon.setVisible(false);
-        jpAbrirMesa.setEnabled(true);
-        jpAbrirMesa.setVisible(true);
+
+        int filaSelect = jtMesasActivas.getSelectedRow();
+
+        if (filaSelect != -1) {
+            int personas = (int) jsCantidadPersonas.getValue();
+            int capacidad = (int) jtMesasActivas.getValueAt(filaSelect, 2);
+
+            if (personas <= capacidad) {
+                int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+                int numero = (int) jtMesasActivas.getValueAt(filaSelect, 1);
+                String disposicion = (String) jtMesasActivas.getValueAt(filaSelect, 3);
+                mesa.setId_mesa(id_mesa);
+                mesa.setNumero(numero);
+                mesa.setCapacidad(capacidad);
+                mesa.setDisposicion(disposicion);
+
+                mesero = (Mesero) jcbMeseros.getSelectedItem();
+
+                pedido.setMesa(mesa);
+                pedido.setMesero(mesero);
+                pedido.setFecha_pedido(LocalDate.now());
+                pedido.setHora_pedido(LocalTime.now());
+                pedido.setEstado(true);
+
+                pedidoData.cargarPedido(pedido);
+
+                jpSalon.setEnabled(false);
+                jpSalon.setVisible(false);
+                jpAbrirMesa.setEnabled(true);
+                jpAbrirMesa.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "La cantidad de personas supera a la capcidad de la mesa.");
+            }
+        }
+
+
     }//GEN-LAST:event_jbAbrirMesaActionPerformed
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
@@ -256,17 +352,100 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.setVisible(false);
     }//GEN-LAST:event_jbAtrasActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbTomarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTomarPedidoActionPerformed
+        // TODO add your handling code here:
+        /*Obtenemos el total de las filas*/
+        int totalFilas = jtProductos.getRowCount();
+        /*Comprobamos que existan filas*/
+        if (totalFilas > 0) {
+            // Seleccionar todas las filas usando setRowSelectionInterval
+            jtProductos.setRowSelectionInterval(0, totalFilas - 1); // Selecciona desde la primera hasta la última fila
+            // Creamos un arreglo para obtener las filas seleccionadas
+            int[] filasRecorrido = jtProductos.getSelectedRows();
+
+            // Recorrer cada fila seleccionada
+            double total = 0;
+            for (int fila : filasRecorrido) {
+                // Extraer los valores de cada columna en la fila seleccionada
+                int id_producto = (int) jtProductos.getValueAt(fila, 0);
+                String nombre = (String) jtProductos.getValueAt(fila, 1);
+                String categoria = (String) jtProductos.getValueAt(fila, 2);
+                double precio = (double) jtProductos.getValueAt(fila, 3);
+                int cantidad = (int) jtProductos.getValueAt(fila, 4);
+
+                detallePedido.setCantidad(cantidad);
+
+                detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
+
+                detallePedido.setPrecio_unitario(precio);
+
+                detallePedido.setSub_total(precio * cantidad);
+
+                total = precio * cantidad + total;
+
+                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                
+                detallePedido.setPedido(pedido);
+                detallePedidoData.agregarDetallePedido(detallePedido);
+            }
+        }
+
+    }//GEN-LAST:event_jbTomarPedidoActionPerformed
+
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        // TODO add your handling code here:
+        int bebidas = (int) jsCantidadBebidas.getValue();
+        int entrada = (int) jsCantidadEntrada.getValue();
+        int platoP = (int) jsCantidaPP.getValue();
+        int postre = (int) jsCantidadPostre.getValue();
+
+        int[] cantidades = {bebidas, entrada, platoP, postre};
+
+        boolean hayCantidadMayorQueCero = false;
+
+        for (int cantidad : cantidades) {
+            if (cantidad > 0) {
+                hayCantidadMayorQueCero = true;
+                break;
+            }
+        }
+
+        if (hayCantidadMayorQueCero) {
+
+            if (bebidas > 0) {
+                Producto producto = (Producto) jcBebidas.getSelectedItem();
+                cargarProductos(producto, bebidas);
+                jsCantidadBebidas.setValue(0);
+            }
+            if (entrada > 0) {
+                Producto producto = (Producto) jcEntrada.getSelectedItem();
+                cargarProductos(producto, entrada);
+                jsCantidadEntrada.setValue(0);
+            }
+            if (platoP > 0) {
+                Producto producto = (Producto) jcPlatoPrincipal.getSelectedItem();
+                cargarProductos(producto, platoP);
+                jsCantidaPP.setValue(0);
+            }
+            if (postre > 0) {
+                Producto producto = (Producto) jcPostre.getSelectedItem();
+                cargarProductos(producto, postre);
+                jsCantidadPostre.setValue(0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna opción.");
+        }
+    }//GEN-LAST:event_jbAgregarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -276,20 +455,122 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbAbrirMesa;
+    private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbAtras;
-    private javax.swing.JComboBox<String> jcbMeseros;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JButton jbTomarPedido;
+    private javax.swing.JComboBox<Producto> jcBebidas;
+    private javax.swing.JComboBox<Producto> jcEntrada;
+    private javax.swing.JComboBox<Producto> jcPlatoPrincipal;
+    private javax.swing.JComboBox<Producto> jcPostre;
+    private javax.swing.JComboBox<Mesero> jcbMeseros;
     private javax.swing.JDesktopPane jdpSalon;
     private javax.swing.JPanel jpAbrirMesa;
     private javax.swing.JPanel jpSalon;
+    private javax.swing.JSpinner jsCantidaPP;
+    private javax.swing.JSpinner jsCantidadBebidas;
+    private javax.swing.JSpinner jsCantidadEntrada;
     private javax.swing.JSpinner jsCantidadPersonas;
+    private javax.swing.JSpinner jsCantidadPostre;
     private javax.swing.JTable jtMesasActivas;
+    private javax.swing.JTable jtProductos;
     // End of variables declaration//GEN-END:variables
-    
-    
+    private void borrarFilaTabla() {
+        int indice = modeloTabla.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
+            modeloTabla.removeRow(i);
+        }
+    }
+
+    private void armarCabeceraMesas() {
+        this.modeloTabla.addColumn("ID");
+        this.modeloTabla.addColumn("N° Mesa");
+        this.modeloTabla.addColumn("Capacidad");
+        this.modeloTabla.addColumn("Disposicion");
+        jtMesasActivas.setModel(modeloTabla);
+    }
+
+    private void armarCabeceraProductos() {
+        this.modeloTablaProducto.addColumn("ID_Producto");
+        this.modeloTablaProducto.addColumn("Nombre producto");
+        this.modeloTablaProducto.addColumn("Categoria");
+        this.modeloTablaProducto.addColumn("Precio");
+        this.modeloTablaProducto.addColumn("Cantidad");
+        jtProductos.setModel(modeloTablaProducto);
+    }
+
+    public void tablaCompleta() {
+        ArrayList<Mesa> mesas = (ArrayList<Mesa>) mesaData.listarMesas();
+        for (Mesa m : mesas) {
+            if (m.getDisposicion().equalsIgnoreCase("libre")) {
+                modeloTabla.addRow(new Object[]{m.getId_mesa(), m.getNumero(), m.getCapacidad(), m.getDisposicion()});
+            }
+
+        }
+
+    }
+
+    private void cargarComboMozo() {
+        ArrayList<Mesero> meseros = (ArrayList<Mesero>) meseroData.listarMeseros();
+
+        jcbMeseros.removeAllItems();
+        for (Mesero mesero : meseros) {
+
+            jcbMeseros.addItem(mesero);
+        }
+
+    }
+
+    private void cargarComboBebidas() {
+        ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
+        jcBebidas.removeAllItems();
+        for (Producto p : prodcutos) {
+            if (p.getCategoria().equalsIgnoreCase("bebida")) {
+                jcBebidas.addItem(p);
+            }
+        }
+
+    }
+
+    private void cargarComboEntrada() {
+        ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
+        jcEntrada.removeAllItems();
+        for (Producto p : prodcutos) {
+            if (p.getCategoria().equalsIgnoreCase("entrada")) {
+                jcEntrada.addItem(p);
+            }
+        }
+
+    }
+
+    private void cargarComboPlatoPrincipal() {
+        ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
+        jcPlatoPrincipal.removeAllItems();
+        for (Producto p : prodcutos) {
+            if (p.getCategoria().trim().equalsIgnoreCase("plato principal")) {
+                jcPlatoPrincipal.addItem(p);
+            }
+        }
+
+    }
+
+    private void cargarComboPostre() {
+        ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
+        jcPostre.removeAllItems();
+        for (Producto p : prodcutos) {
+            if (p.getCategoria().equalsIgnoreCase("postre")) {
+                jcPostre.addItem(p);
+            }
+        }
+
+    }
+
+    public void cargarProductos(Producto producto, int cantidad) {
+        Producto productoSelect = producto;
+        if (productoSelect != null) {
+            modeloTablaProducto.addRow(new Object[]{productoSelect.getId_producto(), productoSelect.getNombre(), productoSelect.getCategoria(), productoSelect.getPrecio(), cantidad});
+        }
+    }
+
 }

@@ -358,8 +358,8 @@ public class PedidoData {
         }
     }
     
-    public void actualizarMontoTotal(int id_pedido, Double monto_total) {
-        String sql = "UPDATE inscripcion SET monto_total = ? WHERE id_pedido = ? "; 
+    public void actualizarMontoTotal(int id_pedido, double monto_total) {
+        String sql = "UPDATE pedidos SET monto_total = ? WHERE id_pedido = ? "; 
         try {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setDouble(1, monto_total);

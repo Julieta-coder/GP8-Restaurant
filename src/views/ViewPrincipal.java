@@ -11,12 +11,12 @@ import persistencia.MeseroData;
 
 public class ViewPrincipal extends javax.swing.JFrame {
 
-    private boolean inicioSesion = false;
+    private boolean inicioSesion = true;
     
     public ViewPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-        jmMesa.setEnabled(false);
+        jmMesa.setEnabled(true);
         jmMesero.setEnabled(false);
         jmPedido.setEnabled(false);
         jmReserva.setEnabled(false);

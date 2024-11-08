@@ -45,8 +45,16 @@ public class MeseroData {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                Mesero mesero = new Mesero();//Construir
+                Mesero mesero = new Mesero();
+                mesero.setApellido(rs.getString("apellido"));
+                mesero.setContraseña("constraseña");
+                mesero.setDni(rs.getInt("dni"));
+                mesero.setEstado(rs.getBoolean("estado"));
+                mesero.setFecha_registro(rs.getDate("fecha_registro").toLocalDate());
+                mesero.setId_mesero(rs.getInt("id_mesero"));
+                mesero.setNombre(rs.getString("nombre"));
                 meseros.add(mesero);
+                
             }
         } catch (SQLException e) {
             System.out.println("Error al listar meseros: " + e.getMessage());
