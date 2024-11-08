@@ -255,14 +255,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         });
     }
     
-    DefaultTableModel modelo = new DefaultTableModel() {
-    @Override
-    public boolean isCellEditable(int row, int column) {
-        // Bloquear la edición de la columna ID (columna 0)
-        return column != 0;
-    }
-};
-
 }
    
     
@@ -401,9 +393,12 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jDetalleMesa.getCellEditor().stopCellEditing();
             }
 
-            // Leer el ID de la mesa, pero sin permitir que se modifique
+            // Obtener el ID de la mesa directamente de la columna de ID
             int idMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
-            
+
+            // Bloquear cualquier intento de edición en la columna del ID (suponiendo que la columna 0 es el ID)
+            modelo.setValueAt(idMesa, selectedRow, 0);
+
             // Leer y convertir los valores editables de la tabla
             int numeroMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 1).toString());
             int capacidad = Integer.parseInt(modelo.getValueAt(selectedRow, 2).toString());
@@ -457,14 +452,18 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     private void jListaEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListaEstadoActionPerformed
         // TODO add your handling code here:
-        limpiarTabla(); // Limpia la tabla antes de cargar los nuevos datos
+      limpiarTabla(); // Limpia la tabla antes de cargar los nuevos datos
 
-       boolean estado = jrbEstadoLogico.isSelected();
+    // Determina el estado seleccionado en el combo box
+    boolean estadoSeleccionado = jListaEstado.getSelectedItem().toString().equals("Activa");
 
-    // Obtener la lista de mesas por el estado seleccionado
-    List<Mesa> mesas = mesaData.listarMesasPorEstado(estado);
+    // Llama a MesaData para obtener las mesas activas o inactivas
+    List<Mesa> mesas = mesaData.listarMesasPorEstado(estadoSeleccionado);
 
-    for (Mesa mesa : mesas) {
+    // Verifica si se han encontrado mesas para el estado seleccionado
+    if (mesas != null && !mesas.isEmpty()) {
+        // Llena la tabla con los datos de las mesas activas o inactivas
+        for (Mesa mesa : mesas) {
             modelo.addRow(new Object[]{
                 mesa.getId_mesa(),
                 mesa.getNumero(),
@@ -473,6 +472,14 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 mesa.getEstado() ? "Activa" : "Inactiva"
             });
         }
+    } else {
+        // Muestra mensaje si no hay mesas para el estado seleccionado
+        JOptionPane.showMessageDialog(this, "No hay mesas " + (estadoSeleccionado ? "activas" : "inactivas") + " para mostrar.");
+    }
+
+
+
+
             
     }//GEN-LAST:event_jListaEstadoActionPerformed
 
@@ -480,10 +487,16 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 //    private DefaultTableModel modelo;
 
 private void armarCabeceraTabla() {
-    if (modelo == null) {
-        modelo = new DefaultTableModel();
-    }
+    // Crea un DefaultTableModel personalizado para evitar la edición de la columna ID
+    modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Permite la edición de todas las columnas excepto la columna "ID" (asumimos que la columna 0 es "ID")
+            return column != 0;
+        }
+    };
     
+    // Solo agrega las columnas si el modelo aún no tiene ninguna
     if (modelo.getColumnCount() == 0) {
         modelo.addColumn("ID");
         modelo.addColumn("Numero Mesa");
@@ -491,8 +504,13 @@ private void armarCabeceraTabla() {
         modelo.addColumn("Disposicion");
         modelo.addColumn("Estado");
     }
-    jDetalleMesa.setModel(modelo); // Asegúrate de que `tableMesas` es el nombre de tu JTable
+
+    // Asigna el modelo a la tabla
+    jDetalleMesa.setModel(modelo);
+    
 }
+
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

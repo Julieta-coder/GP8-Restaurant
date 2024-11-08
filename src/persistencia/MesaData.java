@@ -294,6 +294,7 @@ public class MesaData {
             mesa.setEstado(rs.getBoolean("estado"));
             mesas.add(mesa);
         }
+        
     } catch (SQLException e) {
         System.out.println("Error al listar mesas por estado: " + e.getMessage());
     }
