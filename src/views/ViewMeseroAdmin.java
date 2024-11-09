@@ -57,18 +57,25 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         jtID = new javax.swing.JTextField();
         jbActualizar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jlFondo = new javax.swing.JLabel();
 
-        jlNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jlNombre.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jlNombre.setText("Nombre:");
+        getContentPane().add(jlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
 
-        jlApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jlApellido.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jlApellido.setText("Apellido:");
+        getContentPane().add(jlApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
-        jlDni.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jlDni.setText("DNI;");
+        jlDni.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jlDni.setText("DNI:");
+        getContentPane().add(jlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
-        jlContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jlContraseña.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jlContraseña.setText("Contraseña:");
+        getContentPane().add(jlContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
         jtNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -76,6 +83,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jtNombreKeyTyped(evt);
             }
         });
+        getContentPane().add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 210, 30));
 
         jtApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -83,6 +91,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jtApellidoKeyTyped(evt);
             }
         });
+        getContentPane().add(jtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 210, 30));
 
         jtDNI.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -90,6 +99,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jtDNIKeyTyped(evt);
             }
         });
+        getContentPane().add(jtDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 210, 30));
 
         jpContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jpContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -97,124 +107,62 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jpContraseñaKeyTyped(evt);
             }
         });
+        getContentPane().add(jpContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 210, 30));
 
-        jbEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
 
-        jbBuscar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jbBuscar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
 
-        jbAgregar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jbAgregar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbAgregar.setText("Agregar");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel1.setText("ID:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
 
         jtID.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getContentPane().add(jtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 80, 30));
 
-        jbActualizar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jbActualizar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbActualizar.setText("Actualizar");
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
 
-        jbSalir.setText("X");
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 30, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jbAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                        .addComponent(jbEliminar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlApellido)
-                            .addComponent(jlNombre)
-                            .addComponent(jlDni)
-                            .addComponent(jlContraseña))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtApellido)
-                            .addComponent(jtDNI)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(jpContraseña)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbActualizar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbBuscar)))))
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbSalir)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNombre)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlApellido))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlDni)
-                    .addComponent(jtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlContraseña)
-                    .addComponent(jpContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbEliminar)
-                    .addComponent(jbAgregar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscar))
-                .addGap(18, 18, 18)
-                .addComponent(jbActualizar)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
+        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
+        jlFondo.setText("jLabel2");
+        getContentPane().add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -460,6 +408,7 @@ try {
     private javax.swing.JLabel jlApellido;
     private javax.swing.JLabel jlContraseña;
     private javax.swing.JLabel jlDni;
+    private javax.swing.JLabel jlFondo;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JTextField jpContraseña;
     private javax.swing.JTextField jtApellido;

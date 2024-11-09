@@ -29,16 +29,17 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jpFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jtNombre = new javax.swing.JTextField();
-        jpFondo = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jlImagenFondo = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTable1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -53,47 +54,35 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         jTable1.setEnabled(false);
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 109, 550, 247));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 550, 247));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel1.setText("Buscar por nombre:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 54, 130, 27));
+        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 170, 27));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Busqueda de productos activos");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 6, -1, -1));
-
-        jButton1.setText("Salir");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 390, 80, 33));
+        jpFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
 
         jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtNombreKeyReleased(evt);
             }
         });
-        getContentPane().add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 56, 238, -1));
+        jpFondo.add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 238, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel2.setText("Busqueda de productos activos");
+        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
         jlImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
-
-        javax.swing.GroupLayout jpFondoLayout = new javax.swing.GroupLayout(jpFondo);
-        jpFondo.setLayout(jpFondoLayout);
-        jpFondoLayout.setHorizontalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFondoLayout.createSequentialGroup()
-                .addComponent(jlImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 586, Short.MAX_VALUE)
-                .addGap(1440, 1440, 1440))
-        );
-        jpFondoLayout.setVerticalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFondoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jlImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jpFondo.add(jlImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 584, 440));
 
         getContentPane().add(jpFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 440));
 
