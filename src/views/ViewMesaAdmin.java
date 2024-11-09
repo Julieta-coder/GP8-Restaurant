@@ -433,24 +433,52 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
        
-        //FALTA AGREGAR VALIDADCION, CARTEL DE CONFIRMACION....
-        int selectedRow = jDetalleMesa.getSelectedRow();
+       
+     // Asegúrate de que se haya seleccionado una fila en la tabla
+    int selectedRow = jDetalleMesa.getSelectedRow();
+
+    if (selectedRow >= 0) {
+        // Opciones personalizadas en castellano
+        Object[] options = {"Sí", "No"};
+        int confirm = JOptionPane.showOptionDialog(this, 
+            "¿Estás seguro de que deseas eliminar esta mesa?", 
+            "Confirmación", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, 
+            null, 
+            options, 
+            options[0]);
         
-        int filaMesa = (Integer) modelo.getValueAt(selectedRow, 0);
-        
-        if (selectedRow >= 0){
-            
-            mesaData.eliminarMesa(filaMesa);
-            
-          //  jNumeroMesa.remove(selectedRow);
-            limpiarTabla();
-            cargarDatosEnTabla();
-            
-            JOptionPane.showMessageDialog(this, "Mesa eliminada exitosamente. ");
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una mesa para eliminar. ");
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                // Asegúrate de que la edición de la celda actual se detenga para capturar el valor editado
+                if (jDetalleMesa.isEditing()) {
+                    jDetalleMesa.getCellEditor().stopCellEditing();
+                }
+
+                // Convertir el valor de la tabla con verificación de tipos
+                int idMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
+
+                // Llamar al método para eliminar la mesa en la base de datos
+                mesaData.eliminarMesa(idMesa);
+
+                // Actualizar la tabla después de la eliminación
+                limpiarTabla();
+                cargarDatosEnTabla();
+
+                // Mensaje de éxito
+                JOptionPane.showMessageDialog(this, "Mesa eliminada exitosamente.");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error al leer el ID de la mesa. Verifica los datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ocurrió un error al eliminar la mesa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una mesa para eliminar.");
+    }
+
+  
         
     }//GEN-LAST:event_jEliminarActionPerformed
 
