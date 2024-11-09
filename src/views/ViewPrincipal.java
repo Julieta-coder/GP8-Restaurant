@@ -70,33 +70,35 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         jpLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Usuario:");
-        jpLogIn.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 60, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        jLabel1.setText("Dni:");
+        jpLogIn.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfUsuarioActionPerformed(evt);
             }
         });
-        jpLogIn.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 104, 277, -1));
+        jpLogIn.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 104, 250, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jLabel2.setText("Constraseña:");
         jpLogIn.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 160, -1, -1));
 
         jtfContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jpLogIn.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 204, 277, -1));
+        jtfContraseña.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpLogIn.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 204, 250, -1));
 
-        jbLogIn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jbLogIn.setText("Log in");
+        jbLogIn.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar.png"))); // NOI18N
         jbLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbLogInActionPerformed(evt);
             }
         });
-        jpLogIn.add(jbLogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 260, -1, -1));
+        jpLogIn.add(jbLogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 50, -1));
 
         jlFondoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
         jpLogIn.add(jlFondoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 340));
@@ -115,10 +117,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
+
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jmMesa.setText("Mesas");
         jmMesa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -305,8 +309,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiGuardarReservaActionPerformed
 
     private void jmiListarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarReservasActionPerformed
-        // TODO add your handling code here:
-         escritorio.removeAll();
+        
+        escritorio.removeAll();
         escritorio.repaint();
         ViewListarReservas interReservaList = new ViewListarReservas();
         interReservaList.setVisible(true);

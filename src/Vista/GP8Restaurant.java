@@ -15,6 +15,18 @@ public class GP8Restaurant {
             System.out.println("Error al establecer la conexión con la base de datos.");
             return;
         }
+        
+        
+        
+//        PRUEBA LISTAR PEDIDOS POR MOZOS 
+//         PedidoData pedidosData = new PedidoData();
+//        
+//         for (Pedido ped: pedidosData.listarPedidosDelMozo(1)){
+//         
+//             System.out.println(ped);
+//         }
+         
+        
 //        PRUEBA PARA LISTAR PRRODUCTO
 //            ProductoData p = new ProductoData();
 //        for(Producto produc: p.listarProductos() ){

@@ -3,6 +3,10 @@ package views;
 
 import Entidades.Mesero;
 import Entidades.Pedido;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -25,11 +29,22 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         
         listaM = md.listarMeseros(); 
         cargarMesero();
+        
         cabeceraTabla();
-        cargarDatos();
-    }
+        
+        //metodo que uso para saber si un item esta seleccionado en el combobox y cambia de estado 
+        jcbMeseros.addItemListener(new ItemListener() {
+            
+         @Override
+        public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            actualizarTabla();
+                 }
+              }
+         });
+        
 
-   
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,7 +57,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         jrbPendientes = new javax.swing.JRadioButton();
         jrbCobrados = new javax.swing.JRadioButton();
         jdcFecha = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,24 +79,41 @@ public class ViewMesero extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablaMeseroPedidos.setEnabled(false);
         jScrollPane1.setViewportView(jTablaMeseroPedidos);
 
         PanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 520, 170));
 
         jrbPendientes.setText("Pedidos pendientes");
+        jrbPendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbPendientesActionPerformed(evt);
+            }
+        });
         PanelFondo.add(jrbPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         jrbCobrados.setText("Pedidos cobrados");
-        PanelFondo.add(jrbCobrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
-        PanelFondo.add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 150, 30));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jrbCobrados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jrbCobradosActionPerformed(evt);
             }
         });
-        PanelFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 30, 30));
+        PanelFondo.add(jrbCobrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+
+        jdcFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcFechaPropertyChange(evt);
+            }
+        });
+        PanelFondo.add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 150, 30));
+
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+        PanelFondo.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 30, 30));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
         PanelFondo.add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 420));
@@ -100,18 +132,37 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jrbPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPendientesActionPerformed
+        
+
+        jrbCobrados.setSelected(false); //hago que cuando se seleccione uno el otro se desseleccione  
+        jdcFecha.setEnabled(false);
+     //   actualizarTabla();
+    }//GEN-LAST:event_jrbPendientesActionPerformed
+
+    private void jrbCobradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbCobradosActionPerformed
+        jrbPendientes.setSelected(false);
+        jdcFecha.setEnabled(true);
+        //actualizarTabla();
+    }//GEN-LAST:event_jrbCobradosActionPerformed
+
+    private void jdcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcFechaPropertyChange
+        actualizarTabla();
+   
+    }//GEN-LAST:event_jdcFechaPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelFondo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaMeseroPedidos;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Mesero> jcbMeseros;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JRadioButton jrbCobrados;
@@ -133,6 +184,15 @@ private void cabeceraTabla(){
 
 }
 
+ private void borrarFilaTabla(){
+   int indice = modelo.getRowCount()-1; // obtengo la contidad de columnas menos 1
+   
+   for (int i  = indice; i>=0;i--){
+   modelo.removeRow(i);
+   } //borro las filas de atras para adelante 
+   
+   }
+
 private void cargarMesero(){
         
     for (Mesero mese : listaM){
@@ -142,25 +202,84 @@ private void cargarMesero(){
 
 }
 
-    private void cargarDatos(){
+
+
+//ESETO ME SIRVO SOLO PARA LOS READIO BUTTON, SIN TENER LAS FECHAS EN CCUENTA 
+//    private void cargarDatosPendientes(){       
+//       
+//         Mesero selec =(Mesero)jcbMeseros.getSelectedItem();//tomo del combo box el mesero seleccionado
+//                            //como el getselected nos devuelve un object lo casteo a Mesero
+//       
+//         if(selec != null){
+//          
+//            listaP = pd.listarPedidosDelMozoPendiente(selec.getId_mesero());
+//       
+//           for (Pedido p : listaP){
+//           modelo.addRow(new Object[]{p.getId_pedido(), p.getMesa().getId_mesa(), p.getFecha_pedido(),p.getHora_pedido(),p.getMonto_total()});
+//       
+//               }
+//        
+//         }
+//    }
+    
+//    private void cargarDatosCobrados(){
+//        
+//         
+//         Mesero selec =(Mesero)jcbMeseros.getSelectedItem();//tomo del combo box el mesero seleccionado
+//                            //como el getselected nos devuelve un object lo casteo a Mesero
+//       
+//         if(selec != null){
+//          
+//            listaP = pd.listarPedidosDelMozoCobrado(selec.getId_mesero());
+//       
+//           for (Pedido p : listaP){
+//           modelo.addRow(new Object[]{p.getId_pedido(), p.getMesa().getId_mesa(), p.getFecha_pedido(),p.getHora_pedido(),p.getMonto_total()});
+//       
+//               }
+//        
+//         }
+//    }
+    
+    private void actualizarTabla() {
+         borrarFilaTabla();
         
-         modelo.setRowCount(0);
+          LocalDate fecha = null;
+        
+          //corroboro si hay una fecha seleccionada y captura dicha fecha del chooser
+          if(jdcFecha.getDate() != null){        
+               fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();          
+            }
+    
+         Mesero selec =(Mesero)jcbMeseros.getSelectedItem(); //mesero que selecciono en el combo box
+        
+        if(selec !=null){
+            
+             if (jrbPendientes.isSelected()) {                           
          
-         Mesero selec =(Mesero)jcbMeseros.getSelectedItem();//tomo del combo box el mesero seleccionado
-       //como el getselected nos devuelve un object lo casteo a Mesero
-       
-      // listaM = inscData.materiasNoCursadas(selec.getIdAlumno()); // esto nso devuelve la lista con todas las materias que no esta inscripto
-       //ahora las gregamos a la tabla
-       
-      listaP = pd.listarPedidosDelMozo(selec.getId_mesero());
-       
-       for (Pedido p : listaP){
-           modelo.addRow(new Object[]{p.getId_pedido(), p.getMesa(), p.getFecha_pedido(),p.getHora_pedido(),p.getMonto_total()});
-       
-       }
+                     listaP = pd.listarPedidosDelMozoPendiente(selec.getId_mesero());
         
-
-    }
-
+                }else if(jrbCobrados.isSelected()){
+                    
+                    if(fecha != null){
+                    
+                        listaP = pd.listarPedidosDelMozoParaTalFecha(selec.getId_mesero(), fecha);
+                    
+                         }else {
+                    
+                                  listaP= pd.listarPedidosDelMozoCobrado(selec.getId_mesero());
+                                          }              
+                         } 
+                            
+                  } 
+             
+                   for (Pedido p : listaP){
+                    modelo.addRow(new Object[]{p.getId_pedido(), p.getMesa().getId_mesa(), p.getFecha_pedido(),p.getHora_pedido(),p.getMonto_total()});
+           
+             
+            } //FIN PRIMER IF
+        
+        
+        
+    } //FIN ACTUALIZAR TABLA
 
 }

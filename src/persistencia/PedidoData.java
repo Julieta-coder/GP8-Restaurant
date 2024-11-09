@@ -213,15 +213,9 @@ public class PedidoData {
                     pedido.setHora_pedido(resultSet.getTime("hora_pedido").toLocalTime());
                     pedido.setEstado(resultSet.getBoolean("estado"));
                     pedido.setMonto_total(resultSet.getDouble("monto_total"));
-
-
-                   pedidos.add(pedido);
+                     pedidos.add(pedido);
                 }
-                
-                
-                
-            
-                
+                      
                 
             }
         } catch (SQLException e) {
@@ -230,14 +224,15 @@ public class PedidoData {
         return pedidos;
     }  
     
-    // Listar los pedidos que cobro un mesero en particular en el día.. REVISAR
-    public  List<Pedido> listarPedidosDelMozo(int id_mesero) {
+    // Listar los pedidos que cobro un mesero en particular en el día.. REVISAR -- CAMBIE EL FECHA PEDIDO QUE ESTABA EN CURDATE A ?
+    public  List<Pedido> listarPedidosDelMozoParaTalFecha(int id_mesero, LocalDate fecha_pedido) {
         List<Pedido> pedidos = new ArrayList<>();
-        String sql = "SELECT * FROM pedidos WHERE id_mesero=? AND estado=1 AND fecha_pedido=CURDATE()";
+        String sql = "SELECT * FROM pedidos WHERE id_mesero=? AND fecha_pedido=? AND estado=0";
         try {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 
-                statement.setInt(1,  id_mesero);      
+                statement.setInt(1,  id_mesero);
+                statement.setDate(2,  java.sql.Date.valueOf(fecha_pedido));
 
                 ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
@@ -476,4 +471,73 @@ public class PedidoData {
 //
 //        return pedido;
 //    }
+
+//LISTAR PEDIDOS DE TAL MOZO PENDIENTE
+ public  List<Pedido> listarPedidosDelMozoPendiente(int id_mesero) {
+        List<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT * FROM pedidos WHERE id_mesero=? AND estado=1";
+        try {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                
+                statement.setInt(1,  id_mesero);      
+
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                    Mesa mesa = mesaData.obtenerMesaActivaPorId(resultSet.getInt("id_mesa"));
+                    Mesero mesero=meseroData.buscarMozoPorId(resultSet.getInt("id_mesero"));
+                    pedido.setMesa(mesa);
+                    pedido.setMesero(mesero);
+                    pedido.setFecha_pedido(resultSet.getDate("fecha_pedido").toLocalDate());
+                    pedido.setHora_pedido(resultSet.getTime("hora_pedido").toLocalTime());
+                    pedido.setEstado(resultSet.getBoolean("estado"));
+                    pedido.setMonto_total(resultSet.getDouble("monto_total"));
+
+                   pedidos.add(pedido);
+                }                
+                
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener pedidos: " + e.getMessage());
+        }
+            return pedidos;
+    }
+ 
+ 
+ //LISTAR PEDIDOS DE TAL MOZO COBRADOS
+ public  List<Pedido> listarPedidosDelMozoCobrado(int id_mesero) {
+        List<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT * FROM pedidos WHERE id_mesero=? AND estado=0";
+        try {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                
+                statement.setInt(1,  id_mesero);      
+
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                    Mesa mesa = mesaData.obtenerMesaActivaPorId(resultSet.getInt("id_mesa"));
+                    Mesero mesero=meseroData.buscarMozoPorId(resultSet.getInt("id_mesero"));
+                    pedido.setMesa(mesa);
+                    pedido.setMesero(mesero);
+                    pedido.setFecha_pedido(resultSet.getDate("fecha_pedido").toLocalDate());
+                    pedido.setHora_pedido(resultSet.getTime("hora_pedido").toLocalTime());
+                    pedido.setEstado(resultSet.getBoolean("estado"));
+                    pedido.setMonto_total(resultSet.getDouble("monto_total"));
+
+                   pedidos.add(pedido);
+                }                
+                
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener pedidos: " + e.getMessage());
+        }
+            return pedidos;
+    }
+
+
+
+
 }
