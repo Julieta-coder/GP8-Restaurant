@@ -65,7 +65,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         jlApellido.setText("Apellido:");
 
         jlDni.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jlDni.setText("DNI;");
+        jlDni.setText("DNI:");
 
         jlContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jlContraseña.setText("Contraseña:");
