@@ -112,13 +112,13 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 240, 50, -1));
 
         jbSalir.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jbSalir.setText("Salir");
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 345, 56, 37));
+        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 30, 30));
 
         jLabel1.setText("Codigo:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 244, -1, -1));
