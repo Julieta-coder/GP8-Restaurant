@@ -3,18 +3,21 @@ package views;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import persistencia.PedidoData;
+import persistencia.*;
 import Entidades.Pedido;
 import java.awt.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
 
    private PedidoData pedidoData=new PedidoData();
+   private MeseroData meseroData=new MeseroData();
+   private MesaData mesaData=new MesaData();
     
     private DefaultTableModel modelo= new DefaultTableModel(){
         
@@ -462,11 +465,20 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
         
+        if(! jtBuscarPorId.getText().isEmpty()){
+            
         cargaDatosTabla();
         jtBuscarPorId.setEnabled(false);
         
          deshabilitarComponentes(jpActualizarPorId,true);
          deshabilitarComponentes(jpBotonesPorId,true);
+            
+        }else{
+                    JOptionPane.showMessageDialog(this, "Ingrese un ID para Buscar.");
+
+        }
+        
+     
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -479,15 +491,19 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         borrarFilaTabla();
         
         if(jdFecha.getDate() != null){
-            
+            //de jdfecha se extrae con getDate como un Date de java util para transformarlo se usa ToInstant convierte el javautil en un objeto tipo instant que representa un punto en el tiempo
+            //para convertir ese instant a un objeto tipo zone id time que representa una fecha en una zona horaria determinada invocando metodo atZone espera que le pase la zona horaria
+            //la clase zoneId la constante que representa la zona horaria local systemDefault ese objeto zonIdtIME se convierte de date a un tolocalDate
             LocalDate fechaN=jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
            Double resultado = pedidoData.listarIngresosParaUnaFecha(fechaN);
 //            System.out.println("RESULTADO  "+resultado);
             jtMontoTotal.setText("$ "+resultado);
+            DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
             List<Pedido>listaP =pedidoData.listarIngresosParaUnaFechaSinMonto(fechaN);
 //            jtablaPedidos.setEnabled(false);
             for (Pedido lista : listaP) {
-                            modelo.addRow(new Object []{lista.getId_pedido() ,lista.getMesa().getId_mesa(), lista.getMesero().getId_mesero(),lista.getFecha_pedido(), lista.getMonto_total()}) ;
+                            
+                            modelo.addRow(new Object []{lista.getId_pedido() ,lista.getMesa().getId_mesa(), lista.getMesero().getId_mesero(),lista.getFecha_pedido().format(dtf), lista.getMonto_total()}) ;
 
             }
             
@@ -503,12 +519,45 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
 //            
 //            int idPedido= Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
             int idPedido= Integer.parseInt( jtBuscarPorId.getText() );
+            
+              if (jtBuscarPorId.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID para dar Baja Logica.");
+        return;
+    }
+            
+        try {
+            
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres darle baja logica al Pedido " + "'"+pedidoData.buscarPedidoPorId(idPedido).getId_pedido()+"'"+ " de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+        
+        if (respuesta == JOptionPane.YES_OPTION) {
+            // Llamar al método de eliminación en meseroData
+            if (   pedidoData.actualizarEstadoLogico(idPedido, false)) { // Ahora funciona correctamente
+                JOptionPane.showMessageDialog(this, "Pedido dado de baja logica exitosamente.");
+//                cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
+                     jtBuscarPorId.setText("");
+                     jtBuscarPorId.setEnabled(true);
+                     
+                        jtBuscarPorId.requestFocusInWindow();
+                        
+                    deshabilitarComponentes(jpActualizarPorId,false);
+              deshabilitarComponentes(jpBotonesPorId,false);
+                     
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró Pedido con ID " + idPedido);
+            }
+        }
+        } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+
+        }
+    
+              
+              /*
             pedidoData.actualizarEstadoLogico(idPedido, false);
             
-            System.out.println("estado actualizado");
+            System.out.println("estado actualizado");*/
             
-             jtBuscarPorId.setText("");
-            jtBuscarPorId.setEnabled(true);
+           
             
     }//GEN-LAST:event_jbBajaLogicaActionPerformed
 // FUNCIONA BIEN LO QUE SI REVISAR EL TEMA DE DETALLE PEDIDO QUE SEA EN CASCADA CUANDO TENGA PEDIDOS ASOCIADOS POR QUE SI NO NO ELIMINA
@@ -536,6 +585,12 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
 //                cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
                      jtBuscarPorId.setText("");
                      jtBuscarPorId.setEnabled(true);
+                     
+                        jtBuscarPorId.requestFocusInWindow();
+                        
+                    deshabilitarComponentes(jpActualizarPorId,false);
+                      deshabilitarComponentes(jpBotonesPorId,false);
+                     
             } else {
                 JOptionPane.showMessageDialog(this, "No se encontró Pedido con ID " + idPedido);
             }
@@ -551,13 +606,40 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
     private void jbAltaLogicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaLogicaActionPerformed
         // TODO add your handling code here:
         
-        int idPedido= Integer.parseInt( jtBuscarPorId.getText() );
-            pedidoData.actualizarEstadoLogico(idPedido, true);
+          int idPedido= Integer.parseInt( jtBuscarPorId.getText() );
             
-            System.out.println("estado actualizado");
+              if (jtBuscarPorId.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID para dar Baja Logica.");
+        return;
+    }
             
-             jtBuscarPorId.setText("");
-            jtBuscarPorId.setEnabled(true);
+        try {
+            
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres darle alta logica al Pedido " + "'"+pedidoData.buscarPedidoPorId(idPedido).getId_pedido()+"'"+ " de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+        
+        if (respuesta == JOptionPane.YES_OPTION) {
+            // Llamar al método de eliminación en meseroData
+            if (   pedidoData.actualizarEstadoLogico(idPedido, true)) { // Ahora funciona correctamente
+                JOptionPane.showMessageDialog(this, "Pedido dado de Alta logica exitosamente.");
+//                cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
+                     jtBuscarPorId.setText("");
+                     jtBuscarPorId.setEnabled(true);
+                     
+                       jtBuscarPorId.requestFocusInWindow();
+                       
+                   deshabilitarComponentes(jpActualizarPorId,false);
+                  deshabilitarComponentes(jpBotonesPorId,false);
+                     
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró Pedido con ID " + idPedido);
+            }
+        }
+        } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+
+        }
+           
+            
     }//GEN-LAST:event_jbAltaLogicaActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
@@ -591,7 +673,16 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Complete todos los campos antes de actualizar.");
             return;
         }
-
+        
+        if( ! mesaData.numeroExiste(mesa)){
+             JOptionPane.showMessageDialog(this, "La mesa no existe por favor ingrese un valor correcto.");
+            return;
+        }
+        
+         if(  meseroData.buscarMozoPorId(mesero).equals(null)){
+             JOptionPane.showMessageDialog(this, "El mesero no existe por favor ingrese un valor correcto.");
+            return;
+        }
 
         boolean actualizado =  pedidoData.actualizarPedido(idPedido, mesa, mesero, fechaN, monto);
 
@@ -605,12 +696,16 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
             jdatechooserActualizar.setDate(null);
             jtBuscarPorId.setText("");
             jtBuscarPorId.setEnabled(true);
+            jtBuscarPorId.requestFocusInWindow();
+            
+              deshabilitarComponentes(jpActualizarPorId,false);
+              deshabilitarComponentes(jpBotonesPorId,false);
             
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró un Pedido con el ID especificado.");
         }
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "DNI e ID deben ser valores numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, " deben ser valores numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar el pedido: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
