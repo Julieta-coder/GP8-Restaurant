@@ -6,7 +6,6 @@ package views;
 
 import Entidades.*;
 import persistencia.*;
-
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,6 +14,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -75,7 +75,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jpAbrirMesa.setEnabled(false);
         jpAbrirMesa.setVisible(false);
+        
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -632,7 +635,9 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             modeloTablaProducto.addRow(new Object[]{productoSelect.getId_producto(), productoSelect.getNombre(), productoSelect.getCategoria(), productoSelect.getPrecio(), cantidad});
         }
     }
-
-    
+   
     
 }
+
+
+
