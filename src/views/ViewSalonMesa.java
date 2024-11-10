@@ -7,12 +7,17 @@ package views;
 import Entidades.*;
 import persistencia.*;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -46,8 +51,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         public boolean isCellEditable(int fila, int columna) {
             return false;
         }
+        
+                
     };
-
+    
+   
     public ViewSalonMesa() {
 
         mesaData = new MesaData();
@@ -69,6 +77,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         /*Ventana emergente*/
         armarCabeceraProductos();
         cargarComboBebidas();
+        cargarComboBebidas1();
         cargarComboEntrada();
         cargarComboPlatoPrincipal();
         cargarComboPostre();
@@ -76,8 +85,16 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.setEnabled(false);
         jpAbrirMesa.setVisible(false);
         
-        
+        jsCantidadBebidas.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+        jsCantidadBebidas1.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+        jsCantidadEntrada.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+        jsCantidaPP.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+        jsCantidadPostre.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+        jsCantidadPersonas.setModel(new javax.swing.SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1)); // Valor inicial 0, mínimo 0, máximo Integer.MAX_VALUE, incremento 1
+
+    
     }
+    
     
 
     /**
@@ -92,7 +109,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jdpSalon = new javax.swing.JDesktopPane();
         jpAbrirMesa = new javax.swing.JPanel();
         jbAtras = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jTitulo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -112,10 +129,13 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jcPostre = new javax.swing.JComboBox<>();
         jsCantidadPostre = new javax.swing.JSpinner();
         jbSalir = new javax.swing.JButton();
-        jMesaPedido = new javax.swing.JComboBox<>();
-        jMozoPedido = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jMesa1 = new javax.swing.JTextField();
+        jMozo2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jcBebidas1 = new javax.swing.JComboBox<>();
+        jsCantidadBebidas1 = new javax.swing.JSpinner();
         jpSalon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMesasActivas = new javax.swing.JTable();
@@ -131,7 +151,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jpAbrirMesa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jbAtras.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbAtras.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/back-button.png"))); // NOI18N
         jbAtras.setText("Atras");
         jbAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -141,53 +161,53 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         });
         jpAbrirMesa.add(jbAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, 40));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Gestionar Pedido");
-        jpAbrirMesa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, -1, -1));
+        jTitulo.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jTitulo.setText("<html><u>Gestionar Pedido</u></html>\n");
+        jpAbrirMesa.add(jTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("Bebidas:");
-        jpAbrirMesa.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel4.setText("Bebidas sin Alcohol:");
+        jpAbrirMesa.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel5.setText("Entrada:");
-        jpAbrirMesa.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        jpAbrirMesa.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, 20));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel6.setText("Plato Principal:");
-        jpAbrirMesa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        jpAbrirMesa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, 20));
 
-        jcBebidas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcBebidas.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcBebidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcBebidasActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jcBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 180, -1));
+        jpAbrirMesa.add(jcBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 116, 180, 30));
 
-        jcEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jcEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 180, -1));
+        jcEntrada.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jcEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 206, 180, 30));
 
-        jsCantidaPP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jsCantidaPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 80, -1));
+        jsCantidaPP.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jsCantidaPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 256, 80, 30));
 
-        jsCantidadEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jsCantidadEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 80, -1));
+        jsCantidadEntrada.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jsCantidadEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 206, 80, 30));
 
-        jcPlatoPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jcPlatoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 180, -1));
+        jcPlatoPrincipal.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jcPlatoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 256, 180, 30));
 
-        jsCantidadBebidas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jsCantidadBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 80, -1));
+        jsCantidadBebidas.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jsCantidadBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 116, 80, 30));
 
-        jbAgregar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbAgregar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbAgregar.setText("Agregar producto");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
+        jpAbrirMesa.add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, 40));
 
         jScrollPane2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -199,42 +219,42 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Id_Producto", "Nombre Producto", "Cantidad", "Categoria", "Precio", "Subtotal"
+                "Id_Producto", "Nombre Producto", "Categoria", "Cantidad", "Precio", "Subtotal"
             }
         ));
         jScrollPane2.setViewportView(jtProductos);
 
-        jpAbrirMesa.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, 190));
+        jpAbrirMesa.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 630, 230));
 
-        jbTomarPedido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbTomarPedido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbTomarPedido.setText("Tomar pedido");
         jbTomarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbTomarPedidoActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+        jpAbrirMesa.add(jbTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, -1, 40));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jButton3.setText("Actualizar pedido");
-        jpAbrirMesa.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, -1));
+        jpAbrirMesa.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 360, -1, 40));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setText("Cobrar");
-        jpAbrirMesa.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, -1, -1));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jButton4.setText("Caja");
+        jpAbrirMesa.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 360, 110, 40));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel7.setText("Postre:");
-        jpAbrirMesa.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 262, -1, -1));
+        jpAbrirMesa.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, 20));
 
-        jcPostre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jcPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 180, -1));
+        jcPostre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jcPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 306, 180, 30));
 
-        jsCantidadPostre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jpAbrirMesa.add(jsCantidadPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 80, -1));
+        jsCantidadPostre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jsCantidadPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 306, 80, 30));
 
         jbSalir.setBackground(new java.awt.Color(51, 51, 51));
-        jbSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbSalir.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbSalir.setForeground(new java.awt.Color(255, 255, 255));
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cross-32.png"))); // NOI18N
         jbSalir.setText("Salir");
@@ -243,28 +263,34 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbSalirActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
+        jpAbrirMesa.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, -1, -1));
 
-        jMesaPedido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jMesaPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMesaPedidoActionPerformed(evt);
-            }
-        });
-        jpAbrirMesa.add(jMesaPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 80, 30));
-
-        jMozoPedido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jpAbrirMesa.add(jMozoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 130, 30));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel8.setText("Mesa:");
         jpAbrirMesa.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 50, 30));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel9.setText("Mozo:");
         jpAbrirMesa.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 40, 60, 30));
 
-        jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 910, 440));
+        jMesa1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jMesa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 90, 30));
+
+        jMozo2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jMozo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 150, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel3.setText("Bebidas con Alcohol:");
+        jpAbrirMesa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 130, 30));
+
+        jcBebidas1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jcBebidas1.setToolTipText("");
+        jpAbrirMesa.add(jcBebidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 180, 30));
+
+        jsCantidadBebidas1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jsCantidadBebidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 80, 30));
+
+        jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 1090, 440));
 
         jpSalon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -283,11 +309,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jpSalon.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 226));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("Mozo: ");
-        jpSalon.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, -1));
+        jpSalon.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, 30));
 
-        jcbMeseros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbMeseros.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcbMeseros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbMeserosActionPerformed(evt);
@@ -295,21 +321,21 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         });
         jpSalon.add(jcbMeseros, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 150, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setText("Personas:");
-        jpSalon.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
+        jpSalon.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, 30));
 
-        jsCantidadPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jsCantidadPersonas.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpSalon.add(jsCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 150, -1));
 
-        jbAbrirMesa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jbAbrirMesa.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jbAbrirMesa.setText("Abrir mesa");
         jbAbrirMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAbrirMesaActionPerformed(evt);
             }
         });
-        jpSalon.add(jbAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 150, -1));
+        jpSalon.add(jbAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 150, 60));
 
         jdpSalon.add(jpSalon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 738, 360));
 
@@ -319,7 +345,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jdpSalon, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+                .addComponent(jdpSalon)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -439,6 +465,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // TODO add your handling code here:
         int bebidas = (int) jsCantidadBebidas.getValue();
+        int bebidas1 = (int) jsCantidadBebidas1.getValue();
         int entrada = (int) jsCantidadEntrada.getValue();
         int platoP = (int) jsCantidaPP.getValue();
         int postre = (int) jsCantidadPostre.getValue();
@@ -460,6 +487,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 Producto producto = (Producto) jcBebidas.getSelectedItem();
                 cargarProductos(producto, bebidas);
                 jsCantidadBebidas.setValue(0);
+            }
+            if (bebidas1 > 0) {
+                Producto producto = (Producto) jcBebidas1.getSelectedItem();
+                cargarProductos(producto, bebidas1);
+                jsCantidadBebidas1.setValue(0);
             }
             if (entrada > 0) {
                 Producto producto = (Producto) jcEntrada.getSelectedItem();
@@ -493,13 +525,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.setVisible(false);
     }//GEN-LAST:event_jbAtrasActionPerformed
 
-    private void jMesaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMesaPedidoActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
-    }//GEN-LAST:event_jMesaPedidoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
@@ -513,16 +538,18 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JComboBox<String> jMesaPedido;
-    private javax.swing.JComboBox<String> jMozoPedido;
+    private javax.swing.JTextField jMesa1;
+    private javax.swing.JTextField jMozo2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jTitulo;
     private javax.swing.JButton jbAbrirMesa;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbAtras;
     private javax.swing.JButton jbSalir;
     private javax.swing.JButton jbTomarPedido;
     private javax.swing.JComboBox<Producto> jcBebidas;
+    private javax.swing.JComboBox<String> jcBebidas1;
     private javax.swing.JComboBox<Producto> jcEntrada;
     private javax.swing.JComboBox<Producto> jcPlatoPrincipal;
     private javax.swing.JComboBox<Producto> jcPostre;
@@ -532,6 +559,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jpSalon;
     private javax.swing.JSpinner jsCantidaPP;
     private javax.swing.JSpinner jsCantidadBebidas;
+    private javax.swing.JSpinner jsCantidadBebidas1;
     private javax.swing.JSpinner jsCantidadEntrada;
     private javax.swing.JSpinner jsCantidadPersonas;
     private javax.swing.JSpinner jsCantidadPostre;
@@ -556,11 +584,54 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void armarCabeceraProductos() {
         this.modeloTablaProducto.addColumn("ID_Producto");
         this.modeloTablaProducto.addColumn("Nombre producto");
-        this.modeloTablaProducto.addColumn("Cantidad");
         this.modeloTablaProducto.addColumn("Categoria");
+        this.modeloTablaProducto.addColumn("Cantidad");
         this.modeloTablaProducto.addColumn("Precio");
         this.modeloTablaProducto.addColumn("Subtotal");
         jtProductos.setModel(modeloTablaProducto);
+        
+        
+        // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+        jtProductos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        jtProductos.getTableHeader().setOpaque(false);
+        jtProductos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        jtProductos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        jtProductos.setRowHeight(25);
+
+        // Crear un renderizador para centrar el texto del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+        headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+
+        // Aplicar el renderizador personalizado a cada columna para el encabezado y las celdas
+        for (int i = 0; i < jtProductos.getColumnModel().getColumnCount(); i++) {
+        jtProductos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        jtProductos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer); // Aplica el centrado y los colores en celdas
+}
+        
+        
+        
     }
 
     public void tablaCompleta() {
@@ -572,6 +643,46 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         }
 
+        // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+    jtMesasActivas.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+    jtMesasActivas.getTableHeader().setOpaque(false);
+    jtMesasActivas.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+    jtMesasActivas.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+    jtMesasActivas.setRowHeight(25);
+
+    // Crear un renderizador para centrar el texto del encabezado de la tabla
+    DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+    headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+    headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+    // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+
+    // Aplicar el renderizador personalizado a cada columna para el encabezado y las celdas
+    for (int i = 0; i < jtMesasActivas.getColumnModel().getColumnCount(); i++) {
+    jtMesasActivas.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+    jtMesasActivas.getColumnModel().getColumn(i).setCellRenderer(cellRenderer); // Aplica el centrado y los colores en celdas
+}
+        
+        
     }
 
     private void cargarComboMozo() {
@@ -589,13 +700,26 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
         jcBebidas.removeAllItems();
         for (Producto p : prodcutos) {
-            if (p.getCategoria().equalsIgnoreCase("bebida")) {
+            if (p.getCategoria().equalsIgnoreCase("Bebida sin Alcohol")) {
                 jcBebidas.addItem(p);
             }
         }
 
     }
 
+    private void cargarComboBebidas1() {
+    ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
+    jcBebidas1.removeAllItems();
+    for (Producto p : prodcutos) {
+        if (p.getCategoria().equalsIgnoreCase("Bebidas con Alcohol")) {
+            //jcBebidas1.addItem(p);
+        }
+    }
+}
+
+    
+    
+    
     private void cargarComboEntrada() {
         ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
         jcEntrada.removeAllItems();
