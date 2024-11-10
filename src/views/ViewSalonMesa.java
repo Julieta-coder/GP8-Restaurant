@@ -50,7 +50,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
     public ViewSalonMesa() {
 
-        mesaData = new MesaData();;
+        mesaData = new MesaData();
         meseroData = new MeseroData();
         pedidoData = new PedidoData();
         detallePedidoData = new DetallePedidoData();
@@ -109,6 +109,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jcPostre = new javax.swing.JComboBox<>();
         jsCantidadPostre = new javax.swing.JSpinner();
         jbSalir = new javax.swing.JButton();
+        jMesaPedido = new javax.swing.JComboBox<>();
+        jMozoPedido = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jpSalon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMesasActivas = new javax.swing.JTable();
@@ -135,8 +139,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.add(jbAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Atender");
-        jpAbrirMesa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        jLabel3.setText("Gestionar Pedido");
+        jpAbrirMesa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Bebidas:");
@@ -151,6 +155,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jcBebidas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcBebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcBebidasActionPerformed(evt);
+            }
+        });
         jpAbrirMesa.add(jcBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 180, -1));
 
         jcEntrada.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -181,13 +190,13 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "Id_Producto", "Nombre Producto", "Cantidad", "Categoria", "Precio", "Subtotal"
             }
         ));
         jScrollPane2.setViewportView(jtProductos);
@@ -233,7 +242,26 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         });
         jpAbrirMesa.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
 
-        jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 910, 380));
+        jMesaPedido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jMesaPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMesaPedidoActionPerformed(evt);
+            }
+        });
+        jpAbrirMesa.add(jMesaPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 80, 30));
+
+        jMozoPedido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jpAbrirMesa.add(jMozoPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 130, 30));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel8.setText("Mesa:");
+        jpAbrirMesa.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 50, 30));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel9.setText("Mozo:");
+        jpAbrirMesa.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 40, 60, 30));
+
+        jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 910, 440));
 
         jpSalon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -280,7 +308,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         });
         jpSalon.add(jbAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 150, -1));
 
-        jdpSalon.add(jpSalon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 35, 738, 299));
+        jdpSalon.add(jpSalon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 738, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -293,15 +321,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpSalon)
+            .addComponent(jdpSalon, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jcbMeserosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMeserosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbMeserosActionPerformed
 
     private void jbAbrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirMesaActionPerformed
         // TODO add your handling code here:
@@ -345,16 +369,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         }
 
-
     }//GEN-LAST:event_jbAbrirMesaActionPerformed
 
-    private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
+    private void jcbMeserosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMeserosActionPerformed
         // TODO add your handling code here:
-        jpSalon.setEnabled(true);
-        jpSalon.setVisible(true);
-        jpAbrirMesa.setEnabled(false);
-        jpAbrirMesa.setVisible(false);
-    }//GEN-LAST:event_jbAtrasActionPerformed
+    }//GEN-LAST:event_jcbMeserosActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
@@ -412,7 +431,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             borrarFilaTabla();
         }
 
-
     }//GEN-LAST:event_jbTomarPedidoActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
@@ -460,6 +478,25 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbAgregarActionPerformed
 
+    private void jcBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcBebidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcBebidasActionPerformed
+
+    private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
+        // TODO add your handling code here:
+        jpSalon.setEnabled(true);
+        jpSalon.setVisible(true);
+        jpAbrirMesa.setEnabled(false);
+        jpAbrirMesa.setVisible(false);
+    }//GEN-LAST:event_jbAtrasActionPerformed
+
+    private void jMesaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMesaPedidoActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_jMesaPedidoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
@@ -471,6 +508,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox<String> jMesaPedido;
+    private javax.swing.JComboBox<String> jMozoPedido;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbAbrirMesa;
@@ -512,9 +553,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void armarCabeceraProductos() {
         this.modeloTablaProducto.addColumn("ID_Producto");
         this.modeloTablaProducto.addColumn("Nombre producto");
+        this.modeloTablaProducto.addColumn("Cantidad");
         this.modeloTablaProducto.addColumn("Categoria");
         this.modeloTablaProducto.addColumn("Precio");
-        this.modeloTablaProducto.addColumn("Cantidad");
+        this.modeloTablaProducto.addColumn("Subtotal");
         jtProductos.setModel(modeloTablaProducto);
     }
 
@@ -591,4 +633,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         }
     }
 
+    
+    
 }
