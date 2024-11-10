@@ -335,16 +335,28 @@ public class PedidoData {
 //    }
     
     //actualizar estado logico
-    public void actualizarEstadoLogico(int id_pedido, boolean estado) {
+    public boolean actualizarEstadoLogico(int id_pedido, boolean estado) {
         String sql = "UPDATE pedidos SET estado = ? WHERE id_pedido = ?";
         try {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setBoolean(1, estado);
                 statement.setInt(2, id_pedido);
-                statement.executeUpdate();
+                //statement.executeUpdate();
+                
+               int filasAfectadas = statement.executeUpdate();
+
+                if (filasAfectadas > 0) {
+                    System.out.println("Pedido estado logico actualizado exitosamente.");
+                    return true; // Retorna true si se eliminó exitosamente
+                } else {
+                    System.out.println("No se encontró un Pedido con el ID especificado.");
+                    return false; // Retorna false si no se encontró el mesero
+                }
+                
             }
         } catch (SQLException e) {
             System.out.println("Error al actualizar su estado: " + e.getMessage());
+            return false;
         }
     }
     
