@@ -116,7 +116,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jbEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
+        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
 
         jbBuscar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbBuscar.setText("Buscar");
@@ -125,7 +125,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+        getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, -1, -1));
 
         jbAgregar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbAgregar.setText("Agregar");
@@ -134,14 +134,14 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jbAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
+        getContentPane().add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel1.setText("ID:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
 
         jtID.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        getContentPane().add(jtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 80, 30));
+        getContentPane().add(jtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 80, 30));
 
         jbActualizar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbActualizar.setText("Actualizar");
@@ -150,7 +150,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
                 jbActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
+        getContentPane().add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 40));
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +162,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
 
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
         jlFondo.setText("jLabel2");
-        getContentPane().add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 430));
+        getContentPane().add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

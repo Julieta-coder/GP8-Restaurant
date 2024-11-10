@@ -140,7 +140,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(jmMesero);
 
-        jmPedido.setText("Pedidos");
+        jmPedido.setText("Caja");
+        jmPedido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmPedidoMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jmPedido);
 
         jmReserva.setText("Reserva");
@@ -377,6 +382,25 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private void jtfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsuarioActionPerformed
 
     }//GEN-LAST:event_jtfUsuarioActionPerformed
+
+    private void jmPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmPedidoMouseClicked
+        
+      if(inicioSesion){   
+          
+         escritorio.removeAll();
+         escritorio.repaint();
+         ViewCaja interCaja = new ViewCaja();
+         interCaja.setVisible(true);
+         escritorio.add(interCaja);
+         escritorio.moveToFront(interCaja);
+        
+        }else{
+          
+        JOptionPane.showMessageDialog(this, "Debe iniciar sesion para acceder");
+     }
+        
+        
+    }//GEN-LAST:event_jmPedidoMouseClicked
 
   
     public static void main(String args[]) {
