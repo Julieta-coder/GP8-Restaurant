@@ -79,8 +79,10 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jbBajaLogica = new javax.swing.JButton();
         jbAltaLogica = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
+        jlFondo = new javax.swing.JLabel();
 
         setTitle("Contable");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,15 +98,19 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jtablaPedidos.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(jtablaPedidos);
 
-        jbSalir.setText("SALIR");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 365, 247));
+
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, -1, -1));
 
         jpActualizarPorId.setBackground(new java.awt.Color(153, 153, 153));
         jpActualizarPorId.setForeground(new java.awt.Color(153, 153, 153));
+        jpActualizarPorId.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbActualizar.setText("Actualizar");
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,24 +118,30 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbActualizarActionPerformed(evt);
             }
         });
+        jpActualizarPorId.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 202, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Mesa");
+        jpActualizarPorId.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Mesero");
+        jpActualizarPorId.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Fecha");
+        jpActualizarPorId.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 106, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Monto");
+        jpActualizarPorId.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 152, -1, -1));
 
         jtMesaActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtMesaActualizarKeyTyped(evt);
             }
         });
+        jpActualizarPorId.add(jtMesaActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 20, 126, -1));
 
         jtMeseroActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,62 +153,21 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jtMeseroActualizarKeyTyped(evt);
             }
         });
+        jpActualizarPorId.add(jtMeseroActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 60, 126, -1));
 
         jtMontoActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtMontoActualizarKeyTyped(evt);
             }
         });
+        jpActualizarPorId.add(jtMontoActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 152, 126, -1));
+        jpActualizarPorId.add(jdatechooserActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 106, 126, -1));
 
-        javax.swing.GroupLayout jpActualizarPorIdLayout = new javax.swing.GroupLayout(jpActualizarPorId);
-        jpActualizarPorId.setLayout(jpActualizarPorIdLayout);
-        jpActualizarPorIdLayout.setHorizontalGroup(
-            jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpActualizarPorIdLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(72, 72, 72)
-                .addGroup(jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jdatechooserActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jtMeseroActualizar)
-                    .addComponent(jtMesaActualizar)
-                    .addComponent(jtMontoActualizar))
-                .addGap(41, 41, 41))
-            .addGroup(jpActualizarPorIdLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jbActualizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jpActualizarPorIdLayout.setVerticalGroup(
-            jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpActualizarPorIdLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtMesaActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtMeseroActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jdatechooserActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jpActualizarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jtMontoActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jbActualizar)
-                .addGap(22, 22, 22))
-        );
+        getContentPane().add(jpActualizarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 290, 240));
 
         jpBuscarPorId.setBackground(new java.awt.Color(153, 153, 153));
         jpBuscarPorId.setForeground(new java.awt.Color(153, 153, 153));
+        jpBuscarPorId.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtBuscarPorId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,6 +179,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jtBuscarPorIdKeyTyped(evt);
             }
         });
+        jpBuscarPorId.add(jtBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 37, 96, -1));
 
         jbBuscar.setText("BUSCAR");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,41 +187,17 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
+        jpBuscarPorId.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 71, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Buscar por Id Pedido");
+        jpBuscarPorId.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 6, -1, -1));
 
-        javax.swing.GroupLayout jpBuscarPorIdLayout = new javax.swing.GroupLayout(jpBuscarPorId);
-        jpBuscarPorId.setLayout(jpBuscarPorIdLayout);
-        jpBuscarPorIdLayout.setHorizontalGroup(
-            jpBuscarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBuscarPorIdLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBuscarPorIdLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jpBuscarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpBuscarPorIdLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jbBuscar))
-                    .addComponent(jtBuscarPorId, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
-        );
-        jpBuscarPorIdLayout.setVerticalGroup(
-            jpBuscarPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBuscarPorIdLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(11, 11, 11)
-                .addComponent(jtBuscarPorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbBuscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jpBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 37, 170, 100));
 
         jpBuscarBD.setBackground(new java.awt.Color(153, 153, 153));
         jpBuscarBD.setForeground(new java.awt.Color(153, 153, 153));
+        jpBuscarBD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbBuscarBaseDatos.setText("Base Datos");
         jbBuscarBaseDatos.addActionListener(new java.awt.event.ActionListener() {
@@ -257,89 +205,55 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbBuscarBaseDatosActionPerformed(evt);
             }
         });
+        jpBuscarBD.add(jbBuscarBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 71, -1, -1));
 
         jLabel8.setText("Listar los pedidos de la BD");
+        jpBuscarBD.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, 145, -1));
 
-        javax.swing.GroupLayout jpBuscarBDLayout = new javax.swing.GroupLayout(jpBuscarBD);
-        jpBuscarBD.setLayout(jpBuscarBDLayout);
-        jpBuscarBDLayout.setHorizontalGroup(
-            jpBuscarBDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBuscarBDLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jpBuscarBDLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jbBuscarBaseDatos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jpBuscarBDLayout.setVerticalGroup(
-            jpBuscarBDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBuscarBDLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbBuscarBaseDatos)
-                .addContainerGap())
-        );
+        getContentPane().add(jpBuscarBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 160, 100));
 
         jpBuscarPorFecha.setBackground(new java.awt.Color(153, 153, 153));
+        jpBuscarPorFecha.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtMontoTotal.setEditable(false);
+        jpBuscarPorFecha.add(jtMontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 66, 100, -1));
 
         jdFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jdFechaPropertyChange(evt);
             }
         });
+        jpBuscarPorFecha.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 32, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Buscar por fecha ");
+        jpBuscarPorFecha.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 6, -1, -1));
 
-        javax.swing.GroupLayout jpBuscarPorFechaLayout = new javax.swing.GroupLayout(jpBuscarPorFecha);
-        jpBuscarPorFecha.setLayout(jpBuscarPorFechaLayout);
-        jpBuscarPorFechaLayout.setHorizontalGroup(
-            jpBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBuscarPorFechaLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(jpBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jpBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jtMontoTotal)
-                        .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32))
-        );
-        jpBuscarPorFechaLayout.setVerticalGroup(
-            jpBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBuscarPorFechaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().add(jpBuscarPorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 170, 100));
 
         jrbBuscarPorId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbBuscarPorIdActionPerformed(evt);
             }
         });
+        getContentPane().add(jrbBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
         jrbPedidosBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbPedidosBDActionPerformed(evt);
             }
         });
+        getContentPane().add(jrbPedidosBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
 
         jrbBuscarFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbBuscarFechaActionPerformed(evt);
             }
         });
+        getContentPane().add(jrbBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
 
         jpBotonesPorId.setBackground(new java.awt.Color(153, 153, 153));
+        jpBotonesPorId.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbBajaLogica.setText("Baja Logica");
         jbBajaLogica.addActionListener(new java.awt.event.ActionListener() {
@@ -347,6 +261,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbBajaLogicaActionPerformed(evt);
             }
         });
+        jpBotonesPorId.add(jbBajaLogica, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
 
         jbAltaLogica.setText("Alta Logica");
         jbAltaLogica.addActionListener(new java.awt.event.ActionListener() {
@@ -354,6 +269,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbAltaLogicaActionPerformed(evt);
             }
         });
+        jpBotonesPorId.add(jbAltaLogica, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 15, -1, -1));
 
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -361,91 +277,13 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbEliminarActionPerformed(evt);
             }
         });
+        jpBotonesPorId.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 15, -1, -1));
 
-        javax.swing.GroupLayout jpBotonesPorIdLayout = new javax.swing.GroupLayout(jpBotonesPorId);
-        jpBotonesPorId.setLayout(jpBotonesPorIdLayout);
-        jpBotonesPorIdLayout.setHorizontalGroup(
-            jpBotonesPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBotonesPorIdLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbBajaLogica)
-                .addGap(18, 18, 18)
-                .addComponent(jbAltaLogica)
-                .addGap(18, 18, 18)
-                .addComponent(jbEliminar)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        jpBotonesPorIdLayout.setVerticalGroup(
-            jpBotonesPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBotonesPorIdLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(jpBotonesPorIdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBajaLogica)
-                    .addComponent(jbAltaLogica)
-                    .addComponent(jbEliminar))
-                .addContainerGap())
-        );
+        getContentPane().add(jpBotonesPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 300, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpBotonesPorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbSalir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jrbBuscarPorId)
-                                .addGap(240, 240, 240)
-                                .addComponent(jrbPedidosBD)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jpBuscarPorId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(48, 48, 48)
-                                .addComponent(jpBuscarBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpBuscarPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jrbBuscarFecha)
-                                .addGap(76, 76, 76))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jpActualizarPorId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(63, 63, 63))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jrbPedidosBD)
-                    .addComponent(jrbBuscarFecha)
-                    .addComponent(jrbBuscarPorId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpBuscarPorId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpBuscarBD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpBuscarPorFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpActualizarPorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jpBotonesPorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbSalir)))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
+        jlFondo.setText("jLabel3");
+        getContentPane().add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 780, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -808,6 +646,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdFecha;
     private com.toedter.calendar.JDateChooser jdatechooserActualizar;
+    private javax.swing.JLabel jlFondo;
     private javax.swing.JPanel jpActualizarPorId;
     private javax.swing.JPanel jpBotonesPorId;
     private javax.swing.JPanel jpBuscarBD;

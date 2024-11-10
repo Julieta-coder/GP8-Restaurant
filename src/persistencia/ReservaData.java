@@ -162,14 +162,22 @@ public class ReservaData {
 
             while (rs.next()) {
                 Mesa mesa = mesaData.obtenerMesaActivaPorId(rs.getInt("id_mesa"));
+                
+                if(mesa != null){
+                    
                 String nombre_cliente = rs.getString("nombre_cliente");
                 int dni_cliente = rs.getInt("dni_cliente");
                 LocalDate fecha_reserva = rs.getDate("fecha_reserva").toLocalDate();
                 boolean estado = rs.getBoolean("estado");
 
                 Reserva reserva = new Reserva(id_reserva, mesa, nombre_cliente, dni_cliente, fecha_reserva, estado);
-                reserva.setMesa(mesa);
+               // reserva.setMesa(mesa);
                 reservas.add(reserva);
+                
+                }else{
+                    
+                    System.out.println("La mesa no esta activa o no existe");
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

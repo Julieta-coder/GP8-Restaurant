@@ -55,45 +55,57 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel2.setText("Nombre:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 43, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel3.setText("Categoria:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 85, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel4.setText("Stock:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 165, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel5.setText("Precio:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 125, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel6.setText("Estado:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 206, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel7.setText("Carga de productos");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 0, -1, -1));
-        getContentPane().add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 40, 152, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, -1, -1));
+        getContentPane().add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 160, 30));
 
         jComboCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboCategoriaActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 82, 136, -1));
-        getContentPane().add(jtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 162, 82, -1));
-        getContentPane().add(jtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 122, 82, -1));
-        getContentPane().add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 202, -1, -1));
+        getContentPane().add(jComboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 140, 30));
+        getContentPane().add(jtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 90, 30));
+        getContentPane().add(jtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 90, 30));
 
-        jbGuardar.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jrbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbEstadoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, -1, -1));
+
+        jbGuardar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 345, 83, 37));
+        getContentPane().add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 100, 40));
 
-        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/advertencia.png"))); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +113,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
                 jbEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 345, -1, 37));
+        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 120, 40));
 
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +121,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 240, 50, -1));
+        getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 50, -1));
 
         jbSalir.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
@@ -118,10 +130,11 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
                 jbSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 30, 30));
+        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 30, 30));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel1.setText("Codigo:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 244, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
 
         jtCodigo.setEditable(false);
         jtCodigo.setForeground(new java.awt.Color(0, 0, 0));
@@ -131,14 +144,14 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
                 jtCodigoActionPerformed(evt);
             }
         });
-        getContentPane().add(jtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 241, 77, -1));
+        getContentPane().add(jtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 90, 30));
 
         jLabel8.setText("*Presione enter para buscar");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 275, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
 
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
         jlFondo.setText("jLabel9");
-        getContentPane().add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 400));
+        getContentPane().add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -278,6 +291,10 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
     private void jComboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboCategoriaActionPerformed
+
+    private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbEstadoActionPerformed
 
     private void comboCategorias() {
 
