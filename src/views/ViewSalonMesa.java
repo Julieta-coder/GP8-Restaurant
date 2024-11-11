@@ -416,7 +416,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void jbAbrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirMesaActionPerformed
         // TODO add your handling code here:
 
-    // TODO add your handling code here:
     
     int filaSelect = jtMesasActivas.getSelectedRow();
 
@@ -429,53 +428,63 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     int personas = (int) jsCantidadPersonas.getValue();
     int capacidad = (int) jtMesasActivas.getValueAt(filaSelect, 2);
 
-    if (personas > 0 && personas <= capacidad) {
-        int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
-        int numeroMesa = (int) jtMesasActivas.getValueAt(filaSelect, 1); // Obtener el número de mesa
+    // Verificar que la cantidad de personas sea válida para la capacidad de la mesa
+    if (personas <= 0 || personas > capacidad) {
+        JOptionPane.showMessageDialog(this, "La cantidad de personas no es válida para esta mesa.");
+        return;
+    }
 
-        mesa.setId_mesa(id_mesa);
-        mesa.setNumero(numeroMesa); // Configurar el número de mesa
-        mesa.setCapacidad(capacidad);
+    int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+    int numeroMesa = (int) jtMesasActivas.getValueAt(filaSelect, 1); // Obtener el número de mesa
+    String disposicionActual = (String) jtMesasActivas.getValueAt(filaSelect, 3);
+
+    mesa.setId_mesa(id_mesa);
+    mesa.setNumero(numeroMesa); // Configurar el número de mesa
+    mesa.setCapacidad(capacidad);
+
+    // Cambiar la disposición solo si la mesa está actualmente "Libre"
+    if (disposicionActual.equalsIgnoreCase("libre")) {
         mesa.setDisposicion("ocupada"); // Cambiar disposición a ocupada
+        mesa.setEstado(true); // Establecer estado a true para activa
 
         // Guardar el cambio de disposición en la base de datos
         mesaData.actualizarMesa(mesa); // Método para actualizar la mesa en la base de datos
 
-        // Actualizar la tabla visualmente
+        // Actualizar la tabla visualmente para reflejar el estado "ocupada"
         jtMesasActivas.setValueAt("ocupada", filaSelect, 3);
+    }
 
-        // Mostrar el número de mesa en el campo jMesa1 en la pantalla de GESTIONAR PEDIDO y centrar el texto
-        jMesa1.setText(String.valueOf(numeroMesa));
-        jMesa1.setHorizontalAlignment(javax.swing.JTextField.CENTER); // Centrar el texto en jMesa1
-        jMesa1.setEditable(false); // Hacer el campo no editable
+    // Mostrar el número de mesa en el campo jMesa1 en la pantalla de GESTIONAR PEDIDO y centrar el texto
+    jMesa1.setText(String.valueOf(numeroMesa));
+    jMesa1.setHorizontalAlignment(javax.swing.JTextField.CENTER); // Centrar el texto en jMesa1
+    jMesa1.setEditable(false); // Hacer el campo no editable
 
-        // Obtener el nombre del mozo seleccionado y asignarlo a jMozo2
-        String mozoSeleccionado = jcbMeseros.getSelectedItem().toString();
-        jMozo2.setText(mozoSeleccionado);
-        jMozo2.setHorizontalAlignment(javax.swing.JTextField.CENTER); // Centrar el texto en jMozo2
-        jMozo2.setEditable(false); // Hacer el campo no editable
+    // Obtener el nombre del mozo seleccionado y asignarlo a jMozo2
+    String mozoSeleccionado = jcbMeseros.getSelectedItem().toString();
+    jMozo2.setText(mozoSeleccionado);
+    jMozo2.setHorizontalAlignment(javax.swing.JTextField.CENTER); // Centrar el texto en jMozo2
+    jMozo2.setEditable(false); // Hacer el campo no editable
 
-        // Asignar mesero y crear pedido
-        mesero = (Mesero) jcbMeseros.getSelectedItem();
-        pedido.setMesa(mesa);
-        pedido.setMesero(mesero);
-        pedido.setFecha_pedido(LocalDate.now());
-        pedido.setHora_pedido(LocalTime.now());
-        pedido.setEstado(true);
+    // Asignar mesero y crear pedido
+    mesero = (Mesero) jcbMeseros.getSelectedItem();
+    pedido.setMesa(mesa);
+    pedido.setMesero(mesero);
+    pedido.setFecha_pedido(LocalDate.now());
+    pedido.setHora_pedido(LocalTime.now());
+    pedido.setEstado(true);
 
-        // Guardar el pedido en la base de datos
-        pedidoData.cargarPedido(pedido);
+    // Guardar el pedido en la base de datos
+    pedidoData.cargarPedido(pedido);
 
-        jpSalon.setEnabled(false);
-        jpSalon.setVisible(false);
-        jpAbrirMesa.setEnabled(true);
-        jpAbrirMesa.setVisible(true);
-    } else {
-        JOptionPane.showMessageDialog(this, "La cantidad de personas no es válida para esta mesa.");
+    // Mantener visible la interfaz de la mesa, para que puedan agregarse más pedidos a la misma
+    jpSalon.setEnabled(true);
+    jpSalon.setVisible(true);
+    jpAbrirMesa.setEnabled(true);
+    jpAbrirMesa.setVisible(true);
+
+
+
     
-}
-
-
 //        // Método para el botón "Caja" que vuelve la disposición a "libre"
 //    private void jBCajaActionPerformed(java.awt.event.ActionEvent evt) {
 //    int filaSelect = jtMesasActivas.getSelectedRow();
@@ -590,7 +599,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         int platoP = (int) jsCantidaPP.getValue();
         int postre = (int) jsCantidadPostre.getValue();
 
-        int[] cantidades = {bebidas, entrada, platoP, postre};
+        int[] cantidades = {bebidas,bebidas1, entrada, platoP, postre};
 
         boolean hayCantidadMayorQueCero = false;
 
@@ -609,7 +618,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jsCantidadBebidas.setValue(0);
             }
             if (bebidas1 > 0) {
-                var productoSeleccionado = (Producto) jcBebidas1.getSelectedItem();
+                Producto producto = (Producto) jcBebidas1.getSelectedItem();
                 cargarProductos(producto, bebidas1);
                 jsCantidadBebidas1.setValue(0);
             }
