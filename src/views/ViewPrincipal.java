@@ -59,6 +59,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jmReserva = new javax.swing.JMenu();
         jmiGuardarReserva = new javax.swing.JMenuItem();
         jmiListarReservas = new javax.swing.JMenuItem();
+        jmiComandas = new javax.swing.JMenuItem();
         jmAdministracion = new javax.swing.JMenu();
         jmiContratarMesero = new javax.swing.JMenuItem();
         jmiAñadirMesa = new javax.swing.JMenuItem();
@@ -165,6 +166,14 @@ public class ViewPrincipal extends javax.swing.JFrame {
             }
         });
         jmReserva.add(jmiListarReservas);
+
+        jmiComandas.setText("Comandas");
+        jmiComandas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiComandasActionPerformed(evt);
+            }
+        });
+        jmReserva.add(jmiComandas);
 
         jMenuBar1.add(jmReserva);
 
@@ -402,6 +411,17 @@ public class ViewPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmPedidoMouseClicked
 
+    private void jmiComandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiComandasActionPerformed
+        // TODO add your handling code here:
+        
+         escritorio.removeAll();
+        escritorio.repaint();
+        ViewComandas interComandas = new ViewComandas();
+        interComandas.setVisible(true);
+        escritorio.add(interComandas);
+        escritorio.moveToFront(interComandas);
+    }//GEN-LAST:event_jmiComandasActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -449,6 +469,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jmReserva;
     private javax.swing.JMenuItem jmiAñadirMesa;
     private javax.swing.JMenuItem jmiCargarProducto;
+    private javax.swing.JMenuItem jmiComandas;
     private javax.swing.JMenuItem jmiContable;
     private javax.swing.JMenuItem jmiContratarMesero;
     private javax.swing.JMenuItem jmiGuardarReserva;
