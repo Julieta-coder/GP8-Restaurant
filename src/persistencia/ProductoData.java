@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 public class ProductoData {
     private Connection connection;
+    private String nombre;
 
     public ProductoData() {
         this.connection = Conexion.getConnection();
@@ -147,5 +148,10 @@ public class ProductoData {
      
         
     }
+    
+    @Override
+    public String toString() {
+    return this.nombre;  // Asegúrate de usar el atributo correcto para el nombre
+}
     
 }

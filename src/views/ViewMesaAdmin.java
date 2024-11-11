@@ -80,30 +80,30 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jNumeroMesa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(jNumeroMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 106, -1));
+        jNumeroMesa.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        getContentPane().add(jNumeroMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel1.setText("Numero Mesa");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel1.setText("Numero Mesa:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 110, 30));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel2.setText("Capacidad");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 195, -1));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel2.setText("Capacidad:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
 
-        jAgregar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jAgregar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jAgregar.setText("Agregar");
         jAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 94, 41));
+        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 460, 120, 41));
 
-        jCapacidad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(jCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 106, -1));
+        jCapacidad.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        getContentPane().add(jCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 120, -1));
 
-        jEliminar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jEliminar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jEliminar.setText("Eliminar");
         jEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,30 +112,31 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 110, 40));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel3.setText("Disposicion");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 195, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel3.setText("Disposicion:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 110, 30));
 
-        jDisposicion.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jDisposicion.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jDisposicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libre", "Ocupada", "Atendida" }));
-        getContentPane().add(jDisposicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 106, -1));
+        getContentPane().add(jDisposicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 120, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel4.setText("Estado");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 195, 20));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel4.setText("Estado:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, 20));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel5.setText("ID");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 195, -1));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel5.setText("ID:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 110, 30));
 
+        jIdMesa.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jIdMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jIdMesaActionPerformed(evt);
             }
         });
-        getContentPane().add(jIdMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 78, -1));
+        getContentPane().add(jIdMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 120, -1));
 
-        jBuscar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jBuscar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jBuscar.setText("Buscar");
         jBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +145,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 92, 36));
 
-        jDetalleMesa.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jDetalleMesa.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jDetalleMesa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -160,16 +161,16 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 743, 164));
 
-        Actualizar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        Actualizar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         Actualizar.setText("Actualizar");
         Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, -1, 41));
+        getContentPane().add(Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(633, 460, 110, 41));
 
-        jListaEstado.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jListaEstado.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jListaEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activa", "Inactiva" }));
         jListaEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +179,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jListaEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 216, 120, 30));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel6.setText("Estado");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 68, -1));
 
@@ -190,7 +191,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 30, 30));
-        getContentPane().add(jrbEstadoLogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
+        getContentPane().add(jrbEstadoLogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 40, -1));
 
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
         getContentPane().add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 530));
@@ -222,7 +223,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     }
     
     // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
-    jDetalleMesa.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+    jDetalleMesa.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 12));
     jDetalleMesa.getTableHeader().setOpaque(false);
     jDetalleMesa.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
     jDetalleMesa.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado

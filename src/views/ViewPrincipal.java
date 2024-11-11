@@ -70,11 +70,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         jpLogIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel1.setText("Dni:");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel1.setText("DNI:");
         jpLogIn.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
-        jtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfUsuario.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jtfUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,11 +83,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jpLogIn.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 104, 250, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel2.setText("Constraseña:");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel2.setText("CONTRASEÑA:");
         jpLogIn.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 160, -1, -1));
 
-        jtfContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfContraseña.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jtfContraseña.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jpLogIn.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 204, 250, -1));
 
