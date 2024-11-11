@@ -30,7 +30,10 @@ public class MesaData {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             /*ESTE METODO VERIFICA LA EXISTENCIA DE UNA MESA CON EL MISMO NUMERO. LO HICIMOS PARA NO UTILIZAR CLAVE PRIMARIA EN 'NUMERO'*/
-            if(numeroExiste(mesa.getNumero()) == true){
+            boolean existe = numeroExiste(mesa.getNumero());
+            
+            if(existe == true){
+                System.out.println("entra");
                  ps.setInt(1, mesa.getNumero());
                  ps.setInt(2, mesa.getCapacidad());
                  ps.setString(3, mesa.getDisposicion());

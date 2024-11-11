@@ -459,6 +459,28 @@ public class PedidoData {
         }
         return pedido;
     }
+      public Pedido buscarPedidoPorIdMesa(int id_mesa) {
+        Pedido pedido = null;
+        String sql = "SELECT * FROM pedidos WHERE id_mesa = ?";//Ver si hay que aclarar el estado del pedido
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id_mesa);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                pedido = new Pedido();
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedido.setFecha_pedido(rs.getDate("fecha_pedido").toLocalDate());
+                pedido.setHora_pedido(rs.getTime("hora_pedido").toLocalTime());
+                pedido.setId_pedido(rs.getInt("id_pedido"));
+                pedido.setMesa(mesaData.obtenerMesaActivaPorId(rs.getInt("id_mesa")));
+                pedido.setMesero(meseroData.buscarMozoPorId(rs.getInt("id_mesero")));
+                pedido.setMonto_total(rs.getInt("monto_total"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar pedido: " + e.getMessage());
+        }
+        return pedido;
+    }
     
       // Método para buscar un pedido por ID Maty
 //    public Pedido buscarPedido(int id_pedido) {

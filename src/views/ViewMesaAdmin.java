@@ -18,7 +18,17 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     private List<Mesa> mesas = new ArrayList<>();
     private MesaData mesaData = new MesaData();
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel() {
+
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            if (columna == 1 || columna == 2 || columna == 3) {
+
+                return true;
+            }
+            return false;
+        }
+    };
 
     public ViewMesaAdmin() {
         initComponents();
@@ -415,18 +425,23 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
                 // Leer y convertir los valores editables de la tabla
                 int numeroMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 1).toString());
+
                 int capacidad = Integer.parseInt(modelo.getValueAt(selectedRow, 2).toString());
                 String disposicion = modelo.getValueAt(selectedRow, 3).toString();
                 boolean estado = modelo.getValueAt(selectedRow, 4).toString().equals("Activa");
 
                 // Crear una instancia de Mesa sin modificar el ID
                 Mesa me = new Mesa(idMesa, numeroMesa, capacidad, disposicion, estado);
+                boolean existe = mesaData.numeroExiste(numeroMesa);
+                if (existe == true) {
+                    // Llamar al método para actualizar la mesa en la base de datos
+                    mesaData.actualizarMesa(me);
+                    // Mensaje de éxito
+                    JOptionPane.showMessageDialog(this, "Mesa actualizada exitosamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "La mesa con ese numero ya existe.");
+                }
 
-                // Llamar al método para actualizar la mesa en la base de datos
-                mesaData.actualizarMesa(me);
-
-                // Mensaje de éxito
-                JOptionPane.showMessageDialog(this, "Mesa actualizada exitosamente.");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Error al leer los datos numéricos de la tabla. Verifica los tipos de datos.", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (ClassCastException e) {
@@ -543,13 +558,17 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 //    private DefaultTableModel modelo;
     private void armarCabeceraTabla() {
         // Crea un DefaultTableModel personalizado para evitar la edición de la columna ID
-        modelo = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // Permite la edición de todas las columnas excepto la columna "ID" (asumimos que la columna 0 es "ID")
-                return column != 0;
-            }
-        };
+//        modelo = new DefaultTableModel() {
+//
+//        @Override
+//        public boolean isCellEditable(int fila, int columna) {
+//            if (columna == 2 || columna == 3 || columna == 4) {
+//
+//                return true;
+//            }
+//            return false;
+//        }
+//    };
 
         // Solo agrega las columnas si el modelo aún no tiene ninguna
         if (modelo.getColumnCount() == 0) {
