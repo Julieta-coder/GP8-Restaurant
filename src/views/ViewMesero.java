@@ -273,7 +273,11 @@ private void cargarMesero(){
                   } 
              
                    for (Pedido p : listaP){
-                    modelo.addRow(new Object[]{p.getId_pedido(), p.getMesa().getId_mesa(), p.getFecha_pedido(),p.getHora_pedido(),p.getMonto_total()});
+                    if(p.getMesa()!=null){   
+                        /*EVITAMOS QUE RETORNE MESAS NULAS ES DECIR CON UNA BAJA LOGICA*/
+                        modelo.addRow(new Object[]{p.getId_pedido(), p.getMesa().getId_mesa(), p.getFecha_pedido(),p.getHora_pedido(),p.getMonto_total()});
+                    
+                    }
            
              
             } //FIN PRIMER IF

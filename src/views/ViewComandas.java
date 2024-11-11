@@ -265,7 +265,7 @@ public class ViewComandas extends javax.swing.JInternalFrame {
 
            
            for (Pedido lista : listaP) {
-               
+                        
                           modelo.addRow(new Object []{lista.getId_pedido() ,lista.getMesa().getId_mesa(), lista.getMesero().getId_mesero(),lista.getHora_pedido()}) ;
 
            

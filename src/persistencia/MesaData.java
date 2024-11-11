@@ -306,14 +306,13 @@ public class MesaData {
   
   
    public void actualizarMesa(Mesa mesa) {
-        String sql = "UPDATE mesas SET numero = ?, capacidad = ?, disposicion = ?, estado = ? WHERE id_mesa = ?";
+        String sql = "UPDATE mesas SET numero = ?, capacidad = ?, disposicion = ? WHERE id_mesa = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, mesa.getNumero());
             ps.setInt(2, mesa.getCapacidad());
             ps.setString(3, mesa.getDisposicion());
-            ps.setBoolean(4, mesa.getEstado());
-            ps.setInt(5, mesa.getId_mesa());   
+            ps.setInt(4, mesa.getId_mesa());   
             
             int exito = ps.executeUpdate(); 
             

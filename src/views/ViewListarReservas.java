@@ -397,11 +397,16 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
     }
 
     public void cargarComboNumero() {
-        ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservas();
-        jcbMesaId.removeAllItems();
-        for (Reserva r : reservas) {
-            jcbMesaId.addItem(r.getMesa().getNumero());
-        }
+     
+            ArrayList<Reserva> reservas = (ArrayList<Reserva>) reservaData.obtenerReservas();
+            jcbMesaId.removeAllItems();
+            for (Reserva r : reservas) {
+                if(r.getMesa()!=null){
+                    jcbMesaId.addItem(r.getMesa().getNumero());
+                }
+                
+            }
+        
     }
 
     public void tablaCompleta() {

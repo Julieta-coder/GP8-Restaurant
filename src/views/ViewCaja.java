@@ -27,34 +27,84 @@ public class ViewCaja extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jpFondo = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtPedidosActivos = new javax.swing.JTable();
+        jCobrar = new javax.swing.JButton();
+        jcMediosDePago = new javax.swing.JComboBox<>();
+        jbSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jlFotoFondo = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtPedidosActivos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtPedidosActivos);
+
+        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 180));
+
+        jCobrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jCobrar.setText("Cobrar");
+        jpFondo.add(jCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 310, 140, -1));
+
+        jcMediosDePago.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jpFondo.add(jcMediosDePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, -1));
+
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+        jpFondo.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Medios de pago:");
+        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Pedidos activos");
+        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        jlFotoFondo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlFotoFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
         jlFotoFondo.setText("jLabel1");
-
-        javax.swing.GroupLayout jpFondoLayout = new javax.swing.GroupLayout(jpFondo);
-        jpFondo.setLayout(jpFondoLayout);
-        jpFondoLayout.setHorizontalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlFotoFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 714, Short.MAX_VALUE)
-        );
-        jpFondoLayout.setVerticalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFondoLayout.createSequentialGroup()
-                .addComponent(jlFotoFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
-        );
+        jpFondo.add(jlFotoFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 714, 451));
 
         getContentPane().add(jpFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jCobrar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcMediosDePago;
     private javax.swing.JLabel jlFotoFondo;
     private javax.swing.JPanel jpFondo;
+    private javax.swing.JTable jtPedidosActivos;
     // End of variables declaration//GEN-END:variables
 }
