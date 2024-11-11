@@ -416,9 +416,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void jbAbrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAbrirMesaActionPerformed
         // TODO add your handling code here:
 
-                                              
     // TODO add your handling code here:
-
+    
     int filaSelect = jtMesasActivas.getSelectedRow();
 
     // Verificar si se seleccionó una mesa
@@ -435,6 +434,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         int numeroMesa = (int) jtMesasActivas.getValueAt(filaSelect, 1); // Obtener el número de mesa
 
         mesa.setId_mesa(id_mesa);
+        mesa.setNumero(numeroMesa); // Configurar el número de mesa
         mesa.setCapacidad(capacidad);
         mesa.setDisposicion("ocupada"); // Cambiar disposición a ocupada
 
@@ -474,6 +474,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "La cantidad de personas no es válida para esta mesa.");
     
 }
+
 
 //        // Método para el botón "Caja" que vuelve la disposición a "libre"
 //    private void jBCajaActionPerformed(java.awt.event.ActionEvent evt) {
