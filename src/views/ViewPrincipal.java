@@ -11,7 +11,7 @@ import persistencia.MeseroData;
 
 public class ViewPrincipal extends javax.swing.JFrame {
 
-    private boolean inicioSesion = false;
+    private boolean inicioSesion = true;
     
     
     public ViewPrincipal() {
@@ -19,11 +19,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         configurarEscritorio(); //llamo el metodo que cree para centrar el panel del login
     
-        jmMesa.setEnabled(false);
-        jmMesero.setEnabled(false);
-        jmPedido.setEnabled(false);
-        jmReserva.setEnabled(false);
-        jmAdministracion.setEnabled(false);
+        jmMesa.setEnabled(true);
+        jmMesero.setEnabled(true);
+        jmPedido.setEnabled(true);
+        jmReserva.setEnabled(true);
+        jmAdministracion.setEnabled(true);
       
       
     }
@@ -113,12 +113,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(322, 322, 322)
                 .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(159, Short.MAX_VALUE)
                 .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );

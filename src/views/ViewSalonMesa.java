@@ -151,7 +151,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jtProductos = new javax.swing.JTable();
         jbTomarPedido = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jBCaja = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jcPostre = new javax.swing.JComboBox<>();
         jsCantidadPostre = new javax.swing.JSpinner();
@@ -173,6 +172,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jsCantidadPersonas = new javax.swing.JSpinner();
         jbAbrirMesa = new javax.swing.JButton();
         jbSalir1 = new javax.swing.JButton();
+        jbLiberar = new javax.swing.JButton();
 
         setTitle("Salon");
 
@@ -273,10 +273,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             }
         });
         jpAbrirMesa.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 360, 150, 40));
-
-        jBCaja.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jBCaja.setText("Caja");
-        jpAbrirMesa.add(jBCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 360, 150, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel7.setText("Postre:");
@@ -394,6 +390,15 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         });
         jpSalon.add(jbSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, -1, -1));
 
+        jbLiberar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jbLiberar.setText("Liberar mesa");
+        jbLiberar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLiberarActionPerformed(evt);
+            }
+        });
+        jpSalon.add(jbLiberar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+
         jdpSalon.add(jpSalon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 738, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -429,29 +434,31 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     int capacidad = (int) jtMesasActivas.getValueAt(filaSelect, 2);
 
     // Verificar que la cantidad de personas sea válida para la capacidad de la mesa
-    if (personas <= 0 || personas > capacidad) {
+     String disposicionActual = (String) jtMesasActivas.getValueAt(filaSelect, 3);
+     
+    if (personas <= 0 || personas > capacidad ) {
+       if(disposicionActual.equalsIgnoreCase("libre")){
         JOptionPane.showMessageDialog(this, "La cantidad de personas no es válida para esta mesa.");
         return;
+       }
+        
     }
 
     int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
     int numeroMesa = (int) jtMesasActivas.getValueAt(filaSelect, 1); // Obtener el número de mesa
-    String disposicionActual = (String) jtMesasActivas.getValueAt(filaSelect, 3);
+   
 
     mesa.setId_mesa(id_mesa);
     mesa.setNumero(numeroMesa); // Configurar el número de mesa
     mesa.setCapacidad(capacidad);
 
     // Cambiar la disposición solo si la mesa está actualmente "Libre"
-    if (disposicionActual.equalsIgnoreCase("libre")) {
+    if (disposicionActual.equalsIgnoreCase("libre")&& !disposicionActual.equalsIgnoreCase("atendida")) {
         mesa.setDisposicion("ocupada"); // Cambiar disposición a ocupada
-        mesa.setEstado(true); // Establecer estado a true para activa
-
         // Guardar el cambio de disposición en la base de datos
         mesaData.actualizarMesa(mesa); // Método para actualizar la mesa en la base de datos
-
-        // Actualizar la tabla visualmente para reflejar el estado "ocupada"
-        jtMesasActivas.setValueAt("ocupada", filaSelect, 3);
+       
+ 
     }
 
     // Mostrar el número de mesa en el campo jMesa1 en la pantalla de GESTIONAR PEDIDO y centrar el texto
@@ -477,34 +484,12 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     pedidoData.cargarPedido(pedido);
 
     // Mantener visible la interfaz de la mesa, para que puedan agregarse más pedidos a la misma
-    jpSalon.setEnabled(true);
-    jpSalon.setVisible(true);
+    jpSalon.setEnabled(false);
+    jpSalon.setVisible(false);
     jpAbrirMesa.setEnabled(true);
     jpAbrirMesa.setVisible(true);
 
 
-
-    
-//        // Método para el botón "Caja" que vuelve la disposición a "libre"
-//    private void jBCajaActionPerformed(java.awt.event.ActionEvent evt) {
-//    int filaSelect = jtMesasActivas.getSelectedRow();
-//
-//    if (filaSelect != -1) {
-//        int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
-//        mesa.setId_mesa(id_mesa);
-//        mesa.setDisposicion("libre"); // Cambiar disposición a libre
-//
-//        // Guardar el cambio de disposición en la base de datos
-//        mesaData.actualizarMesa(mesa);
-//
-//        // Actualizar la tabla visualmente
-//        jtMesasActivas.setValueAt("libre", filaSelect, 3);
-//
-//        JOptionPane.showMessageDialog(this, "La mesa se ha cerrado y está ahora libre.");
-//    } else {
-//        JOptionPane.showMessageDialog(this, "Seleccione una mesa para cerrar.");
-//    
-//}
 
 
     }//GEN-LAST:event_jbAbrirMesaActionPerformed
@@ -519,7 +504,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbTomarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTomarPedidoActionPerformed
-        // TODO add your handling code here:
+     // TODO add your handling code here:
       
      
     // Obtener el total de las filas
@@ -575,6 +560,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
                 detallePedido.setPedido(pedido);
                 detallePedidoData.agregarDetallePedido(detallePedido);
+                
+                mesa = pedido.getMesa();
+                mesa.setDisposicion("atendida");
+                mesaData.actualizarDisposicionMesa(mesa);
             }
         }
     } else {
@@ -725,9 +714,28 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
  
     }//GEN-LAST:event_jEliminarPPedidoActionPerformed
 
+    private void jbLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLiberarActionPerformed
+        // TODO add your handling code here:
+         int filaSelect = jtMesasActivas.getSelectedRow();
+
+        // Verificar si se seleccionó una mesa
+        if (filaSelect == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+         int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+         mesa = mesaData.obtenerMesaActivaPorId(id_mesa);
+         mesa.setDisposicion("libre");
+         mesaData.actualizarDisposicionMesa(mesa);
+         System.out.println(mesa.getDisposicion());
+         
+        
+        
+        
+    }//GEN-LAST:event_jbLiberarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBCaja;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jEliminarPPedido;
     private javax.swing.JLabel jLabel1;
@@ -747,6 +755,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAbrirMesa;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbAtras;
+    private javax.swing.JButton jbLiberar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JButton jbSalir1;
     private javax.swing.JButton jbTomarPedido;
@@ -839,10 +848,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     public void tablaCompleta() {
         ArrayList<Mesa> mesas = (ArrayList<Mesa>) mesaData.listarMesas();
         for (Mesa m : mesas) {
-            if (m.getDisposicion().equalsIgnoreCase("libre")) {
                 modeloTabla.addRow(new Object[]{m.getId_mesa(), m.getNumero(), m.getCapacidad(), m.getDisposicion()});
-            }
-
         }
 
         // Establecer fuente y colores de fondo y texto para el encabezado de la tabla

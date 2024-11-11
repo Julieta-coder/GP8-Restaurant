@@ -258,18 +258,47 @@ public class MesaData {
                 ResultSet rs = ps.executeQuery();
                 
                 if (rs.next()) {
-                    int numero = rs.getInt("numero");
-                    int capacidad = rs.getInt("capacidad");
-                    String disposicion = rs.getString("disposicion");
-                    boolean estado = rs.getBoolean("estado");
+                    mesa = new Mesa();
+                    mesa.setId_mesa(rs.getInt("id_mesa"));
+                    mesa.setNumero(rs.getInt("numero"));
+                    mesa.setCapacidad(rs.getInt("capacidad"));
+                    mesa.setDisposicion(rs.getString("disposicion"));
+                    mesa.setEstado(rs.getBoolean("estado"));
                     
-                    mesa = new Mesa(id_mesa, numero, capacidad, disposicion, estado);
                 } else {
                     System.out.println("No se encontró una mesa con ID: " + id_mesa);
                 }
             }
         } catch (SQLException e) {
             System.out.println("Error al buscar mesa por ID: " + e.getMessage());
+        }
+
+        return mesa;
+    }
+  public Mesa buscarMesaPorNumero(int numero) {
+        String sql = "SELECT * FROM mesas WHERE numero = ?";
+        Mesa mesa = null;
+
+        try {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, numero);
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    mesa = new Mesa();
+                    mesa.setId_mesa(rs.getInt("id_mesa"));
+                    mesa.setNumero(rs.getInt("numero"));
+                    mesa.setCapacidad(rs.getInt("capacidad"));
+                    mesa.setDisposicion(rs.getString("disposicion"));
+                    mesa.setEstado(rs.getBoolean("estado"));
+                    
+                } else {
+                    System.out.println("No se encontró una mesa con ese numero: " + numero);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar mesa por numero: " + e.getMessage());
         }
 
         return mesa;
