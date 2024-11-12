@@ -14,6 +14,10 @@ public class Conexion {
     private static final String USUARIO = "root";
     private static final String PASSWORD = "";
     private static Connection connection;
+
+    static Connection getConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
    
     public Conexion() {}

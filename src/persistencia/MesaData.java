@@ -86,7 +86,7 @@ public class MesaData {
            ps.executeUpdate();
            int filasAfectadas = ps.executeUpdate();
            if (filasAfectadas > 0) {
-                System.out.println("Mesa modifica. "+mesa.getDisposicion());
+                System.out.println("Mesa modificada. "+mesa.getDisposicion());
             } else {
                 System.out.println("No se encontró mesa con esa identificacion.");
             }
@@ -350,7 +350,7 @@ public class MesaData {
             
             if(exito ==1){
             
-                JOptionPane.showMessageDialog(null, "Mesa modificado");
+                
             }         
             
         } catch (SQLException e) {

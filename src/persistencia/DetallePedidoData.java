@@ -124,5 +124,10 @@ public class DetallePedidoData {
         }
     }
 
+    public void eliminarDetallesPorPedido(int id_pedido) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
 
 }

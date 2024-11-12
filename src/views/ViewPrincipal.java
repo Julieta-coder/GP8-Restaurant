@@ -334,7 +334,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     private void jbLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogInActionPerformed
        
-        //verifico que los campos no esten vacios
+   //verifico que los campos no esten vacios
         //con el trim elimino si el usuario puso espacios al principio o al final 
        if(jtfUsuario.getText().trim().isEmpty() || jtfContraseña.getText().trim().isEmpty()){
            
@@ -369,7 +369,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "El usuario debe ser un dni numerico");
            jtfUsuario.setText("");
            jtfContraseña.setText("");
-       }
+       
+    }                        
+
     }//GEN-LAST:event_jbLogInActionPerformed
 
     private void jmMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMeseroMouseClicked

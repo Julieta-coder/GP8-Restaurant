@@ -105,7 +105,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 120, 41));
+        getContentPane().add(jAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 110, 41));
 
         jCapacidad.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         getContentPane().add(jCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 120, -1));
@@ -117,7 +117,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 460, 110, 40));
+        getContentPane().add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 110, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel3.setText("Disposicion:");
@@ -207,7 +207,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jbActivarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 460, 110, 40));
+        getContentPane().add(jbActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 110, 40));
 
         jbDesactivar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbDesactivar.setText("Desactivar");
@@ -216,7 +216,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jbDesactivarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbDesactivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 460, -1, 40));
+        getContentPane().add(jbDesactivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 460, 110, 40));
 
         jlFondo.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N

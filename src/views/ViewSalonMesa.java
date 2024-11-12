@@ -252,7 +252,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbTomarPedidoActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 150, 40));
+        jpAbrirMesa.add(jbTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, 150, 40));
 
         jbActualizar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbActualizar.setText("Actualizar pedido");
@@ -261,7 +261,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbActualizarActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 360, 150, 40));
+        jpAbrirMesa.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 370, 150, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel7.setText("Postre:");
@@ -317,7 +317,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jEliminarPPedidoActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jEliminarPPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 360, 150, 40));
+        jpAbrirMesa.add(jEliminarPPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 370, 150, 40));
 
         jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 1220, 440));
 
@@ -386,7 +386,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbLiberarActionPerformed(evt);
             }
         });
-        jpSalon.add(jbLiberar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+        jpSalon.add(jbLiberar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 40));
 
         jdpSalon.add(jpSalon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 738, 360));
 
@@ -731,19 +731,29 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jEliminarPPedidoActionPerformed
 
     private void jbLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLiberarActionPerformed
-        // TODO add your handling code here:
-        int filaSelect = jtMesasActivas.getSelectedRow();
+        
+   
+    // Verificar si se seleccionó una mesa
+    int filaSelect = jtMesasActivas.getSelectedRow();
 
-        // Verificar si se seleccionó una mesa
-        if (filaSelect == -1) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
-        mesa = mesaData.obtenerMesaActivaPorId(id_mesa);
-        mesa.setDisposicion("libre");
-        mesaData.actualizarDisposicionMesa(mesa);
-        System.out.println(mesa.getDisposicion());
+    if (filaSelect == -1) {
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+    mesa = mesaData.obtenerMesaActivaPorId(id_mesa);
+
+    // Actualizar disposición de la mesa a "libre"
+    mesa.setDisposicion("libre");
+    mesaData.actualizarDisposicionMesa(mesa);
+
+    // Mostrar mensaje de confirmación
+    JOptionPane.showMessageDialog(this, "Mesa Liberada");
+
+    // Opcional: Actualizar la tabla para reflejar el cambio en la disposición de la mesa
+    jtMesasActivas.setValueAt("libre", filaSelect, 3);
+
 
 
     }//GEN-LAST:event_jbLiberarActionPerformed
