@@ -471,12 +471,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         pedido.setFecha_pedido(LocalDate.now());
         pedido.setHora_pedido(LocalTime.now());
         pedido.setEstado(true);
-        
-        
+
         //PARA FERIFICAR SI MESA NO ESTA ASICIADO A UN PEDIDO ACTIVO
         ArrayList<Pedido> pedidosDia = (ArrayList<Pedido>) pedidoData.obtenerPedidosDelDia();
         int cont = 0;
-        
+
         //SI NO EXISTEN DATOS EN LA BASE DE DATOS
         if (pedidosDia.size() == 0) {
             pedido.setMesa(mesa);
@@ -484,9 +483,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             pedidoData.cargarPedido(pedido);
             cont++;
         }
-        
-        
-       //RECORREMOS LOS PEDIDOS EN LA BASE
+
+        //RECORREMOS LOS PEDIDOS EN LA BASE
         for (Pedido p : pedidosDia) {
             int id = p.getMesa().getId_mesa();
             if (id == id_mesa) {
@@ -498,18 +496,22 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             pedido.setMesa(mesa);
             // Guardar el pedido en la base de datos
             pedidoData.cargarPedido(pedido);//CAMBIAR DE LUGAR A TOMAR PEDIDO
-        }else{
+        } else {
             pedido = pedidoData.buscarPedidoPorIdMesa(id_mesa);
-            List<DetallePedido> detalleRecuperados= detallePedidoData.listarDetallesPorPedido(pedido.getId_pedido());
-            for(DetallePedido dp : detalleRecuperados){
-                 modeloTablaProducto.addRow(new Object[]{dp.getProducto().getId_producto(), 
-                 dp.getProducto().getNombre(), 
-                 dp.getProducto().getCategoria(),
-                 dp.getCantidad(), dp.getPrecio_unitario(),
-                 dp.getSub_total()});
-                 jbTomarPedido.setEnabled(false);
+            List<DetallePedido> detalleRecuperados = detallePedidoData.listarDetallesPorPedido(pedido.getId_pedido());
+            for (DetallePedido dp : detalleRecuperados) {
+                modeloTablaProducto.addRow(new Object[]{dp.getProducto().getId_producto(),
+                    dp.getProducto().getNombre(),
+                    dp.getProducto().getCategoria(),
+                    dp.getCantidad(), dp.getPrecio_unitario(),
+                    dp.getSub_total()});
+                if (disposicionActual.equalsIgnoreCase("libre") || disposicionActual.equalsIgnoreCase("ocupada")) {
+                    jbTomarPedido.setEnabled(true);
+                } else {
+                    jbTomarPedido.setEnabled(false);
+                }
             }
-            
+
         }
 
         // Mantener visible la interfaz de la mesa, para que puedan agregarse más pedidos a la misma
@@ -561,17 +563,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                     String nombre = (String) jtProductos.getValueAt(fila, 1); // Nombre Producto
                     String categoria = (String) jtProductos.getValueAt(fila, 2); // Categoría
                     int cantidad = (int) jtProductos.getValueAt(fila, 3); // Cantidad
-
-                    // Convertir el precio de String a Double, quitando el símbolo de pesos
-                    String precioStr = (String) jtProductos.getValueAt(fila, 4); // Precio como String
-                    double precio = Double.parseDouble(precioStr.replace("$", "").replace(",", "."));
-
-                    // Calcular el subtotal para esta fila
-                    double subtotal = precio * cantidad;
-
-                    // Actualizar la columna de subtotal en la tabla con formato de pesos
-                    String subtotalConSigno = "$" + String.format("%.2f", subtotal);
-                    jtProductos.setValueAt(subtotalConSigno, fila, 5);
+                    double precio = (double) jtProductos.getValueAt(fila, 4); // precio
+                    double subtotal = (double) jtProductos.getValueAt(fila, 5); // subtotal
 
                     // Configurar los detalles del pedido
                     detallePedido.setCantidad(cantidad);
@@ -661,6 +654,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
         // TODO add your handling code here:
+        borrarFilaTabla();
         jpSalon.setEnabled(true);
         jpSalon.setVisible(true);
         jpAbrirMesa.setEnabled(false);
@@ -675,34 +669,44 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         //Actualizar pedidos 
-        int filaSeleccionada = jtProductos.getSelectedRow();
+        int totalFilas = jtProductos.getRowCount();
 
-        if (filaSeleccionada != -1) {
-            try {
-                int cantidad = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la nueva cantidad:", "Actualizar cantidad", JOptionPane.QUESTION_MESSAGE));
+        if (totalFilas > 0) {
 
-                if (cantidad > 0) {
-                    // Obtener el precio de la columna correspondiente en la tabla
-                    String precioConSigno = (String) jtProductos.getValueAt(filaSeleccionada, 4);
-                    double precio = Double.parseDouble(precioConSigno.replace("$", "").replace(",", "."));
+            double total = 0;
 
-                    // Calcular el nuevo subtotal
-                    double subtotal = precio * cantidad;
+            // Iterar por cada fila de la tabla
+            for (int fila = 0; fila < totalFilas; fila++) {
+                // Extraer los valores de cada columna en la fila actual
+                int id_producto = (int) jtProductos.getValueAt(fila, 0); // ID_Producto
+                String nombre = (String) jtProductos.getValueAt(fila, 1); // Nombre Producto
+                String categoria = (String) jtProductos.getValueAt(fila, 2); // Categoría
+                int cantidad = (int) jtProductos.getValueAt(fila, 3); // Cantidad
+                double precio = (double) jtProductos.getValueAt(fila, 4); // precio
+                double subtotal = (double) jtProductos.getValueAt(fila, 5); // subtotal
 
-                    // Formatear el subtotal con el símbolo de pesos
-                    String subtotalConSigno = "$" + String.format("%.2f", subtotal);
+                // Configurar los detalles del pedido
+                detallePedido.setCantidad(cantidad);
+                detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
+                detallePedido.setPrecio_unitario(precio);
+                detallePedido.setSub_total(subtotal);
 
-                    // Actualizar los valores de cantidad y subtotal en la tabla
-                    jtProductos.setValueAt(cantidad, filaSeleccionada, 3);  // Columna de cantidad
-                    jtProductos.setValueAt(subtotalConSigno, filaSeleccionada, 5);  // Columna de subtotal
-                } else {
-                    JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a cero.", "Error", JOptionPane.ERROR_MESSAGE);
+                // Acumular el total del pedido
+                total += subtotal;
+
+                int filaSelect = jtMesasActivas.getSelectedRow();
+
+                if (filaSelect == 0) {
+                    int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+                    
+                    pedido = pedidoData.buscarPedidoPorIdMesa(id_mesa);
+                    System.out.println(pedido);
+                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                    detallePedido.setPedido(pedido);
+                    detallePedidoData.agregarDetallePedido(detallePedido);
+
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una fila para actualizar.", "Error", JOptionPane.WARNING_MESSAGE);
         }
 
 
@@ -738,29 +742,33 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jEliminarPPedidoActionPerformed
 
     private void jbLiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLiberarActionPerformed
-        
-   
-    // Verificar si se seleccionó una mesa
-    int filaSelect = jtMesasActivas.getSelectedRow();
 
-    if (filaSelect == -1) {
-        JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        // Verificar si se seleccionó una mesa
+        int filaSelect = jtMesasActivas.getSelectedRow();
 
-    int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
-    mesa = mesaData.obtenerMesaActivaPorId(id_mesa);
+        if (filaSelect == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una mesa.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String disposicion = (String) jtMesasActivas.getValueAt(filaSelect, 3);
+        if (disposicion.equalsIgnoreCase("ocupada")) {
+            int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+            mesa = mesaData.obtenerMesaActivaPorId(id_mesa);
 
-    // Actualizar disposición de la mesa a "libre"
-    mesa.setDisposicion("libre");
-    mesaData.actualizarDisposicionMesa(mesa);
+            // Actualizar disposición de la mesa a "libre"
+            mesa.setDisposicion("libre");
+            mesaData.actualizarDisposicionMesa(mesa);
 
-    // Mostrar mensaje de confirmación
-    JOptionPane.showMessageDialog(this, "Mesa Liberada");
+            // Mostrar mensaje de confirmación
+            JOptionPane.showMessageDialog(this, "Mesa Liberada");
 
-    // Opcional: Actualizar la tabla para reflejar el cambio en la disposición de la mesa
-    jtMesasActivas.setValueAt("libre", filaSelect, 3);
-
+            // Opcional: Actualizar la tabla para reflejar el cambio en la disposición de la mesa
+            jtMesasActivas.setValueAt("libre", filaSelect, 3);
+        } else if (disposicion.equalsIgnoreCase("atendida")) {
+            JOptionPane.showMessageDialog(this, "La mesa atendida no puede liberarse. Se debe cobrar");
+        } else {
+            JOptionPane.showMessageDialog(this, "Ya está libre");
+        }
 
 
     }//GEN-LAST:event_jbLiberarActionPerformed
@@ -993,18 +1001,14 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             double precio = productoSelect.getPrecio();
             double subtotal = precio * cantidad;
 
-            // Formateamos los valores de precio y subtotal con el símbolo de pesos
-            String precioConSigno = "$" + String.format("%.2f", precio);
-            String subtotalConSigno = "$" + String.format("%.2f", subtotal);
-
             // Agregamos una fila a la tabla con los campos formateados
             modeloTablaProducto.addRow(new Object[]{
                 productoSelect.getId_producto(), // ID_Producto
                 productoSelect.getNombre(), // Nombre Producto
                 productoSelect.getCategoria(), // Categoria
                 cantidad, // Cantidad
-                precioConSigno, // Precio con símbolo de pesos
-                subtotalConSigno // Subtotal con símbolo de pesos
+                productoSelect.getPrecio(), // Precio con símbolo de pesos
+                subtotal // Subtotal con símbolo de pesos
             });
         }
     }

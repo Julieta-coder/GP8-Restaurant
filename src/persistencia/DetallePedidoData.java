@@ -91,14 +91,14 @@ public class DetallePedidoData {
     }
 
     
-    public void actualizarDetallePedido(DetallePedido detallePedido) {
-        String sql = "UPDATE detalle_pedido SET cantidad = ?, precio_unitario = ?, sub_total = ? WHERE id_detalle = ?";
+    public void actualizarDetallePedido(int id_pedido, DetallePedido detallePedido) {
+        String sql = "UPDATE detalle_pedido SET cantidad = ?, precio_unitario = ?, sub_total = ? WHERE id_pedido = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, detallePedido.getCantidad());
             ps.setDouble(2, detallePedido.getPrecio_unitario());
             ps.setDouble(3, detallePedido.getSub_total());
-            ps.setInt(4, detallePedido.getId_detalle());
+            ps.setInt(4, id_pedido);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error al actualizar detalle de pedido: " + e.getMessage());
