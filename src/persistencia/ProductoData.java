@@ -81,6 +81,32 @@ public class ProductoData {
             System.out.println("Error al actualizar producto: " + e.getMessage());
         }
     }
+     public boolean actualizarStock(int id_producto, int cantidadPedida) {
+        String sql = "UPDATE productos SET stock = ? WHERE id_producto = ?";
+        
+        try {
+            
+           int stockRecuperado = buscarProductoPorId(id_producto).getStock();
+            
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            if(stockRecuperado>=cantidadPedida){
+                
+                ps.setInt(1, stockRecuperado-cantidadPedida);
+                
+            }else{
+                
+                return false;
+            }
+            ps.setInt(2, id_producto);
+            
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar cantidad: " + e.getMessage());
+        }
+        return true;
+    }
 
     public void eliminarProducto(int id_producto) {
         String sql = "DELETE FROM productos WHERE id_producto = ?";

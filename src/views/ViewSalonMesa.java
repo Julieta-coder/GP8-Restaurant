@@ -500,11 +500,13 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             pedido = pedidoData.buscarPedidoPorIdMesa(id_mesa);
             List<DetallePedido> detalleRecuperados = detallePedidoData.listarDetallesPorPedido(pedido.getId_pedido());
             for (DetallePedido dp : detalleRecuperados) {
-                modeloTablaProducto.addRow(new Object[]{dp.getProducto().getId_producto(),
-                    dp.getProducto().getNombre(),
-                    dp.getProducto().getCategoria(),
-                    dp.getCantidad(), dp.getPrecio_unitario(),
-                    dp.getSub_total()});
+
+                //OPCIONAL CARGAR DATOS EN LA TABLA PRODUCTO
+//                modeloTablaProducto.addRow(new Object[]{dp.getProducto().getId_producto(),
+//                    dp.getProducto().getNombre(),
+//                    dp.getProducto().getCategoria(),
+//                    dp.getCantidad(), dp.getPrecio_unitario(),
+//                    dp.getSub_total()});
                 if (disposicionActual.equalsIgnoreCase("libre") || disposicionActual.equalsIgnoreCase("ocupada")) {
                     jbTomarPedido.setEnabled(true);
                 } else {
@@ -566,23 +568,32 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                     double precio = (double) jtProductos.getValueAt(fila, 4); // precio
                     double subtotal = (double) jtProductos.getValueAt(fila, 5); // subtotal
 
-                    // Configurar los detalles del pedido
-                    detallePedido.setCantidad(cantidad);
-                    detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
-                    detallePedido.setPrecio_unitario(precio);
-                    detallePedido.setSub_total(subtotal);
+                    boolean verificar = productoData.actualizarStock(id_producto, cantidad);
 
-                    // Acumular el total del pedido
-                    total += subtotal;
+                    if (!verificar) {
+                        JOptionPane.showMessageDialog(this, "La cantidad de " + nombre + " es superior al stock disponible");
+                    } else {
+                        productoData.actualizarProducto(producto);
 
-                    // Actualizar el pedido en la base de datos
-                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
-                    detallePedido.setPedido(pedido);
-                    detallePedidoData.agregarDetallePedido(detallePedido);
+                        // Configurar los detalles del pedido
+                        detallePedido.setCantidad(cantidad);
+                        detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
+                        detallePedido.setPrecio_unitario(precio);
+                        detallePedido.setSub_total(subtotal);
 
-                    mesa = pedido.getMesa();
-                    mesa.setDisposicion("atendida");
-                    mesaData.actualizarDisposicionMesa(mesa);
+                        // Acumular el total del pedido
+                        total += subtotal;
+
+                        // Actualizar el pedido en la base de datos
+                        pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                        detallePedido.setPedido(pedido);
+                        detallePedidoData.agregarDetallePedido(detallePedido);
+
+                        mesa = pedido.getMesa();
+                        mesa.setDisposicion("atendida");
+                        mesaData.actualizarDisposicionMesa(mesa);
+
+                    }
                 }
             }
         } else {
@@ -655,6 +666,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
         // TODO add your handling code here:
         borrarFilaTabla();
+        borrarFilaTablaMesas();
+        tablaCompleta();
         jpSalon.setEnabled(true);
         jpSalon.setVisible(true);
         jpAbrirMesa.setEnabled(false);
@@ -685,27 +698,51 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 double precio = (double) jtProductos.getValueAt(fila, 4); // precio
                 double subtotal = (double) jtProductos.getValueAt(fila, 5); // subtotal
 
-                // Configurar los detalles del pedido
-                detallePedido.setCantidad(cantidad);
-                detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
-                detallePedido.setPrecio_unitario(precio);
-                detallePedido.setSub_total(subtotal);
+                boolean verificar = productoData.actualizarStock(id_producto, cantidad);
 
-                // Acumular el total del pedido
-                total += subtotal;
+                if (!verificar) {
 
-                int filaSelect = jtMesasActivas.getSelectedRow();
+                    JOptionPane.showMessageDialog(this, "La cantidad de " + nombre + " es superior al stock disponible");
 
-                if (filaSelect == 0) {
-                    int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
-                    
-                    pedido = pedidoData.buscarPedidoPorIdMesa(id_mesa);
-                    System.out.println(pedido);
-                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
-                    detallePedido.setPedido(pedido);
-                    detallePedidoData.agregarDetallePedido(detallePedido);
+                } else {
 
+                    int filaSelect = jtMesasActivas.getSelectedRow();
+
+                    if (filaSelect != -1) {
+
+                        int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+                        pedido = pedidoData.buscarPedidoPorIdMesa(id_mesa);
+
+                        pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+
+                        List<DetallePedido> detalles = detallePedidoData.listarDetallesPorPedido(pedido.getId_pedido());
+                        boolean flag = true;
+                        
+                        for (DetallePedido d : detalles) {
+
+                            if (d.getProducto().getId_producto() == id_producto) {
+
+                                detallePedidoData.actualizarDetallePedidoCantidad(pedido.getId_pedido(), cantidad, d.getCantidad());
+                                borrarFilaTabla();
+                                flag = false; 
+                            }
+                        }
+                              if(flag){
+                                detallePedido.setCantidad(cantidad);
+                                detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
+                                detallePedido.setPrecio_unitario(precio);
+                                detallePedido.setSub_total(subtotal);
+
+                                // Acumular el total del pedido
+                                total += subtotal;
+                                detallePedido.setPedido(pedido);
+                                detallePedidoData.agregarDetallePedido(detallePedido);
+                                
+                                borrarFilaTabla();
+                              }
+                    }
                 }
+
             }
         }
 
@@ -822,6 +859,13 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         int indice = modeloTablaProducto.getRowCount() - 1;
         for (int i = indice; i >= 0; i--) {
             modeloTablaProducto.removeRow(i);
+        }
+    }
+
+    private void borrarFilaTablaMesas() {
+        int indice = modeloTabla.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
+            modeloTabla.removeRow(i);
         }
     }
 
