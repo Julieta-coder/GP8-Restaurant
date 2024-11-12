@@ -32,8 +32,21 @@ public class ViewComandas extends javax.swing.JInternalFrame {
     
     Timer timer;
     
-    private DefaultTableModel modelo= new DefaultTableModel();
-        private DefaultTableModel modeloDetalle= new DefaultTableModel();
+    private DefaultTableModel modelo= new DefaultTableModel(){
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        // Todas las celdas no son editables
+        return false;
+    }
+};
+    
+        private DefaultTableModel modeloDetalle= new DefaultTableModel(){
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        // Todas las celdas no son editables
+        return false;
+    }
+};
 
     
      private PedidoData pedidoData=new PedidoData();
@@ -253,7 +266,7 @@ public class ViewComandas extends javax.swing.JInternalFrame {
      private void borrarFilaTablaDetalles() {
         int indice = modeloDetalle.getRowCount() - 1;
         for (int i = indice; i >= 0; i--) {
-            modelo.removeRow(i);
+            modeloDetalle.removeRow(i);
         }
 
     }    
@@ -283,6 +296,32 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         
+//        if (column == 3 && table.getColumnCount() > 3) { // Verifica que la columna 3 exista
+//            LocalTime horaActual = LocalTime.now();
+//            Object valueAtCell = table.getValueAt(row, 3);
+//
+//            if (valueAtCell instanceof LocalTime) {
+//                LocalTime horaPedido = (LocalTime) valueAtCell;
+//
+//                // Calcular la diferencia en minutos
+//                long minutosPasados = ChronoUnit.MINUTES.between(horaPedido, horaActual);
+//
+//                // Cambiar el color de fondo a rojo si han pasado más de 15 minutos
+//                if (minutosPasados > 15) {
+//                    cell.setBackground(Color.RED);
+//                    cell.setForeground(Color.WHITE);
+//                } else {
+//                    cell.setBackground(Color.WHITE);
+//                    cell.setForeground(Color.BLACK);
+//                }
+//            }
+//        } else {
+//            cell.setBackground(Color.WHITE);
+//            cell.setForeground(Color.BLACK);
+//        }
+//        
+//        return cell;
+       
           // Obtener la hora actual y la hora del pedido
         LocalTime horaActual = LocalTime.now();
         LocalTime horaPedido = (LocalTime) table.getValueAt(row, 3); // Asumiendo que la hora del pedido está en la columna 3
@@ -299,9 +338,9 @@ public class ViewComandas extends javax.swing.JInternalFrame {
             cell.setForeground(Color.BLACK);
         }
 
-        return cell;
+        return cell; 
         
-       /* 
+       /*
         // Obtener la hora actual y la hora del pedido (columna 3 asumida como la hora)
         if (column == 3) { // Solo aplicar el color para la columna de la hora del pedido
             LocalTime horaActual = LocalTime.now();
@@ -323,9 +362,12 @@ public class ViewComandas extends javax.swing.JInternalFrame {
             cell.setForeground(Color.BLACK);
         }
 
-        return cell;*/
+        return cell;
+        */
+       
     }
 }
+
       
    private void cargaDatosTablaDetalles(int idPedido) {
     // Limpiar la tabla de detalles antes de cargar nuevos datos
@@ -340,14 +382,27 @@ public class ViewComandas extends javax.swing.JInternalFrame {
 }
    
    private void cargarDetallesPedidoSeleccionado(java.awt.event.MouseEvent evt) {
-    int filaSeleccionada = jtPedidos.getSelectedRow();
-    if (filaSeleccionada != -1) {
-        // Obtener el ID del pedido desde la fila seleccionada (suponiendo que es la primera columna)
-        int idPedido = (int) jtPedidos.getValueAt(filaSeleccionada, 0);
-        
-        // Cargar los detalles del pedido usando el ID
-        cargaDatosTablaDetalles(idPedido);
-    }
+
+       try {
+                      borrarFilaTablaDetalles();
+
+           int filaSeleccionada = jtPedidos.getSelectedRow();
+           if (filaSeleccionada != -1) {
+               // Obtener el ID del pedido desde la fila seleccionada (suponiendo que es la primera columna)
+               int idPedido = (int) jtPedidos.getValueAt(filaSeleccionada, 0);
+
+               // Cargar los detalles del pedido usando el ID
+               cargaDatosTablaDetalles(idPedido);
+           } else {
+               JOptionPane.showMessageDialog(this, "Por favor seleccione de la columna id la fila que desee ver su detalle.");
+
+           }
+
+       } catch (NumberFormatException e) {
+           JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+
+       }
 }
    
 }
+

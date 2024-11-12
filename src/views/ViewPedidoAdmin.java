@@ -304,12 +304,19 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         if(! jtBuscarPorId.getText().isEmpty()){
-            
-        cargaDatosTabla();
-        jtBuscarPorId.setEnabled(false);
-        
-         deshabilitarComponentes(jpActualizarPorId,true);
-         deshabilitarComponentes(jpBotonesPorId,true);
+            int idPedido= Integer.parseInt( jtBuscarPorId.getText() );
+            if(pedidoData.buscarPedidoPorId( idPedido) != null){
+                 cargaDatosTabla();
+                 jtBuscarPorId.setEnabled(false);
+
+                deshabilitarComponentes(jpActualizarPorId,true);
+                 deshabilitarComponentes(jpBotonesPorId,true);
+                
+            }else{
+                                    JOptionPane.showMessageDialog(this, "El ID ingresado no existe en la BD, ingrese uno correcto por favor.");
+
+            }
+           
             
         }else{
                     JOptionPane.showMessageDialog(this, "Ingrese un ID para Buscar.");
