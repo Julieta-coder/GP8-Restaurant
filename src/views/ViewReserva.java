@@ -61,27 +61,28 @@ public class ViewReserva extends javax.swing.JInternalFrame {
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel1.setText("Guardar una Reserva");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setText("<html><u>GUARDAR UNA RESERVA</u></html> ");
+        jLabel1.setToolTipText("");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setText("Nombre cliente:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel3.setText("DNI:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Fecha:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 38));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel5.setText("Numero de mesa:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
-        jtfNombreCliente.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfNombreCliente.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtfNombreCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfNombreClienteActionPerformed(evt);
@@ -89,7 +90,7 @@ public class ViewReserva extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jtfNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 220, 30));
 
-        jtfDni.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfDni.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtfDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfDniKeyTyped(evt);
@@ -97,19 +98,19 @@ public class ViewReserva extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jtfDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 170, 30));
 
-        jtfIdMesa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtfIdMesa.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         getContentPane().add(jtfIdMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 90, 30));
 
-        jbNuevaReserva.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbNuevaReserva.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbNuevaReserva.setText("Nueva");
         jbNuevaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbNuevaReservaActionPerformed(evt);
             }
         });
-        getContentPane().add(jbNuevaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
+        getContentPane().add(jbNuevaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 80, -1));
 
-        jbGuardarReserva.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbGuardarReserva.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbGuardarReserva.setText("Guardar");
         jbGuardarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

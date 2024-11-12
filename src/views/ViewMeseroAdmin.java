@@ -59,25 +59,26 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jlFondo = new javax.swing.JLabel();
 
+        setTitle("Agregar Mesero");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jlNombre.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jlNombre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jlNombre.setText("Nombre:");
-        getContentPane().add(jlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+        getContentPane().add(jlNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, 30));
 
-        jlApellido.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jlApellido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jlApellido.setText("Apellido:");
-        getContentPane().add(jlApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        getContentPane().add(jlApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, 30));
 
-        jlDni.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jlDni.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jlDni.setText("DNI:");
-        getContentPane().add(jlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+        getContentPane().add(jlDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, 30));
 
-        jlContraseña.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jlContraseña.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jlContraseña.setText("Contraseña:");
-        getContentPane().add(jlContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+        getContentPane().add(jlContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, 30));
 
-        jtNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtNombre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtNombreKeyTyped(evt);
@@ -85,7 +86,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 210, 30));
 
-        jtApellido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtApellido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtApellidoKeyTyped(evt);
@@ -93,7 +94,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 210, 30));
 
-        jtDNI.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtDNI.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtDNIKeyTyped(evt);
@@ -101,7 +102,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jtDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 210, 30));
 
-        jpContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jpContraseña.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jpContraseñaKeyTyped(evt);
@@ -109,48 +110,48 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jpContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 210, 30));
 
-        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
+        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 110, 30));
 
-        jbBuscar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbBuscar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, -1, -1));
+        getContentPane().add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 110, -1));
 
-        jbAgregar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbAgregar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbAgregar.setText("Agregar");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        getContentPane().add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 110, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("ID:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
 
-        jtID.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jtID.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         getContentPane().add(jtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 80, 30));
 
-        jbActualizar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbActualizar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbActualizar.setText("Actualizar");
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 40));
+        getContentPane().add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 110, 30));
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {

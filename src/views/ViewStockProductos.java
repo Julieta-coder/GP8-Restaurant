@@ -64,7 +64,7 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
 
         jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("Buscar por nombre:");
         jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 170, 27));
 
@@ -76,6 +76,7 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         });
         jpFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
 
+        jtNombre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtNombreKeyReleased(evt);
@@ -83,8 +84,8 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         });
         jpFondo.add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 238, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel2.setText("Busqueda de productos activos");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel2.setText("<html><u>Busqueda de Productos Activos</u></html> ");
         jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
         jlImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N

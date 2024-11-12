@@ -181,7 +181,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jTitulo.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jTitulo.setText("<html><u>GESTIONAR PEDIDO</u></html> ");
-        jpAbrirMesa.add(jTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, -1, -1));
+        jpAbrirMesa.add(jTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Bebidas sin Alcohol:");
@@ -225,7 +225,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbAgregarActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, 40));
+        jpAbrirMesa.add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, 40));
 
         jScrollPane2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 

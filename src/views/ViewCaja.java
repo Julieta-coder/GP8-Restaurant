@@ -55,11 +55,11 @@ public class ViewCaja extends javax.swing.JInternalFrame {
 
         jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 180));
 
-        jCobrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jCobrar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jCobrar.setText("Cobrar");
         jpFondo.add(jCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 310, 140, -1));
 
-        jcMediosDePago.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcMediosDePago.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpFondo.add(jcMediosDePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, -1));
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
@@ -70,14 +70,12 @@ public class ViewCaja extends javax.swing.JInternalFrame {
         });
         jpFondo.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setText("Medios de pago:");
         jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Pedidos activos");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setText("<html><u>PEDIDOS ACTIVOS</u></html> ");
         jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
         jlFotoFondo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

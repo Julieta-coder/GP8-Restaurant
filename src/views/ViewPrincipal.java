@@ -123,7 +123,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 .addGap(63, 63, 63))
         );
 
-        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
 
         jmMesa.setText("Mesas");
         jmMesa.addMouseListener(new java.awt.event.MouseAdapter() {

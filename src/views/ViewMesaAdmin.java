@@ -61,7 +61,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jDetalleMesa = new javax.swing.JTable();
-        Actualizar = new javax.swing.JButton();
         jListaEstado = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jSalir = new javax.swing.JButton();
@@ -117,7 +116,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 110, 40));
+        getContentPane().add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, 110, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel3.setText("Disposicion:");
@@ -168,15 +167,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 743, 164));
 
-        Actualizar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        Actualizar.setText("Actualizar");
-        Actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ActualizarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 110, 41));
-
         jListaEstado.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jListaEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activa", "Inactiva" }));
         jListaEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +197,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jbActivarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 110, 40));
+        getContentPane().add(jbActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 110, 40));
 
         jbDesactivar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbDesactivar.setText("Desactivar");
@@ -405,57 +395,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jSalirActionPerformed
 
-    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
-
-        // Asegúrate de que se haya seleccionado una fila en la tabla
-        int selectedRow = jDetalleMesa.getSelectedRow();
-
-        if (selectedRow >= 0) {
-            try {
-                // Asegúrate de que la edición de la celda actual se detenga para capturar el valor editado
-                if (jDetalleMesa.isEditing()) {
-                    jDetalleMesa.getCellEditor().stopCellEditing();
-                }
-
-                // Obtener el ID de la mesa directamente de la columna de ID
-                int idMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
-
-                // Bloquear cualquier intento de edición en la columna del ID (suponiendo que la columna 0 es el ID)
-                modelo.setValueAt(idMesa, selectedRow, 0);
-
-                // Leer y convertir los valores editables de la tabla
-                int numeroMesa = Integer.parseInt(modelo.getValueAt(selectedRow, 1).toString());
-
-                int capacidad = Integer.parseInt(modelo.getValueAt(selectedRow, 2).toString());
-                String disposicion = modelo.getValueAt(selectedRow, 3).toString();
-                boolean estado = modelo.getValueAt(selectedRow, 4).toString().equals("Activa");
-
-                // Crear una instancia de Mesa sin modificar el ID
-                Mesa me = new Mesa(idMesa, numeroMesa, capacidad, disposicion, estado);
-                boolean existe = mesaData.numeroExiste(numeroMesa);
-                if (existe == true) {
-                    // Llamar al método para actualizar la mesa en la base de datos
-                    mesaData.actualizarMesa(me);
-                    // Mensaje de éxito
-                    JOptionPane.showMessageDialog(this, "Mesa actualizada exitosamente.");
-                } else {
-                    JOptionPane.showMessageDialog(this, "La mesa con ese numero ya existe.");
-                }
-
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Error al leer los datos numéricos de la tabla. Verifica los tipos de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-            } catch (ClassCastException e) {
-                JOptionPane.showMessageDialog(this, "Error al leer los datos de la tabla. Verifica los tipos de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar la mesa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una mesa para actualizar.");
-        }
-
-
-    }//GEN-LAST:event_ActualizarActionPerformed
-
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
 
         // Asegúrate de que se haya seleccionado una fila en la tabla
@@ -586,7 +525,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Actualizar;
     private javax.swing.JButton jAgregar;
     private javax.swing.JButton jBuscar;
     private javax.swing.JSpinner jCapacidad;

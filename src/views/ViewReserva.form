@@ -24,20 +24,21 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="2"/>
+          <Font name="Segoe UI" size="18" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Guardar una Reserva"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;u&gt;GUARDAR UNA RESERVA&lt;/u&gt;&lt;/html&gt; "/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="10" width="-1" height="-1"/>
+          <AbsoluteConstraints x="140" y="10" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="2"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Nombre cliente:"/>
       </Properties>
@@ -50,7 +51,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="2"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="DNI:"/>
       </Properties>
@@ -63,7 +64,7 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="2"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Fecha:"/>
       </Properties>
@@ -76,7 +77,7 @@
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="2"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Numero de mesa:"/>
       </Properties>
@@ -89,7 +90,7 @@
     <Component class="javax.swing.JTextField" name="jtfNombreCliente">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="24" style="0"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
       </Properties>
       <Events>
@@ -104,7 +105,7 @@
     <Component class="javax.swing.JTextField" name="jtfDni">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="24" style="0"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
       </Properties>
       <Events>
@@ -119,7 +120,7 @@
     <Component class="javax.swing.JTextField" name="jtfIdMesa">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="24" style="0"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
       </Properties>
       <Constraints>
@@ -131,7 +132,7 @@
     <Component class="javax.swing.JButton" name="jbNuevaReserva">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="2"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Nueva"/>
       </Properties>
@@ -140,14 +141,14 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="310" width="-1" height="-1"/>
+          <AbsoluteConstraints x="100" y="310" width="80" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="jbGuardarReserva">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="2"/>
+          <Font name="Segoe UI" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>

@@ -5,11 +5,17 @@
 package views;
 
 import Entidades.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import persistencia.*;
 
@@ -100,7 +106,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 610, 180));
 
-        jcbReservaId.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbReservaId.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcbReservaId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbReservaIdActionPerformed(evt);
@@ -108,7 +114,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jcbReservaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 80, 30));
 
-        jcbMesaId.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jcbMesaId.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcbMesaId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbMesaIdActionPerformed(evt);
@@ -116,26 +122,26 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jcbMesaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 80, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel1.setText("Lista de reservas");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setText("<html><u>LISTA DE RESERVAS</u></html> ");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setText("Id reserva:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel3.setText("Numero mesa:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        jPanel1.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, -1));
 
         jbSalir.setBackground(new java.awt.Color(204, 204, 204));
         jbSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -148,32 +154,32 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, -1, -1));
 
-        jbTodas.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbTodas.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbTodas.setText("Mostrar todas");
         jbTodas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbTodasActionPerformed(evt);
             }
         });
-        jPanel1.add(jbTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, -1));
+        jPanel1.add(jbTodas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, -1));
 
-        jbModificar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbModificar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbModificar.setText("Modificar");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        jPanel1.add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 150, -1));
 
-        jbOrdenar.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        jbOrdenar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbOrdenar.setText("Ordenar por fecha");
         jbOrdenar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbOrdenarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbOrdenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jPanel1.add(jbOrdenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo 3.png"))); // NOI18N
         jLabel4.setText("jLabel4");
@@ -223,6 +229,9 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
 
     private void jtReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtReservasMouseClicked
         // TODO add your handling code here: 
+        // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+    
+        
 //        int filaSelected = jtReservas.getSelectedRow();
 //        if (filaSelected != -1) {
 //

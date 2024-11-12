@@ -49,6 +49,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
         PanelFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jcbMeseros = new javax.swing.JComboBox<>();
@@ -58,14 +59,20 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         jrbCobrados = new javax.swing.JRadioButton();
         jdcFecha = new com.toedter.calendar.JDateChooser();
         jbSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabelFondo = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel4.setText("<html><u>LISTA DE RESERVAS</u></html> ");
 
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("Mozo:");
         PanelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
+        jcbMeseros.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         PanelFondo.add(jcbMeseros, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 150, 30));
 
         jTablaMeseroPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -84,6 +91,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
 
         PanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 520, 170));
 
+        jrbPendientes.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jrbPendientes.setText("Pedidos pendientes");
         jrbPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +100,7 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         });
         PanelFondo.add(jrbPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
+        jrbCobrados.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jrbCobrados.setText("Pedidos cobrados");
         jrbCobrados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,8 +124,13 @@ public class ViewMesero extends javax.swing.JInternalFrame {
         });
         PanelFondo.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 30, 30));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel2.setText("<html><u>LISTA DE PEDIDOS</u></html> ");
+        PanelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
+
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
         PanelFondo.add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 420));
+        PanelFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,6 +173,9 @@ public class ViewMesero extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelFondo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaMeseroPedidos;
