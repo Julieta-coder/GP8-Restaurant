@@ -152,6 +152,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jcBebidas1 = new javax.swing.JComboBox<>();
         jsCantidadBebidas1 = new javax.swing.JSpinner();
         jEliminarPPedido = new javax.swing.JButton();
+        jlFondo = new javax.swing.JLabel();
         jpSalon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMesasActivas = new javax.swing.JTable();
@@ -162,6 +163,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jbAbrirMesa = new javax.swing.JButton();
         jbSalir1 = new javax.swing.JButton();
         jbLiberar = new javax.swing.JButton();
+        jlFondoAbrirMesa = new javax.swing.JLabel();
 
         setTitle("Salon");
 
@@ -276,14 +278,14 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jbSalir.setBackground(new java.awt.Color(51, 51, 51));
         jbSalir.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cross-32.png"))); // NOI18N
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, -1));
+        jpAbrirMesa.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel8.setText("Mesa:");
@@ -319,7 +321,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         });
         jpAbrirMesa.add(jEliminarPPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 370, 150, 40));
 
-        jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 1220, 440));
+        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo1.png"))); // NOI18N
+        jpAbrirMesa.add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1200, 450));
+
+        jdpSalon.add(jpAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1220, 450));
 
         jpSalon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -370,14 +375,13 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jbSalir1.setBackground(new java.awt.Color(51, 51, 51));
         jbSalir1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbSalir1.setForeground(new java.awt.Color(255, 255, 255));
-        jbSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-cross-32.png"))); // NOI18N
-        jbSalir1.setText("Salir");
+        jbSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalir1ActionPerformed(evt);
             }
         });
-        jpSalon.add(jbSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, -1, -1));
+        jpSalon.add(jbSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
 
         jbLiberar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbLiberar.setText("Liberar mesa");
@@ -387,6 +391,9 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             }
         });
         jpSalon.add(jbLiberar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 40));
+
+        jlFondoAbrirMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
+        jpSalon.add(jlFondoAbrirMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 370));
 
         jdpSalon.add(jpSalon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 738, 360));
 
@@ -790,6 +797,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Producto> jcPostre;
     private javax.swing.JComboBox<Mesero> jcbMeseros;
     private javax.swing.JDesktopPane jdpSalon;
+    private javax.swing.JLabel jlFondo;
+    private javax.swing.JLabel jlFondoAbrirMesa;
     private javax.swing.JPanel jpAbrirMesa;
     private javax.swing.JPanel jpSalon;
     private javax.swing.JSpinner jsCantidaPP;
