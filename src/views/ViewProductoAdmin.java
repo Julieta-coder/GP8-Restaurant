@@ -165,7 +165,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         try {
 
             String nombre = jtNombre.getText();
-            if (nombre.matches("^[a-zA-Z\\s]+$")) { //para que no se pueda poner numeros en nombre
+            if (nombre.matches("^[a-zA-ZñÑ\\s]+$")) { //para que no se pueda poner numeros en nombre
                 String categoria = (String) jComboCategoria.getSelectedItem();
 
                 if (nombre.isEmpty() || categoria.isEmpty()) {
