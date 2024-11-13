@@ -21,7 +21,11 @@ import persistencia.MeseroData;
  */
 public class ViewPersonal extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel(){
+    public boolean isCellEditable(int row, int column) {
+        return false; // Todas las celdas no son editables
+    }
+    };
     private MeseroData meseroData = new MeseroData();
 
     /**
@@ -124,6 +128,11 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
         jbEliminar.setText("Eliminar");
 
         jbSalir.setText("X");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +172,11 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     private void cargarDatos() {
         // Limpiar el modelo antes de cargar datos
