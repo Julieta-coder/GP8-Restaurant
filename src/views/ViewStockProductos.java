@@ -26,8 +26,57 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         initComponents();
         cabeceraTabla();
 //        comboCategorias(); //ESTE ES PARA BUSCAR POR CATEGORIA, FALTA IMPLEMENTAR
-    }
+    
 
+       // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+        JTablaProductos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        JTablaProductos.getTableHeader().setOpaque(false);
+        JTablaProductos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        JTablaProductos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        JTablaProductos.setRowHeight(25);
+
+        // Crear un renderizador para centrar el texto del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+         headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+         headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+     
+        // Aplicar el renderizador personalizado a cada columna para centrar los datos
+        for (int i = 0; i < JTablaProductos.getColumnModel().getColumnCount(); i++) {
+        JTablaProductos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+}
+
+        // Aplicar el renderizador personalizado al encabezado de cada columna
+        for (int i = 0; i < JTablaProductos.getColumnModel().getColumnCount(); i++) {
+         JTablaProductos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+
+        // Configurar para ajustar automáticamente el ancho
+        JTablaProductos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+}
+
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

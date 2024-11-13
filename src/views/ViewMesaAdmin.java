@@ -116,7 +116,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, 110, 40));
+        getContentPane().add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, 110, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel3.setText("Disposicion:");
@@ -197,7 +197,7 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
                 jbActivarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 110, 40));
+        getContentPane().add(jbActivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, 110, 40));
 
         jbDesactivar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbDesactivar.setText("Desactivar");
@@ -475,23 +475,42 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jListaEstadoActionPerformed
 
     private void jbActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActivarActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = jDetalleMesa.getSelectedRow();
+                                           
+    // TODO add your handling code here:
+    int selectedRow = jDetalleMesa.getSelectedRow();
 
-        if (selectedRow >= 0) {
-            int id_mesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
-            mesaData.altaLogica(id_mesa);
-        }
+    if (selectedRow >= 0) {
+        int id_mesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
+        mesaData.altaLogica(id_mesa);  // Activa la mesa en la base de datos
+
+    // Actualizar la tabla eliminando la fila desactivada del modelo de la tabla
+    modelo.removeRow(selectedRow);  // Elimina la fila del modelo de la tabla
+        JOptionPane.showMessageDialog(this, "Mesa Activada");
+    } else {
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una fila en la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    
+}
+
+
+
     }//GEN-LAST:event_jbActivarActionPerformed
 
     private void jbDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDesactivarActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = jDetalleMesa.getSelectedRow();
+    // TODO add your handling code here:
+int selectedRow = jDetalleMesa.getSelectedRow();
 
-        if (selectedRow >= 0) {
-            int id_mesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
-            mesaData.bajaLogica(id_mesa);
-        }
+if (selectedRow >= 0) {
+    int id_mesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
+    mesaData.bajaLogica(id_mesa);  // Desactiva la mesa en la base de datos
+
+    // Actualizar la tabla eliminando la fila desactivada del modelo de la tabla
+    modelo.removeRow(selectedRow);  // Elimina la fila del modelo de la tabla
+    JOptionPane.showMessageDialog(this, "Mesa Desactivada");
+} else {
+    JOptionPane.showMessageDialog(this, "Debe seleccionar una fila en la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
+}
+
+
     }//GEN-LAST:event_jbDesactivarActionPerformed
 
 //    private DefaultTableModel modelo;

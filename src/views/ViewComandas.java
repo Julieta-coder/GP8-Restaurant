@@ -7,6 +7,7 @@ package views;
 import Entidades.*;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import persistencia.*;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -92,6 +94,68 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         timer.setInitialDelay(0);
         timer.start();
         
+        //TABLA 1 y 2
+           // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+        jtPedidos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        jtDetalles.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        jtPedidos.getTableHeader().setOpaque(false);
+        jtDetalles.getTableHeader().setOpaque(false);
+        jtPedidos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        jtDetalles.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        jtPedidos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        jtDetalles.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        jtPedidos.setRowHeight(25);
+        jtDetalles.setRowHeight(25);
+        
+        // Crear un renderizador para centrar el texto del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+         headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+         headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+     
+        // Aplicar el renderizador personalizado a cada columna para centrar los datos
+        for (int i = 0; i < jtPedidos.getColumnModel().getColumnCount(); i++) {
+        jtPedidos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+}
+
+        // Aplicar el renderizador personalizado a cada columna para centrar los datos
+        for (int i = 0; i < jtDetalles.getColumnModel().getColumnCount(); i++) {
+        jtDetalles.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+}
+        // Aplicar el renderizador personalizado al encabezado de cada columna
+        for (int i = 0; i < jtPedidos.getColumnModel().getColumnCount(); i++) {
+         jtPedidos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+        // Aplicar el renderizador personalizado al encabezado de cada columna
+        for (int i = 0; i < jtDetalles.getColumnModel().getColumnCount(); i++) {
+         jtDetalles.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+         
+        // Configurar para ajustar automáticamente el ancho
+        jtPedidos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+         // Configurar para ajustar automáticamente el ancho
+        jtDetalles.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        }
     }
 
     /**
@@ -103,6 +167,7 @@ public class ViewComandas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jbSalir = new javax.swing.JButton();
         jpPrincipal = new javax.swing.JPanel();
         jpFechaYhora = new javax.swing.JPanel();
         jlFecha = new javax.swing.JLabel();
@@ -112,6 +177,14 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtDetalles = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jbSalir1 = new javax.swing.JButton();
+
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         setTitle("Comandas");
 
@@ -146,6 +219,7 @@ public class ViewComandas extends javax.swing.JInternalFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jtPedidos.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -159,6 +233,7 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtPedidos);
 
+        jtDetalles.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -201,8 +276,15 @@ public class ViewComandas extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jbSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
+        jbSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalir1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,13 +292,19 @@ public class ViewComandas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbSalir1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jbSalir1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -224,11 +312,23 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalir1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalir1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JButton jbSalir1;
     private javax.swing.JLabel jlFecha;
     private javax.swing.JLabel jlHora;
     private javax.swing.JPanel jpFechaYhora;

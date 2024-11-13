@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewProductoAdmin.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/persistencia/MesaData.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewSalonMesa.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewMesaAdmin.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewPedidoAdmin.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewStockProductos.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/persistencia/ReservaData.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewMesero.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewComandas.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewMeseroAdmin.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewListarReservas.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewPrincipal.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewCaja.java</file>
-            <file>file:/C:/Users/Adriana/Documents/GitHub/GP8-Restaurant/src/views/ViewReserva.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import persistencia.*;
 
 /**
@@ -40,6 +41,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
             }
             return false;
         }
+        
     };
 
     /**
@@ -55,6 +57,55 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         cargarComboIdReserva();
         cargarComboNumero();
 
+        
+        
+        // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+        jtReservas.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        jtReservas.getTableHeader().setOpaque(false);
+        jtReservas.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        jtReservas.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        jtReservas.setRowHeight(25);
+
+        // Crear un renderizador para centrar el texto del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+         headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+         headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+     
+        // Aplicar el renderizador personalizado a cada columna para centrar los datos
+        for (int i = 0; i < jtReservas.getColumnModel().getColumnCount(); i++) {
+        jtReservas.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+}
+
+        // Aplicar el renderizador personalizado al encabezado de cada columna
+        for (int i = 0; i < jtReservas.getColumnModel().getColumnCount(); i++) {
+         jtReservas.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+
+        // Configurar para ajustar automáticamente el ancho
+        jtReservas.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+               
     }
 
     /**
@@ -85,7 +136,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtReservas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jtReservas.setFont(new java.awt.Font("Segoe UI", 2, 13)); // NOI18N
         jtReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -104,7 +155,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtReservas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 610, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 650, 180));
 
         jcbReservaId.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcbReservaId.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +163,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
                 jcbReservaIdActionPerformed(evt);
             }
         });
-        jPanel1.add(jcbReservaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 80, 30));
+        jPanel1.add(jcbReservaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 80, 30));
 
         jcbMesaId.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcbMesaId.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +171,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
                 jcbMesaIdActionPerformed(evt);
             }
         });
-        jPanel1.add(jcbMesaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 80, 30));
+        jPanel1.add(jcbMesaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 80, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setText("<html><u>LISTA DE RESERVAS</u></html> ");
@@ -183,7 +234,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo 3.png"))); // NOI18N
         jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 340));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 340));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 340));
 
@@ -243,124 +294,99 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // TODO add your handling code here:
 
-        
-        int filaSelect = jtReservas.getSelectedRow();
+                                                
+    int filaSelect = jtReservas.getSelectedRow();
 
-        if (filaSelect != -1) {
-            
-            Object idReservaObj = jtReservas.getValueAt(filaSelect, 0);
-            int id_reserva = 0;
-            
-            if (idReservaObj instanceof String) {
-                
-                try {
-                    
-                    id_reserva = Integer.parseInt((String) idReservaObj);
-                    
-                } catch (NumberFormatException e) {
-                    
-                    JOptionPane.showMessageDialog(this, "El ID de la reserva no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
-                    
-                    return;
-                }
-            } else if (idReservaObj instanceof Integer) {
-                id_reserva = (Integer) idReservaObj;
-            }
+    if (filaSelect != -1) {
+        // Obtener el ID de la reserva (no editable)
+        Object idReservaObj = jtReservas.getValueAt(filaSelect, 0);
+        int id_reserva = 0;
 
-   
-            Object dniObj = jtReservas.getValueAt(filaSelect, 2);
-            int din = 0;
-            if (dniObj instanceof String) {
-                
-                try {
-                    
-                    String dniStr = (String) dniObj;
-                    
-                    if (dniStr.length() == 8 && dniStr.matches("\\d+")) { // Verificar que tenga 8 dígitos y sea numérico
-                        
-                        din = Integer.parseInt(dniStr);
-                        
-                    } else if (dniStr.length() != 8) {
-                        JOptionPane.showMessageDialog(this, "El DNI debe tener exactamente 8 caracteres", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    } else {
-                        
-                        JOptionPane.showMessageDialog(this, "El DNI debe contener solo números", "Error", JOptionPane.ERROR_MESSAGE);
-                        
-                        return;
-                    }
-                } catch (NumberFormatException e) {
-                    
-                    JOptionPane.showMessageDialog(this, "El valor de DNI no es válido. Debe ser numérico", "Error", JOptionPane.ERROR_MESSAGE);
-                    
-                    return;
-                }
-            } else if (dniObj instanceof Integer) {
-                din = (Integer) dniObj;
+        if (idReservaObj instanceof String) {
+            try {
+                id_reserva = Integer.parseInt((String) idReservaObj);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "El ID de la reserva no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-
-           
-            String nombre = (String) jtReservas.getValueAt(filaSelect, 3);
-
-           
-            Object fechaObj = jtReservas.getValueAt(filaSelect, 4);
-            
-            LocalDate fecha = null;
-            if (fechaObj instanceof String) {
-                
-                try {
-                    
-                    fecha = LocalDate.parse((String) fechaObj); 
-                    
-                } catch (DateTimeParseException e) {
-                    
-                    JOptionPane.showMessageDialog(this, "La fecha no es válida. Debe cumplir el siguiente formato: yyyy-mm-dd", "Error", JOptionPane.ERROR_MESSAGE);
-                    
-                    return;
-                }
-            } else if (fechaObj instanceof LocalDate) {
-                
-                fecha = (LocalDate) fechaObj;
-                
-            }
-            
-            
-           Object numeroObj = jtReservas.getValueAt(filaSelect, 5);
-            int numero = 0;
-            Mesa mesa= new Mesa();
-            
-            if (numeroObj instanceof String) {
-                
-                try {
-                    
-                    numero = Integer.parseInt((String) numeroObj);
-                    mesa = mesaData.obtenerMesaActivaPorNumero(numero);
-                    
-                } catch (NumberFormatException e) {
-                    
-                    JOptionPane.showMessageDialog(this, "El numero de la mesa no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
-                    
-                    return;
-                }
-                
-            } else if (numeroObj instanceof Integer) {
-                
-                numero = (Integer) idReservaObj;
-                
-            }
-         
-            int confirm = JOptionPane.showConfirmDialog(this, "¿Modificar reserva?", "Modificar reserva", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-               
-                reservaData.actualizarReserva(mesa,nombre, din, fecha, id_reserva);
-                
-                modeloTabla.removeRow(filaSelect);
-                JOptionPane.showMessageDialog(this, "¡Reserva modificada!");
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una fila", "Error", JOptionPane.WARNING_MESSAGE);
+        } else if (idReservaObj instanceof Integer) {
+            id_reserva = (Integer) idReservaObj;
         }
+
+        // Obtener y validar el DNI
+        Object dniObj = jtReservas.getValueAt(filaSelect, 2);
+        int dni = 0;
+        if (dniObj instanceof String) {
+            try {
+                String dniStr = (String) dniObj;
+                if (dniStr.length() == 8 && dniStr.matches("\\d+")) {
+                    dni = Integer.parseInt(dniStr);
+                } else {
+                    JOptionPane.showMessageDialog(this, "El DNI debe tener exactamente 8 caracteres y ser numérico", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "El valor de DNI no es válido. Debe ser numérico", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else if (dniObj instanceof Integer) {
+            dni = (Integer) dniObj;
+        }
+
+        // Obtener el nombre
+        String nombre = (String) jtReservas.getValueAt(filaSelect, 3);
+
+        // Obtener y validar la fecha
+        Object fechaObj = jtReservas.getValueAt(filaSelect, 4);
+        LocalDate fecha = null;
+        if (fechaObj instanceof String) {
+            try {
+                fecha = LocalDate.parse((String) fechaObj); 
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(this, "La fecha no es válida. Debe cumplir el formato yyyy-MM-dd", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else if (fechaObj instanceof LocalDate) {
+            fecha = (LocalDate) fechaObj;
+        }
+
+        // Obtener y validar el número de mesa
+        Object numeroObj = jtReservas.getValueAt(filaSelect, 5);
+        int numero = 0;
+        Mesa mesa = null;
+        if (numeroObj instanceof String) {
+            try {
+                numero = Integer.parseInt((String) numeroObj);
+                mesa = mesaData.obtenerMesaActivaPorNumero(numero);
+                if (mesa == null) {
+                    JOptionPane.showMessageDialog(this, "El número de mesa no es válido o no está activa.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "El número de la mesa no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else if (numeroObj instanceof Integer) {
+            numero = (Integer) numeroObj;
+            mesa = mesaData.obtenerMesaActivaPorNumero(numero);
+            if (mesa == null) {
+                JOptionPane.showMessageDialog(this, "El número de mesa no es válido o no está activa.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // Confirmar modificación y actualizar reserva
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Modificar reserva?", "Modificar reserva", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            reservaData.actualizarReserva(mesa, nombre, dni, fecha, id_reserva);
+            JOptionPane.showMessageDialog(this, "¡Reserva modificada!");
+        }
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una fila", "Error", JOptionPane.WARNING_MESSAGE);
+    
+}
+
 
 
     }//GEN-LAST:event_jbModificarActionPerformed
@@ -389,7 +415,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
        private void armarCabecera() {
         this.modeloTabla.addColumn("ID");
-        this.modeloTabla.addColumn("ID_MESA");
+        this.modeloTabla.addColumn("ID_Mesa");
         this.modeloTabla.addColumn("DNI");
         this.modeloTabla.addColumn("Nombre");
         this.modeloTabla.addColumn("Fecha");

@@ -4,6 +4,7 @@ package views;
 import Entidades.Mesero;
 import java.awt.Graphics;
 import java.awt.Image;
+import static java.lang.Integer.parseInt;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import persistencia.MeseroData;
@@ -344,7 +345,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         
       try{
         MeseroData md = new MeseroData();
-        Integer usuario = Integer.parseInt(jtfUsuario.getText());
+        Integer usuario = Integer.valueOf(jtfUsuario.getText());
         String contra = jtfContraseña.getText();
 
         Mesero mesero = md.buscarMozoPorDni(usuario);
@@ -370,7 +371,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
            jtfUsuario.setText("");
            jtfContraseña.setText("");
        
-    }                        
+    }                             
 
     }//GEN-LAST:event_jbLogInActionPerformed
 

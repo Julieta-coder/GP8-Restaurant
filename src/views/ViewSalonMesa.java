@@ -187,15 +187,15 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Bebidas sin Alcohol:");
-        jpAbrirMesa.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
+        jpAbrirMesa.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel5.setText("Entrada:");
-        jpAbrirMesa.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, 20));
+        jpAbrirMesa.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, 20));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel6.setText("Plato Principal:");
-        jpAbrirMesa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, 20));
+        jpAbrirMesa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, 20));
 
         jcBebidas.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcBebidas.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +267,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel7.setText("Postre:");
-        jpAbrirMesa.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, 20));
+        jpAbrirMesa.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, 20));
 
         jcPostre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpAbrirMesa.add(jcPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 306, 180, 30));
@@ -303,7 +303,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel3.setText("Bebidas con Alcohol:");
-        jpAbrirMesa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 130, 30));
+        jpAbrirMesa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 30));
 
         jcBebidas1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jcBebidas1.setToolTipText("");
@@ -381,7 +381,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbSalir1ActionPerformed(evt);
             }
         });
-        jpSalon.add(jbSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+        jpSalon.add(jbSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, -1));
 
         jbLiberar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbLiberar.setText("Liberar mesa");

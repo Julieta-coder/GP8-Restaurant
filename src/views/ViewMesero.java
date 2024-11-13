@@ -3,12 +3,18 @@ package views;
 
 import Entidades.Mesero;
 import Entidades.Pedido;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import persistencia.MeseroData;
 import persistencia.PedidoData;
@@ -43,7 +49,44 @@ public class ViewMesero extends javax.swing.JInternalFrame {
               }
          });
         
+// Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+    jTablaMeseroPedidos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+    jTablaMeseroPedidos.getTableHeader().setOpaque(false);
+    jTablaMeseroPedidos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+    jTablaMeseroPedidos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+    jTablaMeseroPedidos.setRowHeight(25);
 
+    // Crear un renderizador para centrar el texto del encabezado de la tabla
+    DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+    headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+    headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+    // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+
+    // Aplicar el renderizador personalizado a cada columna para el encabezado y las celdas
+    for (int i = 0; i < jTablaMeseroPedidos.getColumnModel().getColumnCount(); i++) {
+    jTablaMeseroPedidos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+    jTablaMeseroPedidos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer); // Aplica el centrado y los colores en celdas
+}
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

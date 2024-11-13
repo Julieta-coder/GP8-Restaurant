@@ -119,7 +119,7 @@ public class ViewReserva extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jbGuardarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, -1, -1));
 
-        jdcFecha.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jdcFecha.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         getContentPane().add(jdcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 220, 30));
 
         jbSalir.setBackground(new java.awt.Color(51, 51, 51));
@@ -147,76 +147,87 @@ public class ViewReserva extends javax.swing.JInternalFrame {
 
     private void jbGuardarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarReservaActionPerformed
         // TODO add your handling code here:
+                                                
+    // TODO add your handling code here:
 
-        /*El primer try previene el ingreso de caracteres no numericos en campos de texto dni e id*/
-        try {
-            int dni = Integer.parseInt(jtfDni.getText());
+    /*El primer try previene el ingreso de caracteres no numericos en campos de texto dni e id*/
+    try {
+        int dni = Integer.parseInt(jtfDni.getText());
 
-            /*Este if controla el limite numerico permitido para dni (Limitado en la base de datos a 8 caracteres)*/
-            if (dni > 999999 && dni < 99999999) {
-                int numeroMesa = Integer.parseInt(jtfIdMesa.getText());
+        /*Este if controla el limite numerico permitido para dni (Limitado en la base de datos a 8 caracteres)*/
+        if (dni > 999999 && dni < 99999999) {
+            int numeroMesa = Integer.parseInt(jtfIdMesa.getText());
 
-                String nombre = jtfNombreCliente.getText();
-                if (!nombre.matches("[a-zA-Z\\s]+")) {
-                    
-                   JOptionPane.showMessageDialog(this, "El nombre no puede contener numeros");
-                   
-                   return;
-                }
-                /*El siguiente if controla que campo de texto nombre NO quede vacio*/
-                if (!nombre.isEmpty()) {
+            String nombre = jtfNombreCliente.getText();
+            if (!nombre.matches("[a-zA-Z\\s]+")) {
+                
+               JOptionPane.showMessageDialog(this, "El nombre no puede contener numeros");
+               
+               return;
+            }
+            /*El siguiente if controla que campo de texto nombre NO quede vacio*/
+            if (!nombre.isEmpty()) {
 
-                    /*El try controla que LocalDate no sea nula*/
-                    try {
+                /*El try controla que LocalDate no sea nula*/
+                try {
+                    LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate hoy = LocalDate.now(); // Obtener la fecha actual
 
-                        LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                        ArrayList<Reserva> reservasFecha = (ArrayList<Reserva>) reservaData.obtenerReservas();
-                        for (Reserva r : reservasFecha) {
-                            LocalDate fechaValid = r.getFecha_reserva();
-                            System.out.println(fechaValid);
-                            if (fechaValid.equals(fecha)) {
-                                JOptionPane.showMessageDialog(this, "La mesa ya esta reservada en la fecha " + fecha);
-                                return;
-                            }
-                        }
-                        mesa = mesaData.obtenerMesaActivaPorNumero(numeroMesa);
-
-                        /*El if controla que mesa no sea nula*/
-                        if (mesa != null) {
-                            reserva = new Reserva(mesa, nombre, dni, fecha, true);
-
-                            int confirm = JOptionPane.showConfirmDialog(this, "¿Realizar reserva en la mesa " + mesa.getNumero() + "?", "Confirmar reserva", JOptionPane.YES_NO_OPTION);
-
-                            /*Confirmacion de reserva*/
-                            if (confirm == JOptionPane.YES_OPTION) {
-                                /*CREACION DE RESERVA*/
-
-                                reservaData.guardarReserva(reserva);
-                                JOptionPane.showMessageDialog(this, "¡Reserva creada!");
-                                jbGuardarReserva.setEnabled(false);
-                                jtfNombreCliente.setText("");
-                                jtfDni.setText("");
-                                jtfIdMesa.setText("");
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(this, "El numero de mesa no existe", "Error", JOptionPane.ERROR_MESSAGE);
-
-                        }
-
-                    } catch (NullPointerException e) {
-                        JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha");
+                    // Verificar que la fecha seleccionada no sea anterior a la fecha actual
+                    if (fecha.isBefore(hoy)) {
+                        JOptionPane.showMessageDialog(this, "No se puede realizar una reserva para una fecha pasada", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+
+                    ArrayList<Reserva> reservasFecha = (ArrayList<Reserva>) reservaData.obtenerReservas();
+                    for (Reserva r : reservasFecha) {
+                        LocalDate fechaValid = r.getFecha_reserva();
+                        System.out.println(fechaValid);
+                        if (fechaValid.equals(fecha)) {
+                            JOptionPane.showMessageDialog(this, "La mesa ya esta reservada en la fecha " + fecha);
+                            return;
+                        }
+                    }
+                    mesa = mesaData.obtenerMesaActivaPorNumero(numeroMesa);
+
+                    /*El if controla que mesa no sea nula*/
+                    if (mesa != null) {
+                        reserva = new Reserva(mesa, nombre, dni, fecha, true);
+
+                        int confirm = JOptionPane.showConfirmDialog(this, "¿Realizar reserva en la mesa " + mesa.getNumero() + "?", "Confirmar reserva", JOptionPane.YES_NO_OPTION);
+
+                        /*Confirmacion de reserva*/
+                        if (confirm == JOptionPane.YES_OPTION) {
+                            /*CREACION DE RESERVA*/
+
+                            reservaData.guardarReserva(reserva);
+                            JOptionPane.showMessageDialog(this, "¡Reserva creada!");
+                            jbGuardarReserva.setEnabled(false);
+                            jtfNombreCliente.setText("");
+                            jtfDni.setText("");
+                            jtfIdMesa.setText("");
+                            jdcFecha.setDate(null); // Limpia el campo de fecha
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El numero de mesa no existe", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (NullPointerException e) {
+                    JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "DNI invalido. ", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "DNI e ID solo reciben valores numericos", "", JOptionPane.ERROR_MESSAGE);
-
+        } else {
+            JOptionPane.showMessageDialog(this, "DNI invalido. ", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "DNI e ID solo reciben valores numericos", "", JOptionPane.ERROR_MESSAGE);
+    
+} 
+
+
     }//GEN-LAST:event_jbGuardarReservaActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed

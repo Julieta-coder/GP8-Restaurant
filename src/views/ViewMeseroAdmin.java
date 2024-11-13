@@ -302,8 +302,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
 
-
-                                             
+                                            
     String idText = jtID.getText();
     
     if (idText.isEmpty()) {
@@ -313,21 +312,36 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
 
     try {
         int id = Integer.parseInt(idText);
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres eliminar el mesero " + "'"+meseroData.buscarMozoPorId(id).getApellido()+"'"+ " de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
-        
+        Mesero mesero = meseroData.buscarMozoPorId(id);
+
+        if (mesero == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró mesero con ID " + id);
+            return;
+        }
+
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres eliminar el mesero " + "'" + mesero.getApellido() + "'" + " de la base de datos?", "Advertencia", JOptionPane.YES_NO_OPTION);
+
         if (respuesta == JOptionPane.YES_OPTION) {
             // Llamar al método de eliminación en meseroData
-            if (meseroData.eliminarMesero(id)) { // Ahora funciona correctamente
+            if (meseroData.eliminarMesero(id)) {
                 JOptionPane.showMessageDialog(this, "Mesero eliminado exitosamente.");
-//                cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
+                // Limpiar campos del formulario
+                jtID.setText("");
+                jtNombre.setText("");
+                jtApellido.setText("");
+                jtDNI.setText("");
+                jpContraseña.setText("");
+            
+                // Otros campos a limpiar según el formulario
+                // cargarDatosEnTabla(); // Actualizar la tabla después de eliminar
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontró mesero con ID " + id);
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el mesero con ID " + id);
             }
         }
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
-    }
-
+    
+}
 
     
        

@@ -5,13 +5,18 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import persistencia.*;
 import Entidades.Pedido;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
 
@@ -39,7 +44,55 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
          grupoRadioButon();
 
          armarCabeceraTabla();
+         
+         
+        // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+        jtablaPedidos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        jtablaPedidos.getTableHeader().setOpaque(false);
+        jtablaPedidos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        jtablaPedidos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        jtablaPedidos.setRowHeight(25);
+
+        // Crear un renderizador para centrar el texto del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+         headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+         headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+     
+        // Aplicar el renderizador personalizado a cada columna para centrar los datos
+        for (int i = 0; i < jtablaPedidos.getColumnModel().getColumnCount(); i++) {
+        jtablaPedidos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+}
+
+        // Aplicar el renderizador personalizado al encabezado de cada columna
+        for (int i = 0; i < jtablaPedidos.getColumnModel().getColumnCount(); i++) {
+         jtablaPedidos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+
+        // Configurar para ajustar automáticamente el ancho
+        jtablaPedidos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+ 
+         
     }
 
 
@@ -84,6 +137,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         setTitle("Contable");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jtablaPedidos.setFont(new java.awt.Font("Segoe UI", 2, 13)); // NOI18N
         jtablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -98,7 +152,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jtablaPedidos.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(jtablaPedidos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 365, 247));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 400, 247));
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -112,27 +166,28 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jpActualizarPorId.setForeground(new java.awt.Color(153, 153, 153));
         jpActualizarPorId.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jbActualizar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbActualizar.setText("Actualizar");
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbActualizarActionPerformed(evt);
             }
         });
-        jpActualizarPorId.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 202, -1, -1));
+        jpActualizarPorId.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Mesa");
         jpActualizarPorId.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel5.setText("Mesero");
         jpActualizarPorId.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel6.setText("Fecha");
         jpActualizarPorId.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 106, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel7.setText("Monto");
         jpActualizarPorId.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 152, -1, -1));
 
@@ -141,7 +196,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jtMesaActualizarKeyTyped(evt);
             }
         });
-        jpActualizarPorId.add(jtMesaActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 20, 126, -1));
+        jpActualizarPorId.add(jtMesaActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 150, -1));
 
         jtMeseroActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,22 +208,24 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jtMeseroActualizarKeyTyped(evt);
             }
         });
-        jpActualizarPorId.add(jtMeseroActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 60, 126, -1));
+        jpActualizarPorId.add(jtMeseroActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 150, -1));
 
         jtMontoActualizar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtMontoActualizarKeyTyped(evt);
             }
         });
-        jpActualizarPorId.add(jtMontoActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 152, 126, -1));
-        jpActualizarPorId.add(jdatechooserActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 106, 126, -1));
+        jpActualizarPorId.add(jtMontoActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, -1));
+        jpActualizarPorId.add(jdatechooserActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 150, -1));
 
-        getContentPane().add(jpActualizarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 290, 240));
+        getContentPane().add(jpActualizarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 340, 240));
 
         jpBuscarPorId.setBackground(new java.awt.Color(153, 153, 153));
         jpBuscarPorId.setForeground(new java.awt.Color(153, 153, 153));
+        jpBuscarPorId.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpBuscarPorId.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jtBuscarPorId.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtBuscarPorId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtBuscarPorIdActionPerformed(evt);
@@ -179,15 +236,16 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jtBuscarPorIdKeyTyped(evt);
             }
         });
-        jpBuscarPorId.add(jtBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 37, 96, -1));
+        jpBuscarPorId.add(jtBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 96, -1));
 
+        jbBuscar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbBuscar.setText("BUSCAR");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
         });
-        jpBuscarPorId.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 71, -1, -1));
+        jpBuscarPorId.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Buscar por Id Pedido");
@@ -199,14 +257,16 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jpBuscarBD.setForeground(new java.awt.Color(153, 153, 153));
         jpBuscarBD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jbBuscarBaseDatos.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbBuscarBaseDatos.setText("Base Datos");
         jbBuscarBaseDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarBaseDatosActionPerformed(evt);
             }
         });
-        jpBuscarBD.add(jbBuscarBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 71, -1, -1));
+        jpBuscarBD.add(jbBuscarBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel8.setText("Listar los pedidos de la BD");
         jpBuscarBD.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, 145, -1));
 
@@ -216,8 +276,10 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jpBuscarPorFecha.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtMontoTotal.setEditable(false);
+        jtMontoTotal.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpBuscarPorFecha.add(jtMontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 66, 100, -1));
 
+        jdFecha.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jdFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jdFechaPropertyChange(evt);
@@ -225,11 +287,11 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         });
         jpBuscarPorFecha.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 32, 100, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setText("Buscar por fecha ");
         jpBuscarPorFecha.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 6, -1, -1));
 
-        getContentPane().add(jpBuscarPorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 170, 100));
+        getContentPane().add(jpBuscarPorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 170, 100));
 
         jrbBuscarPorId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,36 +312,39 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jrbBuscarFechaActionPerformed(evt);
             }
         });
-        getContentPane().add(jrbBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
+        getContentPane().add(jrbBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, -1));
 
         jpBotonesPorId.setBackground(new java.awt.Color(153, 153, 153));
         jpBotonesPorId.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jbBajaLogica.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbBajaLogica.setText("Baja Logica");
         jbBajaLogica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBajaLogicaActionPerformed(evt);
             }
         });
-        jpBotonesPorId.add(jbBajaLogica, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, -1, -1));
+        jpBotonesPorId.add(jbBajaLogica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        jbAltaLogica.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbAltaLogica.setText("Alta Logica");
         jbAltaLogica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAltaLogicaActionPerformed(evt);
             }
         });
-        jpBotonesPorId.add(jbAltaLogica, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 15, -1, -1));
+        jpBotonesPorId.add(jbAltaLogica, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
             }
         });
-        jpBotonesPorId.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 15, -1, -1));
+        jpBotonesPorId.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 100, -1));
 
-        getContentPane().add(jpBotonesPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 300, 50));
+        getContentPane().add(jpBotonesPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 340, 50));
 
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
         jlFondo.setText("jLabel3");
