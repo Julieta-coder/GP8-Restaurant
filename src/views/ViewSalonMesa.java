@@ -592,6 +592,8 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                         mesa = pedido.getMesa();
                         mesa.setDisposicion("atendida");
                         mesaData.actualizarDisposicionMesa(mesa);
+                        jbTomarPedido.setEnabled(false);
+                        JOptionPane.showMessageDialog(this, "Pedido generado.");
 
                     }
                 }
@@ -672,6 +674,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpSalon.setVisible(true);
         jpAbrirMesa.setEnabled(false);
         jpAbrirMesa.setVisible(false);
+        jbTomarPedido.setEnabled(true);
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jbSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalir1ActionPerformed
@@ -682,67 +685,79 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         //Actualizar pedidos 
-        int totalFilas = jtProductos.getRowCount();
 
-        if (totalFilas > 0) {
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Modificar el pedido?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            int totalFilas = jtProductos.getRowCount();
 
-            double total = 0;
+            if (totalFilas > 0) {
 
-            // Iterar por cada fila de la tabla
-            for (int fila = 0; fila < totalFilas; fila++) {
-                // Extraer los valores de cada columna en la fila actual
-                int id_producto = (int) jtProductos.getValueAt(fila, 0); // ID_Producto
-                String nombre = (String) jtProductos.getValueAt(fila, 1); // Nombre Producto
-                String categoria = (String) jtProductos.getValueAt(fila, 2); // Categoría
-                int cantidad = (int) jtProductos.getValueAt(fila, 3); // Cantidad
-                double precio = (double) jtProductos.getValueAt(fila, 4); // precio
-                double subtotal = (double) jtProductos.getValueAt(fila, 5); // subtotal
+                double total = 0;
 
-                boolean verificar = productoData.actualizarStock(id_producto, cantidad);
+                // Iterar por cada fila de la tabla
+                for (int fila = 0; fila < totalFilas; fila++) {
+                    // Extraer los valores de cada columna en la fila actual
+                    int id_producto = (int) jtProductos.getValueAt(fila, 0); // ID_Producto
+                    String nombre = (String) jtProductos.getValueAt(fila, 1); // Nombre Producto
+                    String categoria = (String) jtProductos.getValueAt(fila, 2); // Categoría
+                    int cantidad = (int) jtProductos.getValueAt(fila, 3); // Cantidad
+                    double precio = (double) jtProductos.getValueAt(fila, 4); // precio
+                    double subtotal = (double) jtProductos.getValueAt(fila, 5); // subtotal
 
-                if (!verificar) {
+                    boolean verificar = productoData.actualizarStock(id_producto, cantidad);
 
-                    JOptionPane.showMessageDialog(this, "La cantidad de " + nombre + " es superior al stock disponible");
+                    if (!verificar) {
 
-                } else {
+                        JOptionPane.showMessageDialog(this, "La cantidad de " + nombre + " es superior al stock disponible");
 
-                    int filaSelect = jtMesasActivas.getSelectedRow();
+                    } else {
 
-                    if (filaSelect != -1) {
+                        int filaSelect = jtMesasActivas.getSelectedRow();
 
-                        int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
-                        pedido = pedidoData.buscarPedidoPorIdMesa(id_mesa);
+                        if (filaSelect != -1) {
 
-                        pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                            int id_mesa = (int) jtMesasActivas.getValueAt(filaSelect, 0);
+                            pedido = pedidoData.buscarPedidoPorIdMesa(id_mesa);
 
-                        List<DetallePedido> detalles = detallePedidoData.listarDetallesPorPedido(pedido.getId_pedido());
-                        boolean flag = true;
-                        
-                        for (DetallePedido d : detalles) {
+                            List<DetallePedido> detalles = detallePedidoData.listarDetallesPorPedido(pedido.getId_pedido());
 
-                            if (d.getProducto().getId_producto() == id_producto) {
+                            boolean flag = true;
 
-                                detallePedidoData.actualizarDetallePedidoCantidad(pedido.getId_pedido(), cantidad, d.getCantidad());
-                                borrarFilaTabla();
-                                flag = false; 
+                            for (DetallePedido d : detalles) {
+
+                                if (d.getProducto().getId_producto() == id_producto) {
+
+                                    detallePedidoData.actualizarDetallePedidoCantidad(pedido.getId_pedido(), cantidad, d.getCantidad());
+                                    int cantidadBaseD = d.getCantidad() + cantidad;
+                                    double totalOriginal = pedido.getMonto_total();
+                                    total += subtotal + totalOriginal;
+                                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                                    detallePedidoData.actualizarDetallePedidoSubTotal(pedido.getId_pedido(), precio, cantidadBaseD);
+                                    borrarFilaTabla();
+                                    
+                                    flag = false;
+                                }
                             }
-                        }
-                              if(flag){
+                            if (flag) {
                                 detallePedido.setCantidad(cantidad);
                                 detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
                                 detallePedido.setPrecio_unitario(precio);
                                 detallePedido.setSub_total(subtotal);
 
-                                // Acumular el total del pedido
-                                total += subtotal;
+                                // Acumular el total del pedido 
+                                double totalOriginal = pedido.getMonto_total();
+                                total += subtotal + totalOriginal;
+                                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
                                 detallePedido.setPedido(pedido);
                                 detallePedidoData.agregarDetallePedido(detallePedido);
-                                
                                 borrarFilaTabla();
-                              }
+                               
+                            }
+                        }
                     }
-                }
 
+                }
+                 JOptionPane.showMessageDialog(this, "Productos agregados al pedido "+pedido.getId_pedido()+" de la mesa "+pedido.getMesa());
             }
         }
 

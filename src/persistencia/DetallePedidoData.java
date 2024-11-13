@@ -118,6 +118,20 @@ public class DetallePedidoData {
             System.out.println("Error al actualizar detalle de pedido: " + e.getMessage());
         }
     }
+     public void actualizarDetallePedidoSubTotal(int id_pedido, double precio, int cantidad) {
+        String sql = "UPDATE detalle_pedido SET sub_total = ? WHERE id_pedido = ?";
+        
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDouble(1, precio*cantidad);
+            ps.setDouble(2, id_pedido);
+           
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar detalle de pedido: " + e.getMessage());
+        }
+    }
    
     public void eliminarDetallePedido(int id_detalle) {
         String sql = "DELETE FROM detalle_pedido WHERE id_detalle = ?";
