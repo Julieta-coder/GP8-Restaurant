@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class PedidoData {
-    private final Connection connection;
+    private Connection connection;
     
    private MesaData mesaData= new MesaData();
     private MeseroData meseroData=new MeseroData();
@@ -37,6 +37,23 @@ public class PedidoData {
                 this.connection = Conexion.getConnection();
                 this.mesaData=mesaData;
                 this.meseroData=meseroData;
+    }
+    
+    // Implementación única del método getConnection()
+    private Connection getConnection() {
+        if (connection == null) {
+            try {
+                String url = "jdbc:mysql://localhost:3306/tu_base_de_datos";
+                String user = "tu_usuario";
+                String password = "tu_contraseña";
+                
+                connection = DriverManager.getConnection(url, user, password);
+                System.out.println("Conexión establecida exitosamente.");
+            } catch (SQLException e) {
+                System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+            }
+        }
+        return connection;
     }
     
     
@@ -377,28 +394,26 @@ public class PedidoData {
     
     public boolean actualizarPedido(int id_pedido, int id_mesa, int id_mesero, LocalDate fecha_pedido , double monto_total) {
         String sql = "UPDATE pedidos SET id_mesa = ?, id_mesero = ?, fecha_pedido = ?, monto_total = ? WHERE id_pedido = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            //ps.setInt(1, pedido.getId_mesa());
-            ps.setInt(1,id_mesa );
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        if (connection == null) {
+            System.out.println("Error: la conexión es nula.");
+            return false;
+        }
 
-            ps.setInt(2, id_mesero);
-            ps.setDate(3,  java.sql.Date.valueOf(fecha_pedido));  
+        ps.setInt(1, id_mesa);
+        ps.setInt(2, id_mesero);
+        ps.setDate(3, java.sql.Date.valueOf(fecha_pedido)); // Convierte LocalDate a java.sql.Date
+        ps.setDouble(4, monto_total);
+        ps.setInt(5, id_pedido);
 
-//            ps.setDate(3, new java.sql.Date(pedido.getFecha_pedido().getTime()));
-//            ps.setDate(3,  java.sql.Date.valueOf(pedido.getFecha_pedido()));
+        int filasAfectadas = ps.executeUpdate();
 
-            ps.setDouble(4, monto_total);
-            ps.setInt(5, id_pedido);
-            
-       int filasAfectadas = ps.executeUpdate();
-        
         if (filasAfectadas > 0) {
             System.out.println("Pedido actualizado exitosamente.");
             return true; // Retorna true si se actualizó exitosamente
         } else {
             System.out.println("No se encontró un pedido con el ID especificado.");
-            return false; // Retorna false si no se encontró el mesero
+            return false; // Retorna false si no se encontró el pedido
         }
     } catch (SQLException e) {
         System.out.println("Error al actualizar pedido: " + e.getMessage());
@@ -573,7 +588,29 @@ public class PedidoData {
             return pedidos;
     }
 
+    
 
+    public boolean actualizarEstadoPedido(int idPedido, boolean estado) {
+    String sql = "UPDATE pedidos SET estado = ? WHERE id_pedido = ?";
 
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+            stmt.setBoolean(1, estado);
+            stmt.setInt(2, idPedido);
+            
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Estado del pedido actualizado exitosamente.");
+                return true;
+            } else {
+                System.out.println("No se encontró un pedido con el ID especificado.");
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar el estado del pedido: " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
 
+    }
+ 
 }

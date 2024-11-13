@@ -4,75 +4,77 @@
  */
 package views;
 
+import Entidades.Pedido;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import persistencia.DetallePedidoData;
+import persistencia.MesaData;
+import persistencia.PedidoData;
+
 
 /**
  *
  * @author salon
  */
 public class ViewCaja extends javax.swing.JInternalFrame {
+    
+     private DefaultTableModel modelo = new DefaultTableModel();
+    
+    PedidoData pd = new PedidoData();
 
     /**
      * Creates new form ViewPedido
      */
     public ViewCaja() {
-        initComponents();
-        
-     
+    initComponents();
+    cabeceraTabla(); // Configura las columnas de la tabla
+    cargarPedidosActivos(); // Carga los pedidos activos en la tabla
+
     // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
-        jtPedidosActivos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
-        jtPedidosActivos.getTableHeader().setOpaque(false);
-        jtPedidosActivos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
-        jtPedidosActivos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
-        jtPedidosActivos.setRowHeight(25);
+    jtPedidosActivos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+    jtPedidosActivos.getTableHeader().setOpaque(false);
+    jtPedidosActivos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+    jtPedidosActivos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+    jtPedidosActivos.setRowHeight(25);
 
-        // Crear un renderizador para centrar el texto del encabezado de la tabla
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-         headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
-         headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+    // Crear un renderizador para centrar el texto del encabezado de la tabla
+    DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+    headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+    headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
 
-        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+    // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+    DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        
-        // Centramos el texto en las celdas
-        setHorizontalAlignment(SwingConstants.CENTER);
-        
-        if (isSelected) {
-            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
-            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
-        } else {
-            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
-            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            setHorizontalAlignment(SwingConstants.CENTER); // Centramos el texto en las celdas
+            c.setBackground(isSelected ? new Color(169, 169, 169) : new Color(245, 245, 245)); // Color de fondo
+            c.setForeground(isSelected ? Color.WHITE : Color.BLACK); // Color de texto
+            return c;
         }
-        
-        return c;
-    }
-};
-     
-        // Aplicar el renderizador personalizado a cada columna para centrar los datos
-        for (int i = 0; i < jtPedidosActivos.getColumnModel().getColumnCount(); i++) {
+    };
+
+    // Aplicar el renderizador personalizado a cada columna
+    for (int i = 0; i < jtPedidosActivos.getColumnModel().getColumnCount(); i++) {
         jtPedidosActivos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
-}
+    }
 
-        // Aplicar el renderizador personalizado al encabezado de cada columna
-        for (int i = 0; i < jtPedidosActivos.getColumnModel().getColumnCount(); i++) {
-         jtPedidosActivos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
-}
+    // Aplicar el renderizador personalizado al encabezado de cada columna
+    for (int i = 0; i < jtPedidosActivos.getColumnModel().getColumnCount(); i++) {
+        jtPedidosActivos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+    }
 
-        // Configurar para ajustar automáticamente el ancho
-        jtPedidosActivos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);    
-        
-        
-        
-        
+    // Configurar para ajustar automáticamente el ancho
+    jtPedidosActivos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+      
         
     }
 
@@ -85,6 +87,7 @@ public class ViewCaja extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jpFondo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPedidosActivos = new javax.swing.JTable();
@@ -94,6 +97,8 @@ public class ViewCaja extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jlFotoFondo = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -117,10 +122,21 @@ public class ViewCaja extends javax.swing.JInternalFrame {
 
         jCobrar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jCobrar.setText("Cobrar");
+        jCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCobrarActionPerformed(evt);
+            }
+        });
         jpFondo.add(jCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, 140, 40));
 
         jcMediosDePago.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jpFondo.add(jcMediosDePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, -1));
+        jcMediosDePago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta Debito", "Tarjeta Credito" }));
+        jcMediosDePago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcMediosDePagoActionPerformed(evt);
+            }
+        });
+        jpFondo.add(jcMediosDePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 210, -1));
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +157,7 @@ public class ViewCaja extends javax.swing.JInternalFrame {
         jlFotoFondo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlFotoFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
         jlFotoFondo.setText("jLabel1");
-        jpFondo.add(jlFotoFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 714, 451));
+        jpFondo.add(jlFotoFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 714, 451));
 
         getContentPane().add(jpFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 470));
 
@@ -153,9 +169,59 @@ public class ViewCaja extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jcMediosDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcMediosDePagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcMediosDePagoActionPerformed
+
+    private void jCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCobrarActionPerformed
+        // TODO add your handling code here:
+                                              
+    int selectedRow = jtPedidosActivos.getSelectedRow();
+
+    if (selectedRow >= 0) {
+        int idPedido = (int) modelo.getValueAt(selectedRow, 0); // Obtener el ID del pedido seleccionado
+        PedidoData pedidoData = new PedidoData();
+        DetallePedidoData detallePedidoData = new DetallePedidoData();
+
+        // Confirmar si se desea proceder con el cobro
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de cobrar este pedido?", "Confirmar Cobro", JOptionPane.YES_NO_OPTION);
+        
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Poner el monto total del pedido en cero
+            pedidoData.actualizarMontoTotal(idPedido, 0.0);
+
+            // Cambiar el estado del pedido a "cobrado" o "inactivo"
+            pedidoData.actualizarEstadoPedido(idPedido, false); // Asumiendo que false indica que el pedido está inactivo
+
+            // Borrar o poner en cero los detalles asociados al pedido
+            detallePedidoData.eliminarDetallesPorPedido(idPedido); // O usa un método para poner cantidades en cero
+
+            // Liberar la mesa asociada al pedido
+            Pedido pedido = pedidoData.buscarPedidoPorId(idPedido);
+            if (pedido.getMesa() != null) {
+                int idMesa = pedido.getMesa().getId_mesa();
+                MesaData mesaData = new MesaData();
+                mesaData.liberarMesa(idMesa);
+            }
+
+            // Actualizar la tabla
+            cargarPedidosActivos(); // Recargar la tabla para reflejar los cambios
+
+            JOptionPane.showMessageDialog(this, "El pedido ha sido cobrado y la mesa ha sido liberada.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione un pedido en la tabla para cobrar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+        
+        
+        
+        
+    }//GEN-LAST:event_jCobrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCobrar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -165,4 +231,60 @@ public class ViewCaja extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jpFondo;
     private javax.swing.JTable jtPedidosActivos;
     // End of variables declaration//GEN-END:variables
+
+    private void cabeceraTabla() {
+       
+    this.modelo.addColumn("Id_Pedido");
+    this.modelo.addColumn("Id_Mesa");
+    this.modelo.addColumn("Id_Mesero");
+    this.modelo.addColumn("Fecha Pedido");
+    this.modelo.addColumn("Hora Pedido");
+    this.modelo.addColumn("Estado");
+    this.modelo.addColumn("Monto Total");
+    jtPedidosActivos.setModel(modelo);
+                
+   }
+    
+    private void cargarPedidosActivos() {
+    
+    
+    modelo.setRowCount(0); // Limpia la tabla antes de cargar los datos
+
+    List<Pedido> pedidosActivos = pd.obtenerPedidos(); // Utiliza la instancia 'pd' existente
+
+    for (Pedido pedido : pedidosActivos) {
+        if (pedido.isEstado()) { // Filtrar solo los pedidos activos
+            Integer idMesa = null;
+            Integer idMesero = null;
+
+            // Depuración para ver si getMesa() o getMesero() es null
+            if (pedido.getMesa() != null) {
+                idMesa = pedido.getMesa().getId_mesa();
+            } else {
+                System.out.println("Mesa es null para pedido con ID: " + pedido.getId_pedido());
+            }
+
+            if (pedido.getMesero() != null) {
+                idMesero = pedido.getMesero().getId_mesero();
+            } else {
+                System.out.println("Mesero es null para pedido con ID: " + pedido.getId_pedido());
+            }
+
+            modelo.addRow(new Object[]{
+    pedido.getId_pedido(),
+    (idMesa != null) ? idMesa : "-", // Muestra "-" si no hay una mesa asociada
+    (idMesero != null) ? idMesero : "-", // Muestra "-" si no hay un mesero asociado
+    pedido.getFecha_pedido(),
+    pedido.getHora_pedido(),
+    pedido.isEstado() ? "Activo" : "Inactivo",
+    pedido.getMonto_total()
+});
+        }
+    }
+    modelo.fireTableDataChanged(); // Notifica los cambios al modelo de la tabla
 }
+}
+    
+    
+ 
+
