@@ -170,39 +170,7 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
 
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        // TODO add your handling code here:
-//        try {
-//            
-//            String nombre = jtNombre.getText();
-//            String apellido = jtApellido.getText();
-//            int dni = Integer.parseInt(jtDNI.getText());
-//            if(dni<999999){
-//                JOptionPane.showMessageDialog(this, "DNI invalido.");
-//                return;
-//            }
-//            String contraseña = jpContraseña.getText();
-//        
-//            if(nombre.isEmpty() || apellido.isEmpty() || dni == 0 || contraseña.isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Completar todos los campos.");
-//                return;
-//            }
-//            Mesero mesero = new Mesero (nombre, apellido, dni, LocalDate.now(), contraseña, true);
-//            
-//            meseroData.agregarMesero(mesero);
-//                    jtNombre.setText("");
-//                    jtApellido.setText("");
-//                    jtDNI.setText("");
-//                    jpContraseña.setText("");
-//                    
-//            Mesero nuevoMesero = new Mesero();//RECORDAR AÑADIR CONTRASEÑA Y ESTADO 
-//            meseros.add(nuevoMesero);
-////            cargarDatosEnTabla();
-//            JOptionPane.showMessageDialog(this, "Mesero agregado exitosamente.");
-//            
-//        }    catch (Exception e){
-//            JOptionPane.showMessageDialog(this, "DNI debe ser numerico.");
-//        }
-//        
+ 
   try {
         String nombre = jtNombre.getText();
         String apellido = jtApellido.getText();
@@ -245,7 +213,9 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
     }
         
-   
+  jbEliminar.setEnabled(false);
+   jbActualizar.setEnabled(false);
+  
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     
@@ -296,7 +266,9 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar el mesero: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-
+    
+     jbEliminar.setEnabled(false);
+     jbActualizar.setEnabled(false);
 
     }//GEN-LAST:event_jbActualizarActionPerformed
 
@@ -327,9 +299,16 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
     }
-
-
     
+    jtNombre.setText(" ");
+    jtApellido.setText(" ");
+    jtDNI.setText(" ");
+    jtID.setText(" ");
+    jpContraseña.setText(" ");
+
+
+      jbEliminar.setEnabled(false);
+     jbActualizar.setEnabled(false);
        
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -341,14 +320,15 @@ try {
         int idCompare = Integer.parseInt(jtID.getText());
         // Buscar el mesero utilizando meseroData
         Mesero mesero = meseroData.buscarMozoPorId(idCompare);
-          jbEliminar.setEnabled(true);
-        jbActualizar.setEnabled(true);
+
         if (mesero != null) {
             // Si se encuentra el mesero, llenar los campos con sus datos
             jtNombre.setText(mesero.getNombre());
             jtApellido.setText(mesero.getApellido());
             jtDNI.setText(String.valueOf(mesero.getDni()));
             jpContraseña.setText(mesero.getContraseña());
+              jbEliminar.setEnabled(true);
+        jbActualizar.setEnabled(true);
             // Aquí podrías agregar más campos si es necesario
         } else {
             // Si no se encuentra el mesero, mostrar un mensaje

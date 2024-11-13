@@ -62,6 +62,30 @@ public class MeseroData {
         return meseros;
     }
     
+       public List<Mesero> listarPersonal() {
+        List<Mesero> meseros = new ArrayList<>();
+        String sql = "SELECT * FROM meseros";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Mesero mesero = new Mesero();
+                mesero.setId_mesero(rs.getInt("id_mesero"));
+                mesero.setNombre(rs.getString("nombre"));
+                mesero.setApellido(rs.getString("apellido"));
+                mesero.setFecha_registro(rs.getDate("fecha_registro").toLocalDate());
+                mesero.setEstado(rs.getBoolean("estado"));
+
+
+                meseros.add(mesero);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar el personal: " + e.getMessage());
+        }
+        return meseros;
+    }
+    
     //Maty se mando un metodo que le hacia falta
     public Mesero buscarMozoPorId(int id_mesero) {
         Mesero mesero = null;
