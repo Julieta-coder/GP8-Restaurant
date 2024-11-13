@@ -119,7 +119,7 @@ public class ViewCaja extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtPedidosActivos);
 
-        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 660, 240));
+        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 660, 240));
 
         jCobrar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jCobrar.setText("Cobrar");
@@ -149,7 +149,7 @@ public class ViewCaja extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setText("Medios de pago:");
-        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setText("<html><u>PEDIDOS ACTIVOS</u></html> ");
@@ -158,7 +158,7 @@ public class ViewCaja extends javax.swing.JInternalFrame {
         jlFotoFondo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlFotoFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
         jlFotoFondo.setText("jLabel1");
-        jpFondo.add(jlFotoFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 714, 451));
+        jpFondo.add(jlFotoFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 714, 440));
 
         getContentPane().add(jpFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 470));
 
