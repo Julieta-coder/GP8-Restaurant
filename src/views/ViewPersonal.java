@@ -104,9 +104,9 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPersonal = new javax.swing.JTable();
         jbAlta = new javax.swing.JButton();
-        jbBaja = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jbBaja = new javax.swing.JButton();
 
         jtPersonal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,15 +122,30 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtPersonal);
 
         jbAlta.setText("Alta");
-
-        jbBaja.setText("Baja");
+        jbAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("X");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
+            }
+        });
+
+        jbBaja.setText("Baja");
+        jbBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaActionPerformed(evt);
             }
         });
 
@@ -143,13 +158,13 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jbBaja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbAlta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -178,6 +193,93 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jtPersonal.getSelectedRow();
+        
+        if (selectedRow == -1){
+        
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila.");
+            return;
+        }
+        
+        
+         int idMesero = (int) jtPersonal.getValueAt(selectedRow, 0);
+         String estadoActual = jtPersonal.getValueAt(selectedRow, 4).toString();
+
+    // Verificamos si el mesero ya está activo
+    if (estadoActual.equals("Activo")) {
+        javax.swing.JOptionPane.showMessageDialog(this, "El mesero ya está activo.");
+    } else {
+        try {
+            if (meseroData.actualizarEstadoMesero(idMesero, true)) { // true para activar
+                jtPersonal.setValueAt("Activo", selectedRow, 4);
+                javax.swing.JOptionPane.showMessageDialog(this, "Mesero activado exitosamente.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se pudo activar el mesero.");
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al activar el mesero: " + e.getMessage());
+        }
+    }
+    }//GEN-LAST:event_jbAltaActionPerformed
+    
+    private void jbBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaActionPerformed
+        // TODO add your handling code here:
+        
+                 int selectedRow = jtPersonal.getSelectedRow();
+    
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila.");
+    } 
+         int idMesero = (int) jtPersonal.getValueAt(selectedRow, 0);
+         String estadoActual = jtPersonal.getValueAt(selectedRow, 4).toString();
+
+    // Verificamos si el mesero ya está inactivo
+    if (estadoActual.equals("Inactivo")) {
+        javax.swing.JOptionPane.showMessageDialog(this, "El mesero ya está inactivo.");
+    } else {
+        try {
+            if (meseroData.actualizarEstadoMesero(idMesero, false)) { // false para inactivar
+                jtPersonal.setValueAt("Inactivo", selectedRow, 4);
+                javax.swing.JOptionPane.showMessageDialog(this, "Mesero inactivado exitosamente.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se pudo inactivar el mesero.");
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al inactivar el mesero: " + e.getMessage());
+        }
+    }
+    
+    }//GEN-LAST:event_jbBajaActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jtPersonal.getSelectedRow();
+
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila para eliminar.");
+        return;
+    }
+
+    int idMesero = (int) jtPersonal.getValueAt(selectedRow, 0);
+    int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este mesero?", "Confirmar Eliminación", javax.swing.JOptionPane.YES_NO_OPTION);
+
+    if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+        try {
+            if (meseroData.eliminarMesero(idMesero)) {
+                modelo.removeRow(selectedRow); // Elimina la fila de la tabla
+                javax.swing.JOptionPane.showMessageDialog(this, "Mesero eliminado exitosamente.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se pudo eliminar el mesero.");
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el mesero: " + e.getMessage());
+        }
+    }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    
     private void cargarDatos() {
         // Limpiar el modelo antes de cargar datos
         modelo.setRowCount(0);
@@ -197,6 +299,7 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
     }
         
         
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAlta;

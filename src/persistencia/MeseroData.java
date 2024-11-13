@@ -219,6 +219,28 @@ public class MeseroData {
 
         return mesero;
     }
+     public boolean actualizarEstadoMesero(int idMesero, boolean nuevoEstado) {
+    String sql = "UPDATE meseros SET estado = ? WHERE id_mesero = ?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setBoolean(1, nuevoEstado); // true para Activo, false para Inactivo
+        ps.setInt(2, idMesero);
+
+        int filasAfectadas = ps.executeUpdate();
+        
+        if (filasAfectadas > 0) {
+            System.out.println("Estado del mesero actualizado exitosamente.");
+            return true; // Retorna true si se actualizó exitosamente
+        } else {
+            System.out.println("No se encontró un mesero con el ID especificado.");
+            return false; // Retorna false si no se encontró el mesero
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al actualizar el estado del mesero: " + e.getMessage());
+        return false; // Retorna false en caso de error
+    }
+}
+
 
     
 }
