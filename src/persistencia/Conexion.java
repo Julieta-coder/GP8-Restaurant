@@ -35,7 +35,8 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error al cargar el driver de MariaDB: " + ex.getMessage());
                 ex.printStackTrace();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos.\nSQL Exception en Conexion.\nEl programa finaliza hasta que se abra el\n servidor donde se encuentra ubicada la base de datos");
+                System.exit(1);
             }
         }
         return connection;

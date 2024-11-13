@@ -12,7 +12,7 @@ import persistencia.MeseroData;
 
 public class ViewPrincipal extends javax.swing.JFrame {
 
-    private boolean inicioSesion = true;
+    private boolean inicioSesion = false;
     
     
     public ViewPrincipal() {
@@ -20,11 +20,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         configurarEscritorio(); //llamo el metodo que cree para centrar el panel del login
     
-        jmMesa.setEnabled(true);
-        jmMesero.setEnabled(true);
-        jmPedido.setEnabled(true);
-        jmReserva.setEnabled(true);
-        jmAdministracion.setEnabled(true);
+        jmMesa.setEnabled(false);
+        jmMesero.setEnabled(false);
+        jmPedido.setEnabled(false);
+        jmReserva.setEnabled(false);
+        jmAdministracion.setEnabled(false);
       
       
     }
