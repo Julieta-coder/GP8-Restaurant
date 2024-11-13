@@ -108,6 +108,7 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jbBaja = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jlImagen = new javax.swing.JLabel();
         jlFondo = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,7 +152,7 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
                 jbSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, 30));
+        getContentPane().add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 30, 30));
 
         jbBaja.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbBaja.setText("Baja");
@@ -165,6 +166,9 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("LISTADO DEL PERSONAL");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
+
+        jlImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/busqueda.png"))); // NOI18N
+        getContentPane().add(jlImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, -1, -1));
 
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
         jlFondo.setText("jLabel1");
@@ -293,6 +297,7 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlFondo;
+    private javax.swing.JLabel jlImagen;
     private javax.swing.JTable jtPersonal;
     // End of variables declaration//GEN-END:variables
 }

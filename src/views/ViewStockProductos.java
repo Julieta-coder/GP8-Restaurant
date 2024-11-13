@@ -82,16 +82,45 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTablaProductos = new javax.swing.JTable();
         jpFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jlImagenFondo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTablaProductos = new javax.swing.JTable();
+        jlImagen = new javax.swing.JLabel();
+        jlImagen2 = new javax.swing.JLabel();
+        jlFondo = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel1.setText("Buscar por nombre:");
+        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 130, 27));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jpFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 40, 30));
+
+        jtNombre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jtNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNombreKeyReleased(evt);
+            }
+        });
+        jpFondo.add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 238, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel2.setText("<html><u>Busqueda de Productos Activos</u></html> ");
+        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         JTablaProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         JTablaProductos.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
@@ -109,38 +138,19 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
         JTablaProductos.setEnabled(false);
         jScrollPane1.setViewportView(JTablaProductos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 550, 247));
+        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 670, 280));
 
-        jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jlImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/comida-rapida.png"))); // NOI18N
+        jpFondo.add(jlImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel1.setText("Buscar por nombre:");
-        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 170, 27));
+        jlImagen2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pizza.png"))); // NOI18N
+        jpFondo.add(jlImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jpFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
+        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo 3.png"))); // NOI18N
+        jlFondo.setText("jLabel3");
+        jpFondo.add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, -1));
 
-        jtNombre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtNombreKeyReleased(evt);
-            }
-        });
-        jpFondo.add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 238, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel2.setText("<html><u>Busqueda de Productos Activos</u></html> ");
-        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
-
-        jlImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
-        jpFondo.add(jlImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 584, 440));
-
-        getContentPane().add(jpFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 440));
+        getContentPane().add(jpFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,7 +173,9 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel jlImagenFondo;
+    private javax.swing.JLabel jlFondo;
+    private javax.swing.JLabel jlImagen;
+    private javax.swing.JLabel jlImagen2;
     private javax.swing.JPanel jpFondo;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
