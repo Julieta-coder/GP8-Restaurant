@@ -5,7 +5,13 @@
 package views;
 
 import Entidades.Mesero;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import persistencia.MeseroData;
 
@@ -15,38 +21,72 @@ import persistencia.MeseroData;
  */
 public class ViewPersonal extends javax.swing.JInternalFrame {
 
-    DefaultTableModel  modelo  = new DefaultTableModel ();
+    DefaultTableModel modelo = new DefaultTableModel();
     private MeseroData meseroData = new MeseroData();
-    
+
     /**
      * Creates new form ViewPersonal
      */
     public ViewPersonal() {
         initComponents();
-        
-        String cabecera [ ]  = { " Id ",  " Nombre " ," Apellido "," fecha_registro "," Estado "};
+
+        String[] cabecera = {"Id", "Nombre", "Apellido", "Fecha Registro", "Estado"};
         modelo.setColumnIdentifiers(cabecera);
-        
         jtPersonal.setModel(modelo);
+
+        cargarDatos(); // Cargar los datos en la tabla al iniciar
+    
         
+        // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+        jtPersonal.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        jtPersonal.getTableHeader().setOpaque(false);
+        jtPersonal.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        jtPersonal.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        jtPersonal.setRowHeight(25);
+
+        // Crear un renderizador para centrar el texto del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+         headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+         headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+     
+        // Aplicar el renderizador personalizado a cada columna para centrar los datos
+        for (int i = 0; i < jtPersonal.getColumnModel().getColumnCount(); i++) {
+        jtPersonal.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+}
+
+        // Aplicar el renderizador personalizado al encabezado de cada columna
+        for (int i = 0; i < jtPersonal.getColumnModel().getColumnCount(); i++) {
+         jtPersonal.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+
+        // Configurar para ajustar automáticamente el ancho
+        jtPersonal.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+        
+             
         
     }
-    
-    private void cargarDatos() {
-        // Limpiar el modelo antes de cargar datos
-        modelo.setRowCount(0);
-
-        List<Mesero> meseros = meseroData.listarPersonal();
-        for (Mesero mesero : meseros) {
-            Object[] fila = new Object[5];
-            fila[0] = mesero.getId_mesero();
-            fila[1] = mesero.getNombre();
-            fila[2] = mesero.getApellido();
-            fila[3] = mesero.getFecha_registro();
-            fila[4] = mesero.isEstado() ? "Activo" : "Inactivo"; // Convertir el estado booleano en texto
-
-            modelo.addRow(fila);
-        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,7 +164,25 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargarDatos() {
+        // Limpiar el modelo antes de cargar datos
+        modelo.setRowCount(0);
+
+        List<Mesero> meseros = meseroData.listarPersonal();
+        for (Mesero mesero : meseros) {
+            Object[] fila = new Object[5];
+            fila[0] = mesero.getId_mesero();
+            fila[1] = mesero.getNombre();
+            fila[2] = mesero.getApellido();
+            fila[3] = mesero.getFecha_registro();
+            fila[4] = mesero.isEstado() ? "Activo" : "Inactivo"; // Convertir el estado booleano en texto
+
+            modelo.addRow(fila);
+        }
+    
     }
+        
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAlta;
