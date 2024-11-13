@@ -67,6 +67,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jmiCargarProducto = new javax.swing.JMenuItem();
         jmiContable = new javax.swing.JMenuItem();
         jmiStock = new javax.swing.JMenuItem();
+        jmiPersonal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,6 +180,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jmReserva);
 
         jmAdministracion.setText("Administracion");
+        jmAdministracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAdministracionActionPerformed(evt);
+            }
+        });
 
         jmiContratarMesero.setText("Contratar mesero");
         jmiContratarMesero.addActionListener(new java.awt.event.ActionListener() {
@@ -219,6 +225,14 @@ public class ViewPrincipal extends javax.swing.JFrame {
             }
         });
         jmAdministracion.add(jmiStock);
+
+        jmiPersonal.setText("Personal");
+        jmiPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPersonalActionPerformed(evt);
+            }
+        });
+        jmAdministracion.add(jmiPersonal);
 
         jMenuBar1.add(jmAdministracion);
 
@@ -425,6 +439,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(interComandas);
     }//GEN-LAST:event_jmiComandasActionPerformed
 
+    private void jmAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAdministracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmAdministracionActionPerformed
+
+    private void jmiPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPersonalActionPerformed
+        // TODO add your handling code here:
+             escritorio.removeAll();
+        escritorio.repaint();
+        ViewPersonal interPersonal = new ViewPersonal();
+        interPersonal.setVisible(true);
+        escritorio.add(interPersonal);
+        escritorio.moveToFront(interPersonal);
+    }//GEN-LAST:event_jmiPersonalActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -477,6 +505,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiContratarMesero;
     private javax.swing.JMenuItem jmiGuardarReserva;
     private javax.swing.JMenuItem jmiListarReservas;
+    private javax.swing.JMenuItem jmiPersonal;
     private javax.swing.JMenuItem jmiStock;
     private javax.swing.JPanel jpLogIn;
     private javax.swing.JTextField jtfContraseña;
@@ -499,6 +528,6 @@ private void centrarPanelLogin(){
             }
         });
     }
-
+ 
 
 }
