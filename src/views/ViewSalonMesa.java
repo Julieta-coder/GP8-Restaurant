@@ -24,6 +24,7 @@ import javax.swing.table.TableColumn;
 import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -72,11 +73,15 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         productoData = new ProductoData();
 
         initComponents();
+        
+        SwingUtilities.invokeLater(() -> centrarPanelSalon()); //metodo para central el panel de salon
+
         cargarComboMozo();
         armarCabeceraMesas();
         cargarComboBebidas();
         cargarComboBebidas1();
         tablaCompleta();
+        
 
         /*Ventana emergente*/
         armarCabeceraProductos();
@@ -110,6 +115,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
         // También puedes configurar para ajustar automáticamente el ancho
         jtProductos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        
 
     }
 
@@ -1072,4 +1078,29 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             });
         }
     }
+
+    //METODOS PARA CENTRAR EL PANEL DEL SALON 
+private void centrarPanelSalon(){
+    int x = (jdpSalon.getWidth()- jpSalon.getWidth())/2;
+    int y=(jdpSalon.getHeight()-jpSalon.getHeight())/2;
+    jpSalon.setLocation(x, y);   
+    
 }
+
+// private void configurarEscritorio() {
+//        jdpSalon.addComponentListener(new java.awt.event.ComponentAdapter() {
+//            @Override
+//            public void componentResized(java.awt.event.ComponentEvent evt) {
+//                centrarPanelSalon();
+//            }
+//        });
+    }
+
+
+
+
+
+
+
+
+

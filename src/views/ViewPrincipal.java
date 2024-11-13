@@ -50,8 +50,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jtfUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jtfContraseña = new javax.swing.JTextField();
         jbLogIn = new javax.swing.JButton();
+        jPassword = new javax.swing.JPasswordField();
         jlFondoLogin = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmMesa = new javax.swing.JMenu();
@@ -90,10 +90,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jLabel2.setText("CONTRASEÑA:");
         jpLogIn.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 160, -1, -1));
 
-        jtfContraseña.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jtfContraseña.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jpLogIn.add(jtfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 204, 250, -1));
-
         jbLogIn.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jbLogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar.png"))); // NOI18N
         jbLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -103,8 +99,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jpLogIn.add(jbLogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 50, -1));
 
+        jPassword.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpLogIn.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 250, 30));
+
         jlFondoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo cuadrado 4.png"))); // NOI18N
-        jpLogIn.add(jlFondoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 340));
+        jpLogIn.add(jlFondoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 340));
 
         escritorio.setLayer(jpLogIn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -113,16 +113,16 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(322, 322, 322)
+                .addGap(337, 337, 337)
                 .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
+                .addContainerGap(80, Short.MAX_VALUE)
                 .addComponent(jpLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(64, 64, 64))
         );
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
@@ -351,7 +351,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
        
    //verifico que los campos no esten vacios
         //con el trim elimino si el usuario puso espacios al principio o al final 
-       if(jtfUsuario.getText().trim().isEmpty() || jtfContraseña.getText().trim().isEmpty()){
+       if(jtfUsuario.getText().trim().isEmpty() || jPassword.getText().trim().isEmpty()){
            
            JOptionPane.showMessageDialog(this, "Debe ingresar usuario y contraseña");
            return;   
@@ -360,7 +360,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
       try{
         MeseroData md = new MeseroData();
         Integer usuario = Integer.valueOf(jtfUsuario.getText());
-        String contra = jtfContraseña.getText();
+        String contra = jPassword.getText();
 
         Mesero mesero = md.buscarMozoPorDni(usuario);
 
@@ -369,7 +369,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jpLogIn.setVisible(false);
                 jmMesa.setEnabled(true);
                 jmMesero.setEnabled(true);
-                 jmPedido.setEnabled(true);
+                jmPedido.setEnabled(true);
                 jmReserva.setEnabled(true);
                 jmAdministracion.setEnabled(true);
                 inicioSesion = true;
@@ -377,13 +377,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
         }else {
             JOptionPane.showMessageDialog(this, "Los datos ingresados son incorrectos");
             jtfUsuario.setText("");
-            jtfContraseña.setText("");
+            jPassword.setText("");
         }    
        }catch(NumberFormatException ex){
        
            JOptionPane.showMessageDialog(this, "El usuario debe ser un dni numerico");
            jtfUsuario.setText("");
-           jtfContraseña.setText("");
+           jPassword.setText("");
        
     }                             
 
@@ -440,12 +440,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiComandasActionPerformed
 
     private void jmAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAdministracionActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jmAdministracionActionPerformed
 
     private void jmiPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPersonalActionPerformed
         // TODO add your handling code here:
-             escritorio.removeAll();
+       escritorio.removeAll();
         escritorio.repaint();
         ViewPersonal interPersonal = new ViewPersonal();
         interPersonal.setVisible(true);
@@ -491,6 +491,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPasswordField jPassword;
     private javax.swing.JButton jbLogIn;
     private javax.swing.JLabel jlFondoLogin;
     private javax.swing.JMenu jmAdministracion;
@@ -508,7 +509,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiPersonal;
     private javax.swing.JMenuItem jmiStock;
     private javax.swing.JPanel jpLogIn;
-    private javax.swing.JTextField jtfContraseña;
     private javax.swing.JTextField jtfUsuario;
     // End of variables declaration//GEN-END:variables
 
