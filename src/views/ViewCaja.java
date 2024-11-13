@@ -4,6 +4,13 @@
  */
 package views;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author salon
@@ -15,6 +22,58 @@ public class ViewCaja extends javax.swing.JInternalFrame {
      */
     public ViewCaja() {
         initComponents();
+        
+     
+    // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
+        jtPedidosActivos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
+        jtPedidosActivos.getTableHeader().setOpaque(false);
+        jtPedidosActivos.getTableHeader().setBackground(new Color(30, 144, 255)); // Azul para el encabezado
+        jtPedidosActivos.getTableHeader().setForeground(new Color(23, 32, 42)); // Color de texto del encabezado
+        jtPedidosActivos.setRowHeight(25);
+
+        // Crear un renderizador para centrar el texto del encabezado de la tabla
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+         headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER); // Centrar texto en el encabezado
+         headerRenderer.setBackground(new Color(30, 144, 255)); // Color de fondo del encabezado
+
+        // Crear un renderizador para centrar, establecer colores y aplicar estilos a las celdas de datos de la tabla
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        // Centramos el texto en las celdas
+        setHorizontalAlignment(SwingConstants.CENTER);
+        
+        if (isSelected) {
+            c.setBackground(new Color(169, 169, 169)); // Color de fondo al seleccionar (azul claro)
+            c.setForeground(Color.WHITE); // Color de texto al seleccionar (blanco)
+        } else {
+            c.setBackground(new Color(245, 245, 245)); // Color de fondo normal de las celdas (gris claro)
+            c.setForeground(Color.BLACK); // Color de texto normal (negro)
+        }
+        
+        return c;
+    }
+};
+     
+        // Aplicar el renderizador personalizado a cada columna para centrar los datos
+        for (int i = 0; i < jtPedidosActivos.getColumnModel().getColumnCount(); i++) {
+        jtPedidosActivos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+}
+
+        // Aplicar el renderizador personalizado al encabezado de cada columna
+        for (int i = 0; i < jtPedidosActivos.getColumnModel().getColumnCount(); i++) {
+         jtPedidosActivos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+
+        // Configurar para ajustar automáticamente el ancho
+        jtPedidosActivos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);    
+        
+        
+        
+        
+        
     }
 
     /**
@@ -40,24 +99,25 @@ public class ViewCaja extends javax.swing.JInternalFrame {
 
         jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jtPedidosActivos.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtPedidosActivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id_Pedido", "Id_Mesa", "Id_Mesero", "Fecha Pedido", "Hora Pedido", "Estado", "Monto Total"
             }
         ));
         jScrollPane1.setViewportView(jtPedidosActivos);
 
-        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 180));
+        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 660, 240));
 
         jCobrar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jCobrar.setText("Cobrar");
-        jpFondo.add(jCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 310, 140, -1));
+        jpFondo.add(jCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, 140, 40));
 
         jcMediosDePago.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpFondo.add(jcMediosDePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, -1));
@@ -76,7 +136,7 @@ public class ViewCaja extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setText("<html><u>PEDIDOS ACTIVOS</u></html> ");
-        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         jlFotoFondo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlFotoFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
