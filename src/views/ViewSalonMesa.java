@@ -582,10 +582,11 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                         detallePedido.setSub_total(subtotal);
 
                         // Acumular el total del pedido
+                        double totalBase = pedido.getMonto_total();
                         total += subtotal;
 
                         // Actualizar el pedido en la base de datos
-                        pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                        pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total+totalBase);
                         detallePedido.setPedido(pedido);
                         detallePedidoData.agregarDetallePedido(detallePedido);
 

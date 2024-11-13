@@ -4,6 +4,7 @@
  */
 package views;
 
+import Entidades.Mesa;
 import Entidades.Pedido;
 import java.awt.Color;
 import java.awt.Component;
@@ -187,21 +188,16 @@ public class ViewCaja extends javax.swing.JInternalFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de cobrar este pedido?", "Confirmar Cobro", JOptionPane.YES_NO_OPTION);
         
         if (confirm == JOptionPane.YES_OPTION) {
-            // Poner el monto total del pedido en cero
-            pedidoData.actualizarMontoTotal(idPedido, 0.0);
-
             // Cambiar el estado del pedido a "cobrado" o "inactivo"
             pedidoData.actualizarEstadoPedido(idPedido, false); // Asumiendo que false indica que el pedido está inactivo
-
-            // Borrar o poner en cero los detalles asociados al pedido
-            detallePedidoData.eliminarDetallesPorPedido(idPedido); // O usa un método para poner cantidades en cero
-
+              
             // Liberar la mesa asociada al pedido
             Pedido pedido = pedidoData.buscarPedidoPorId(idPedido);
-            if (pedido.getMesa() != null) {
-                int idMesa = pedido.getMesa().getId_mesa();
+            Mesa mesa = pedido.getMesa();
+            if (mesa != null) {
+                mesa.setDisposicion("libre");
                 MesaData mesaData = new MesaData();
-                mesaData.liberarMesa(idMesa);
+                mesaData.actualizarDisposicionMesa(mesa);
             }
 
             // Actualizar la tabla

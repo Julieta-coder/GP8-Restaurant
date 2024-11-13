@@ -149,12 +149,6 @@ public class DetallePedidoData {
         } catch (SQLException e) {
             System.out.println("Error al eliminar detalle de pedido: " + e.getMessage());
         }
-    }
-
-    public void eliminarDetallesPorPedido(int id_pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    
+    }   
 
 }
