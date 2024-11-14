@@ -135,7 +135,7 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
                 jbAltaActionPerformed(evt);
             }
         });
-        getContentPane().add(jbAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, -1));
+        getContentPane().add(jbAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 80, -1));
 
         jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
@@ -144,7 +144,7 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
                 jbEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, -1, -1));
+        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, 80, -1));
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +161,7 @@ public class ViewPersonal extends javax.swing.JInternalFrame {
                 jbBajaActionPerformed(evt);
             }
         });
-        getContentPane().add(jbBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
+        getContentPane().add(jbBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 80, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("LISTADO DEL PERSONAL");

@@ -775,9 +775,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 //                                    double totalOriginal = pedido.getMonto_total();
                                     
                                     detallePedidoData.actualizarDetallePedidoSubTotal(pedido.getId_pedido(), precio, cantidadBaseD, id_producto);
-                                    d.getSub_total();
-                                    total += d.getSub_total()+subtotal;
-                                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                                   
+                                    total += d.getSub_total();
+                                    double totalOriginal = pedido.getMonto_total();
+                                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total+totalOriginal);
                                     //  borrarFilaTabla();
                                     flag = false;
                                     
@@ -789,13 +790,15 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                                 detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
                                 detallePedido.setPrecio_unitario(precio);
                                 detallePedido.setSub_total(subtotal);
-
-                                // Acumular el total del pedido 
-//                                double totalOriginal = pedido.getMonto_total();
+                                
+//                                 Acumular el total del pedido 
+                                double totalOriginal = pedido.getMonto_total();
+                                
                                 total += subtotal;
-                                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total );
+                                
                                 detallePedido.setPedido(pedido);
                                 detallePedidoData.agregarDetallePedido(detallePedido);
+                                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total + totalOriginal);
                                // borrarFilaTabla();
                                
                             }

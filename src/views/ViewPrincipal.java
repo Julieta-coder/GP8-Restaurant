@@ -313,8 +313,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
          escritorio.removeAll();
         escritorio.repaint();
         ViewPedidoAdmin interPedidoAdmin = new ViewPedidoAdmin();
-        interPedidoAdmin.setVisible(true);
-        escritorio.add(interPedidoAdmin);
+            interPedidoAdmin.setVisible(true);
+            escritorio.add(interPedidoAdmin);
         escritorio.moveToFront(interPedidoAdmin);
         
         
