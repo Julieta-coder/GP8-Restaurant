@@ -360,16 +360,17 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         getContentPane().add(jpBotonesPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 340, 50));
 
         jpMozo.setBackground(new java.awt.Color(153, 153, 153));
+        jpMozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Buscar por id Mozo");
-        jpMozo.add(jLabel3);
+        jpMozo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 5, -1, -1));
 
         jtMozoID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtMozoIDKeyTyped(evt);
             }
         });
-        jpMozo.add(jtMozoID);
+        jpMozo.add(jtMozoID, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 26, 100, -1));
 
         jbBuscarMozoID.setText("BUSCAR");
         jbBuscarMozoID.addActionListener(new java.awt.event.ActionListener() {
@@ -377,7 +378,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbBuscarMozoIDActionPerformed(evt);
             }
         });
-        jpMozo.add(jbBuscarMozoID);
+        jpMozo.add(jbBuscarMozoID, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 53, -1, -1));
 
         getContentPane().add(jpMozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 130, 100));
 
@@ -389,23 +390,24 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         getContentPane().add(jrbMozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
 
         jpMesa.setBackground(new java.awt.Color(153, 153, 153));
+        jpMesa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setText("Listar pedidos de Mesa");
-        jpMesa.add(jLabel9);
+        jpMesa.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 5, -1, -1));
 
         jtMesaID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtMesaIDKeyTyped(evt);
             }
         });
-        jpMesa.add(jtMesaID);
-        jpMesa.add(jdcFechaMesa);
+        jpMesa.add(jtMesaID, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 26, 90, -1));
+        jpMesa.add(jdcFechaMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 53, 90, -1));
 
         jspinHora1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 22, 1));
-        jpMesa.add(jspinHora1);
+        jpMesa.add(jspinHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 80, -1, -1));
 
         jspinHora2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 23, 1));
-        jpMesa.add(jspinHora2);
+        jpMesa.add(jspinHora2, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 80, -1, -1));
 
         jbMesaFechaHora.setText("BUSCAR");
         jbMesaFechaHora.addActionListener(new java.awt.event.ActionListener() {
@@ -413,7 +415,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbMesaFechaHoraActionPerformed(evt);
             }
         });
-        jpMesa.add(jbMesaFechaHora);
+        jpMesa.add(jbMesaFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 107, -1, -1));
 
         getContentPane().add(jpMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 150, 130));
 
