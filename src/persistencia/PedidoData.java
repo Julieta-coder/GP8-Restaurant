@@ -138,7 +138,7 @@ public class PedidoData {
     // Método para obtener todos los Pedidos activos de las mesas (Attentidas) del dia de hoy desde la query
     public List<Pedido> obtenerPedidosDelDia() {
         List<Pedido> pedidos = new ArrayList<>();
-        String sql = "SELECT * FROM pedidos WHERE estado=0 AND fecha_pedido=CURDATE()";
+        String sql = "SELECT * FROM pedidos WHERE estado = 1 AND fecha_pedido=CURDATE()";
         try {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 ResultSet resultSet = statement.executeQuery();

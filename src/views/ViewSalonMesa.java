@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
@@ -579,7 +579,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         boolean flag = false;
 
         // Comprobar que existan filas en la tabla
-        if (totalFilas > 0) {
+        if (totalFilas != -1) {
             // Opciones personalizadas para los botones
             Object[] opciones = {"Sí", "No"};
             int confirm = JOptionPane.showOptionDialog(this,
@@ -620,7 +620,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
                         // Acumular el total del pedido
                         double totalBase = pedido.getMonto_total();
+                        
                         total += subtotal;
+                        
+                        
 
                         // Actualizar el pedido en la base de datos
                         pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total+totalBase);
@@ -729,7 +732,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
             int totalFilas = jtProductos.getRowCount();
             System.out.println("filas"+totalFilas);
 
-            if (totalFilas > 0) {
+            if (totalFilas != -1) { 
 
                 double total = 0;
 
@@ -766,28 +769,31 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                             for (DetallePedido d : detalles) {
 
                                 if (d.getProducto().getId_producto() == id_producto) {
-
-                                    detallePedidoData.actualizarDetallePedidoCantidad(pedido.getId_pedido(), cantidad, d.getCantidad());
-                                    int cantidadBaseD = d.getCantidad() + cantidad;
-                                    double totalOriginal = pedido.getMonto_total();
-                                    total += subtotal + totalOriginal;
-                                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
-                                    detallePedidoData.actualizarDetallePedidoSubTotal(pedido.getId_pedido(), precio, cantidadBaseD);
-                                  //  borrarFilaTabla();
                                     
+                                    detallePedidoData.actualizarDetallePedidoCantidad(pedido.getId_pedido(), cantidad, d.getCantidad(), id_producto);
+                                    int cantidadBaseD = d.getCantidad() + cantidad;
+//                                    double totalOriginal = pedido.getMonto_total();
+                                    
+                                    detallePedidoData.actualizarDetallePedidoSubTotal(pedido.getId_pedido(), precio, cantidadBaseD, id_producto);
+                                    d.getSub_total();
+                                    total += d.getSub_total()+subtotal;
+                                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+                                    //  borrarFilaTabla();
                                     flag = false;
+                                    
                                 }
                             }
                             if (flag) {
+                                
                                 detallePedido.setCantidad(cantidad);
                                 detallePedido.setProducto(productoData.buscarProductoPorId(id_producto));
                                 detallePedido.setPrecio_unitario(precio);
                                 detallePedido.setSub_total(subtotal);
 
                                 // Acumular el total del pedido 
-                                double totalOriginal = pedido.getMonto_total();
-                                total += subtotal + totalOriginal;
-                                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
+//                                double totalOriginal = pedido.getMonto_total();
+                                total += subtotal;
+                                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total );
                                 detallePedido.setPedido(pedido);
                                 detallePedidoData.agregarDetallePedido(detallePedido);
                                // borrarFilaTabla();
@@ -798,6 +804,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
                 }
                  JOptionPane.showMessageDialog(this, "Productos agregados al pedido "+pedido.getId_pedido()+" de la mesa "+pedido.getMesa());
+                 borrarFilaTabla();
             }
         }
 
@@ -1085,7 +1092,9 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         ArrayList<Producto> prodcutos = (ArrayList<Producto>) productoData.listarProductos();
         jcBebidas.removeAllItems();
         for (Producto p : prodcutos) {
+           
             if (p.getCategoria().equalsIgnoreCase("Bebida sin Alcohol")) {
+                
                 jcBebidas.addItem(p);
             }
         }
@@ -1096,7 +1105,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         ArrayList<Producto> productos = (ArrayList<Producto>) productoData.listarProductos();
         jcBebidas1.removeAllItems();
         for (Producto p : productos) {
-            if (p.getCategoria().equalsIgnoreCase("Bebida con Alcohol")) {
+            if (p.getCategoria().trim().equalsIgnoreCase("Bebida con Alcohol")) {
                 jcBebidas1.addItem(p); // Añade Producto directamente
             }
         }

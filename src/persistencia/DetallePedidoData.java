@@ -104,28 +104,35 @@ public class DetallePedidoData {
             System.out.println("Error al actualizar detalle de pedido: " + e.getMessage());
         }
     }
-    public void actualizarDetallePedidoCantidad(int id_pedido, int cantidad, int cantidadOriginal) {
-        String sql = "UPDATE detalle_pedido SET cantidad = ? WHERE id_pedido = ?";
+    
+    
+    public void actualizarDetallePedidoCantidad(int id_pedido, int cantidad, int cantidadOriginal, int id_producto) {
+        String sql = "UPDATE detalle_pedido SET cantidad = ? WHERE id_pedido = ? AND id_producto = ?";
         
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cantidad+cantidadOriginal);
             ps.setDouble(2, id_pedido);
+            ps.setInt(3, id_producto);
            
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error al actualizar detalle de pedido: " + e.getMessage());
         }
     }
-     public void actualizarDetallePedidoSubTotal(int id_pedido, double precio, int cantidad) {
-        String sql = "UPDATE detalle_pedido SET sub_total = ? WHERE id_pedido = ?";
+    
+    
+    
+     public void actualizarDetallePedidoSubTotal(int id_pedido, double precio, int cantidad, int id_producto) {
+        String sql = "UPDATE detalle_pedido SET sub_total = ? WHERE id_pedido = ? AND id_producto = ?";
         
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDouble(1, precio*cantidad);
             ps.setDouble(2, id_pedido);
+            ps.setInt(3, id_producto);
            
             ps.executeUpdate();
         } catch (SQLException e) {
