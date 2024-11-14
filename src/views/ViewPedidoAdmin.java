@@ -132,6 +132,19 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jbBajaLogica = new javax.swing.JButton();
         jbAltaLogica = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
+        jpMozo = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jtMozoID = new javax.swing.JTextField();
+        jbBuscarMozoID = new javax.swing.JButton();
+        jrbMozo = new javax.swing.JRadioButton();
+        jpMesa = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jtMesaID = new javax.swing.JTextField();
+        jdcFechaMesa = new com.toedter.calendar.JDateChooser();
+        jspinHora1 = new javax.swing.JSpinner();
+        jspinHora2 = new javax.swing.JSpinner();
+        jbMesaFechaHora = new javax.swing.JButton();
+        jrbMesa = new javax.swing.JRadioButton();
         jlFondo = new javax.swing.JLabel();
 
         setTitle("Contable");
@@ -152,7 +165,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jtablaPedidos.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(jtablaPedidos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 400, 247));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 400, 247));
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +249,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jtBuscarPorIdKeyTyped(evt);
             }
         });
-        jpBuscarPorId.add(jtBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 96, -1));
+        jpBuscarPorId.add(jtBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 96, -1));
 
         jbBuscar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbBuscar.setText("BUSCAR");
@@ -245,13 +258,13 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbBuscarActionPerformed(evt);
             }
         });
-        jpBuscarPorId.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        jpBuscarPorId.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Buscar por Id Pedido");
-        jpBuscarPorId.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 6, -1, -1));
+        jpBuscarPorId.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(jpBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 37, 170, 100));
+        getContentPane().add(jpBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 140, 100));
 
         jpBuscarBD.setBackground(new java.awt.Color(153, 153, 153));
         jpBuscarBD.setForeground(new java.awt.Color(153, 153, 153));
@@ -264,20 +277,20 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jbBuscarBaseDatosActionPerformed(evt);
             }
         });
-        jpBuscarBD.add(jbBuscarBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        jpBuscarBD.add(jbBuscarBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel8.setText("Listar los pedidos de la BD");
         jpBuscarBD.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, 145, -1));
 
-        getContentPane().add(jpBuscarBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 160, 100));
+        getContentPane().add(jpBuscarBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 140, 100));
 
         jpBuscarPorFecha.setBackground(new java.awt.Color(153, 153, 153));
         jpBuscarPorFecha.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtMontoTotal.setEditable(false);
         jtMontoTotal.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jpBuscarPorFecha.add(jtMontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 66, 100, -1));
+        jpBuscarPorFecha.add(jtMontoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, -1));
 
         jdFecha.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jdFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -285,34 +298,34 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
                 jdFechaPropertyChange(evt);
             }
         });
-        jpBuscarPorFecha.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 32, 100, -1));
+        jpBuscarPorFecha.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setText("Buscar por fecha ");
-        jpBuscarPorFecha.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 6, -1, -1));
+        jpBuscarPorFecha.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        getContentPane().add(jpBuscarPorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 170, 100));
+        getContentPane().add(jpBuscarPorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 140, 100));
 
         jrbBuscarPorId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbBuscarPorIdActionPerformed(evt);
             }
         });
-        getContentPane().add(jrbBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        getContentPane().add(jrbBuscarPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jrbPedidosBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbPedidosBDActionPerformed(evt);
             }
         });
-        getContentPane().add(jrbPedidosBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+        getContentPane().add(jrbPedidosBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
 
         jrbBuscarFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbBuscarFechaActionPerformed(evt);
             }
         });
-        getContentPane().add(jrbBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, -1));
+        getContentPane().add(jrbBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
 
         jpBotonesPorId.setBackground(new java.awt.Color(153, 153, 153));
         jpBotonesPorId.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -345,6 +358,71 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         jpBotonesPorId.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 100, -1));
 
         getContentPane().add(jpBotonesPorId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 340, 50));
+
+        jpMozo.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel3.setText("Buscar por id Mozo");
+        jpMozo.add(jLabel3);
+
+        jtMozoID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtMozoIDKeyTyped(evt);
+            }
+        });
+        jpMozo.add(jtMozoID);
+
+        jbBuscarMozoID.setText("BUSCAR");
+        jbBuscarMozoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarMozoIDActionPerformed(evt);
+            }
+        });
+        jpMozo.add(jbBuscarMozoID);
+
+        getContentPane().add(jpMozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 130, 100));
+
+        jrbMozo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMozoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jrbMozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
+
+        jpMesa.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel9.setText("Listar pedidos de Mesa");
+        jpMesa.add(jLabel9);
+
+        jtMesaID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtMesaIDKeyTyped(evt);
+            }
+        });
+        jpMesa.add(jtMesaID);
+        jpMesa.add(jdcFechaMesa);
+
+        jspinHora1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 22, 1));
+        jpMesa.add(jspinHora1);
+
+        jspinHora2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 23, 1));
+        jpMesa.add(jspinHora2);
+
+        jbMesaFechaHora.setText("BUSCAR");
+        jbMesaFechaHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMesaFechaHoraActionPerformed(evt);
+            }
+        });
+        jpMesa.add(jbMesaFechaHora);
+
+        getContentPane().add(jpMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 150, 130));
+
+        jrbMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMesaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jrbMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
 
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
         jlFondo.setText("jLabel3");
@@ -698,40 +776,253 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jtMontoActualizarKeyTyped
 
+    private void jrbMozoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMozoActionPerformed
+        // TODO add your handling code here:
+                        grupoRadioButon();
+
+    }//GEN-LAST:event_jrbMozoActionPerformed
+
+    private void jrbMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMesaActionPerformed
+        // TODO add your handling code here:
+                        grupoRadioButon();
+
+    }//GEN-LAST:event_jrbMesaActionPerformed
+
+    private void jtMozoIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMozoIDKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+    }//GEN-LAST:event_jtMozoIDKeyTyped
+
+    private void jtMesaIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMesaIDKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+    }//GEN-LAST:event_jtMesaIDKeyTyped
+
+    private void jbBuscarMozoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarMozoIDActionPerformed
+        // TODO add your handling code here:
+        
+          if(! jtMozoID.getText().isEmpty()){
+            int idMozo= Integer.parseInt( jtMozoID.getText() );
+            if(pedidoData.listarPedidosDelMozoDelDia(idMozo) != null){
+                  cargaDatosTablaPorMozo();
+                  jtMozoID.setText("");
+                
+            }else{
+                                    JOptionPane.showMessageDialog(this, "El ID ingresado no existe en la BD, ingrese uno correcto por favor.");
+
+            }
+           
+            
+        }else{
+                    JOptionPane.showMessageDialog(this, "Ingrese un ID para Buscar.");
+
+        }
+    }//GEN-LAST:event_jbBuscarMozoIDActionPerformed
+
+    private void jbMesaFechaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMesaFechaHoraActionPerformed
+        // TODO add your handling code here:
+              // Validar que el campo ID no esté vacío
+    String idText = jtMesaID.getText().trim();
+    if (idText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID de mesa para buscar.");
+        return;
+    }
+
+    try {
+        // Validar que el ID sea un valor numérico
+        int idMesa = Integer.parseInt(idText);
+
+        // Validar que la fecha no sea nula
+        if (jdcFechaMesa.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fecha válida.");
+            return;
+        }
+
+        // Validar valores de los spinners
+        int hora = (int) jspinHora1.getValue(); 
+        int hora2 = (int) jspinHora2.getValue();
+
+        if (hora < 0 || hora > 23 || hora2 < 0 || hora2 > 23) {
+            JOptionPane.showMessageDialog(this, "Las horas deben estar entre 0 y 23.");
+            return;
+        }
+
+        LocalTime hora1 = LocalTime.of(hora, 0);
+        LocalTime hora3 = LocalTime.of(hora2, 0);
+        LocalDate fechaN = jdcFechaMesa.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        // Verificar que la mesa existe
+        if (!mesaData.numeroExiste(idMesa)) {
+            JOptionPane.showMessageDialog(this, "La mesa no existe. Ingrese un valor correcto.");
+            return;
+        }
+
+        // Listar pedidos según el rango de horas
+        List<Pedido> pedidos;
+        if (hora > hora2) {
+            JOptionPane.showMessageDialog(this, "Las horas deben estar entre 0 y 23.");
+            pedidos=null;
+        } else {
+            pedidos = pedidoData.listarPedidosMesaConFechaHora(fechaN, hora1, hora3, idMesa);
+        }
+
+        if (pedidos != null && !pedidos.isEmpty()) {
+            borrarFilaTabla();
+            for (Pedido m : pedidos) {
+                modelo.addRow(new Object[]{
+                    m.getId_pedido(),
+                    m.getMesa().getId_mesa(),
+                    m.getMesero().getId_mesero(),
+                    m.getFecha_pedido(),
+                    m.getHora_pedido(),
+                    m.getMonto_total()
+                });
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró un Pedido con los criterios especificados.");
+        }
+
+        // Limpiar campos
+        jtMesaID.setText("");
+        jdcFechaMesa.setDate(null);
+        jtBuscarPorId.requestFocusInWindow();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID de la mesa debe ser un valor numérico.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error al buscar el pedido: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jbMesaFechaHoraActionPerformed
+
+ //   private void jbMesaFechaHoraActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+   
+//        int idMesa = Integer.parseInt(jtMesaID.getText());
+//        // Asegurarse de que el campo ID no esté vacío
+//        String idText = jtMesaID.getText();
+//        if (! jtMesaID.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Ingrese un ID de mesa para buscar.");
+//            return;
+//    }
+//
+//    try {
+//        // Obtener el ID y los nuevos valores de los campos
+//        int id = Integer.parseInt(idText);
+//        int hora = (int) jspinHora1.getValue(); // Obtener el valor del spinner como entero
+//        LocalTime hora1 = LocalTime.of(hora, 0); // Crear LocalTime con el valor obtenido (minutos en 0)
+//
+//        int hora2 = (int) jspinHora2.getValue(); // Obtener el valor del spinner como entero
+//        LocalTime hora3 = LocalTime.of(hora2, 0); // Crear LocalTime con el valor obtenido (minutos en 0)      
+//
+//        LocalDate fechaN=jdcFechaMesa.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        
+//        
+////         Verificar que todos los campos estén llenos
+//        if (jtMesaID.getText().isEmpty() || jdcFechaMesa.getDate() == null) {
+//            JOptionPane.showMessageDialog(this, "Complete todos los campos antes de actualizar.");
+//            return;
+//        }
+//
+//        if (!mesaData.numeroExiste(id)) {
+//            JOptionPane.showMessageDialog(this, "La mesa no existe por favor ingrese un valor correcto.");
+//            return;
+//        }
+//
+//        if (hora > hora2) {
+//
+//            List<Pedido> p = pedidoData.listarPedidosMesaConFechaHora(fechaN, hora1, hora3, idMesa);
+//
+//            if (p != null) {
+//
+//                borrarFilaTabla();
+//
+//                for (Pedido m : p) {
+//                    modelo.addRow(new Object[]{m.getId_pedido(), m.getMesa().getId_mesa(), m.getMesero().getId_mesero(), m.getFecha_pedido(), m.getHora_pedido(), m.getMonto_total()});
+//                }
+//            }
+//
+//        } else if (hora2 > hora) {
+//            List<Pedido> p2 = pedidoData.listarPedidosMesaConFechaHora(fechaN, hora3, hora1, idMesa);
+//
+//            if (p2 != null) {
+//
+//                borrarFilaTabla();
+//
+//                for (Pedido m : p2) {
+//                    modelo.addRow(new Object[]{m.getId_pedido(), m.getMesa().getId_mesa(), m.getMesero().getId_mesero(), m.getFecha_pedido(), m.getHora_pedido(), m.getMonto_total()});
+//                }
+//
+//            }
+//
+//            jtMesaID.setText("");
+//            jdcFechaMesa.setDate(null);
+//            jtBuscarPorId.requestFocusInWindow();
+//
+//
+//           
+//        } else {
+//            JOptionPane.showMessageDialog(this, "No se encontró un Pedido con el ID especificado.");
+//        }
+//    } catch (NumberFormatException e) {
+//        JOptionPane.showMessageDialog(this, " deben ser valores numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
+//    } catch (Exception e) {
+//        JOptionPane.showMessageDialog(this, "Ocurrió un error al actualizar el pedido: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//    }
+        
+ //   }               
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbAltaLogica;
     private javax.swing.JButton jbBajaLogica;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbBuscarBaseDatos;
+    private javax.swing.JButton jbBuscarMozoID;
     private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbMesaFechaHora;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdFecha;
     private com.toedter.calendar.JDateChooser jdatechooserActualizar;
+    private com.toedter.calendar.JDateChooser jdcFechaMesa;
     private javax.swing.JLabel jlFondo;
     private javax.swing.JPanel jpActualizarPorId;
     private javax.swing.JPanel jpBotonesPorId;
     private javax.swing.JPanel jpBuscarBD;
     private javax.swing.JPanel jpBuscarPorFecha;
     private javax.swing.JPanel jpBuscarPorId;
+    private javax.swing.JPanel jpMesa;
+    private javax.swing.JPanel jpMozo;
     private javax.swing.JRadioButton jrbBuscarFecha;
     private javax.swing.JRadioButton jrbBuscarPorId;
+    private javax.swing.JRadioButton jrbMesa;
+    private javax.swing.JRadioButton jrbMozo;
     private javax.swing.JRadioButton jrbPedidosBD;
+    private javax.swing.JSpinner jspinHora1;
+    private javax.swing.JSpinner jspinHora2;
     private javax.swing.JTextField jtBuscarPorId;
     private javax.swing.JTextField jtMesaActualizar;
+    private javax.swing.JTextField jtMesaID;
     private javax.swing.JTextField jtMeseroActualizar;
     private javax.swing.JTextField jtMontoActualizar;
     private javax.swing.JTextField jtMontoTotal;
+    private javax.swing.JTextField jtMozoID;
     private javax.swing.JTable jtablaPedidos;
     // End of variables declaration//GEN-END:variables
 
@@ -809,6 +1100,23 @@ private void borrarFilaTabla() {
 
     }
 
+   private void cargaDatosTablaPorMozo(){
+         borrarFilaTabla();
+         int idMozo= Integer.parseInt( jtMozoID.getText() );
+        
+        
+
+//           List <Pedido> lista= (List) pedidoData.buscarPedidoPorId(idPedido);
+        List  < Pedido> lista=  pedidoData.listarPedidosDelMozoDelDia(idMozo);
+
+//            modelo.addRow(new Object []{lista.getId_pedido() ,lista.getMesa().getId_mesa(), lista.getMesero().getId_mesero(),lista.getFecha_pedido(), lista.getHora_pedido(), lista.getMonto_total()}) ;
+
+      
+        for(Pedido m : lista){
+            modelo.addRow(new Object []{m.getId_pedido() ,m.getMesa().getId_mesa(), m.getMesero().getId_mesero(),m.getFecha_pedido(),m.getHora_pedido(), m.getMonto_total()}) ;
+        }
+
+    }
   
   public void grupoRadioButon(){
         borrarFilaTabla();
@@ -816,9 +1124,16 @@ private void borrarFilaTabla() {
       buttonGroup1.add(jrbBuscarPorId);
       buttonGroup1.add(jrbPedidosBD);
       buttonGroup1.add(jrbBuscarFecha);
+      buttonGroup1.add(jrbMozo);
+      buttonGroup1.add(jrbMesa);
+
+      
       
       if( jrbBuscarPorId.isSelected()){
-                  borrarFilaTabla();
+          borrarFilaTabla();
+
+          deshabilitarComponentes(jpMozo, false);
+          deshabilitarComponentes(jpMesa, false);
 
          deshabilitarComponentes(jpBuscarBD,false);
          deshabilitarComponentes(jpBuscarPorFecha,false);
@@ -830,7 +1145,10 @@ private void borrarFilaTabla() {
           
           
       }else if(jrbPedidosBD.isSelected()){
-                  borrarFilaTabla();
+          borrarFilaTabla();
+
+          deshabilitarComponentes(jpMozo, false);
+          deshabilitarComponentes(jpMesa, false);
 
          deshabilitarComponentes(jpBuscarBD,true);
          deshabilitarComponentes(jpBuscarPorFecha,false);
@@ -839,10 +1157,37 @@ private void borrarFilaTabla() {
          deshabilitarComponentes(jpBotonesPorId,false);
           
       }else if(jrbBuscarFecha.isSelected()){
-                  borrarFilaTabla();
+          borrarFilaTabla();
+
+          deshabilitarComponentes(jpMozo, false);
+          deshabilitarComponentes(jpMesa, false);
 
          deshabilitarComponentes(jpBuscarBD,false);
          deshabilitarComponentes(jpBuscarPorFecha,true);
+         deshabilitarComponentes(jpBuscarPorId,false);
+         deshabilitarComponentes(jpActualizarPorId,false);
+         deshabilitarComponentes(jpBotonesPorId,false);
+         
+      }else if(jrbMozo.isSelected()){
+          borrarFilaTabla();
+          
+          deshabilitarComponentes(jpMozo, true);
+          deshabilitarComponentes(jpMesa, false);
+
+         deshabilitarComponentes(jpBuscarBD,false);
+         deshabilitarComponentes(jpBuscarPorFecha,false);
+         deshabilitarComponentes(jpBuscarPorId,false);
+         deshabilitarComponentes(jpActualizarPorId,false);
+         deshabilitarComponentes(jpBotonesPorId,false);
+         
+      }else if(jrbMesa.isSelected()){
+          borrarFilaTabla();
+
+          deshabilitarComponentes(jpMozo, false);
+          deshabilitarComponentes(jpMesa, true);
+
+         deshabilitarComponentes(jpBuscarBD,false);
+         deshabilitarComponentes(jpBuscarPorFecha,false);
          deshabilitarComponentes(jpBuscarPorId,false);
          deshabilitarComponentes(jpActualizarPorId,false);
          deshabilitarComponentes(jpBotonesPorId,false);
