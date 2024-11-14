@@ -356,10 +356,14 @@ try {
     }//GEN-LAST:event_jpContraseñaKeyTyped
 
     private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
-        // TODO add your handling code here:
-         char c = evt.getKeyChar();
-        
-         if ((c>'z' || c<'a')&&(c>'Z' || c<'A')) evt.consume();
+        // TODO add your handling code here:                             
+    char c = evt.getKeyChar();
+
+    if (!Character.isLetter(c) && c != 'ñ' && c != 'Ñ') {
+        evt.consume(); // Ignorar el carácter si no es una letra o ñ/Ñ
+    
+}
+
     }//GEN-LAST:event_jtNombreKeyTyped
 
     private void jtDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDNIKeyTyped
@@ -376,9 +380,13 @@ try {
 
     private void jtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyTyped
         // TODO add your handling code here:
-          char c = evt.getKeyChar();
-        
-         if ((c>'z' || c<'a')&&(c>'Z' || c<'A')) evt.consume();
+    char c = evt.getKeyChar();
+
+    if (!Character.isLetter(c) && c != 'ñ' && c != 'Ñ') {
+        evt.consume(); // Ignorar el carácter si no es una letra o ñ/Ñ
+    
+}
+
     }//GEN-LAST:event_jtApellidoKeyTyped
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
