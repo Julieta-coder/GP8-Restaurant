@@ -431,7 +431,7 @@ public class PedidoData {
     
     //actualizar estado logico
     public boolean actualizarEstadoLogico(int id_pedido, boolean estado) {
-        String sql = "UPDATE pedidos SET estado = ? WHERE id_pedido = ?";
+        String sql = "UPDATE pedidos SET estado = ? WHERE id_pedido = ? ";
         try {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setBoolean(1, estado);
@@ -456,7 +456,7 @@ public class PedidoData {
     }
     
     public void actualizarMontoTotal(int id_pedido, double monto_total) {
-        String sql = "UPDATE pedidos SET monto_total = ? WHERE id_pedido = ? "; 
+        String sql = "UPDATE pedidos SET monto_total = ? WHERE id_pedido = ? AND estado= 1 "; 
         try {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setDouble(1, monto_total);

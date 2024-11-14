@@ -158,7 +158,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jcBebidas1 = new javax.swing.JComboBox<>();
         jsCantidadBebidas1 = new javax.swing.JSpinner();
         jEliminarPPedido = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jlFondo = new javax.swing.JLabel();
         jpSalon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -359,9 +358,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         });
         jpAbrirMesa.add(jEliminarPPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 150, 40));
 
-        jTextField1.setText("jTextField1");
-        jpAbrirMesa.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 350, -1, -1));
-
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo1.png"))); // NOI18N
         jpAbrirMesa.add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1200, 450));
 
@@ -518,7 +514,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         int cont = 0;
 
         //SI NO EXISTEN DATOS EN LA BASE DE DATOS
-        if (pedidosDia.size() == 0) {
+        if (pedidosDia.size() < 0) {
             pedido.setMesa(mesa);
             // Guardar el pedido en la base de datos
             pedidoData.cargarPedido(pedido);
@@ -945,7 +941,6 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jMozo2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jTitulo;
     private javax.swing.JButton jbAbrirMesa;
     private javax.swing.JButton jbActualizar;
