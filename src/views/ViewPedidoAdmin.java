@@ -723,7 +723,8 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
 
     private void jbBuscarBaseDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarBaseDatosActionPerformed
         // TODO add your handling code here:
-        
+          borrarFilaTabla();
+          
         List <Pedido> listaP=   pedidoData.obtenerPedidos();
 
         for (Pedido lista : listaP) {
@@ -734,7 +735,7 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         }
         
     
-                   borrarFilaTabla();
+                 
 
         
     }//GEN-LAST:event_jbBuscarBaseDatosActionPerformed
