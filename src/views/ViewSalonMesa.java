@@ -215,15 +215,34 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.add(jcEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 206, 180, 30));
 
         jsCantidaPP.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jsCantidaPP.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsCantidaPP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jsCantidaPPKeyTyped(evt);
+            }
+        });
         jpAbrirMesa.add(jsCantidaPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 256, 80, 30));
 
         jsCantidadEntrada.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jsCantidadEntrada.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsCantidadEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jsCantidadEntradaKeyTyped(evt);
+            }
+        });
         jpAbrirMesa.add(jsCantidadEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 206, 80, 30));
 
         jcPlatoPrincipal.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jpAbrirMesa.add(jcPlatoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 256, 180, 30));
 
         jsCantidadBebidas.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jsCantidadBebidas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsCantidadBebidas.setFocusable(false);
+        jsCantidadBebidas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jsCantidadBebidasKeyTyped(evt);
+            }
+        });
         jpAbrirMesa.add(jsCantidadBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 116, 80, 30));
 
         jbAgregar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
@@ -279,6 +298,12 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.add(jcPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 306, 180, 30));
 
         jsCantidadPostre.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jsCantidadPostre.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsCantidadPostre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jsCantidadPostreKeyTyped(evt);
+            }
+        });
         jpAbrirMesa.add(jsCantidadPostre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 306, 80, 30));
 
         jbSalir.setBackground(new java.awt.Color(51, 51, 51));
@@ -316,6 +341,12 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jpAbrirMesa.add(jcBebidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 180, 30));
 
         jsCantidadBebidas1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jsCantidadBebidas1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jsCantidadBebidas1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jsCantidadBebidas1KeyTyped(evt);
+            }
+        });
         jpAbrirMesa.add(jsCantidadBebidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 80, 30));
 
         jEliminarPPedido.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
@@ -833,6 +864,47 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbLiberarActionPerformed
+
+    private void jsCantidadBebidasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jsCantidadBebidasKeyTyped
+        // TODO add your handling code here:
+        
+     
+    }//GEN-LAST:event_jsCantidadBebidasKeyTyped
+
+    private void jsCantidadBebidas1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jsCantidadBebidas1KeyTyped
+        // TODO add your handling code here:
+    char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+    }//GEN-LAST:event_jsCantidadBebidas1KeyTyped
+
+    private void jsCantidadEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jsCantidadEntradaKeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+    }//GEN-LAST:event_jsCantidadEntradaKeyTyped
+
+    private void jsCantidaPPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jsCantidaPPKeyTyped
+        // TODO add your handling code here:
+ 
+          char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+        
+
+    }//GEN-LAST:event_jsCantidaPPKeyTyped
+
+    private void jsCantidadPostreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jsCantidadPostreKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+    }//GEN-LAST:event_jsCantidadPostreKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

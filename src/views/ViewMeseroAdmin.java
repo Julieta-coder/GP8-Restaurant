@@ -243,6 +243,10 @@ public class ViewMeseroAdmin extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Complete todos los campos antes de actualizar.");
             return;
         }
+          if (dni < 999999) {
+            JOptionPane.showMessageDialog(this, "DNI inválido.");
+            return;
+          }
 
         // Crear una instancia de Mesero con los nuevos datos
         Mesero mesero = new Mesero(id, nombre, apellido, dni, LocalDate.now(), contraseña, true);
@@ -333,6 +337,11 @@ try {
         } else {
             // Si no se encuentra el mesero, mostrar un mensaje
             JOptionPane.showMessageDialog(this, "No se encontró mesero con el ID " + idCompare);
+            //LIMPIA LOS DATOS 
+        jtNombre.setText("");
+        jtApellido.setText("");
+        jtDNI.setText("");
+        jpContraseña.setText("");
         }
 
     } catch (NumberFormatException e) {
