@@ -158,6 +158,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         jcBebidas1 = new javax.swing.JComboBox<>();
         jsCantidadBebidas1 = new javax.swing.JSpinner();
         jEliminarPPedido = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jlFondo = new javax.swing.JLabel();
         jpSalon = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -252,7 +253,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbAgregarActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, 40));
+        jpAbrirMesa.add(jbAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, -1, 40));
 
         jScrollPane2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -279,7 +280,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbTomarPedidoActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, 150, 40));
+        jpAbrirMesa.add(jbTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 150, 40));
 
         jbActualizar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbActualizar.setText("Actualizar pedido");
@@ -288,7 +289,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jbActualizarActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 370, 150, 40));
+        jpAbrirMesa.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 400, 150, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel7.setText("Postre:");
@@ -356,7 +357,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                 jEliminarPPedidoActionPerformed(evt);
             }
         });
-        jpAbrirMesa.add(jEliminarPPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 370, 150, 40));
+        jpAbrirMesa.add(jEliminarPPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 150, 40));
+
+        jTextField1.setText("jTextField1");
+        jpAbrirMesa.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 350, -1, -1));
 
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo1.png"))); // NOI18N
         jpAbrirMesa.add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1200, 450));
@@ -445,7 +449,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpSalon, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+            .addComponent(jdpSalon)
         );
 
         pack();
@@ -932,6 +936,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jMozo2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jTitulo;
     private javax.swing.JButton jbAbrirMesa;
     private javax.swing.JButton jbActualizar;
