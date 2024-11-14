@@ -84,6 +84,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jtfUsuarioActionPerformed(evt);
             }
         });
+        jtfUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfUsuarioKeyTyped(evt);
+            }
+        });
         jpLogIn.add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 104, 250, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
@@ -453,6 +458,17 @@ public class ViewPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(interPersonal);
     }//GEN-LAST:event_jmiPersonalActionPerformed
 
+    private void jtfUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfUsuarioKeyTyped
+        // TODO add your handling code here:
+             char c = evt.getKeyChar();
+         
+        
+        if (c>'9' || c<'0') evt.consume();
+        
+        if( jtfUsuario.getText().length() >= 8 ){
+            evt.consume();
+    }//GEN-LAST:event_jtfUsuarioKeyTyped
+ }
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
