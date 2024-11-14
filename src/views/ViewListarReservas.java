@@ -43,6 +43,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
         }
         
     };
+    private LocalDate fechaOriginal;
 
     /**
      * Creates new form ViewListarReservas
@@ -281,7 +282,21 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
     private void jtReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtReservasMouseClicked
         // TODO add your handling code here: 
         // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
-    
+    int filaSelect = jtReservas.getSelectedRow();
+
+    if (filaSelect != -1) {
+        // Obtener la fecha original de la reserva
+        Object fechaObj = jtReservas.getValueAt(filaSelect, 4);
+        if (fechaObj instanceof String) {
+            try {
+                fechaOriginal = LocalDate.parse((String) fechaObj);
+            } catch (DateTimeParseException e) {
+                fechaOriginal = null;
+            }
+        } else if (fechaObj instanceof LocalDate) {
+            fechaOriginal = (LocalDate) fechaObj;
+        }
+    }
         
 //        int filaSelected = jtReservas.getSelectedRow();
 //        if (filaSelected != -1) {
@@ -294,8 +309,7 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // TODO add your handling code here:
 
-                                                
-    int filaSelect = jtReservas.getSelectedRow();
+      int filaSelect = jtReservas.getSelectedRow();
 
     if (filaSelect != -1) {
         // Obtener el ID de la reserva (no editable)
@@ -350,6 +364,14 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
             fecha = (LocalDate) fechaObj;
         }
 
+        // Validar que la fecha no sea anterior a hoy
+        if (fecha != null && fecha.isBefore(LocalDate.now())) {
+            JOptionPane.showMessageDialog(this, "No se puede seleccionar una fecha anterior a hoy.", "Error", JOptionPane.ERROR_MESSAGE);
+            // Restaurar la fecha original en la tabla
+            jtReservas.setValueAt(fechaOriginal != null ? fechaOriginal.toString() : "", filaSelect, 4);
+            return;
+        }
+
         // Obtener y validar el número de mesa
         Object numeroObj = jtReservas.getValueAt(filaSelect, 5);
         int numero = 0;
@@ -384,8 +406,8 @@ public class ViewListarReservas extends javax.swing.JInternalFrame {
 
     } else {
         JOptionPane.showMessageDialog(this, "Debe seleccionar una fila", "Error", JOptionPane.WARNING_MESSAGE);
-    
-}
+    }
+
 
 
 
