@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package views;
 
 import Entidades.*;
@@ -25,10 +22,7 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Matias
- */
+
 public class ViewComandas extends javax.swing.JInternalFrame {
 
     
@@ -178,6 +172,7 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         jtDetalles = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jbSalir1 = new javax.swing.JButton();
+        jlFondo = new javax.swing.JLabel();
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +182,9 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         });
 
         setTitle("Comandas");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jpPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpFechaYhora.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -203,10 +201,10 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         jpFechaYhoraLayout.setHorizontalGroup(
             jpFechaYhoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpFechaYhoraLayout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
-                .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
-                .addComponent(jlHora, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101)
+                .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addComponent(jlHora, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
         );
         jpFechaYhoraLayout.setVerticalGroup(
@@ -216,8 +214,10 @@ public class ViewComandas extends javax.swing.JInternalFrame {
                 .addGroup(jpFechaYhoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
+
+        jpPrincipal.add(jpFechaYhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 840, 70));
 
         jtPedidos.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -233,6 +233,8 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtPedidos);
 
+        jpPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 850, 120));
+
         jtDetalles.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jtDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,37 +249,11 @@ public class ViewComandas extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jtDetalles);
 
+        jpPrincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 850, 190));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("Seleccione ID de la fila para ver el detalle");
-
-        javax.swing.GroupLayout jpPrincipalLayout = new javax.swing.GroupLayout(jpPrincipal);
-        jpPrincipal.setLayout(jpPrincipalLayout);
-        jpPrincipalLayout.setHorizontalGroup(
-            jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jpFechaYhora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jpPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jpPrincipalLayout.setVerticalGroup(
-            jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpFechaYhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jpPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 95, 313, -1));
 
         jbSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jbSalir1.addActionListener(new java.awt.event.ActionListener() {
@@ -285,29 +261,12 @@ public class ViewComandas extends javax.swing.JInternalFrame {
                 jbSalir1ActionPerformed(evt);
             }
         });
+        jpPrincipal.add(jbSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 30, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbSalir1)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbSalir1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo 3.png"))); // NOI18N
+        jpPrincipal.add(jlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
+
+        getContentPane().add(jpPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -330,6 +289,7 @@ public class ViewComandas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSalir;
     private javax.swing.JButton jbSalir1;
     private javax.swing.JLabel jlFecha;
+    private javax.swing.JLabel jlFondo;
     private javax.swing.JLabel jlHora;
     private javax.swing.JPanel jpFechaYhora;
     private javax.swing.JPanel jpPrincipal;
