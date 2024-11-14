@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package persistencia;
 
-/**
- *
- * @author Adriana
- */
+
 import Entidades.Mesa;
 import java.sql.*;
 import java.util.ArrayList;
@@ -256,8 +250,8 @@ public class MesaData {
 
         try {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, id_mesa);
                 
+                ps.setInt(1, id_mesa);      
                 ResultSet rs = ps.executeQuery();
                 
                 if (rs.next()) {
@@ -278,6 +272,7 @@ public class MesaData {
 
         return mesa;
     }
+  
   public Mesa buscarMesaPorNumero(int numero) {
         String sql = "SELECT * FROM mesas WHERE numero = ?";
         Mesa mesa = null;

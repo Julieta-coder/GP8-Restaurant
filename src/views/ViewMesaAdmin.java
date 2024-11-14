@@ -22,10 +22,10 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
         @Override
         public boolean isCellEditable(int fila, int columna) {
-            if (columna == 1 || columna == 2 || columna == 3) {
-
-                return true;
-            }
+//            if (columna == 1 || columna == 2) {
+//
+//                return true;
+//            }
             return false;
         }
     };
@@ -48,13 +48,13 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jNumeroMesa = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jAgregar = new javax.swing.JButton();
         jCapacidad = new javax.swing.JSpinner();
         jEliminar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jDisposicion = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jIdMesa = new javax.swing.JTextField();
@@ -62,11 +62,11 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jDetalleMesa = new javax.swing.JTable();
         jListaEstado = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
         jSalir = new javax.swing.JButton();
         jrbEstadoLogico = new javax.swing.JRadioButton();
         jbActivar = new javax.swing.JButton();
         jbDesactivar = new javax.swing.JButton();
+        jtDisposicion = new javax.swing.JTextField();
         jlFondo = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -88,6 +88,10 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
         jNumeroMesa.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         getContentPane().add(jNumeroMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel6.setText("Estado");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 68, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel1.setText("Numero Mesa:");
@@ -121,10 +125,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel3.setText("Disposicion:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 110, 30));
-
-        jDisposicion.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jDisposicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libre", "Ocupada", "Atendida" }));
-        getContentPane().add(jDisposicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 120, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Estado:");
@@ -176,10 +176,6 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jListaEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 216, 120, 30));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel6.setText("Estado");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 68, -1));
-
         jSalir.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cruz.png"))); // NOI18N
         jSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +203,10 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jbDesactivar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 460, 110, 40));
+
+        jtDisposicion.setText("Libre");
+        jtDisposicion.setEnabled(false);
+        getContentPane().add(jtDisposicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 110, -1));
 
         jlFondo.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jlFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo grande.png"))); // NOI18N
@@ -300,16 +300,15 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
             if (mesa != null) {
                 // Rellenar los campos con los datos de la mesa encontrada
                 jNumeroMesa.setValue(mesa.getNumero());
-                jCapacidad.setValue(mesa.getCapacidad());
-                jDisposicion.setSelectedItem(mesa.getDisposicion());
+                jCapacidad.setValue(mesa.getCapacidad());               
 
-                // Establece el estado en el combo box según el valor booleano
+                // Establece el estado en el radio button según el valor booleano
                 if (mesa.getEstado()) {
-                    jrbEstadoLogico.isSelected();
+                    jrbEstadoLogico.setSelected(true);
                 } else {
-                    jrbEstadoLogico.isSelected();
+                    jrbEstadoLogico.setSelected(false);
+                
                 }
-
                 // Limpia la tabla antes de cargar los datos
                 DefaultTableModel model = (DefaultTableModel) jDetalleMesa.getModel();
                 model.setRowCount(0);
@@ -345,12 +344,10 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
             int numeroMesa = (Integer) jNumeroMesa.getValue(); // Corrección: se usa getValue en lugar de getText
             int capacidad = (Integer) jCapacidad.getValue(); // Corrección: se usa getValue en lugar de getText
-            String disposicion = jDisposicion.getSelectedItem().toString();
-            //boolean estado = (boolean) jEstado.getSelectedItem().);
             boolean estado = jrbEstadoLogico.isSelected();
-
+            String disposicion = "Libre";
             // Validar que todos los campos estén llenos
-            if (numeroMesa == 0 || capacidad == 0 || disposicion.isEmpty()) {
+            if (numeroMesa == 0 || capacidad == 0 ){
                 JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
                 return;
             }
@@ -375,8 +372,9 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
             jNumeroMesa.setValue(0);
             jCapacidad.setValue(0);
 
-            jDisposicion.setSelectedIndex(0);
+          //  jDisposicion.setSelectedIndex(0);
             jrbEstadoLogico.isSelected();
+            jIdMesa.setText(" ");
 
             // Recargar la tabla para mostrar la nueva mesa
             cargarDatosEnTabla();
@@ -481,11 +479,19 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
 
     if (selectedRow >= 0) {
         int id_mesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
-        mesaData.altaLogica(id_mesa);  // Activa la mesa en la base de datos
+        String estado = modelo.getValueAt(selectedRow, 4).toString();
+    
+        //Evaluo si la mesa seleccionada ya esta activa
+        if(estado.equals("Activa")){
+             JOptionPane.showMessageDialog(this, "La mesa ya se encuentra activa");           
+        }else{  
+            mesaData.altaLogica(id_mesa);  // Activa la mesa en la base de datos
 
-    // Actualizar la tabla eliminando la fila desactivada del modelo de la tabla
-    modelo.removeRow(selectedRow);  // Elimina la fila del modelo de la tabla
-        JOptionPane.showMessageDialog(this, "Mesa Activada");
+         // Actualizar la tabla eliminando la fila desactivada del modelo de la tabla
+         modelo.removeRow(selectedRow);  // Elimina la fila del modelo de la tabla
+        JOptionPane.showMessageDialog(this, "Mesa Activada");       
+       }
+        
     } else {
         JOptionPane.showMessageDialog(this, "Debe seleccionar una fila en la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
     
@@ -496,16 +502,26 @@ public class ViewMesaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActivarActionPerformed
 
     private void jbDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDesactivarActionPerformed
-    // TODO add your handling code here:
+    
 int selectedRow = jDetalleMesa.getSelectedRow();
 
 if (selectedRow >= 0) {
     int id_mesa = Integer.parseInt(modelo.getValueAt(selectedRow, 0).toString());
-    mesaData.bajaLogica(id_mesa);  // Desactiva la mesa en la base de datos
+    
+    String estado = modelo.getValueAt(selectedRow, 4).toString();
+    
+        //Evaluo si la mesa seleccionada ya esta inactiva
+        if(estado.equals("Inactiva")){
+             JOptionPane.showMessageDialog(this, "La mesa ya se encuentra inactiva");  
+             
+        }else{  
+         mesaData.bajaLogica(id_mesa);  // Desactiva la mesa en la base de datos
 
-    // Actualizar la tabla eliminando la fila desactivada del modelo de la tabla
-    modelo.removeRow(selectedRow);  // Elimina la fila del modelo de la tabla
-    JOptionPane.showMessageDialog(this, "Mesa Desactivada");
+             // Actualizar la tabla eliminando la fila desactivada del modelo de la tabla
+             modelo.removeRow(selectedRow);  // Elimina la fila del modelo de la tabla
+            JOptionPane.showMessageDialog(this, "Mesa Desactivada");
+      }
+        
 } else {
     JOptionPane.showMessageDialog(this, "Debe seleccionar una fila en la tabla", "Advertencia", JOptionPane.WARNING_MESSAGE);
 }
@@ -548,7 +564,6 @@ if (selectedRow >= 0) {
     private javax.swing.JButton jBuscar;
     private javax.swing.JSpinner jCapacidad;
     private javax.swing.JTable jDetalleMesa;
-    private javax.swing.JComboBox<String> jDisposicion;
     private javax.swing.JButton jEliminar;
     private javax.swing.JTextField jIdMesa;
     private javax.swing.JLabel jLabel1;
@@ -567,5 +582,6 @@ if (selectedRow >= 0) {
     private javax.swing.JButton jbDesactivar;
     private javax.swing.JLabel jlFondo;
     private javax.swing.JRadioButton jrbEstadoLogico;
+    private javax.swing.JTextField jtDisposicion;
     // End of variables declaration//GEN-END:variables
 }

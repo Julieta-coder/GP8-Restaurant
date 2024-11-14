@@ -359,7 +359,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         
       try{
         MeseroData md = new MeseroData();
-        Integer usuario = Integer.valueOf(jtfUsuario.getText());
+        Integer usuario = Integer.valueOf(jtfUsuario.getText().trim());
         String contra = jPassword.getText();
 
         Mesero mesero = md.buscarMozoPorDni(usuario);

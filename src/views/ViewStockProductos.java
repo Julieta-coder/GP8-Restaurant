@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -19,15 +20,18 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
     
     ProductoData pd = new ProductoData();
+   
     
   
    
     public ViewStockProductos() {
+        
         initComponents();
         cabeceraTabla();
-//        comboCategorias(); //ESTE ES PARA BUSCAR POR CATEGORIA, FALTA IMPLEMENTAR
+        cargarDatos();
+        // setIconImage(new ImageIcon(getClass().getResource("/imagenes/logo.png")).getImage());
+        
     
-
        // Establecer fuente y colores de fondo y texto para el encabezado de la tabla
         JTablaProductos.getTableHeader().setFont(new Font("Segoe UI", Font.ITALIC, 14));
         JTablaProductos.getTableHeader().setOpaque(false);
@@ -73,7 +77,7 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
 
         // Configurar para ajustar automáticamente el ancho
         JTablaProductos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-
+        
 }
 
     
@@ -158,7 +162,7 @@ public class ViewStockProductos extends javax.swing.JInternalFrame {
     private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
         
         String nom = jtNombre.getText().toLowerCase();
-        cargarDatos(nom);
+        cargarDatosPorNombre(nom);
     
     }//GEN-LAST:event_jtNombreKeyReleased
 
@@ -192,7 +196,21 @@ private void cabeceraTabla(){
 
 }
 
-    private void cargarDatos(String nom){
+    private void cargarDatos(){
+
+      modelo.setRowCount(0); // limpio la tabla
+      List <Producto> listaP = pd.listarProductos();
+     
+     for (Producto p : listaP){
+           
+        modelo.addRow(new Object[] {p.getId_producto(),p.getNombre(),p.getCategoria(),p.getPrecio(),p.getStock()});
+                     
+          }
+        
+
+}
+
+    private void cargarDatosPorNombre(String nom){
       
       modelo.setRowCount(0); // limpio la tabla
       List <Producto> listaP = pd.listarProductos();
