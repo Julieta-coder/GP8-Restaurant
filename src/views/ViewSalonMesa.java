@@ -696,6 +696,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "¿Modificar el pedido?", "Confirmacion", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             int totalFilas = jtProductos.getRowCount();
+            System.out.println("filas"+totalFilas);
 
             if (totalFilas > 0) {
 
@@ -703,6 +704,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
 
                 // Iterar por cada fila de la tabla
                 for (int fila = 0; fila < totalFilas; fila++) {
+                    System.out.println("for fila"+fila);
                     // Extraer los valores de cada columna en la fila actual
                     int id_producto = (int) jtProductos.getValueAt(fila, 0); // ID_Producto
                     String nombre = (String) jtProductos.getValueAt(fila, 1); // Nombre Producto
@@ -740,7 +742,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                                     total += subtotal + totalOriginal;
                                     pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
                                     detallePedidoData.actualizarDetallePedidoSubTotal(pedido.getId_pedido(), precio, cantidadBaseD);
-                                    borrarFilaTabla();
+                                  //  borrarFilaTabla();
                                     
                                     flag = false;
                                 }
@@ -757,7 +759,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                                 pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total);
                                 detallePedido.setPedido(pedido);
                                 detallePedidoData.agregarDetallePedido(detallePedido);
-                                borrarFilaTabla();
+                               // borrarFilaTabla();
                                
                             }
                         }
