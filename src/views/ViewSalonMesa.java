@@ -600,10 +600,10 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                         mesa.setDisposicion("atendida");
                         mesaData.actualizarDisposicionMesa(mesa);
                         jbTomarPedido.setEnabled(false);
-                        JOptionPane.showMessageDialog(this, "Pedido generado.");
-
+                        
                     }
                 }
+                JOptionPane.showMessageDialog(this, "Pedido generado.");
             }
         } else {
             JOptionPane.showMessageDialog(this, "No hay productos seleccionados.");
