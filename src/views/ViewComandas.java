@@ -134,9 +134,9 @@ public class ViewComandas extends javax.swing.JInternalFrame {
 };
      
         // Aplicar el renderizador personalizado a cada columna para centrar los datos
-        for (int i = 0; i < jtPedidos.getColumnModel().getColumnCount(); i++) {
-        jtPedidos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
-}
+//        for (int i = 0; i < jtPedidos.getColumnModel().getColumnCount(); i++) {
+//        jtPedidos.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+//}
 
         // Aplicar el renderizador personalizado a cada columna para centrar los datos
         for (int i = 0; i < jtDetalles.getColumnModel().getColumnCount(); i++) {

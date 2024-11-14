@@ -734,7 +734,8 @@ public class ViewPedidoAdmin extends javax.swing.JInternalFrame {
         }
         
     
-           
+                   borrarFilaTabla();
+
         
     }//GEN-LAST:event_jbBuscarBaseDatosActionPerformed
 

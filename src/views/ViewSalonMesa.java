@@ -782,7 +782,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                                    
                                     total += d.getSub_total();
                                     double totalOriginal = pedido.getMonto_total();
-                                    pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total+totalOriginal);
+                                  //  pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total+totalOriginal);
                                     //  borrarFilaTabla();
                                     flag = false;
                                     
@@ -802,7 +802,7 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                                 
                                 detallePedido.setPedido(pedido);
                                 detallePedidoData.agregarDetallePedido(detallePedido);
-                                pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total + totalOriginal);
+                               // pedidoData.actualizarMontoTotal(pedido.getId_pedido(), total + totalOriginal);
                                // borrarFilaTabla();
                                
                             }
@@ -810,8 +810,17 @@ public class ViewSalonMesa extends javax.swing.JInternalFrame {
                     }
 
                 }
-                 JOptionPane.showMessageDialog(this, "Productos agregados al pedido "+pedido.getId_pedido()+" de la mesa "+pedido.getMesa());
-                 borrarFilaTabla();
+                JOptionPane.showMessageDialog(this, "Productos agregados al pedido " + pedido.getId_pedido() + " de la mesa " + pedido.getMesa());
+
+                List<DetallePedido> detallesParaMontoTotales = detallePedidoData.listarDetallesPorPedido(pedido.getId_pedido());
+                 double totalOriginalFinal=0;
+                for (DetallePedido dmt : detallesParaMontoTotales) {
+                    
+                    totalOriginalFinal+= dmt.getSub_total();
+                    
+                }
+                 pedidoData.actualizarMontoTotal(pedido.getId_pedido(),  totalOriginalFinal);
+                borrarFilaTabla();
             }
         }
 
