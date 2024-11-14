@@ -19,6 +19,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
     public ViewProductoAdmin() {
         initComponents();
+        jbEliminar.setEnabled(false);
         
         
      //  modelo = new DefaultTableModel();
@@ -50,6 +51,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jtCodigo = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jlFondo = new javax.swing.JLabel();
 
@@ -83,11 +85,6 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         getContentPane().add(jtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 160, 30));
 
         jComboCategoria.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jComboCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboCategoriaActionPerformed(evt);
-            }
-        });
         getContentPane().add(jComboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 140, 30));
 
         jtStock.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
@@ -110,7 +107,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
                 jbGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 120, 40));
+        getContentPane().add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 80, 40));
 
         jbEliminar.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/advertencia.png"))); // NOI18N
@@ -152,6 +149,14 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 90, 30));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/escoba (1).png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 40, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel8.setText("*Presione enter para buscar");
@@ -199,10 +204,12 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
                     productoNuevo.setStock(stock);
                     productoNuevo.setEstado(estado);
                     pd.actualizarProducto(productoNuevo);
-                    
+                                     
                     JOptionPane.showMessageDialog(this, "¡Producto modificado!");
-
+                   
+                
                 }
+                
                 
                 limpiarCampos();
                 productoNuevo=null;
@@ -260,7 +267,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
     private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
 
-        
+        jbEliminar.setEnabled(true);
         try{
         Integer codigo = Integer.parseInt(jtCodigo.getText());
 
@@ -279,10 +286,12 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         }else{
             
              JOptionPane.showMessageDialog(null, "Debe ingresar un codigo existente");
+             jbEliminar.setEnabled(false);
         }
         }catch(NumberFormatException ex){
             
             JOptionPane.showMessageDialog(null, "Debe ingresar un numero");
+            jbEliminar.setEnabled(false);
             
         
         }
@@ -296,13 +305,17 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
-    private void jComboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboCategoriaActionPerformed
-
     private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jrbEstadoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        limpiarCampos();
+        jtCodigo.setEditable(false);
+        jbEliminar.setEnabled(false);
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comboCategorias() {
 
@@ -325,6 +338,7 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -347,20 +361,20 @@ public class ViewProductoAdmin extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 
-private void cargarDatos(){
-    
-    List<Producto> listaP = pd.listarProductos();
-    
-    //modelo.setRowCount(0);
-    
-    for (Producto p : listaP){
-        
-        modelo.addRow(new Object[] {p.getId_producto(),p.getNombre(),p.getCategoria(),p.getPrecio(),p.getStock()});
-        
-    
-    }
-    
-
-
-    }
+//private void cargarDatos(){
+//    
+//    List<Producto> listaP = pd.listarProductos();
+//    
+//    //modelo.setRowCount(0);
+//    
+//    for (Producto p : listaP){
+//        
+//        modelo.addRow(new Object[] {p.getId_producto(),p.getNombre(),p.getCategoria(),p.getPrecio(),p.getStock()});
+//        
+//    
+//    }
+//    
+//
+//
+//    }
 }
